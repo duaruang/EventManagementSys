@@ -25,7 +25,7 @@ $config['base_url'] .= "://".$_SERVER['HTTP_HOST']."/";
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] .= 'e-proposal/';
+$config['base_url'] .= 'em/';
 
 /*
 |--------------------------------------------------------------------------

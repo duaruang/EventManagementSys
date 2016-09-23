@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Dashboard extends MY_Controller {
+class Error_controller extends MY_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -20,18 +20,6 @@ class Dashboard extends MY_Controller {
 	 */
 	public function index()
 	{
-	   
-
-        //Set Head Content
-		$head['title'] = 'Welcome to Event Management System' ;
-		$this->load->view('include/head', $head, TRUE);
-        
-        //Set Spesific Javascript page
-        $data['script']     = $this->load->view('page/proposal/script/script', NULL, TRUE);
-        $data['load_pro']   = $this->proposal_model->load_proposal();
-        
-		$this->template->view('page/proposal/index',$data);
+		$this->load->view('errors/html/error_404');
 	}
-    
-   
 }

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Welcome extends CI_Controller {
+class Dashboard_controller extends MY_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -20,6 +20,17 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('welcome_message');
+	    $this->is_logged();
+        //Set Head Content
+		$head['title'] = 'Dashboard - Event Management System' ;
+		$head['css']	=  $this->load->view('page/dashboard/include/vendor-css', NULL, TRUE);
+		$this->load->view('include/head', $head, TRUE);
+        
+        //Set Spesific Javascript page
+        $data['script']     = $this->load->view('page/dashboard/include/vendor-script', NULL, TRUE);
+        
+		$this->template->view('page/dashboard/index',$data);
 	}
+    
+   
 }

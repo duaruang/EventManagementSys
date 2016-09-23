@@ -18,7 +18,7 @@ class MY_Controller extends CI_Controller
 	
 	public function is_logged()
     {
-        if ($this->session->userdata('logged_in') == FALSE) redirect('sign-in');
+        if ($this->session->userdata('logged_in') == FALSE) redirect('User_controller/signin');
     }
     
     public function insert_activities_user($activities)

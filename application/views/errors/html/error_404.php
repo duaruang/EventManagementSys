@@ -44,7 +44,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     help you get back on track.
                 </p>
                 <br>
-                <a class="btn btn-pink waves-effect waves-light" href="index.html"> Return Home</a>
+                <a class="btn btn-pink waves-effect waves-light" href="<?php echo base_url(); ?>"> Return Home</a>
 
             </div>
 
