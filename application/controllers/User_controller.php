@@ -19,6 +19,36 @@ class User_controller extends MY_Controller {
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
 	
+
+
+    //Function: table user
+	public function index()
+	{
+        //Set Head Content
+		$head['title'] 		= 'User Administration - Event Management System V.1.0' ;
+		$head['css']		=  $this->load->view('page/user/include/index-css', NULL, TRUE);
+		$this->load->view('include/head', $head, TRUE);
+       
+       //Set Spesific Javascript page
+        $data['script'] = $this->load->view('page/user/include/index-script', NULL, TRUE);
+        
+		$this->template->view('page/user/index',$data);
+	}
+
+	//Function: table user-group
+	public function user_group()
+	{
+        //Set Head Content
+		$head['title'] 		= 'User Group Administration - Event Management System V.1.0' ;
+		$head['css']		=  $this->load->view('page/user/include/user-group-css', NULL, TRUE);
+		$this->load->view('include/head', $head, TRUE);
+       
+       //Set Spesific Javascript page
+        $data['script'] = $this->load->view('page/user/include/user-group-script', NULL, TRUE);
+        
+		$this->template->view('page/user/user-group',$data);
+	}
+
 	//Function: Sign in to the application
 	public function signin()
 	{

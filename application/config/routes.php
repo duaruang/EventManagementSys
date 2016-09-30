@@ -61,5 +61,7 @@ $route['dashboard'] = 'Dashboard_controller/index';
 /*==============================================
 USER CONTROLLER
 ================================================*/
+$route['users'] = 'User_controller/index';
+$route['user-group'] = 'User_controller/user_group';
 $route['signin'] = 'User_controller/signin';
 $route['forgot-password'] = 'User_controller/forgot_password';

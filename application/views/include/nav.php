@@ -9,7 +9,7 @@
                             <li class="has-submenu">
                                 <a href="<?php echo site_url(); ?>"><i class="zmdi zmdi-collection-text"></i><span> Privilage </span> </a>
                                 <ul class="submenu">
-                                    <li><a href="<?php echo site_url(); ?>">User</a></li>
+                                    <li><a href=#">User</a></li>
                                     <li><a href="<?php echo site_url(); ?>">User Group</a></li>  
                                 </ul>
                             </li>

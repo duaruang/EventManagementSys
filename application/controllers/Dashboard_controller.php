@@ -20,7 +20,7 @@ class Dashboard_controller extends MY_Controller {
 	 */
 	public function index()
 	{
-	    //$this->is_logged();
+	    $this->is_logged();
         //Set Head Content
 		$head['title'] = 'Dashboard - Event Management System' ;
 		$head['css']	=  $this->load->view('page/dashboard/include/vendor-css', NULL, TRUE);

@@ -18,7 +18,8 @@ class MY_Controller extends CI_Controller
 	
 	public function is_logged()
     {
-        if ($this->session->userdata('logged_in') == FALSE) redirect('signin');
+        $url = "http://182.23.52.249/Dummy//SSO_WebService/login.php?source=http://localhost/em/user/process_signin&app_code=EVENT";
+        if ($this->session->userdata('logged_in') == FALSE) redirect($url);
     }
     
     public function insert_activities_user($activities)

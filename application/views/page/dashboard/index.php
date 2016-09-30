@@ -43,7 +43,7 @@
 
 
                 <div class="row">
-                    <div class="col-xs-12 col-lg-12 col-xl-8">
+                    <div class="col-xs-12 col-lg-8 col-xl-8">
                         <div class="card-box">
 
                             <h4 class="header-title m-t-0 m-b-20">Event Statistics</h4>
@@ -67,7 +67,7 @@
                         </div>
                     </div><!-- end col-->
 
-                    <div class="col-xs-12 col-lg-12 col-xl-4">
+                    <div class="col-xs-12 col-lg-4 col-xl-4">
                         <div class="card-box">
 
                             <h4 class="header-title m-t-0 m-b-30">Events this month</h4>

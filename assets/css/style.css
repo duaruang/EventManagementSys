@@ -5679,7 +5679,7 @@ button:focus {
 .btn-label {
   background: rgba(43, 61, 81, 0.1);
   display: inline-block;
-  padding: 7px 15px;
+  padding: 7px 8px;
   border-radius: 3px 0 0 3px;
   margin: -7px -14px;
   margin-right: 12px; }
@@ -22603,3 +22603,8 @@ div.hopscotch-bubble .hopscotch-bubble-arrow-container.down .hopscotch-bubble-ar
   text-shadow: rgba(255, 255, 255, 0.3) 5px 1px, rgba(255, 255, 255, 0.2) 12px 3px, rgba(255, 255, 255, 0.1) 6px 4px; }
 
 /*# sourceMappingURL=style.css.map */
+table.dataTable thead .sorting::before, table.dataTable thead .sorting_asc::before, table.dataTable thead .sorting_desc::before, table.dataTable thead .sorting_asc_disabled::before, table.dataTable thead .sorting_desc_disabled::before { visibility:hidden;}
+.custombox-modal-container
+{
+  width: 325px !important;
+} 
