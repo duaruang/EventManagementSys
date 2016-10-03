@@ -62,105 +62,103 @@ class User_controller extends MY_Controller {
 	}
 	
 	//Function: Process of signing in 
-	public function process_signin()
+	public function cek_authorization()
 	{
-		//No data -> redirected to Daftar Pegawai 
-		if(count($_POST) == 0){
-			redirect('dashboard', 'location');
-		}
+		/*====================================================================
+		PARSE URL PARAMETER
+		======================================================================*/
+		$url= parse_url($_SERVER['REQUEST_URI']);
+		parse_str($url['query'], $params);
 
-		//Default value is OK. If validations fail result will change to NG.
-		$output = array(
-			'result'  		=> 'OK',
-			'page'			=> ''
+		$pecah = explode("&", $url['query']);
+		$idsdm = $pecah[0];
+		$NIK = $pecah[1];
+		$username = $pecah[2];
+		$nama = $pecah[3];
+		$email = $pecah[4];
+
+		$username = substr($username, strpos($username, "=") + 1);
+		$idsdm = substr($idsdm, strpos($idsdm, "=") + 1);
+		$secret_code=strtoupper("$3cretc0d3".$username.",EVENT,".$idsdm);
+		header('Content-Type: application/json');
+		$data = json_decode(file_get_contents('http://182.23.52.249/Dummy/SSO_WebService/crosscheck.php?secret='.$secret_code.'&app_code=EVENT&username='.$username));
+		$data = json_encode($data);
+		$json = json_decode($data, true);
+		/*====================================================================
+		GET DATA FROM API SSO
+		======================================================================*/
+		$nik 				=$json['login'][0]['data'][0]['nik'];
+		$username 			=$json['login'][0]['data'][0]['username'];
+		$email 				=$json['login'][0]['data'][0]['email'];
+		$nama 				=$json['login'][0]['data'][0]['nama'];
+		$idsdm 				=$json['login'][0]['data'][0]['idsdm'];
+		$posisinama			=$json['login'][0]['data'][0]['posisi_nama'];
+		$posisisso			=$json['login'][0]['data'][0]['posisi_sso'];
+		$posisisingkatan	=$json['login'][0]['data'][0]['posisi_singkatan'];
+		$lokasikerja		=$json['login'][0]['data'][0]['lokasi_kerja'];
+		$kodecabang			=$json['login'][0]['data'][0]['kode_cabang'];
+		$cabang 			=$json['login'][0]['data'][0]['cabang'];
+		$unit				=$json['login'][0]['data'][0]['unit'];
+		$kode_unit			=$json['login'][0]['data'][0]['kode_unit'];
+		$organisasiname		=$json['login'][0]['data'][0]['organisasi_name'];
+		$organisasidesc		=$json['login'][0]['data'][0]['organisasi_desc'];
+		$foto 				=$json['login'][0]['data'][0]['foto'];
+
+		/*
+		//insert dummy user
+		$data_karyawan 		= array(
+							'idsdm' 		=> $idsdm,
+							'email' 		=> $email,
+							'username'		=> $username,
+							'foto'			=> $foto,
+							'nik'			=> $nik,
+							'fullname'		=> $nama,
+							'kode_cabang'	=> $kodecabang,
+							'created_date'	=> date('Y-m-d H:i:s'),
+							'is_active'		=> 'active'
 		);
+		$this->user_model->insert_sample_user($data_karyawan);*/
+		/*====================================================================
+		CHECK DATA USER FROM TABLE USER EVENT MANAGEMENT
+		======================================================================*/
+		$query_user		= $this->user_model->select_checkin($nik);
+		
+		if($query_user->num_rows() > 0){
+			$sql_user 		= $query_user->result_array();
 
-		//==== Get Data ====
-		$username	= $this->security->xss_clean(strip_image_tags($this->input->post('form-username')));
-		$password 	= do_hash($this->security->xss_clean(strip_image_tags($this->input->post('form-password'))));
-		$page		= $this->security->xss_clean(strip_image_tags($this->session->userdata('sess_user_page')));
-		
-		//==== Check Data ====
-		$sql_user = $this->user_model->select_user($username,$password);
-		
-		if($sql_user->num_rows() > 0)
+			//Set session userdata
+			$session_array = array(
+								'logged_in'					=> TRUE,
+								'sess_user_id'              => $sql_user[0]['idsdm'],
+								'sess_user_id_user_group'	=> $sql_user[0]['id_user_group'],
+								'sess_user_nik'       		=> $sql_user[0]['nik'],
+								'sess_user_nama'       		=> $sql_user[0]['fullname'],
+								'sess_user_username'       	=> $sql_user[0]['username'],
+								'sess_user_email'   	    => $sql_user[0]['email'],
+								'sess_user_kode_cabang'		=> $sql_user[0]['kode_cabang'],
+								'sess_user_foto'  			=> $sql_user[0]['foto'],
+								'sess_user_kode_fingerprint'=> $sql_user[0]['kode_fingerprint']
+							 );                
+			$this->session->set_userdata($session_array);
+			
+			redirect('dashboard');
+			
+
+		}else
 		{
-			$user 		= $sql_user->result_array();
-			$flag_us	= '';
-			
-			//Check User Group and Status 
-			if($user[0]['id_user_group'] == 1) //Administrator, no is_active validations
-			{
-				$flag_us = 'Y';
-			}
-			elseif($user[0]['id_user_group'] != '0' and $user[0]['is_active'] == 1) //Not Administrator, is_active should be '1' (active)
-			{
-				$flag_us = 'Y';
-			}
-			else //Ex: User group not assigned yet
-			{
-				$flag_us = 'N';
-			}
-				 
-			if($flag_us == 'Y') //Sign in 
-			{
-				//Set session userdata
-				$session_array = array(
-									'logged_in'					=> TRUE,
-									'sess_user_id'              => $user[0]['id_user'],
-									'sess_user_id_user_group'	=> $user[0]['id_user_group'],
-									'sess_user_username'        => $user[0]['username'],
-									'sess_user_fullname'       	=> $user[0]['fullname'],
-									'sess_user_email'       	=> $user[0]['email'],
-									'sess_user_after_login'		=> '1' 
-								 );                
-				$this->session->set_userdata($session_array);
-				
-				//Set output value
-				$output = array(
-					'result'  		=> 'OK',
-					'page'			=> $page
-				);
-				
-				//Unset session userdata
-				$this->session->set_userdata('sess_user_page','');
-				$this->session->unset_userdata('sess_user_page');
-				
-				//Set session flashdata
-				$this->session->set_flashdata('message_success', 'Anda berhasil masuk sebagai '.ucwords($user[0]['nama_depan'].'.'));
-				
-				//Log user activities
-				$activities = 'Sign in';
-				$this->insert_activities_user($activities);
-			}
-			else
-			{
-				//Set Output Value
-				$output = array(
-					'result'  		=> 'NG',
-					'page'			=> ''
-				);
-			
-				//Set session flashdata
-				$this->session->set_flashdata('message_error', 'Sign in tidak berhasil, mohon hubungi Administrator.');
-			}
-		}
-		else
-		{
-			//Set Output Value
-			$output = array(
-				'result'  		=> 'NG',
-				'page'			=> ''
-			);
-			
-			//Set session flashdata
-			$this->session->set_flashdata('message_error', 'Username atau password salah!');
+			    $this->session->set_flashdata('error', 'Mohon maaf, anda tidak terdaftar pada sistem event management system. Hubungi IT center');
+			    //redirect ke halaman menampilkan pesan error
+				redirect('lock');
 		}
 		
-		echo json_encode($output);
-		exit;
 	}
-    
+
+	public function lock_user()
+	{
+		$this->is_logged();
+		$this->load->view('page/user/lock');
+	}
+
     public function forgot_password()
 	{
         //Set Head Content
@@ -171,149 +169,6 @@ class User_controller extends MY_Controller {
 		$this->load->view('page/user/forgot-password');
 	}
 	
-	//Function: Process of forget-password
-    public function process_forgot_password()
-    {
-		//No data -> redirected to Daftar Pegawai 
-		if(count($_POST) == 0){
-			redirect('dashboard', 'location');
-		}
-
-		//Default value is OK. If validations fail result will change to NG.
-		$output = array(
-			'result'  		=> 'OK'
-		);
-
-		//==== Get Data ====
-		$email	= $this->security->xss_clean(strip_image_tags($this->input->post('form-email')));
-		
-		//==== Check Data ====
-		$sql_user = $this->user_model->select_user_email($email);
-		
-		if($sql_user->num_rows() > 0) {
-			//==== Set Data ====
-			/*$randoms    = random_string('alnum', 4);
-			$mdd        = do_hash($randoms,'md5');*/
-			$mdd	= do_hash($email);
-			$url	= base_url().'user/reset/'.$mdd;
-			
-			//Get Constant data from constants.php
-			$email_sender 	= EmailSender;
-			$email_address	= EmailAddress;
-			
-			//==== Send Email ===
-			$this->load->library('email');  
-	        $this->email->clear();              
-            $this->email->from($email_address, $email_sender); 
-			$this->email->to($email);	
-            $this->email->subject('Password Anda telah berhasil di reset');
-            $data['url_reset']	= $url;
-			$message			= $this->load->view('email/forgot-password',$data,TRUE);         
-            $this->email->message($message);  
-			
-			if ( !$this->email->send() )
-            {
-				//$log_action = 'Sistem gagal mengirim email ke '.$email.'.';
-                //$this->log_record($log_action);
-            }
-			else
-			{ 
-				//$log_action = 'Sistem berhasil mengirim email ke '.$email.'.';
-                //$this->log_record($log_action);
-				
-				//==== Set Data ====
-				$random_password 		= random_string('alnum', 8);
-				$random_password_enc 	= do_hash($random_password);
-				
-				//==== Update Data ====
-				$data_update	= array(
-										'password'			=> $random_password_enc,
-										'reset_password' 	=> $random_password,
-										'forgot_pass_code' 	=> $mdd,
-										'forgot_pass_date' 	=> date('Y-m-d H:i:s')
-									);
-				$this->user_model->update_forgot_password($data_update,$email);
-            }
-			
-			//Set session flashdata
-			$this->session->set_flashdata('message_success', 'Mohon cek email Anda, sistem telah mengirimkan link untuk mengubah password Anda.');
-		} 
-		else 
-		{  
-			//Set session flashdata
-			$this->session->set_flashdata('message_error', 'Email tidak ditemukan, mohon ulangi kembali.');
-		}
-		
-		echo json_encode($output);
-		exit;
-	}
-	
-	//Function: Process of reset
-    public function reset()
-    {
-        $random_code = $this->uri->segment(3);
-		
-		//Checking data 
-		$sql = $this->user_model->select_user_reset($random_code);
-		
-		//If data exists
-		if($sql->num_rows() > 0 )
-		{
-			//Set Head Content
-			$head['title'] = 'Selamat datang di aplikasi e-proposal' ;
-			$this->load->view('include/head', $head, TRUE);
-			
-			//Set Spesific Javascript page
-			$data['script'] 	= $this->load->view('page/user/script/script-signin', NULL, TRUE);
-			
-			//==== Set Data ====
-			$user 				= $sql->result_array();
-			$data['id_user']	= $user[0]['id'];
-			
-			$this->load->view('page/user/reset-password',$data);
-		}
-		else
-		{
-			//Set session flashdata
-			$this->session->set_flashdata('message_error', 'Link tidak ditemukan, harap coba kembali.');
-			
-			redirect('sign-in');
-		}
-    }
-	
-	//Function: Process of reset-password
-    public function process_reset_password()
-    {
-		//No data -> redirected to Daftar Pegawai 
-		if(count($_POST) == 0){
-			redirect('dashboard', 'location');
-		}
-
-		//Default value is OK. If validations fail result will change to NG.
-		$output = array(
-			'result'  		=> 'OK'
-		);
-
-		//==== Get Data ====
-		$id_user 		= $this->security->xss_clean(strip_image_tags($this->input->post('form-hidden-id-user')));
-		$password 		= $this->security->xss_clean(strip_image_tags($this->input->post('form-password')));
-		$en_password	= do_hash($password);
-		
-		//==== Update Data ====
-		$data_update	= array(
-								'password'			=> $en_password,
-								'reset_password' 	=> '',
-								'forgot_pass_code' 	=> '',
-								'forgot_pass_date' 	=> ''
-							);
-		$this->user_model->update_user($data_update,$id_user);
-			
-		//Set session flashdata
-		$this->session->set_flashdata('message_success', 'Password telah berhasil diubah.');
-		
-		echo json_encode($output);
-		exit;
-	}
 	
 	//Function: Process of signing out
     public function process_signout()
@@ -329,15 +184,14 @@ class User_controller extends MY_Controller {
 							'logged_in'					=> '',
 							'sess_user_id'              => '',
 							'sess_user_id_user_group'	=> '',
-							'sess_user_id_satker'       => '',
-							'sess_user_provinsi'       	=> '',
-							'sess_user_kabupaten'       => '',
-							'sess_user_nip'        		=> '',
-							'sess_user_first_name'  	=> '',
-							'sess_user_last_name'  		=> '',
-							'sess_user_after_login'		=> ''
-						 );        
-						 
+							'sess_user_nik'       		=> '',
+							'sess_user_username'       	=> '',
+							'sess_user_nama'       		=> '',
+							'sess_user_email'   	    => '',
+							'sess_user_kode_cabang'		=> '',
+							'sess_user_foto'  			=> '',
+							'sess_user_kode_fingerprint'=> ''
+						 );                
 		$this->session->set_userdata($session_array);
 		
 		//Unset session userdata and destroy all session userdata
@@ -346,7 +200,7 @@ class User_controller extends MY_Controller {
         
 		//Set session flashdata
 		$this->session->set_flashdata('message_success', 'Anda telah berhasil sign out!');
-        redirect('sign-in');
+        redirect('dashboard');
     }
     
     public function my_profile()

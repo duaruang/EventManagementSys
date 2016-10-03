@@ -11,63 +11,50 @@
         <div class="clearfix"></div>
         <div class="wrapper-page">
 
-        	<div class="account-bg">
+            <div class="account-bg">
                 <div class="card-box m-b-0">
                     <div class="text-xs-center m-t-20">
-                        <a href="<?php echo base_url(); ?>" class="logo">
+                        <a href="index.html" class="logo">
+                            <i class="zmdi zmdi-group-work icon-c-logo"></i>
                             <span>Event Management System</span>
                         </a>
                     </div>
                     <div class="m-t-30 m-b-20">
-                        <div class="col-xs-12 text-xs-center">
-                            <h6 class="text-muted text-uppercase m-b-0 m-t-0">Sign In</h6>
-                        </div>
-                        <?php 
-                        $attribute = array('class'=>'form-horizontal m-t-20');
-                        echo form_open('',$attribute); ?>
-
-                            <div class="form-group ">
-                                <div class="col-xs-12">
-                                    <input class="form-control" type="text" required="" placeholder="Username">
-                                </div>
+                        <form method="GET" action="<?php echo ?>" role="form" class="text-xs-center m-t-20">
+                            <div class="user-thumb">
+                                <img src="assets/images/users/avatar-1.jpg" class="img-responsive img-circle img-thumbnail" alt="thumbnail">
                             </div>
-
                             <div class="form-group">
-                                <div class="col-xs-12">
-                                    <input class="form-control" type="password" required="" placeholder="Password">
-                                </div>
-                            </div>
-
-                            <div class="form-group ">
-                                <div class="col-xs-12">
-                                    <div class="checkbox checkbox-custom">
-                                        <input id="checkbox-signup" type="checkbox">
-                                        <label for="checkbox-signup">
-                                            Remember me
-                                        </label>
+                                <p class="text-muted m-t-10">
+                                    Enter your password to access the admin.
+                                </p>
+                                <div class="form-group m-t-30">
+                                    <div class="col-xs-12">
+                                        <input class="form-control" type="password" required="" placeholder="Enter password">
                                     </div>
+                                </div>
 
+                                <div class="form-group text-center m-t-20 m-b-0">
+                                    <div class="col-xs-12">
+                                        <button class="btn btn-success btn-block waves-effect waves-light" type="submit">Enter Now</button>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="form-group text-center m-t-30">
-                                <div class="col-xs-12">
-                                    <button class="btn btn-success btn-block waves-effect waves-light" type="submit">Log In</button>
-                                </div>
-                            </div>
+                        </form>
 
-                            <div class="form-group m-t-30 m-b-0">
-                                <div class="col-sm-12">
-                                    <a href="<?php echo site_url('forgot-password'); ?>" class="text-muted"><i class="fa fa-lock m-r-5"></i> Forgot your password?</a>
-                                </div>
-                            </div>
-
-                        <?php echo form_close(); ?>
 
                     </div>
                 </div>
             </div>
             <!-- end card-box-->
+
+            <div class="m-t-20">
+                <div class="text-xs-center">
+                    <p class="text-white">Not you?<a href="pages-login.html" class="text-white m-l-5"><b>Sign In</b></a></p>
+                </div>
+            </div>
+
         </div>
         <!-- end wrapper page -->
 

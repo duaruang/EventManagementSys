@@ -76,12 +76,17 @@
                             <li class="nav-item dropdown notification-list">
                                 <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light nav-user" data-toggle="dropdown" href="#" role="button"
                                    aria-haspopup="false" aria-expanded="false">
-                                    <img src="<?php echo base_url(); ?>assets/images/users/avatar-1.jpg" alt="user" class="img-circle">
+                                    <?php if($this->session->userdata('sess_user_foto') == NULL){ ?>
+                                        <img src="<?php echo base_url(); ?>assets/images/UserImage.png" alt="user" class="img-circle">
+                                    <?php }else{ ?>
+                                        <img src="<?php echo base_url(); ?>assets/images/UserImage.png" alt="user" class="img-circle">
+                                        <!--<img src="<?php echo $this->session->userdata('sess_user_foto'); ?>" alt="photo" class="img-circle">-->
+                                    <?php } ?>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right dropdown-arrow profile-dropdown " aria-labelledby="Preview">
                                     <!-- item-->
                                     <div class="dropdown-item noti-title">
-                                        <h5 class="text-overflow"><small>Welcome ! John</small> </h5>
+                                        <h5 class="text-overflow"><small><?php echo $this->session->userdata('sess_user_nama'); ?></small> </h5>
                                     </div>
 
                                     <!-- item-->
@@ -95,12 +100,7 @@
                                     </a>
 
                                     <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                        <i class="zmdi zmdi-lock-open"></i> <span>Lock Screen</span>
-                                    </a>
-
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <a href="<?php echo site_url('signout'); ?>" class="dropdown-item notify-item">
                                         <i class="zmdi zmdi-power"></i> <span>Logout</span>
                                     </a>
 

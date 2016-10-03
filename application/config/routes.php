@@ -62,6 +62,9 @@ $route['dashboard'] = 'Dashboard_controller/index';
 USER CONTROLLER
 ================================================*/
 $route['users'] = 'User_controller/index';
+$route['lock'] = 'User_controller/lock_user';
 $route['user-group'] = 'User_controller/user_group';
 $route['signin'] = 'User_controller/signin';
 $route['forgot-password'] = 'User_controller/forgot_password';
+$route['check_user'] = 'User_controller/cek_authorization';
+$route['signout'] = 'User_controller/process_signout';
