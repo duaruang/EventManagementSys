@@ -141,6 +141,10 @@ class User_controller extends MY_Controller {
 							 );                
 			$this->session->set_userdata($session_array);
 			
+			$activities ='Sign in';
+			$itemid		= '';
+			$this->insert_activities_user($activities,$itemid);
+
 			redirect('dashboard');
 			
 
@@ -177,7 +181,8 @@ class User_controller extends MY_Controller {
 		
         //Log user activities
         $activities = 'Sign out';
-        $this->insert_activities_user($activities);
+        $itemid		= '';
+        $this->insert_activities_user($activities,$itemid);
         
 		//Set session userdata
 		$session_array = array(

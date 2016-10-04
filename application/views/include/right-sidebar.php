@@ -10,51 +10,18 @@
                     <div class="tab-content">
                         <div class="tab-pane fade in active" id="home-2">
                             <div class="timeline-2">
+                                <?php if($load_trail->num_rows() > 0){ ?>
+                                <?php foreach($load_trail->result() as $data){ ?>
                                 <div class="time-item">
                                     <div class="item-info">
-                                        <small class="text-muted">5 minutes ago</small>
-                                        <p><strong><a href="#" class="text-info">John Doe</a></strong> Uploaded a photo <strong>"DSC000586.jpg"</strong></p>
+                                        <small class="text-muted"><?php echo tgl_indo($data->date); ?></small>
+                                        <p><strong><a href="<?php echo $data->idsdm; ?>" class="text-info"><?php echo $data->fullname; ?></a></strong> <?php echo $data->description; ?> 
+                                        <?php if($data->item_id == '')
+                                        {}else{ ?><strong>"<?php echo $data->item_id; ?>"</strong><?php } ?></p>
                                     </div>
                                 </div>
-
-                                <div class="time-item">
-                                    <div class="item-info">
-                                        <small class="text-muted">30 minutes ago</small>
-                                        <p><a href="" class="text-info">Lorem</a> commented your post.</p>
-                                        <p><em>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam laoreet tellus ut tincidunt euismod. "</em></p>
-                                    </div>
-                                </div>
-
-                                <div class="time-item">
-                                    <div class="item-info">
-                                        <small class="text-muted">59 minutes ago</small>
-                                        <p><a href="" class="text-info">Jessi</a> attended a meeting with<a href="#" class="text-success">John Doe</a>.</p>
-                                        <p><em>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam laoreet tellus ut tincidunt euismod. "</em></p>
-                                    </div>
-                                </div>
-
-                                <div class="time-item">
-                                    <div class="item-info">
-                                        <small class="text-muted">1 hour ago</small>
-                                        <p><strong><a href="#" class="text-info">John Doe</a></strong>Uploaded 2 new photos</p>
-                                    </div>
-                                </div>
-
-                                <div class="time-item">
-                                    <div class="item-info">
-                                        <small class="text-muted">3 hours ago</small>
-                                        <p><a href="" class="text-info">Lorem</a> commented your post.</p>
-                                        <p><em>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam laoreet tellus ut tincidunt euismod. "</em></p>
-                                    </div>
-                                </div>
-
-                                <div class="time-item">
-                                    <div class="item-info">
-                                        <small class="text-muted">5 hours ago</small>
-                                        <p><a href="" class="text-info">Jessi</a> attended a meeting with<a href="#" class="text-success">John Doe</a>.</p>
-                                        <p><em>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam laoreet tellus ut tincidunt euismod. "</em></p>
-                                    </div>
-                                </div>
+                                <?php } ?>
+                                <?php } ?>
                             </div>
                         </div>
                     </div>

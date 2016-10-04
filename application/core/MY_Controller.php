@@ -14,6 +14,9 @@ class MY_Controller extends CI_Controller
         $this->output->set_header("Pragma: no-cache"); 
      
 		date_default_timezone_set("Asia/Jakarta");
+
+        $head['load_trail']      =  $this->user_model->select_audit_trail_individual();
+        $this->load->view('include/right-sidebar', $head, TRUE);
     }
 	
 	public function is_logged()
@@ -22,12 +25,13 @@ class MY_Controller extends CI_Controller
         if ($this->session->userdata('logged_in') == FALSE) redirect($url);
     }
     
-    public function insert_activities_user($activities)
+    public function insert_activities_user($activities,$itemid)
     {
         //==== Check Data ====
         $data = array(
                         'id_user'       => $this->session->userdata('sess_user_id'),
                         'description'   => $activities,
+                        'item_id'       => $itemid,
                         'date'          => date('Y-m-d H:i:s')
                     );
                     
