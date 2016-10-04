@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 03, 2016 at 12:12 PM
+-- Generation Time: Oct 04, 2016 at 05:45 AM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 7.0.8
 
@@ -28,8 +28,9 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `em_activitiesuser` (
   `id` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
+  `id_user` varchar(256) NOT NULL,
   `description` varchar(256) NOT NULL,
+  `item_id` varchar(256) DEFAULT NULL,
   `date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -37,11 +38,9 @@ CREATE TABLE `em_activitiesuser` (
 -- Dumping data for table `em_activitiesuser`
 --
 
-INSERT INTO `em_activitiesuser` (`id`, `id_user`, `description`, `date`) VALUES
-(1, 0, 'Sign out', '2016-10-03 16:41:10'),
-(2, 0, 'Sign out', '2016-10-03 16:41:31'),
-(3, 0, 'Sign out', '2016-10-03 16:43:05'),
-(4, 0, 'Sign out', '2016-10-03 16:51:22');
+INSERT INTO `em_activitiesuser` (`id`, `id_user`, `description`, `item_id`, `date`) VALUES
+(1, 'ECD2FD56BAAA7D522748DB3BA18CB79B', 'Sign out', NULL, '2016-10-04 10:26:14'),
+(2, 'ECD2FD56BAAA7D522748DB3BA18CB79B', 'signin', NULL, '2016-10-04 10:27:21');
 
 -- --------------------------------------------------------
 
@@ -132,7 +131,7 @@ ALTER TABLE `em_usergroup`
 -- AUTO_INCREMENT for table `em_activitiesuser`
 --
 ALTER TABLE `em_activitiesuser`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `em_user`
 --
