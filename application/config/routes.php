@@ -58,6 +58,8 @@ $route['translate_uri_dashes'] = FALSE;
 DASHBOARD CONTROLLER
 ================================================*/
 $route['dashboard'] = 'Dashboard_controller/index';
+
+
 /*==============================================
 USER CONTROLLER
 ================================================*/
@@ -68,3 +70,9 @@ $route['signin'] = 'User_controller/signin';
 $route['forgot-password'] = 'User_controller/forgot_password';
 $route['check_user'] = 'User_controller/cek_authorization';
 $route['signout'] = 'User_controller/process_signout';
+
+
+/*==============================================
+EVENT CONTROLLER
+================================================*/
+$route['propose'] = 'Event_controller/propose';

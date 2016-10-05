@@ -3,8 +3,8 @@
 
                     <!-- LOGO -->
                     <div class="topbar-left">
-                        <a href="index.html" class="logo">
-                            <i class="zmdi zmdi-group-work icon-c-logo"></i>
+                        <a href="<?php echo base_url(); ?>" class="logo">
+                            <img class="logo-head" src="<?php echo base_url(); ?>assets/images/logo-pnm.png">
                             <span>Event Management System</span>
                         </a>
                     </div>

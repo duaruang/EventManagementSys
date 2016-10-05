@@ -30,7 +30,7 @@
                             <li class="has-submenu">
                                 <a href="<?php echo site_url(); ?>"><i class="zmdi zmdi-collection-text"></i><span> Event </span> </a>
                                 <ul class="submenu">
-                                    <li><a href="<?php echo site_url(); ?>">Pengajuan Event</a></li>
+                                    <li><a href="<?php echo site_url('propose'); ?>">Pengajuan Event</a></li>
                                     <li><a href="<?php echo site_url(); ?>">Persetujuan Memo Event</a></li>
                                     <li><a href="<?php echo site_url(); ?>">Data Validasi &amp; Persetujuan Event</a></li>
                                 </ul>

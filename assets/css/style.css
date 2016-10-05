@@ -22608,3 +22608,9 @@ table.dataTable thead .sorting::before, table.dataTable thead .sorting_asc::befo
 {
   width: 325px !important;
 } 
+
+img.logo-head
+{
+    width: 130px;
+    margin-top: 8px;
+}
