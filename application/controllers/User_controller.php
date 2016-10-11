@@ -144,6 +144,22 @@ class User_controller extends MY_Controller {
 		exit;
 	}
 
+	//Function: View user
+	public function view_user()
+	{
+		$id = $this->uri->segment(3);
+        //Set Head Content
+		$head['title'] 		= 'View User Administration - Event Management System V.1.0' ;
+		$head['css']		=  $this->load->view('page/user/include/adduser-css', NULL, TRUE);
+		$this->load->view('include/head', $head, TRUE);
+       
+       //Set Spesific Javascript page
+        $data['script'] = $this->load->view('page/user/include/adduser-script', NULL, TRUE);
+        $data['load_user_group']		= $this->user_group_model->select_usergroup_dropdown();
+        $data['load_user']				= $this->user_model->select_user_id($id);
+		$this->template->view('page/user/view-user',$data);
+	}
+
 	//Function: form edit user
 	public function edit_user()
 	{

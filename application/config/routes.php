@@ -71,6 +71,7 @@ $route['users'] 					= 'User_controller/index';
 $route['users/add'] 				= 'User_controller/add_user';
 $route['lock'] 						= 'User_controller/lock_user';
 $route['user-group'] 				= 'User_controller/user_group';
+$route['users/view/(:any)'] 		= 'User_controller/view_user/$1';
 $route['signin'] 					= 'User_controller/signin';
 $route['forgot-password'] 			= 'User_controller/forgot_password';
 $route['check_user'] 				= 'User_controller/cek_authorization';

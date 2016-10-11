@@ -60,10 +60,8 @@
                                         <th>Username</th>
                                         <th>Email</th>
                                         <th>Hak Akses</th>
-                                        <th>Nama Organisasi</th>
-                                        <th>Deskripsi Organisasi</th>
                                         <th>Status</th>
-                                        <th width="200">Action</th>
+                                        <th width="280">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -74,10 +72,9 @@
                                         <td><?php echo $data->username; ?></td>
                                         <td><?php echo $data->email; ?></td>
                                         <td><?php echo $data->definisi; ?></td>
-                                        <td><?php echo $data->organisasi_name; ?></td>
-                                        <td><?php echo $data->organisasi_desc; ?></td>
                                         <td><?php echo $data->userstat; ?></td>
                                         <td>
+                                            <a href="<?php echo site_url('users/view/'.$data->idsdm); ?>" class="btn action btn-warning  waves-effect waves-light"><span class="btn-label"><i class="fa fa-eye"></i></span>View</a>&nbsp;&nbsp;
                                             <a href="<?php echo site_url('users/edit/'.$data->idsdm); ?>" class="btn action btn-warning  waves-effect waves-light"><span class="btn-label"><i class="fa fa-pencil"></i></span>Edit</a>&nbsp;&nbsp;
                                             <a href="#custom-modal" class="btn action btn-danger waves-effect waves-light delete-user" data-animation="blur" data-plugin="custommodal" data-overlaySpeed="100" data-overlayColor="#36404a" data-iduser="<?php echo $data->idsdm; ?>" data-namauser="<?php echo $data->fullname; ?>"><span class="btn-label"><i class="fa fa-times"></i></span>Delete</a>
                                         </td>
