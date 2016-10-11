@@ -21,6 +21,7 @@ class User_model extends CI_Model
 					->from('em_user')
 					->join('em_usergroup','em_usergroup.id = em_user.id_user_group','LEFT')
 					->where('em_user.is_active !=','deleted')
+                    ->where('em_user.is_administrator',0)
                     ->get();
     }
 
