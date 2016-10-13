@@ -43,12 +43,15 @@
 
         table.buttons().container()
                 .appendTo('#datatable-buttons_wrapper .col-md-6:eq(0)');
+				
+		
+		//Script: Delete User Group
+		$('#datatable-buttons tbody').on('click', '.delete-usergroup', function () {
+			var id_usergroup = $(this).data('idusergroup'); 
+			var group_name = $(this).data('groupname'); 
+			$('.hidden-idusergroup').val(id_usergroup);
+			$('.hidden-groupname').val(group_name);
+		});
+		
     } );
-
-
-//Script: Delete User
-$('#datatable-buttons tbody').on('click', '.delete-user', function () {
-    var idUser = $(this).data('iduser'); 
-    $('.f-hidden-id-user').val(idUser);
-} );
 </script>       

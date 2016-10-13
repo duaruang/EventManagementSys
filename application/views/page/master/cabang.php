@@ -21,9 +21,9 @@
                     <div class="col-sm-12">
                         <div class="card-box table-responsive">
                             <p class="text-muted font-13 m-b-30">
-                                 <button type="button" class="btn btn-primary waves-effect waves-light">
+                                 <a href="<?php echo site_url('cabang/add_cabang'); ?>" class="btn btn-primary waves-effect waves-light">
                                     <span class="btn-label"><i class="fa fa-plus"></i></span>Tambah Cabang
-                                 </button>
+                                 </a>
                             </p>
                             <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                 <thead>
@@ -44,8 +44,8 @@
                                         <td><?php echo $data->wilayah; ?></td>
                                         <td><?php echo $data->is_active; ?></td>
                                         <td>
-                                            <a href="#" class="btn action btn-warning  waves-effect waves-light"><span class="btn-label"><i class="fa fa-pencil"></i></span>Edit</a>&nbsp;&nbsp;
-                                            <a href="#custom-modal" class="btn action btn-danger waves-effect waves-light delete-user" data-animation="blur" data-plugin="custommodal" data-overlaySpeed="100" data-overlayColor="#36404a" data-iduser=""><span class="btn-label"><i class="fa fa-times"></i></span>Delete</a>
+                                            <a href="<?php echo site_url('cabang/edit_cabang/'.$data->id); ?>" class="btn action btn-warning  waves-effect waves-light"><span class="btn-label"><i class="fa fa-pencil"></i></span>Edit</a>&nbsp;&nbsp;
+                                            <a href="#custom-modal" class="btn action btn-danger waves-effect waves-light delete-cabang" data-animation="blur" data-plugin="custommodal" data-overlaySpeed="100" data-overlayColor="#36404a" data-idcabang="$data->id"><span class="btn-label"><i class="fa fa-times"></i></span>Delete</a>
                                         </td>
                                     </tr>
                                 <?php } ?>

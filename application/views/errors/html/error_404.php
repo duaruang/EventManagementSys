@@ -9,10 +9,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <meta name="author" content="Coderthemes">
 
         <!-- App Favicon -->
-        <link rel="shortcut icon" href="<?php echo base_url(); ?>assets/images/favicon.ico">
+        <link rel="shortcut icon" href="<?php echo base_url(); ?>assets/images/pnm-favicon.png">
 
         <!-- App title -->
-        <title>Uplon - Responsive Admin Dashboard Template</title>
+        <title>Error 404 - Event Management System</title>
 
         <!-- App CSS -->
         <link href="<?php echo base_url(); ?>assets/css/style.css" rel="stylesheet" type="text/css" />

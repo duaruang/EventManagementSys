@@ -45,10 +45,10 @@
                 .appendTo('#datatable-buttons_wrapper .col-md-6:eq(0)');
     } );
 
-
-//Script: Delete User
-$('#datatable-buttons tbody').on('click', '.delete-user', function () {
-    var idUser = $(this).data('iduser'); 
-    $('.f-hidden-id-user').val(idUser);
-} );
+        
+        //Script: Delete cabang
+        $('#sample_2 tbody').on('click', '.b-delete-cabang', function () {
+            var idcabang = $(this).data('idcabang'); 
+            $('.f-dp-id-cabang').val(idcabang);
+        } );
 </script>       

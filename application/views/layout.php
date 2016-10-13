@@ -20,7 +20,7 @@
         <!-- Start right Content here -->
         <!-- ============================================================== -->
         <div class="wrapper">
-            <div class="container">
+          
 
                 <?php echo $contents; ?>
 
@@ -30,14 +30,14 @@
                 </footer>
                 <!-- End Footer -->
 
-            </div> <!-- container -->
+             <div class="container">
 
             <!-- Right Sidebar -->
             <div class="side-bar right-bar">
                 <?php $this->load->view('include/right-sidebar'); ?>
             </div>
             <!-- /Right-bar -->
-
+             </div> <!-- container -->
         </div> <!-- End wrapper -->
 
         <script>

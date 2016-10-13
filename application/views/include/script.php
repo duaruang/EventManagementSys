@@ -1,5 +1,4 @@
 <script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/js/tether.min.js"></script><!-- Tether for Bootstrap -->
 <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/waves.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/jquery.nicescroll.js"></script>

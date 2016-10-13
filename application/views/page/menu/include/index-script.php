@@ -45,10 +45,14 @@
                 .appendTo('#datatable-buttons_wrapper .col-md-6:eq(0)');
     } );
 
+        
+        //Script: Delete cabang
+        $('#datatable-buttons tbody').on('click', '.delete-menu', function () {
+            var idmenu = $(this).data('idmenu'); 
+            $('.f-id-menu').val(idmenu);
 
-//Script: Delete User
-$('#datatable-buttons tbody').on('click', '.delete-user', function () {
-    var idUser = $(this).data('iduser'); 
-    $('.f-hidden-id-user').val(idUser);
-} );
+            var namamenu = $(this).data('namamenu'); 
+            $('.f-nama-menu').val(namamenu);
+            $(".ss").html(namamenu);
+        } );
 </script>       

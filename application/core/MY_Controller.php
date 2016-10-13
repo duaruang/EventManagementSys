@@ -14,8 +14,14 @@ class MY_Controller extends CI_Controller
         $this->output->set_header("Pragma: no-cache"); 
      
 		date_default_timezone_set("Asia/Jakarta");
-
-        $head['load_trail']      =  $this->user_model->select_audit_trail_individual();
+		
+		//Load Menubar: Main System
+		$data_global					= array();
+		$data_global['load_menubar'] 	= $this->menu_model->select_menubar_parent();
+		$this->load->vars($data_global);
+		
+		//Load Audit Trail
+        $head['load_trail']     =  $this->user_model->select_audit_trail_individual();
         $this->load->view('include/right-sidebar', $head, TRUE);
     }
 	
@@ -32,7 +38,8 @@ class MY_Controller extends CI_Controller
                         'id_user'       => $this->session->userdata('sess_user_id'),
                         'description'   => $activities,
                         'item_id'       => $itemid,
-                        'date'          => date('Y-m-d H:i:s')
+                        'date'          => date('Y-m-d H:i:s'),
+                        'ip_address'    => $this->input->ip_address()
                     );
                     
         $this->user_model->insert_activities_user($data);

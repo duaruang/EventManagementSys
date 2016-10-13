@@ -79,8 +79,7 @@
                                     <?php if($this->session->userdata('sess_user_foto') == NULL){ ?>
                                         <img src="<?php echo base_url(); ?>assets/images/UserImage.png" alt="user" class="img-circle">
                                     <?php }else{ ?>
-                                        <img src="<?php echo base_url(); ?>assets/images/UserImage.png" alt="user" class="img-circle">
-                                        <!--<img src="<?php echo $this->session->userdata('sess_user_foto'); ?>" alt="photo" class="img-circle">-->
+                                        <img src="<?php echo $this->session->userdata('sess_user_foto'); ?>" alt="photo" class="img-circle">
                                     <?php } ?>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right dropdown-arrow profile-dropdown " aria-labelledby="Preview">
@@ -95,7 +94,7 @@
                                     </a>
 
                                     <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <a href="<?php echo site_url('setting'); ?>" class="dropdown-item notify-item">
                                         <i class="zmdi zmdi-settings"></i> <span>Settings</span>
                                     </a>
 

@@ -1,7 +1,7 @@
 /**
-* Theme: Adminto Admin Template
-* Author: Coderthemes
-* Module/App: Main Js
+* Theme: PNM Admin
+* Author: duaruang
+* Module/App: Core js
 */
 
 

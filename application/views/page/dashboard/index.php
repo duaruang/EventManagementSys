@@ -1,3 +1,12 @@
+<div style="background: #fff;box-shadow: 0 0px 24px 0 rgba(0, 0, 0, 0.06), 0 1px 0px 0 rgba(0, 0, 0, 0.02);">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li class="active">Dashboard</li>
+        </ol>
+    </div>
+</div>
+
+<div class="container"> 
 <!-- Page-Title -->
                 <div class="row">
                     <div class="col-sm-12">
@@ -94,3 +103,4 @@
 
                 </div>
                 <!-- end row -->
+</div>

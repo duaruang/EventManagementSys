@@ -46,9 +46,13 @@
     } );
 
 
-//Script: Delete User
-$('#datatable-buttons tbody').on('click', '.delete-user', function () {
-    var idUser = $(this).data('iduser'); 
-    $('.f-hidden-id-user').val(idUser);
-} );
+//Script: Delete Materi
+        $('#datatable-buttons tbody').on('click', '.delete-user', function () {
+            var iduser = $(this).data('iduser'); 
+            $('.f-id-user').val(iduser);
+
+            var namauser = $(this).data('namauser'); 
+            $('.f-nama-user').val(namauser);
+            $(".ss").html(namauser);
+        } );
 </script>       

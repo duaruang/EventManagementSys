@@ -12,8 +12,9 @@ File: AutoComplete init js
 $(function () {
     'use strict';
 
-    var countriesArray = $.map(countries, function (value, key) { return { value: value, data: key }; });
-
+   
+    var countriesArray = $.map(function (value, key) { return { value: value, data: key }; });
+    //var countriesArray = 'http://localhost/em/user_controller/get_all_karyawan.html';
     // Setup jQuery ajax mock:
     $.mockjax({
         url: '*',
@@ -22,9 +23,9 @@ $(function () {
             var query = settings.data.query,
                 queryLowerCase = query.toLowerCase(),
                 re = new RegExp('\\b' + $.Autocomplete.utils.escapeRegExChars(queryLowerCase), 'gi'),
-                suggestions = $.grep(countriesArray, function (country) {
+                suggestions = $.grep(countriesArray, function (data) {
                      // return country.value.toLowerCase().indexOf(queryLowerCase) === 0;
-                    return re.test(country.value);
+                    return re.test(data.value);
                 }),
                 response = {
                     query: query,
@@ -38,13 +39,10 @@ $(function () {
     // Initialize ajax autocomplete:
     $('#autocomplete-ajax').autocomplete({
         // serviceUrl: '/autosuggest/service/url',
-        lookup: countriesArray,
-        lookupFilter: function(suggestion, originalQuery, queryLowerCase) {
-            var re = new RegExp('\\b' + $.Autocomplete.utils.escapeRegExChars(queryLowerCase), 'gi');
-            return re.test(suggestion.value);
-        },
+        serviceUrl: 'http://localhost/em/user_controller/get_all_karyawan.html',
+        dataType:'jsonp',
         onSelect: function(suggestion) {
-            $('#selction-ajax').html('You selected: ' + suggestion.value + ', ' + suggestion.data);
+            $('#selection-ajax').html('You selected: ' + suggestion.karyawan_id + ', ' + suggestion.karyawan_nama);
         },
         onHint: function (hint) {
             $('#autocomplete-ajax-x').val(hint);
@@ -61,11 +59,11 @@ $(function () {
     var teams = nhl.concat(nba);
 
     // Initialize autocomplete with local lookup:
-    $('#autocomplete').devbridgeAutocomplete({
-        lookup: teams,
+    $('#autocomplete').autocomplete({
+        serviceUrl: 'http://localhost/em/user_controller/get_all_karyawan.html',
         minChars: 1,
         onSelect: function (suggestion) {
-            $('#selection').html('You selected: ' + suggestion.value + ', ' + suggestion.data.category);
+            $('#selction-ajax').html('You selected: ' + suggestion.value + ', ' + suggestion.data);
         },
         showNoSuggestionNotice: true,
         noSuggestionNotice: 'Sorry, no matching results',
@@ -74,12 +72,12 @@ $(function () {
     
     // Initialize autocomplete with custom appendTo:
     $('#autocomplete-custom-append').autocomplete({
-        lookup: countriesArray,
+        serviceUrl: 'http://localhost/em/user_controller/get_all_karyawan.html',
         appendTo: '#suggestions-container'
     });
 
     // Initialize autocomplete with custom appendTo:
     $('#autocomplete-dynamic').autocomplete({
-        lookup: countriesArray
+        serviceUrl: 'http://localhost/em/user_controller/get_all_karyawan.html'
     });
 });

@@ -15,7 +15,7 @@
                                 <div class="time-item">
                                     <div class="item-info">
                                         <small class="text-muted"><?php echo tgl_indo($data->date); ?></small>
-                                        <p><strong><a href="<?php echo $data->idsdm; ?>" class="text-info"><?php echo $data->fullname; ?></a></strong> <?php echo $data->description; ?> 
+                                        <p><strong><a href="#" class="text-info"><?php echo $data->fullname; ?></a></strong> <?php echo $data->description; ?> 
                                         <?php if($data->item_id == '')
                                         {}else{ ?><strong>"<?php echo $data->item_id; ?>"</strong><?php } ?></p>
                                     </div>

@@ -33,6 +33,92 @@ class Master_controller extends MY_Controller {
 		$this->template->view('page/master/cabang',$data);
 	}
 
+	public function add_cabang()
+	{
+	    //$this->is_logged();
+        //Set Head Content
+		$head['title'] 			= 'Tambah Cabang - Event Management System' ;
+		$head['css']			=  $this->load->view('page/master/include/add-css', NULL, TRUE);
+		$this->load->view('include/head', $head, TRUE);
+        
+        //Set Spesific Javascript page
+        $data['script']     	= $this->load->view('page/master/include/add-script', NULL, TRUE);
+        
+        //Load page
+		$this->template->view('page/master/add-cabang',$data);
+	}
+
+	public function edit_cabang()
+	{
+	    //$this->is_logged();
+	    $idcabang 		= $this->uri->segment(3);
+        //Set Head Content
+		$head['title'] 			= 'Edit Cabang - Event Management System' ;
+		$head['css']			=  $this->load->view('page/master/include/add-css', NULL, TRUE);
+		$this->load->view('include/head', $head, TRUE);
+        
+        //Set Spesific Javascript page
+        $data['script']     	= $this->load->view('page/master/include/add-script', NULL, TRUE);
+        $data['load_cabang']	= $this->master_model->select_id_cabang($idcabang);
+        //Load page
+		$this->template->view('page/master/edit-cabang',$data);
+	}
+
+	public function process_add_cabang()
+	{
+		
+		//Default value is OK. If validations fail result will change to NG.
+		$output = array(
+			'result'  	=> 'OK',
+			'msg'		=> ''
+		);
+		//==== Get Data ====
+		$nama_cabang		= trim($this->security->xss_clean(strip_image_tags($this->input->post('nama_cabang'))));
+		$alamat_cabang		= $this->security->xss_clean(strip_image_tags($this->input->post('alamat_cabang')));
+		$notelp_cabang		= $this->security->xss_clean(strip_image_tags($this->input->post('notelp_cabang')));
+		$wilayah_cabang		= $this->security->xss_clean(strip_image_tags($this->input->post('wilayah_cabang')));
+		$status_cabang		= $this->security->xss_clean(strip_image_tags($this->input->post('status_cabang')));
+		$id_user			= $this->session->userdata('sess_user_id');
+		
+		//==== Check Data ====
+		$sql_cab= $this->master_model->check_cabang($nama_cabang);
+		
+		if($sql_cab->num_rows() == 0) {
+			//==== Insert Data ====
+			$data_insert	= array(
+									'nama_cabang'			=> $nama_cabang,
+									'alamat_cabang'			=> $alamat_cabang,
+									'no_telp'				=> $notelp_cabang,
+									'wilayah'				=> $wilayah_cabang,
+									'is_active' 			=> $status_cabang,
+									'created_by' 			=> $id_user,
+									'created_date' 			=> date('Y-m-d H:i:s')
+								);
+
+			$this->master_model->insert_Cabang($data_insert);
+            
+            $activities ='Tambah Cabang';
+			$itemid		= $nama_cabang;
+			$this->insert_activities_user($activities,$itemid);
+			
+			//Set session flashdata
+			$this->session->set_flashdata('message_success', 'Data telah berhasil disimpan.');
+		} 
+		else //already exists
+		{  
+			$output = array(
+				'result'  	=> 'NG',
+				'msg'		=> 'Nama cabang sudah ada, gunakan nama cabang yang lain.'
+			);
+			
+			//Set session flashdata
+			//$this->session->set_flashdata('message_error', 'Nama cabang sudah ada, gunakan nama cabang yang lain.');
+		}
+		
+		echo json_encode($output);
+		exit;
+	}
+
 	public function divisi()
 	{
 	    //$this->is_logged();
