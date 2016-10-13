@@ -96,12 +96,11 @@
                                 </div>
                             </div>
                             
-                            <div id="show_exam" style="display: none;">
+                            <div id="show_tipe" style="display: none;">
                                 <div class="form-group row">
                                     <label class="col-sm-2">Tipe Exam</label>
                                     <div class="col-sm-6">
-                                        <select class="select2 form-control">
-                                            <option>--pilih tipe exam--</option>
+                                        <select class="select2 form-control" id="tipe_exam" name="tipe_exam">
                                            <?php if($load_tipe_exam->num_rows() > 0){ ?>
                                             <?php foreach($load_tipe_exam->result() as $data){ ?>
                                                 <option value="<?php echo $data->id; ?>"><?php echo $data->tipe_exam; ?></option>
@@ -110,32 +109,28 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2">Judul Exam</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" class="form-control" required="" id="judul_exam" required="" name="judul_exam" readonly=""/>
-                                        <input type="hidden" id="idexam" name="idexam">
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <a class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target=".bs-example-modal-lg">Pilih Exam</a>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2">Deskripsi</label>
-                                    <div class="col-sm-4">
-                                        <input type="text" class="form-control" required="" id="deskripsi" required="" name="deskripsi" readonly=""/>
-                                    </div>
-                                    
+                            </div>
+                            <div class="form-group row" id="show_tipe_pelatihan">
+                                <label class="col-sm-2">Tipe Pelatihan</label>
+                                <div class="col-sm-3">
+                                    <select class="select2 form-control" id="tipe_pelatihan" name="tipe_pelatihan">
+                                        <option value="">--pilih tipe pelatihan--</option>
+                                       <?php if($load_tipe_pelatihan->num_rows() > 0){ ?>
+                                        <?php foreach($load_tipe_pelatihan->result() as $data){ ?>
+                                            <option value="<?php echo $data->id; ?>"><?php echo $data->tipe_pelatihan; ?></option>
+                                        <?php } ?>
+                                        <?php } ?>
+                                    </select>
                                 </div>
                             </div>
-                            <!--
-                            <div class="form-group row">
+
+                            <div class="form-group row" id="dengan_exam" style="display: none;">
                                 <label class="col-sm-2">Dengan Exam</label>
                                 <div class="col-sm-5">
                                     <div class="row">
                                         <div class="col-xs-1">
                                             <div class="radio radio-success">
-                                                <input name="radio" id="radio1" value="option1" checked="" type="radio">
+                                                <input name="radio" id="radio1" value="ya" type="radio">
                                                 <label for="radio1">
                                                     Ya
                                                 </label>
@@ -143,7 +138,7 @@
                                         </div>
                                         <div class="col-xs-2">
                                             <div class="radio radio-success">
-                                                <input name="radio" id="radio2" value="option1" checked="" type="radio">
+                                                <input name="radio" id="radio2" value="tidak" type="radio">
                                                 <label for="radio2">
                                                     Tidak
                                                 </label>
@@ -151,7 +146,174 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>-->
+                            </div>
+                            <div id="show_exam" style="display: none;">
+                                <div class="form-group row">
+                                    <label class="col-sm-2">Judul Exam</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" required="" id="judul_exam" required="" name="judul_exam" readonly=""/>
+                                        <input type="hidden" id="idexam" name="idexam">
+                                        <input type="hidden" id="idjadwalexam" name="idjadwalexam">
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <a class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target=".bs-example-modal-lg">Pilih Exam</a>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2">Kategori</label>
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control" required="" id="deskripsi" required="" name="deskripsi" readonly=""/>
+                                    </div>
+                                    
+                                </div>
+                            </div>        
+                                <ul class="nav nav-tabs m-t-30" id="myTab" role="tablist">
+                                        <li class="nav-item active" id="navdaftarpeserta">
+                                            <a class="nav-link" id="home-tab" data-toggle="tab" href="#daftar_peserta"
+                                               role="tab" aria-controls="home" aria-expanded="true">Daftar Peserta</a>
+                                        </li>
+                                         <li class="nav-item active" id="daftarpesertainput">
+                                            <a class="nav-link" id="home-tab" data-toggle="tab" href="#daftar_peserta_input"
+                                               role="tab" aria-controls="home" aria-expanded="true">Daftar Peserta input</a>
+                                        </li>
+                                        <li class="nav-item" id="navpicpanitia">
+                                            <a class="nav-link" id="home-tab" data-toggle="tab" href="#pic-panitia"
+                                               role="tab" aria-controls="home" aria-expanded="true">PIC Panitia dan Trainer</a>
+                                        </li>
+                                        <li class="nav-item" id="navrab">
+                                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#rab"
+                                               role="tab" aria-controls="profile">Rencana Anggaran Biaya</a>
+                                        </li>
+                                        <li class="nav-item" id="navrundown">
+                                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#rundown"
+                                               role="tab" aria-controls="profile">Rundown</a>
+                                        </li>
+                                        <li class="nav-item" id="navbiayatraining">
+                                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#biayatraining"
+                                               role="tab" aria-controls="profile">Biaya Training dan Vendor</a>
+                                        </li>
+                                        <li class="nav-item" id="navmateri">
+                                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#materi"
+                                               role="tab" aria-controls="profile">Materi</a>
+                                        </li>
+                                        
+                                    </ul>
+                                    <div class="result" id="result"></div>
+                                    <div class="tab-content" id="myTabContent">
+                                        <div role="tabpanel" class="tab-pane fade in active" id="daftar_peserta"
+                                             aria-labelledby="home-tab">
+                                             <div class="p-20" id="show_tabel_peserta" style="display: none; position: relative;">
+                                             <div class="form-group" id="loader" style="position:absolute;display:none;width: 100%;height:100%;text-align: center;background-color: #fff;z-index: 1000;">
+<img style="position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;" src="<?php echo base_url(); ?>assets/images/Preloader_2.gif">
+            </div>
+                                                   <table id="daftar_peserta_table" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>NIK</th>
+                                                            <th>Nama</th>
+                                                            <th>Posisi</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        
+                                                        </tbody>
+                                                    </table>
+                                            </div>
+                                        </div>
+                                        <div role="tabpanel" class="tab-pane fade in active" id="daftar_peserta_input"
+                                             aria-labelledby="home-tab">
+                                             <div class="p-20" id="show_tabel_peserta_input" style="display: none; position: relative;">
+                                             <div class="form-group" id="loader" style="position:absolute;display:none;width: 100%;height:100%;text-align: center;background-color: #fff;z-index: 1000;">
+<img style="position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;" src="<?php echo base_url(); ?>assets/images/Preloader_2.gif">
+            </div>
+                                                   <table id="daftar_peserta_table_input" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>NIK</th>
+                                                            <th>Nama</th>
+                                                            <th>Posisi</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        
+                                                        </tbody>
+                                                    </table>
+                                            </div>
+                                        </div>
+                                            <div class="tab-pane fade" id="PIC/Panitia" role="tabpanel"
+                                             aria-labelledby="profile-tab">
+                                                <div class="p-20">
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-3">Materi Training <span class="text-danger">*</span></label>
+                                                        <div class="col-sm-5">
+                                                            <select class="select2 form-control">
+                                                                <option value="">--pilih materi--</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="pic-panitia" role="tabpanel"
+                                             aria-labelledby="profile-tab">
+                                                <div class="p-20">
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-3">Materi Training <span class="text-danger">*</span></label>
+                                                        <div class="col-sm-5">
+                                                            <select class="select2 form-control">
+                                                                <option value="">--pilih materi--</option>
+
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="rundown" role="tabpanel"
+                                             aria-labelledby="profile-tab">
+                                                <div class="p-20">
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-3">Materi Training <span class="text-danger">*</span></label>
+                                                        <div class="col-sm-5">
+                                                            <select class="select2 form-control">
+                                                                <option value="">--pilih materi--</option>
+
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="biayatraining" role="tabpanel"
+                                             aria-labelledby="profile-tab">
+                                                <div class="p-20">
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-3">Materi Training <span class="text-danger">*</span></label>
+                                                        <div class="col-sm-5">
+                                                            <select class="select2 form-control">
+                                                                <option value="">--pilih materi--</option>
+
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="materi" role="tabpanel"
+                                             aria-labelledby="profile-tab">
+                                                <div class="p-20">
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-3">Materi Training <span class="text-danger">*</span></label>
+                                                        <div class="col-sm-5">
+                                                            <select class="select2 form-control">
+                                                                <option value="">--pilih materi--</option>
+
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                            </div>
+                            
+                            
                             <div class="form-group">
                                 <div style="margin-top: 40px;">
                                     <button type="submit" class="btn btn-primary waves-effect waves-light">
@@ -193,6 +355,7 @@
                             <th>Durasi</th>
                             <th>Jumlah Pertanyaan</th>
                             <th>Kategori</th>
+                            <th hidden="">id Jadwal Exam</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -205,6 +368,7 @@
                             <td><?php echo $data->durasi ?></td>
                             <td><?php echo $data->jml_pertanyaan; ?></td>
                             <td><?php echo $data->avail; ?></td>
+                            <td scope="row" hidden=""><?php echo $data->id_jadwal_exam; ?></td>
                             <td><button type="button" class="pilih_exam" data-dismiss="modal">pilih</button></td>
                         </tr>
                         <?php } ?>

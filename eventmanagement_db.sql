@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 13 Okt 2016 pada 07.07
+-- Generation Time: 13 Okt 2016 pada 14.18
 -- Versi Server: 10.1.10-MariaDB
 -- PHP Version: 7.0.4
 
@@ -327,7 +327,8 @@ INSERT INTO `em_activitiesuser` (`id`, `id_user`, `description`, `item_id`, `dat
 (302, '00000000002', 'Menghapus kategori tempat', 'coba tempat kategor sadi', '2016-10-12 18:31:33', '::1'),
 (303, '00000000002', 'Menghapus kategori tempat', 'kategori magrib', '2016-10-12 18:31:37', '::1'),
 (304, '00000000011', 'Sign out', '', '2016-10-12 19:16:53', '::1'),
-(305, '00000000002', 'Sign in', '', '2016-10-13 11:58:19', '::1');
+(305, '00000000002', 'Sign in', '', '2016-10-13 11:58:19', '::1'),
+(306, '00000000011', 'Sign in', '', '2016-10-13 12:51:55', '::1');
 
 -- --------------------------------------------------------
 
@@ -888,7 +889,7 @@ ALTER TABLE `em_usergroup_matrix`
 -- AUTO_INCREMENT for table `em_activitiesuser`
 --
 ALTER TABLE `em_activitiesuser`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=306;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=307;
 --
 -- AUTO_INCREMENT for table `em_cabang`
 --

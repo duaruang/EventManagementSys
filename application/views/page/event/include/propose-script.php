@@ -23,18 +23,48 @@
 	        var $row = $(this).closest("tr");    // Find the row
 	        var idexam	 			= $row.find("td:nth-child(1)");
 	        var judulexam 			= $row.find("td:nth-child(2)");
-	        var deskripsi			= $row.find("td:nth-child(3)");
+	        var kategori			= $row.find("td:nth-child(6)");
+	        var idjadwalexam		= $row.find("td:nth-child(7)");
 
-	       document.getElementById("idexam").value 		= idexam.text(); 
-		   document.getElementById("judul_exam").value 	= judulexam.text();
-		   document.getElementById("deskripsi").value 	= deskripsi.text();
+	       document.getElementById("idexam").value 			= idexam.text(); 
+		   document.getElementById("judul_exam").value 		= judulexam.text();
+		   document.getElementById("deskripsi").value 		= kategori.text();
+		   document.getElementById("idjadwalexam").value 	= idjadwalexam.text();
+		   var id_jadwal_exam= idjadwalexam.text();
+		   //Menampilkan Tabel Peserta
+		   $('#show_tabel_peserta').show();
+		   $("#show_tabel_peserta tbody tr").children().remove();
+		   $('#loader').show();
+		   $.ajax({
+                    type: 'POST',
+                    url: '<?php echo base_url() ?>Event_controller/get_list_peserta/'+id_jadwal_exam,
+                    dataType: 'json',
+                    cache	: false,
+   					processData: false,
+                    success: function (data) {
+                    	//for (var i=0; i<data.length; i++){
 
+                    	//	console.log(data[i].nama);
+                    	//}
+                    	$('#loader').hide();
+                    	$.each(data, function(i, item) {
+					    $('<tr>').html(
+					        "<td>" + data[i].id_sdm + "</td><td>" + data[i].nama + "</td><td>" + data[i].posisi + "</td>").appendTo('#daftar_peserta_table');
+					    });
+                    },
+                    error: function (e) {
+                    	$('#loader').hide();
+                        alert('error connection. please reload');
+                    }
+                });
 	    });
   	 });
 	
 	$(document).ready(function() {
+		//Validasi Field Kosong
 		$('form').parsley();
 		$('.autonumber').autoNumeric('init');
+		//Tabel Exam
 		$('#exam_table').DataTable();
 		//Date range picker
 		<?php $tomorrow_timestamp = strtotime("+ 3 day"); ?>
@@ -45,23 +75,89 @@
 	        minDate: '<?php echo tgl_eng(date('Y-m-d', $tomorrow_timestamp)); ?>'
 
 	    });
-	    
+
+	    //Menampilkan nilai tanggal awal pada field tanggal awal
 	    $('.input-limit-datepicker').on('apply.daterangepicker', function(ev, picker) {
 	      $('#start').val(picker.startDate.format('DD-MM-YYYY'));
+	  	});
 
-	  });
-
+	    //Menampilkan nilai tanggal akhir pada field tanggal akhir
 	    $('.input-limit-datepicker').on('apply.daterangepicker', function(ev, picker) {
 	      $('#end').val(picker.endDate.format('DD-MM-YYYY'));
+	  	});
+ 		
+ 		
+	  	$('#show_tipe_pelatihan').hide();
+		$('#myTab').hide();
 
-	  });
- 
+		//validasi apabila kategori event terpilih
 		$('#kategori_event').on('change', function() {
-			$('#show_exam').hide();
+			
+			$('#myTab').show();
+
+	  		if(this.value == '0000000004')
+	  		{
+
+	  			$("#tipe_exam").hide();
+	  			$('#show_tipe_pelatihan').hide();
+	  			$("#tipe_exam").select2("val", "");
+	  			$('#show_exam').hide();
+	  			$('#show_tipe').hide();
+	  			$('#show_tabel_peserta').hide();
+	  			$("#show_tabel_peserta tbody tr").children().remove();
+
+	  		}
+
+	  		if(this.value == '0000000001')
+	  		{
+	  			$('#show_tipe').hide();
+	  			$('#navmateri').show();
+	  			$('#navrab').show();
+	  			$('#navrundown').show();
+	  			$('#navbiayatraining').show();
+	  			$('#navpicpanitia').show();
+	  			$('#show_tipe_pelatihan').show();
+	  			$('#dengan_exam').show();
+	  		}
+
 	  		if(this.value == '0000000002')
 	  		{
-	  			$('#show_exam').show();
+	  			$('#show_tipe').show();
+  				$('#show_tipe_pelatihan').hide();
+	  			$("#tipe_exam").select2("val", "");
+	  			$("#tipe_exam").hide();
+	  			$('#show_exam').hide();
+	  			$('#navdaftarpeserta').show();
+	  			
+	  			$('#daftarpesertainput').hide();
+	  			$('#show_tabel_peserta_input').hide();
 	  		}
+
+
+		});
+
+
+
+		//validasi untuk menampilkan pilih exam
+		$('#tipe_exam').on('change', function() {
+	  		$('#show_exam').show();
+	  		$('#navmateri').hide();
+  			$('#navrab').hide();
+  			$('#navrundown').hide();
+  			$('#navbiayatraining').hide();
+  			$('#navpicpanitia').hide();
+	  			
+		});
+
+		//validasi untuk menampilkan rab
+		$('#tipe_pelatihan').on('change', function() {
+	  		$('#show_exam').hide();
+	  		$('#navmateri').hide();
+  			$('#navrab').hide();
+  			$('#navrundown').hide();
+  			$('#navbiayatraining').hide();
+  			$('#navpicpanitia').hide();
+	  			
 		});
 
 
