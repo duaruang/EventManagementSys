@@ -83,13 +83,13 @@
 
 	<!-- Modal -->
 	<div id="custom-modal" class="modal-demo">
-		<?php echo form_open('usergroup_controller/process_delete'); ?>
+		<?php echo form_open('user-group/process-delete'); ?>
 			<button type="button" class="close" onclick="Custombox.close();">
 				<span>&times;</span><span class="sr-only">Close</span>
 			</button>
 			<h4 class="custom-modal-title" style="background-color: #E9311B;">Delete</h4>
 			<div class="custom-modal-text">
-				Apakah Anda yakin ingin menghapus data ini?
+				Apakah Anda yakin ingin menghapus user group <strong>"<span class="ss text-danger del-usergroup"></span>"</strong>?
 			</div>
 			<input type="hidden" class="hidden-idusergroup" name="hidden-idusergroup" value=""/>
 			<input type="hidden" class="hidden-groupname" name="hidden-groupname" value=""/>

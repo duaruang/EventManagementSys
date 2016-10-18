@@ -24,9 +24,9 @@ if ( ! function_exists('tgl_eng'))
         $ubah = gmdate($tgl, time()+60*60*8);
         $pecah = explode("-",$ubah);
         $tanggal = $pecah[2];
-        $bulan = bulan($pecah[1]);
+        $bulan = $pecah[1];
         $tahun = $pecah[0];
-        return $tanggal.', '.$bulan.' '.$tahun;
+        return $tanggal.'-'.$bulan.'-'.$tahun;
     }
 }
 

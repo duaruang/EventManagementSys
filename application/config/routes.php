@@ -87,8 +87,12 @@ USER GROUP CONTROLLER
 ================================================*/
 $route['user-group'] 				= 'UserGroup_controller/index';
 $route['user-group/add'] 			= 'UserGroup_controller/add';
+$route['user-group/process-add'] 	= 'UserGroup_controller/process_add';
 $route['user-group/view/(:num)'] 	= 'UserGroup_controller/view/$1';
 $route['user-group/edit/(:num)'] 	= 'UserGroup_controller/edit/$1';
+$route['user-group/process-edit'] 	= 'UserGroup_controller/process_edit';
+$route['user-group/process-delete'] = 'UserGroup_controller/process_delete';
+
 
 /*==============================================
 MENU CONTROLLER
@@ -111,6 +115,17 @@ $route['trainer/process_edit'] 			= 'Trainer_controller/process_edit';
 $route['trainer/delete'] 				= 'Trainer_controller/process_delete';
 
 /*==============================================
+TRAINER EKSTERNAL CONTROLLER
+================================================*/
+$route['trainer-eksternal']					= 'TrainerEksternal_controller/index';
+$route['trainer-eksternal/add'] 			= 'TrainerEksternal_controller/add';
+$route['trainer-eksternal/process-add'] 	= 'TrainerEksternal_controller/process_add';
+$route['trainer-eksternal/view/(:num)'] 	= 'TrainerEksternal_controller/view/$1';
+$route['trainer-eksternal/edit/(:num)'] 	= 'TrainerEksternal_controller/edit/$1';
+$route['trainer-eksternal/process-edit']	= 'TrainerEksternal_controller/process_edit';
+$route['trainer-eksternal/process-delete'] 	= 'TrainerEksternal_controller/process_delete';
+
+/*==============================================
 MATERI CONTROLLER
 ================================================*/
 $route['materi'] 						= 'Materi_controller/index';
@@ -129,6 +144,17 @@ $route['tipe-pelatihan/process_add'] 			= 'TipePelatihan_controller/process_add'
 $route['tipe-pelatihan/edit/(:num)'] 			= 'TipePelatihan_controller/edit/$1';
 $route['tipe-pelatihan/process_edit'] 			= 'TipePelatihan_controller/process_edit';
 $route['tipe-pelatihan/delete'] 				= 'TipePelatihan_controller/process_delete';
+
+/*==============================================
+TIPE EXAM CONTROLLER
+================================================*/
+$route['tipe-exam'] 						= 'TipeExam_controller/index';
+$route['tipe-exam/add'] 					= 'TipeExam_controller/add';
+$route['tipe-exam/process_add'] 			= 'TipeExam_controller/process_add';
+$route['tipe-exam/edit/(:num)'] 			= 'TipeExam_controller/edit/$1';
+$route['tipe-exam/process_edit'] 			= 'TipeExam_controller/process_edit';
+$route['tipe-exam/delete'] 					= 'TipeExam_controller/process_delete';
+$route['tipe-exam/view/(:num)'] 			= 'TipeExam_controller/view/$1';
 
 /*==============================================
 KLASIFIKASI MATERI CONTROLLER
@@ -151,9 +177,37 @@ $route['divisi/process_edit'] 			= 'Divisi_controller/process_edit';
 $route['divisi/delete'] 				= 'Divisi_controller/process_delete';
 
 /*==============================================
+KATEGORI TEMPAT CONTROLLER
+================================================*/
+$route['kategori-tempat'] 						= 'KategoriTempat_controller/index';
+$route['kategori-tempat/add'] 					= 'KategoriTempat_controller/add';
+$route['kategori-tempat/view/(:num)'] 			= 'KategoriTempat_controller/view/$1';
+$route['kategori-tempat/process_add'] 			= 'KategoriTempat_controller/process_add';
+$route['kategori-tempat/edit/(:num)'] 			= 'KategoriTempat_controller/edit/$1';
+$route['kategori-tempat/process_edit'] 			= 'KategoriTempat_controller/process_edit';
+$route['kategori-tempat/delete'] 				= 'KategoriTempat_controller/process_delete';
+
+/*==============================================
+KATEGORI EVENT CONTROLLER
+================================================*/
+$route['kategori-event'] 						= 'KategoriEvent_controller/index';
+$route['kategori-event/add'] 					= 'KategoriEvent_controller/add';
+$route['kategori-event/view/(:num)'] 			= 'KategoriEvent_controller/view/$1';
+$route['kategori-event/process_add'] 			= 'KategoriEvent_controller/process_add';
+$route['kategori-event/edit/(:num)'] 			= 'KategoriEvent_controller/edit/$1';
+$route['kategori-event/process_edit'] 			= 'KategoriEvent_controller/process_edit';
+$route['kategori-event/delete'] 				= 'KategoriEvent_controller/process_delete';
+
+/*==============================================
 EVENT CONTROLLER
 ================================================*/
-$route['propose'] = 'Event_controller/propose';
+$route['pengajuan-event'] 						= 'Event_controller/propose';
+$route['event'] 								= 'Event_controller/index';
+$route['pengajuan-event/view/(:num)'] 			= 'Event_controller/view/$1';
+$route['pengajuan-event/process_add'] 			= 'Event_controller/process_add';
+$route['pengajuan-event/edit/(:num)'] 			= 'Event_controller/edit/$1';
+$route['pengajuan-event/process_edit'] 			= 'Event_controller/process_edit';
+$route['pengajuan-event/delete'] 				= 'Event_controller/process_delete';
 
 /*==============================================
 CABANG CONTROLLER

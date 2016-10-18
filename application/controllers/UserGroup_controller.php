@@ -63,7 +63,7 @@ class UserGroup_controller extends MY_Controller {
 		
 		//Get Data
 		$menu_active	= $this->security->xss_clean(strip_image_tags($this->input->post('id_menuactive')));
-		$group_name		= $this->security->xss_clean(strip_image_tags($this->input->post('group_name')));
+		$group_name		= trim($this->security->xss_clean(strip_image_tags($this->input->post('group_name'))));
 		$status			= $this->security->xss_clean(strip_image_tags($this->input->post('status')));
 		$id_user		= $this->session->userdata('sess_user_id');
 		
@@ -172,7 +172,7 @@ class UserGroup_controller extends MY_Controller {
 
 	public function process_edit()
 	{
-        //No data -> redirected to page adding user group
+        //No data -> redirected to page editing user group
 		if(count($_POST) == 0){
 			redirect('user-group/edit', 'location');
 		}
@@ -184,7 +184,7 @@ class UserGroup_controller extends MY_Controller {
 		
 		//Get Data
 		$menu_active	= $this->security->xss_clean(strip_image_tags($this->input->post('id_menuactive')));
-		$group_name		= $this->security->xss_clean(strip_image_tags($this->input->post('group_name')));
+		$group_name		= trim($this->security->xss_clean(strip_image_tags($this->input->post('group_name'))));
 		$status			= $this->security->xss_clean(strip_image_tags($this->input->post('status')));
 		$id_usergroup	= $this->security->xss_clean(strip_image_tags($this->input->post('hidden_idusergroup')));
 		$id_user		= $this->session->userdata('sess_user_id');
@@ -255,7 +255,7 @@ class UserGroup_controller extends MY_Controller {
 		//EndLoop: data checkbox
 		
 		//Log user activities
-		$activities ='Edit User Group';
+		$activities = 'Edit User Group';
 		$itemid		= $group_name;
 		$this->insert_activities_user($activities,$itemid);
 		
@@ -277,12 +277,12 @@ class UserGroup_controller extends MY_Controller {
 		$id_user	  = $this->session->userdata('sess_user_id');
 		
 		if($id_usergroup != '') {
-			//Update Data is_active = disabled
+			//Update Data is_active = deleted
 			$data = array('is_active'=>'deleted','modified_by'=> $id_user,'modified_date'=> date('Y-m-d H:i:s'));
 			$this->user_group_model->update_usergroup($id_usergroup,$data);
             
 			//Log user activities
-			$activities ='Edit User Group';
+			$activities = 'Hapus User Group';
 			$itemid		= $group_name;
 			$this->insert_activities_user($activities,$itemid);
 			

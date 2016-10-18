@@ -1,17 +1,21 @@
-###################
-Update User Group
-###################
+########################
+Update Trainer Eskternal
+########################
 Config: 
+- Autoload
 - Routes
-- Core
 
 Controller:
-- Semua controller (update value data id user)
-- User Group Controller (Create, Update, Delete)
+- Trainer Eksternal controller
 
 Model: 
-- User Group Model
+- Trainer Eskternal Model
 
 Database: 
-- Semua table (update type)
-- Table user group, user group matrix, navigation menu
+- Table Trainer Eksternal
+- Table Trainer Eksternal Files
+
+Assets: 
+- Attachments
+- JS
+- Plugins

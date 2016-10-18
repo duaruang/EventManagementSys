@@ -40,7 +40,7 @@
                                     </select>
                                 </div>-->
 								<div class="col-sm-4">
-                                    <input type="text" class="form-control" disabled value="<?php echo $ug[0]['is_active']; ?>"/>
+                                    <input type="text" class="form-control" disabled value="<?php echo ($ug[0]['is_active']=='active' ? 'Aktif' : 'Tidak Aktif' ); ?>"/>
                                 </div>
                             </div>
 							

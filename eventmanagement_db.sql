@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 13, 2016 at 01:12 PM
+-- Generation Time: Oct 18, 2016 at 07:16 AM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `em_activitiesuser` (
   `item_id` varchar(256) DEFAULT NULL,
   `date` datetime NOT NULL,
   `ip_address` varchar(255) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=185 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=256 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `em_activitiesuser`
@@ -206,7 +206,78 @@ INSERT INTO `em_activitiesuser` (`id`, `id_user`, `description`, `item_id`, `dat
 (181, '00000000002', 'Edit User Group', 'test untuk hapus', '2016-10-13 17:45:58', '::1'),
 (182, '00000000002', 'Edit User Group', 'kepala_divisi', '2016-10-13 17:46:19', '::1'),
 (183, '00000000002', 'Edit User Group', 'kepala_divisi', '2016-10-13 18:04:05', '::1'),
-(184, '00000000002', 'Edit User Group', 'test user group matrix1', '2016-10-13 18:06:55', '::1');
+(184, '00000000002', 'Edit User Group', 'test user group matrix1', '2016-10-13 18:06:55', '::1'),
+(185, '00000000002', 'Sign out', '', '2016-10-14 09:21:45', '::1'),
+(186, '00000000002', 'Sign in', '', '2016-10-14 09:32:11', '::1'),
+(187, '00000000002', 'Tambah User', 'Hario Nur Agung Wicaksono', '2016-10-14 09:57:23', '::1'),
+(188, '00000000002', 'Sign out', '', '2016-10-14 09:57:45', '::1'),
+(189, '00000000011', 'Sign in', '', '2016-10-14 09:57:50', '::1'),
+(190, '00000000011', 'Menghapus user', 'Ilham Hidayat', '2016-10-14 09:57:57', '::1'),
+(191, '00000000011', 'Tambah User', 'Ilham Hidayat', '2016-10-14 09:58:10', '::1'),
+(192, '00000000011', 'Edit User', 'Ilham Hidayat', '2016-10-14 09:58:20', '::1'),
+(193, '00000000011', 'Sign out', '', '2016-10-14 09:58:26', '::1'),
+(194, '00000000011', 'Sign in', '', '2016-10-14 09:59:09', '::1'),
+(195, '00000000011', 'Tambah Event', '', '2016-10-14 13:48:26', '::1'),
+(196, '00000000011', 'Tambah Event', '', '2016-10-14 13:58:06', '::1'),
+(197, '00000000011', 'Sign in', '', '2016-10-14 13:59:31', '::1'),
+(198, '00000000011', 'Tambah Event', 'Coba', '2016-10-14 14:04:40', '::1'),
+(199, '00000000011', 'Tambah Event', 'Coba', '2016-10-14 14:04:51', '::1'),
+(200, '00000000011', 'Tambah Event', '', '2016-10-14 14:04:55', '::1'),
+(201, '00000000011', 'Tambah Event', 'Learning by Doing', '2016-10-14 14:06:38', '::1'),
+(202, '00000000011', 'Tambah Event', '', '2016-10-14 14:06:52', '::1'),
+(203, '00000000011', 'Tambah Event', 'dsfsdfsd', '2016-10-14 14:08:34', '::1'),
+(204, '00000000011', 'Tambah Event', '', '2016-10-14 14:12:13', '::1'),
+(205, '00000000011', 'Tambah Event', 'sfdsdfdsgfd', '2016-10-14 14:12:47', '::1'),
+(206, '00000000011', 'Tambah Event', 'sfdhghfgh', '2016-10-14 14:14:08', '::1'),
+(207, '00000000011', 'Tambah Event', '', '2016-10-14 14:14:14', '::1'),
+(208, '00000000011', 'Tambah Event', 'sdfdfgdfgfd', '2016-10-14 14:16:06', '::1'),
+(209, '00000000011', 'Tambah Event', '', '2016-10-14 14:18:13', '::1'),
+(210, '00000000011', 'Tambah Event', 'sdfsdfsd', '2016-10-14 14:22:08', '::1'),
+(211, '00000000011', 'Tambah Event', '', '2016-10-14 14:22:20', '::1'),
+(212, '00000000011', 'Tambah Event', 'fdgdfhgjghs sdfsdfs', '2016-10-14 14:24:46', '::1'),
+(213, '00000000011', 'Tambah Event', 'sfsdfsdfsdfsdfsdf', '2016-10-14 14:25:42', '::1'),
+(214, '00000000011', 'Tambah Event', '', '2016-10-14 14:28:48', '::1'),
+(215, '00000000011', 'Tambah Event', 'COBA EVENT', '2016-10-14 14:33:26', '::1'),
+(216, '00000000011', 'Tambah Event', 'Event Oracle', '2016-10-14 14:51:30', '::1'),
+(217, '00000000011', 'Tambah Event', 'TEST EVENT', '2016-10-14 15:09:45', '::1'),
+(218, '00000000011', 'Sign out', '', '2016-10-14 15:10:03', '::1'),
+(219, '00000000011', 'Sign in', '', '2016-10-14 15:15:08', '::1'),
+(220, '00000000011', 'Tambah Trainer Eksternal', 'Hola Test', '2016-10-14 15:18:43', '::1'),
+(221, '00000000002', 'Sign out', '', '2016-10-14 15:27:24', '::1'),
+(222, '00000000011', 'Sign in', '', '2016-10-14 16:26:14', '::1'),
+(223, '00000000011', 'Tambah User', 'Andika Permana Putra Purba', '2016-10-14 16:26:58', '::1'),
+(224, '00000000011', 'Menghapus user', 'Andika Permana Putra Purba', '2016-10-14 16:27:30', '::1'),
+(225, '00000000011', 'Tambah User Group', 'coba', '2016-10-14 16:30:21', '::1'),
+(226, '00000000011', 'Edit User Group', 'coba', '2016-10-14 16:30:52', '::1'),
+(227, '00000000011', 'Tambah Trainer Eksternal', 'mama', '2016-10-14 16:32:46', '::1'),
+(228, '00000000011', 'Tambah kategori event', 'test kat', '2016-10-14 16:39:12', '::1'),
+(229, '00000000011', 'Tambah Event', 'Event Coba Sekarang', '2016-10-14 16:51:42', '::1'),
+(230, '00000000011', 'Tambah Event', '', '2016-10-14 16:53:01', '::1'),
+(231, '00000000011', 'Sign out', '', '2016-10-14 17:21:07', '::1'),
+(232, '00000000011', 'Sign in', '', '2016-10-15 20:21:12', '::1'),
+(233, '00000000011', 'Sign in', '', '2016-10-16 12:34:49', '::1'),
+(234, '00000000011', 'Sign in', '', '2016-10-17 18:26:22', '::1'),
+(235, '00000000011', 'Sign out', '', '2016-10-17 19:08:58', '::1'),
+(236, '00000000011', 'Sign in', '', '2016-10-17 19:09:09', '::1'),
+(237, '00000000011', 'Sign in', '', '2016-10-17 19:11:13', '::1'),
+(238, '00000000011', 'Tambah Trainer Eksternal', 'test nama pemateri', '2016-10-17 20:42:17', '::1'),
+(239, '00000000011', 'Tambah Trainer Eksternal', 'naama p', '2016-10-17 20:43:36', '::1'),
+(240, '00000000011', 'Sign in', '', '2016-10-18 10:30:31', '::1'),
+(241, '00000000011', 'Edit Trainer', 'nama baru pemateri', '2016-10-18 11:07:09', '::1'),
+(242, '00000000011', 'Tambah Trainer Eksternal', 'nama baru pemateri', '2016-10-18 11:09:26', '::1'),
+(243, '00000000011', 'Tambah Trainer Eksternal', 'nama baru pemateri', '2016-10-18 11:10:03', '::1'),
+(244, '00000000011', 'Edit Trainer Eksternal', 'naama p', '2016-10-18 11:11:38', '::1'),
+(245, '00000000011', 'Edit Trainer Eksternal', 'naama p', '2016-10-18 11:11:43', '::1'),
+(246, '00000000011', 'Edit Trainer Eksternal', 'naama paaa', '2016-10-18 11:11:59', '::1'),
+(247, '00000000011', 'Hapus Trainer Eksternal', 'naama paaa', '2016-10-18 11:12:17', '::1'),
+(248, '00000000011', 'Edit Trainer Eksternal', 'naama paaa', '2016-10-18 11:57:49', '::1'),
+(249, '00000000011', 'Edit Trainer Eksternal', 'naama paaa', '2016-10-18 11:57:57', '::1'),
+(250, '00000000011', 'Edit Trainer Eksternal', 'naama paaadfsdfds', '2016-10-18 11:58:02', '::1'),
+(251, '00000000011', 'Hapus Trainer Eksternal', 'nama baru pemateri', '2016-10-18 12:00:22', '::1'),
+(252, '00000000011', 'Edit Trainer Eksternal', 'naama baru 213', '2016-10-18 12:00:40', '::1'),
+(253, '00000000011', 'Edit Trainer Eksternal', 'naama baru 213', '2016-10-18 12:01:00', '::1'),
+(254, '00000000011', 'Edit Trainer Eksternal', 'naama baru 213', '2016-10-18 12:01:02', '::1'),
+(255, '00000000011', 'Edit Trainer Eksternal', 'naama baru 213', '2016-10-18 12:01:16', '::1');
 
 -- --------------------------------------------------------
 
@@ -274,6 +345,143 @@ INSERT INTO `em_divisi` (`id`, `nama_divisi`, `is_active`, `created_by`, `create
 (4, 'IT', 'disabled', 00000890600, '2016-10-07 13:52:12', 00000890600, '2016-10-07 14:35:00'),
 (5, 'Coba 123', 'deleted', 00093190615, '2016-10-07 16:51:25', 00093190615, '2016-10-07 16:51:30'),
 (6, 'Coba divisi 1', 'active', 00083521114, '2016-10-07 18:53:45', 00083521114, '2016-10-07 18:54:13');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `em_event`
+--
+
+CREATE TABLE IF NOT EXISTS `em_event` (
+`id` int(10) unsigned zerofill NOT NULL,
+  `id_event` varchar(256) NOT NULL,
+  `nomor_memo` varchar(256) NOT NULL,
+  `nama_event` varchar(256) NOT NULL,
+  `topik_event` varchar(256) NOT NULL,
+  `lokasi_kerja` varchar(256) DEFAULT NULL,
+  `mulai_tanggal_pelaksanaan` date NOT NULL,
+  `selesai_tanggal_pelaksanaan` date NOT NULL,
+  `id_kategori_tempat_pelaksanaan` int(10) unsigned zerofill NOT NULL COMMENT 'kategori tempat pelaksanaannya. seperti hotel, dsb.',
+  `nama_tempat` varchar(256) NOT NULL COMMENT 'nama tempat pelaksanaannya',
+  `target_sasaran` varchar(256) NOT NULL,
+  `id_kategori_event` int(10) unsigned zerofill NOT NULL COMMENT 'jenis event yang ingin diajukan. contoh : exam/training/dsb.',
+  `id_tipe_exam` int(10) unsigned zerofill DEFAULT NULL COMMENT 'tipe exam (post test/pretest)',
+  `id_tipe_pelatihan` int(10) unsigned zerofill DEFAULT NULL COMMENT 'tipe pelatihan apabila memilih event kategori training',
+  `dengan_exam` int(11) DEFAULT NULL COMMENT 'jika memilih event training, menggunakan exam atau tidak',
+  `jumlah_peserta` int(11) DEFAULT NULL,
+  `id_exam` int(10) unsigned zerofill DEFAULT NULL COMMENT 'id exam',
+  `id_jadwal_exam` int(10) unsigned zerofill DEFAULT NULL COMMENT 'id jadwal exam untuk mendapatkan list peserta ',
+  `is_active` enum('active','deleted') NOT NULL,
+  `created_by` int(11) unsigned zerofill NOT NULL,
+  `created_date` int(11) NOT NULL,
+  `modified_by` int(11) unsigned zerofill DEFAULT NULL,
+  `modified_date` int(11) DEFAULT NULL,
+  `status_event` enum('draft','submitted','approved by atasan','aprroved by pusat','cancelled by user','cancelled by atasan','cancelled by pusat','rejected by atasan','rejected by pusat') NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `em_event`
+--
+
+INSERT INTO `em_event` (`id`, `id_event`, `nomor_memo`, `nama_event`, `topik_event`, `lokasi_kerja`, `mulai_tanggal_pelaksanaan`, `selesai_tanggal_pelaksanaan`, `id_kategori_tempat_pelaksanaan`, `nama_tempat`, `target_sasaran`, `id_kategori_event`, `id_tipe_exam`, `id_tipe_pelatihan`, `dengan_exam`, `jumlah_peserta`, `id_exam`, `id_jadwal_exam`, `is_active`, `created_by`, `created_date`, `modified_by`, `modified_date`, `status_event`) VALUES
+(0000000002, 'fnYGNhUwH61476431490', 'a-222/PNM-PPI/IKL/2016', 'Event Oracle', 'Programming', '', '2016-10-17', '2016-10-18', 0000000002, 'Mulia', '200', 0000000002, 0000000002, 0000000000, 0, 3, 0000000001, 0000000007, 'active', 00000000011, 2016, NULL, NULL, 'submitted'),
+(0000000003, 'qkD4F2on7x1476432585', 'A-999/PNM-ASA/DDD/5343', 'TEST EVENT', 'TOPIK 1', '', '2016-10-17', '2016-10-18', 0000000002, 'HILTON', '200', 0000000002, 0000000002, 0000000000, 0, 77, 0000001007, 0000001008, 'active', 00000000011, 2016, NULL, NULL, 'submitted'),
+(0000000004, 'QK7t8e9qLw1476438702', 'A-999/PNM-PPI/HHH/2016', 'Event Coba Sekarang', 'Meeting Progress', '', '2016-10-17', '2016-10-22', 0000000002, 'Mulia', 'test bu', 0000000002, 0000000002, 0000000000, 0, 3, 0000000004, 0000000006, 'active', 00000000011, 2016, NULL, NULL, 'submitted'),
+(0000000005, '4S8cgJeQbl1476438781', '', '', '', '', '0000-00-00', '0000-00-00', 0000000000, '', '', 0000000002, 0000000002, 0000000000, 0, 29, 0000001015, 0000001013, 'active', 00000000011, 2016, NULL, NULL, 'submitted');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `em_event_listpeserta`
+--
+
+CREATE TABLE IF NOT EXISTS `em_event_listpeserta` (
+`id` int(10) unsigned zerofill NOT NULL,
+  `id_event` int(10) unsigned zerofill NOT NULL,
+  `idsdm` varchar(256) NOT NULL,
+  `nik` varchar(256) NOT NULL,
+  `nama` varchar(256) NOT NULL,
+  `posisi` varchar(256) NOT NULL,
+  `created_by` int(10) unsigned zerofill NOT NULL,
+  `created_date` date NOT NULL,
+  `modified_by` int(10) unsigned zerofill DEFAULT NULL,
+  `modified_date` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `em_kategori_event`
+--
+
+CREATE TABLE IF NOT EXISTS `em_kategori_event` (
+  `id` int(10) unsigned zerofill NOT NULL,
+  `kategori_event` varchar(256) NOT NULL,
+  `created_by` int(11) unsigned zerofill NOT NULL,
+  `created_date` datetime NOT NULL,
+  `modified_by` int(11) unsigned zerofill DEFAULT NULL,
+  `modified_date` datetime DEFAULT NULL,
+  `is_active` enum('active','disabled','deleted') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `em_kategori_event`
+--
+
+INSERT INTO `em_kategori_event` (`id`, `kategori_event`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES
+(0000000001, 'Training', 00000000001, '0000-00-00 00:00:00', 00000000002, '2016-10-12 13:56:02', 'active'),
+(0000000002, 'Exam', 00000000001, '0000-00-00 00:00:00', NULL, NULL, 'active'),
+(0000000004, 'others', 00000000002, '2016-10-12 13:36:06', NULL, NULL, 'active'),
+(0000000005, 'asd', 00000000002, '2016-10-12 13:37:09', NULL, '2016-10-12 13:45:16', 'deleted'),
+(0000000006, 'Coba event', 00000000002, '2016-10-12 13:45:54', NULL, '2016-10-12 13:45:58', 'deleted'),
+(0000000007, 'asda', 00000000002, '2016-10-12 13:47:36', NULL, '2016-10-12 13:47:41', 'deleted'),
+(0000000008, 'gggg', 00000000002, '2016-10-12 13:49:24', 00000000002, '2016-10-12 13:49:27', 'deleted'),
+(0000000009, 'asdasd', 00000000002, '2016-10-12 16:51:42', 00000000002, '2016-10-12 17:50:39', 'deleted'),
+(0000000010, 'adasd', 00000000002, '2016-10-12 17:08:21', 00000000002, '2016-10-12 17:50:34', 'deleted'),
+(0000000011, 'sfff', 00000000002, '2016-10-12 17:23:13', 00000000002, '2016-10-12 17:51:20', 'disabled'),
+(0000000012, 'kta', 00000000002, '2016-10-12 17:27:07', 00000000002, '2016-10-12 17:50:44', 'deleted'),
+(0000000013, 'coba kategori 1', 00000000002, '2016-10-12 17:50:52', 00000000002, '2016-10-12 17:51:11', 'disabled'),
+(0000000014, 'asdasd', 00000000002, '2016-10-12 17:57:10', NULL, NULL, 'disabled'),
+(0000000000, 'test kat', 00000000011, '2016-10-14 16:39:12', NULL, NULL, 'active');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `em_kategori_tempat`
+--
+
+CREATE TABLE IF NOT EXISTS `em_kategori_tempat` (
+  `id` int(11) NOT NULL,
+  `kategori_tempat` varchar(256) NOT NULL,
+  `created_by` int(11) unsigned zerofill NOT NULL,
+  `created_date` datetime NOT NULL,
+  `modified_by` int(11) unsigned zerofill DEFAULT NULL,
+  `modified_date` datetime DEFAULT NULL,
+  `is_active` enum('active','disabled','deleted') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `em_kategori_tempat`
+--
+
+INSERT INTO `em_kategori_tempat` (`id`, `kategori_tempat`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES
+(2, 'Hotel', 00099450915, '2016-10-11 19:27:18', NULL, NULL, 'active'),
+(3, 'Villa', 00099450915, '2016-10-11 19:27:52', NULL, NULL, 'active'),
+(4, 'coba tempat kategori a', 00099450915, '2016-10-11 19:29:42', 00000000002, '2016-10-12 18:31:26', 'deleted'),
+(5, 'coba lagi a', 00099450915, '2016-10-11 19:30:46', 00000000002, '2016-10-12 18:31:15', 'deleted'),
+(6, 'coba tempat kategor sadi', 00000000002, '2016-10-12 16:55:55', 00000000002, '2016-10-12 17:00:00', 'deleted'),
+(7, '', 00000000002, '2016-10-12 17:01:12', 00000000002, '2016-10-12 17:03:14', 'deleted'),
+(8, 'coba tempat kategori', 00000000002, '2016-10-12 17:02:39', 00000000002, '2016-10-12 18:31:30', 'deleted'),
+(9, 'asd sda', 00000000002, '2016-10-12 17:03:21', 00000000002, '2016-10-12 18:31:10', 'deleted'),
+(10, '', 00000000002, '2016-10-12 17:04:05', 00000000002, '2016-10-12 17:07:00', 'deleted'),
+(11, 'coba tempat kategori asdasdsa', 00000000002, '2016-10-12 17:07:12', 00000000002, '2016-10-12 18:31:03', 'deleted'),
+(12, '', 00000000002, '2016-10-12 17:07:18', 00000000011, '2016-10-12 17:11:20', 'deleted'),
+(13, 'coba tempat kategor sadi', 00000000011, '2016-10-12 17:11:27', 00000000002, '2016-10-12 18:31:33', 'deleted'),
+(14, 'coba tempat kategor sadi hgfjgjh', 00000000011, '2016-10-12 17:13:03', 00000000002, '2016-10-12 18:31:13', 'deleted'),
+(15, '', 00000000011, '2016-10-12 17:13:09', 00000000011, '2016-10-12 17:19:41', 'deleted'),
+(16, 'hahaha', 00000000011, '2016-10-12 17:20:08', 00000000002, '2016-10-12 18:31:18', 'deleted'),
+(17, 'coba html', 00000000002, '2016-10-12 17:23:37', 00000000002, '2016-10-12 18:31:07', 'deleted'),
+(18, 'kategori magrib', 00000000002, '2016-10-12 17:53:35', 00000000002, '2016-10-12 18:31:37', 'deleted');
 
 -- --------------------------------------------------------
 
@@ -351,7 +559,7 @@ CREATE TABLE IF NOT EXISTS `em_navigationmenu` (
   `created_date` datetime NOT NULL,
   `modified_by` int(11) unsigned zerofill DEFAULT NULL,
   `modified_date` datetime DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `em_navigationmenu`
@@ -365,12 +573,12 @@ INSERT INTO `em_navigationmenu` (`id`, `id_parent`, `id_systemactive`, `icon_men
 (5, NULL, 1, 'zmdi zmdi-collection-text', 'Master Data', NULL, 0, 1, 3, NULL, 'active', 00000000001, '2016-10-07 09:28:19', NULL, NULL),
 (6, 5, 1, NULL, 'Matriks Program & Anggaran', 'matriks', 0, 1, NULL, 1, 'active', 00000000001, '2016-10-07 09:29:06', NULL, NULL),
 (7, 5, 1, NULL, 'Trainer', 'trainer', 0, 1, NULL, 2, 'active', 00000000001, '2016-10-07 09:29:24', 00000000001, '2016-10-07 09:47:44'),
-(8, 5, 1, NULL, 'Materi', 'materi', 0, 1, NULL, 4, 'active', 00000000001, '2016-10-07 09:29:53', NULL, NULL),
-(9, 5, 1, NULL, 'Kategori Event', 'kategori-event', 0, 1, NULL, 5, 'active', 00000000001, '2016-10-07 09:30:08', NULL, NULL),
-(10, 5, 1, NULL, 'Tipe Pelatihan', 'tipe-pelatihan', 0, 1, NULL, 6, 'active', 00000000001, '2016-10-07 09:30:28', NULL, NULL),
-(11, 5, 1, NULL, 'Cabang', 'cabang', 0, 1, NULL, 7, 'active', 00000000001, '2016-10-07 09:30:40', NULL, NULL),
-(12, 5, 1, NULL, 'Divisi', 'divisi', 0, 1, NULL, 8, 'active', 00000000001, '2016-10-07 09:31:00', NULL, NULL),
-(13, 5, 1, NULL, 'Klasifikasi Materi', 'klasifikasi-materi', 0, 1, NULL, 3, 'active', 00000000001, '2016-10-07 09:35:31', 00000000001, '2016-10-07 09:54:00'),
+(8, 5, 1, NULL, 'Materi', 'materi', 0, 1, NULL, 5, 'active', 00000000001, '2016-10-07 09:29:53', NULL, NULL),
+(9, 5, 1, NULL, 'Kategori Event', 'kategori-event', 0, 1, NULL, 6, 'active', 00000000001, '2016-10-07 09:30:08', NULL, NULL),
+(10, 5, 1, NULL, 'Tipe Pelatihan', 'tipe-pelatihan', 0, 1, NULL, 7, 'active', 00000000001, '2016-10-07 09:30:28', NULL, NULL),
+(11, 5, 1, NULL, 'Cabang', 'cabang', 0, 0, NULL, 8, 'disabled', 00000000001, '2016-10-07 09:30:40', NULL, NULL),
+(12, 5, 1, NULL, 'Divisi', 'divisi', 0, 0, NULL, 9, 'disabled', 00000000001, '2016-10-07 09:31:00', NULL, NULL),
+(13, 5, 1, NULL, 'Klasifikasi Materi', 'klasifikasi-materi', 0, 1, NULL, 4, 'active', 00000000001, '2016-10-07 09:35:31', 00000000001, '2016-10-07 09:54:00'),
 (14, NULL, 1, 'zmdi zmdi-collection-text', 'Event', NULL, 0, 1, 4, NULL, 'active', 00000000001, '2016-10-07 09:31:22', NULL, NULL),
 (15, 14, 1, NULL, 'Pengajuan Event', 'pengajuan-event', 0, 1, NULL, 1, 'active', 00000000001, '2016-10-07 09:31:22', NULL, NULL),
 (16, 14, 1, NULL, 'Persetujuan Memo Event', 'persetujuan-memo', 0, 1, NULL, 2, 'active', 00000000001, '2016-10-07 09:31:44', NULL, NULL),
@@ -385,7 +593,11 @@ INSERT INTO `em_navigationmenu` (`id`, `id_parent`, `id_systemactive`, `icon_men
 (25, 22, 1, NULL, 'Realisasi Event & RKAP', 'realisasi-eventRkap', 0, 1, NULL, 3, 'active', 00000000001, '2016-10-07 09:35:17', NULL, NULL),
 (26, 22, 1, NULL, 'Feedback', 'feedback', 0, 1, NULL, 4, 'active', 00000000001, '2016-10-07 09:35:31', NULL, NULL),
 (27, NULL, 1, 'zmdi zmdi-collection-item', 'Audit Trail', 'audit-trail', 0, 0, 7, NULL, 'active', 00000000001, '2016-10-07 09:35:31', NULL, NULL),
-(28, NULL, 2, 'zmdi zmdi-collection-item', 'Registrasi Event', 'registrasi-event', 0, 1, 0, NULL, 'active', 00000000001, '2016-10-07 09:35:31', NULL, NULL);
+(28, NULL, 2, 'zmdi zmdi-collection-item', 'Registrasi Event', 'registrasi-event', 0, 1, 0, NULL, 'active', 00000000001, '2016-10-07 09:35:31', NULL, NULL),
+(29, 5, 1, NULL, 'Tipe Exam', 'tipe-exam', 0, 1, NULL, 9, 'active', 00000000001, '2016-10-14 09:45:45', NULL, NULL),
+(30, 5, 1, NULL, 'Kategori Tempat Event', 'kategori-tempat', 0, 1, NULL, 10, 'active', 00000000001, '2016-10-14 11:33:49', NULL, NULL),
+(31, 5, 1, NULL, 'Trainer Eksternal', 'trainer-eksternal', 0, 1, NULL, 3, 'active', 00000000001, '2016-10-07 09:29:24', 00000000001, '2016-10-07 09:47:44'),
+(32, 14, 1, NULL, 'List Event', 'event', 0, 1, NULL, 4, 'active', 00000000001, '2016-10-07 09:31:22', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -400,9 +612,9 @@ CREATE TABLE IF NOT EXISTS `em_systemactive` (
   `login_only` tinyint(4) NOT NULL COMMENT '1=hanya akses login(tidak ada CRUD di usergroup privilege);0=ada CRUD di usergroup privilege',
   `is_displayed` tinyint(4) NOT NULL COMMENT '1=ditampilkan di usergroup privilege;0=tidak ditampilkan',
   `is_active` enum('active','disabled','deleted') NOT NULL,
-  `created_by` int(10) unsigned zerofill NOT NULL,
+  `created_by` int(11) unsigned zerofill NOT NULL,
   `created_date` datetime NOT NULL,
-  `modified_by` int(10) unsigned zerofill DEFAULT NULL,
+  `modified_by` int(11) unsigned zerofill DEFAULT NULL,
   `modified_date` datetime DEFAULT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
@@ -411,9 +623,9 @@ CREATE TABLE IF NOT EXISTS `em_systemactive` (
 --
 
 INSERT INTO `em_systemactive` (`id`, `definisi`, `sort`, `login_only`, `is_displayed`, `is_active`, `created_by`, `created_date`, `modified_by`, `modified_date`) VALUES
-(1, 'Sistem Utama', 1, 0, 1, 'active', 0000000001, '2016-10-12 10:00:00', NULL, NULL),
-(2, 'Sistem Registrasi Event', 2, 1, 1, 'active', 0000000001, '2016-10-12 10:00:00', NULL, NULL),
-(3, 'Sistem Registrasi User', 3, 1, 0, 'active', 0000000001, '2016-10-12 10:00:00', NULL, NULL);
+(1, 'Sistem Utama', 1, 0, 1, 'active', 00000000001, '2016-10-12 10:00:00', NULL, NULL),
+(2, 'Sistem Registrasi Event', 2, 1, 1, 'active', 00000000001, '2016-10-12 10:00:00', NULL, NULL),
+(3, 'Sistem Registrasi User', 3, 1, 0, 'active', 00000000001, '2016-10-12 10:00:00', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -450,6 +662,30 @@ INSERT INTO `em_tipepelatihan` (`id`, `tipe_pelatihan`, `inisial_pelatihan`, `de
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `em_tipe_exam`
+--
+
+CREATE TABLE IF NOT EXISTS `em_tipe_exam` (
+`id` int(10) unsigned zerofill NOT NULL,
+  `tipe_exam` varchar(256) NOT NULL,
+  `created_by` int(11) unsigned zerofill NOT NULL,
+  `created_date` datetime NOT NULL,
+  `modified_by` int(11) unsigned zerofill DEFAULT NULL,
+  `modified_date` datetime DEFAULT NULL,
+  `is_active` enum('active','disabled','deleted') NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `em_tipe_exam`
+--
+
+INSERT INTO `em_tipe_exam` (`id`, `tipe_exam`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES
+(0000000001, 'pre test', 00000000001, '2016-10-12 00:00:00', 00000000002, '2016-10-12 18:10:16', 'active'),
+(0000000002, 'post test', 00000000002, '2016-10-12 18:08:48', 00000000002, '2016-10-12 18:14:12', 'active');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `em_trainer`
 --
 
@@ -478,6 +714,58 @@ INSERT INTO `em_trainer` (`id`, `nik`, `nama_pemateri`, `inisial`, `jabatan`, `i
 (3, '5432212', 'Joko Priambodo', 'eg', 'Head Operation', 6, 1, 'disabled', 00000890600, '2016-10-07 13:43:21', NULL, NULL),
 (4, '5432211', 'Lisa Maruntu', 'LM', 'Officer', 5, 1, 'disabled', 00000890600, '2016-10-07 13:49:20', NULL, NULL),
 (5, '188383', 'yudhi', 'Y', 'IT OFFICER', 6, 2, 'active', 00083521114, '2016-10-07 19:01:23', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `em_trainereksternal`
+--
+
+CREATE TABLE IF NOT EXISTS `em_trainereksternal` (
+`id` int(10) unsigned zerofill NOT NULL,
+  `nama_pemateri` varchar(255) NOT NULL,
+  `nama_perusahaan` varchar(255) NOT NULL,
+  `is_active` enum('active','disabled','deleted') NOT NULL,
+  `created_by` int(11) unsigned zerofill NOT NULL,
+  `created_date` datetime NOT NULL,
+  `modified_by` int(11) unsigned zerofill DEFAULT NULL,
+  `modified_date` datetime DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `em_trainereksternal`
+--
+
+INSERT INTO `em_trainereksternal` (`id`, `nama_pemateri`, `nama_perusahaan`, `is_active`, `created_by`, `created_date`, `modified_by`, `modified_date`) VALUES
+(0000000001, 'naama baru 213', 'nama baru 7586', 'active', 00000000011, '2016-10-17 20:43:36', 00000000011, '2016-10-18 12:01:16'),
+(0000000003, 'nama baru pemateri', 'nama baru perusahaan', 'deleted', 00000000011, '2016-10-18 11:10:03', 00000000011, '2016-10-18 12:00:22');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `em_trainereksternal_files`
+--
+
+CREATE TABLE IF NOT EXISTS `em_trainereksternal_files` (
+`id` int(11) NOT NULL,
+  `id_pemateri` int(10) unsigned zerofill NOT NULL,
+  `nama_file` varchar(255) NOT NULL,
+  `tipe_file` varchar(50) NOT NULL,
+  `is_active` enum('active','deleted') NOT NULL,
+  `created_by` int(11) unsigned zerofill NOT NULL,
+  `created_date` datetime NOT NULL,
+  `modified_by` int(11) unsigned zerofill DEFAULT NULL,
+  `modified_date` datetime DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `em_trainereksternal_files`
+--
+
+INSERT INTO `em_trainereksternal_files` (`id`, `id_pemateri`, `nama_file`, `tipe_file`, `is_active`, `created_by`, `created_date`, `modified_by`, `modified_date`) VALUES
+(1, 0000000001, '1_20161017at204336_c608480b5bf700081f77ab6930b1c64d.jpg', 'image/jpeg', 'deleted', 00000000011, '2016-10-17 20:43:36', 00000000011, '2016-10-18 11:57:49'),
+(2, 0000000001, '1_20161017at204336_Quotation-308081602_MajalahAGRINA.pdf', 'applicatio', 'deleted', 00000000011, '2016-10-17 20:43:36', 00000000011, '2016-10-18 11:57:49'),
+(3, 0000000001, '0000000001_20161018at120040_ScreenShot2016-10-18at10.23.01AM.png', 'image/png', 'deleted', 00000000011, '2016-10-18 12:00:40', 00000000011, '2016-10-18 12:01:16');
 
 -- --------------------------------------------------------
 
@@ -523,7 +811,7 @@ CREATE TABLE IF NOT EXISTS `em_user` (
   `created_date` datetime NOT NULL,
   `modified_by` int(11) unsigned zerofill DEFAULT NULL,
   `modified_date` datetime DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `em_user`
@@ -531,7 +819,10 @@ CREATE TABLE IF NOT EXISTS `em_user` (
 
 INSERT INTO `em_user` (`id`, `idsdm`, `nik`, `id_user_group`, `username`, `fullname`, `email`, `organisasi_name`, `organisasi_desc`, `reset_password`, `forgot_pass_code`, `forgot_pass_date`, `is_administrator`, `is_active`, `finger_print`, `created_by`, `created_date`, `modified_by`, `modified_date`) VALUES
 (00000000001, NULL, NULL, NULL, 'administrator', 'ADMINISTRATOR', 'admin@admin.co.id', NULL, NULL, NULL, NULL, NULL, 1, 'active', NULL, 00000000001, '2016-10-06 22:39:42', NULL, NULL),
-(00000000002, '                         ECD2FD56BAAA7D522748DB3BA18CB79B', 93190615, 00000000000, 'IHidayat0808', 'Ilham Hidayat', 'ilham_ild@pnm.co.id', NULL, NULL, NULL, NULL, NULL, 0, 'active', NULL, 00000000001, '2016-10-06 22:39:42', NULL, NULL);
+(00000000002, 'ECD2FD56BAAA7D522748DB3BA18CB79B                ', 93190615, 00000000000, 'IHidayat0808', 'Ilham Hidayat', 'ilham_ild@pnm.co.id', NULL, NULL, NULL, NULL, NULL, 0, 'deleted', NULL, 00000000001, '2016-10-06 22:39:42', 00000000011, '2016-10-14 09:57:57'),
+(00000000011, '00A15C24F05EEAA69C2E701F365741F0', 99450915, 00000000001, 'HNAWicaksono0909', 'Hario Nur Agung Wicaksono', 'hario0987@pnm.co.id', '', '', NULL, NULL, NULL, 0, 'active', NULL, 00000000002, '2016-10-14 09:57:23', NULL, NULL),
+(00000000012, 'ECD2FD56BAAA7D522748DB3BA18CB79B', 93190615, 00000000001, 'IHidayat0808', 'Ilham Hidayat', 'ilham_ild@pnm.co.id', 'itd', 'it strategic development', NULL, NULL, NULL, 0, 'disabled', NULL, 00000000011, '2016-10-14 09:58:10', 00000000011, '2016-10-14 09:58:20'),
+(00000000013, '38B636D94B1CA3B1F2532DB740DA446C', 96490815, 00000000003, 'APPPurba0812', 'Andika Permana Putra Purba', 'andika_ppp@pnm.co.id', 'itd', 'it strategic development', NULL, NULL, NULL, 0, 'deleted', NULL, 00000000011, '2016-10-14 16:26:58', 00000000011, '2016-10-14 16:27:30');
 
 -- --------------------------------------------------------
 
@@ -547,7 +838,7 @@ CREATE TABLE IF NOT EXISTS `em_usergroup` (
   `created_date` datetime NOT NULL,
   `modified_by` int(11) unsigned zerofill DEFAULT NULL,
   `modified_date` datetime DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `em_usergroup`
@@ -561,7 +852,8 @@ INSERT INTO `em_usergroup` (`id`, `definisi`, `is_active`, `created_by`, `create
 (00000000005, 'kepala_cabang', 'active', 00000000001, '2016-10-05 00:00:00', NULL, NULL),
 (00000000006, 'kepala_divisi', 'active', 00000000001, '2016-10-05 00:00:00', 00000000002, '2016-10-13 18:04:05'),
 (00000000014, 'test user group matrix1', 'disabled', 00000000002, '2016-10-13 15:08:16', 00000000002, '2016-10-13 18:06:55'),
-(00000000015, 'test untuk hapus', 'deleted', 00000000002, '2016-10-13 17:16:44', NULL, NULL);
+(00000000015, 'test untuk hapus', 'deleted', 00000000002, '2016-10-13 17:16:44', NULL, NULL),
+(00000000016, 'coba', 'disabled', 00000000011, '2016-10-14 16:30:21', 00000000011, '2016-10-14 16:30:52');
 
 -- --------------------------------------------------------
 
@@ -578,7 +870,7 @@ CREATE TABLE IF NOT EXISTS `em_usergroup_matrix` (
   `action_update` tinyint(4) NOT NULL COMMENT '1=active;0=inactive',
   `action_delete` tinyint(4) NOT NULL COMMENT '1=active;0=inactive',
   `action_login` tinyint(4) NOT NULL COMMENT 'Hak akses login (tidak ada CRUD), sesuai flag login_only di em_navigationmenu'
-) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=87 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `em_usergroup_matrix`
@@ -647,7 +939,30 @@ INSERT INTO `em_usergroup_matrix` (`id`, `id_usergroup`, `id_menu`, `action_crea
 (60, 0000000006, 24, 1, 1, 1, 1, 0),
 (61, 0000000006, 25, 1, 1, 1, 1, 0),
 (62, 0000000006, 26, 1, 1, 1, 1, 0),
-(63, 0000000006, 28, 0, 0, 0, 0, 0);
+(63, 0000000006, 28, 0, 0, 0, 0, 0),
+(64, 0000000016, 3, 1, 1, 1, 1, 0),
+(65, 0000000016, 4, 1, 1, 1, 1, 0),
+(66, 0000000016, 6, 1, 1, 0, 1, 0),
+(67, 0000000016, 7, 1, 1, 1, 1, 0),
+(68, 0000000016, 31, 1, 0, 1, 1, 0),
+(69, 0000000016, 13, 1, 1, 1, 0, 0),
+(70, 0000000016, 8, 1, 1, 1, 1, 0),
+(71, 0000000016, 9, 1, 1, 1, 1, 0),
+(72, 0000000016, 10, 1, 1, 1, 1, 0),
+(73, 0000000016, 29, 1, 1, 1, 1, 0),
+(74, 0000000016, 30, 1, 1, 1, 1, 0),
+(75, 0000000016, 15, 1, 1, 0, 1, 0),
+(76, 0000000016, 16, 1, 1, 0, 1, 0),
+(77, 0000000016, 17, 1, 1, 1, 1, 0),
+(78, 0000000016, 32, 1, 1, 1, 1, 0),
+(79, 0000000016, 19, 1, 1, 1, 1, 0),
+(80, 0000000016, 20, 1, 1, 1, 1, 0),
+(81, 0000000016, 21, 1, 1, 1, 1, 0),
+(82, 0000000016, 23, 1, 1, 1, 1, 0),
+(83, 0000000016, 24, 1, 1, 1, 1, 0),
+(84, 0000000016, 25, 1, 1, 1, 1, 0),
+(85, 0000000016, 26, 1, 1, 1, 1, 0),
+(86, 0000000016, 28, 0, 0, 0, 0, 0);
 
 --
 -- Indexes for dumped tables
@@ -669,6 +984,18 @@ ALTER TABLE `em_cabang`
 -- Indexes for table `em_divisi`
 --
 ALTER TABLE `em_divisi`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `em_event`
+--
+ALTER TABLE `em_event`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `em_event_listpeserta`
+--
+ALTER TABLE `em_event_listpeserta`
  ADD PRIMARY KEY (`id`);
 
 --
@@ -702,9 +1029,27 @@ ALTER TABLE `em_tipepelatihan`
  ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `em_tipe_exam`
+--
+ALTER TABLE `em_tipe_exam`
+ ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `em_trainer`
 --
 ALTER TABLE `em_trainer`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `em_trainereksternal`
+--
+ALTER TABLE `em_trainereksternal`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `em_trainereksternal_files`
+--
+ALTER TABLE `em_trainereksternal_files`
  ADD PRIMARY KEY (`id`);
 
 --
@@ -739,7 +1084,7 @@ ALTER TABLE `em_usergroup_matrix`
 -- AUTO_INCREMENT for table `em_activitiesuser`
 --
 ALTER TABLE `em_activitiesuser`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=185;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=256;
 --
 -- AUTO_INCREMENT for table `em_cabang`
 --
@@ -750,6 +1095,16 @@ MODIFY `id` int(10) unsigned zerofill NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
 --
 ALTER TABLE `em_divisi`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `em_event`
+--
+ALTER TABLE `em_event`
+MODIFY `id` int(10) unsigned zerofill NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `em_event_listpeserta`
+--
+ALTER TABLE `em_event_listpeserta`
+MODIFY `id` int(10) unsigned zerofill NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `em_klasifikasimateri`
 --
@@ -764,7 +1119,7 @@ MODIFY `id` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 -- AUTO_INCREMENT for table `em_navigationmenu`
 --
 ALTER TABLE `em_navigationmenu`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=29;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=33;
 --
 -- AUTO_INCREMENT for table `em_systemactive`
 --
@@ -776,10 +1131,25 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 ALTER TABLE `em_tipepelatihan`
 MODIFY `id` int(10) unsigned zerofill NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
+-- AUTO_INCREMENT for table `em_tipe_exam`
+--
+ALTER TABLE `em_tipe_exam`
+MODIFY `id` int(10) unsigned zerofill NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
 -- AUTO_INCREMENT for table `em_trainer`
 --
 ALTER TABLE `em_trainer`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `em_trainereksternal`
+--
+ALTER TABLE `em_trainereksternal`
+MODIFY `id` int(10) unsigned zerofill NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `em_trainereksternal_files`
+--
+ALTER TABLE `em_trainereksternal_files`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `em_url_host`
 --
@@ -789,17 +1159,17 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 -- AUTO_INCREMENT for table `em_user`
 --
 ALTER TABLE `em_user`
-MODIFY `id` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+MODIFY `id` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `em_usergroup`
 --
 ALTER TABLE `em_usergroup`
-MODIFY `id` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
+MODIFY `id` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `em_usergroup_matrix`
 --
 ALTER TABLE `em_usergroup_matrix`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=64;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=87;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

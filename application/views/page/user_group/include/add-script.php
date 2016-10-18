@@ -64,7 +64,7 @@
 		$("#form-add-usergroup").submit(function(e){
 			e.preventDefault();
 			
-			var formURL = "<?php echo site_url('usergroup_controller/process_add'); ?>";
+			var formURL = "<?php echo site_url('user-group/process-add'); ?>";
 			var formDatas = new FormData(this);
 			$("#loader").show();
 			var xhr = $.ajax({
@@ -101,7 +101,7 @@
 		$("#form-edit-usergroup").submit(function(e){
 			e.preventDefault();
 			
-			var formURL = "<?php echo site_url('usergroup_controller/process_edit'); ?>";
+			var formURL = "<?php echo site_url('user-group/process-edit'); ?>";
 			var formDatas = new FormData(this);
 			$("#loader").show();
 			var xhr = $.ajax({

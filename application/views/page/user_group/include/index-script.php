@@ -51,6 +51,7 @@
 			var group_name = $(this).data('groupname'); 
 			$('.hidden-idusergroup').val(id_usergroup);
 			$('.hidden-groupname').val(group_name);
+			$('.del-usergroup').html(group_name);
 		});
 		
     } );
