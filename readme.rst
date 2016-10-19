@@ -1,21 +1,17 @@
 ########################
-Update Trainer Eskternal
+Update Kategori RAB
 ########################
 Config: 
 - Autoload
 - Routes
 
 Controller:
-- Trainer Eksternal controller
+- Kategori RAB controller
+- Update: Trainer Eksternal Controller
 
 Model: 
-- Trainer Eskternal Model
+- Kategori RAB Model
 
 Database: 
-- Table Trainer Eksternal
-- Table Trainer Eksternal Files
-
-Assets: 
-- Attachments
-- JS
-- Plugins
+- Table Kategori RAB
+- Update Table: Navigation Menu, Trainer Eksternal, Trainer Eksternal Files

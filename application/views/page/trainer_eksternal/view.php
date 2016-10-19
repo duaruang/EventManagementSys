@@ -3,7 +3,7 @@
     <div class="container">
         <ol class="breadcrumb">
             <li><a href="<?php echo site_url('dashboard'); ?>">Dashboard</a></li>
-            <li><a href="<?php echo site_url('trainer-eksternal'); ?>">Trainer Administration</a></li>
+            <li><a href="<?php echo site_url('trainer-eksternal'); ?>">Trainer Eksternal Administration</a></li>
             <li class="active">View Trainer Eksternal</li>
         </ol>
     </div>
@@ -42,7 +42,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-2">Status <span class="text-danger">*</span></label>
+                                <label class="col-sm-2">Status</label>
                                 <div class="col-sm-2">
                                     <input type="text" class="form-control" value="<?php echo ($t[0]['is_active']=='active' ? 'Aktif' : 'Tidak Aktif' ); ?>" disabled />
                                 </div>

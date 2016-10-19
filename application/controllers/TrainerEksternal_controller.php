@@ -191,9 +191,9 @@ class TrainerEksternal_controller extends MY_Controller {
 
 	public function process_edit()
 	{
-		//No data -> redirected to page adding trainer eksternal
+		//No data -> redirected to page editing trainer eksternal
 		if(count($_POST) == 0){
-			redirect('trainer-eksternal/add', 'location');
+			redirect('trainer-eksternal/edit', 'location');
 		}
 		//Default value is OK. If validations fail result will change to NG.
 		$output = array(

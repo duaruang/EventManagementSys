@@ -3,7 +3,7 @@
     <div class="container">
         <ol class="breadcrumb">
             <li><a href="<?php echo site_url('dashboard'); ?>">Dashboard</a></li>
-            <li><a href="<?php echo site_url('trainer-eksternal'); ?>">Trainer Administration</a></li>
+            <li><a href="<?php echo site_url('trainer-eksternal'); ?>">Trainer Eksternal Administration</a></li>
             <li class="active">Edit Trainer Eksternal</li>
         </ol>
     </div>

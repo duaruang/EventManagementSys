@@ -199,6 +199,18 @@ $route['kategori-event/process_edit'] 			= 'KategoriEvent_controller/process_edi
 $route['kategori-event/delete'] 				= 'KategoriEvent_controller/process_delete';
 
 /*==============================================
+KATEGORI RAB CONTROLLER
+================================================*/
+$route['kategori-rab'] 							= 'KategoriRab_controller/index';
+$route['kategori-rab/add'] 						= 'KategoriRab_controller/add';
+$route['kategori-rab/process-add-kategori'] 	= 'KategoriRab_controller/process_add_kategori';
+$route['kategori-rab/process-add-subkategori'] 	= 'KategoriRab_controller/process_add_subkategori';
+$route['kategori-rab/view/(:num)'] 				= 'KategoriRab_controller/view/$1';
+$route['kategori-rab/edit/(:num)'] 				= 'KategoriRab_controller/edit/$1';
+$route['kategori-rab/process-edit'] 			= 'KategoriRab_controller/process_edit';
+$route['kategori-rab/process-delete'] 			= 'KategoriRab_controller/process_delete';
+
+/*==============================================
 EVENT CONTROLLER
 ================================================*/
 $route['pengajuan-event'] 						= 'Event_controller/propose';

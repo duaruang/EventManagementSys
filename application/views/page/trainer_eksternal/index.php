@@ -49,7 +49,7 @@
 			<div class="card-box table-responsive">
 				<p class="text-muted font-13 m-b-30">
 					 <a href="<?php echo site_url('trainer-eksternal/add'); ?>" class="btn btn-primary waves-effect waves-light">
-						<span class="btn-label"><i class="fa fa-plus"></i></span>Tambah Data
+						<span class="btn-label"><i class="fa fa-plus"></i></span>Tambah Trainer Eksternal
 					 </a>
 				</p>
 				<table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
