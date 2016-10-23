@@ -5,13 +5,19 @@ Config:
 - Autoload
 - Routes
 
+Helpers: 
+- Tanggal 
+
 Controller:
-- Kategori RAB controller
-- Update: Trainer Eksternal Controller
+- Feedback
 
 Model: 
-- Kategori RAB Model
+- Feedback
+
+View: 
+- Feedback
+- Email
 
 Database: 
-- Table Kategori RAB
-- Update Table: Navigation Menu, Trainer Eksternal, Trainer Eksternal Files
+- Add: Registrasi, Email Template, Settings
+- Update: Feedback, Feedback Detail

@@ -17,6 +17,14 @@ if ( ! function_exists('tgl_indo'))
     }
 }
 
+if ( ! function_exists('tgl_indo_datetime'))
+{
+    function tgl_indo_datetime($tgl)
+    {
+        return substr($tgl,8,2).'-'.substr($tgl,5,2).'-'.substr($tgl,0,4).' '.substr($tgl,11,8);
+    }
+}
+
 if ( ! function_exists('tgl_eng'))
 {
     function tgl_eng($tgl)

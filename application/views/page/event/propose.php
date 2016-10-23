@@ -25,13 +25,19 @@
                     <div class="col-sm-12">
                     <div class="p-20">
                         <?php 
-                        $attrib = array('class' => 'form-horizontal','id'=>'add-form-event');
-                        echo form_open('',$attrib); ?>
+                        $attrib = array('class' => 'form-horizontal','id'=>'add-form-event','name'=>'add-form-event');
+                        echo form_open('pengajuan-event/process_add',$attrib); ?>
                             <div class="form-group row">
                                 <label class="col-sm-2">Nomor Memo <span class="text-danger">*</span></label>
-                                <div class="col-sm-5">
-                                    <input type="text" class="form-control" data-mask="a-999/PNM-aaa/aaa/9999" required id="inputNomorMemo" name="inputNomorMemo" />
-                                    <span class="font-13 text-muted">contoh : X-999/PNM-XXX/XXX/9999</span>
+                                <div class="col-sm-3" id="maskinput">
+                                    <input type="text" class="form-control" data-mask="a-999/PNM-aaa/aa/9999" required id="inputNomorMemo" name="inputNomorMemo" placeholder="contoh : X-999/PNM-XXX/XX/9999" />
+                                </div>
+                                <div class="col-sm-2">
+                                     <label class="c-input c-checkbox">
+                                        <input type="checkbox" id="denganFormat" name="denganFormat" value="use" checked="">
+                                        <span class="c-indicator"></span> 
+                                        Gunakan Format Nomor Memo
+                                    </label> 
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -46,12 +52,13 @@
                                     <input type="text" class="form-control" required placeholder="Type something" id="inputTopikEvent" name="inputTopikEvent"/>
                                 </div>
                             </div>
+                            <!--
                             <div class="form-group row">
                                 <label class="col-sm-2">Lokasi Kerja</label>
                                 <div class="col-sm-3">
-                                    <input type="text" class="form-control" readonly="" value="<?php echo $this->session->userdata('sess_user_lokasi_kerja'); ?>" id="inputLokasiKerja" name="inputLokasiKerja" />
+                                    <input type="text" class="form-control" readonly="" value="" id="inputLokasiKerja" name="inputLokasiKerja" />
                                 </div>
-                            </div>
+                            </div>-->
                             <div class="form-group row">
                                 <label class="col-sm-2">Tanggal Pelaksanaan <span class="text-danger">*</span></label>
                                 <div class="col-sm-5">
@@ -75,8 +82,14 @@
                                         <?php } ?>
                                     </select>
                                 </div>
-                                <div class="col-sm-3">
-                                    <input type="text" class="form-control" required="" placeholder="Nama Tempat" id="inputNamaTempat" name="inputNamaTempat"/>
+                                <div class="col-sm-2"><a class="maps-google" data-toggle="modal" data-target=".gmap"><i class="fa fa-2x fa-map-marker"></i> get location</a></div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-offset-2 col-sm-5">
+                                    <textarea type="text" class="form-control" required="" placeholder="Nama Tempat" id="inputNamaTempat" name="inputNamaTempat" rows="3"></textarea>
+                                    <span class="font-13 text-muted">latitude : <span id="lat" class="text-dark"></span>, longitude :<span id="lng" class="text-dark"></span></span>
+                                    <input type="hidden" id="ev_latitude" name="ev_latitude">
+                                    <input type="hidden" id="ev_longitude" name="ev_longitude">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -98,17 +111,29 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group row" id="show_tipe_exam">
-                                <label class="col-sm-2">Tipe Exam</label>
-                                <div class="col-sm-2">
-                                    <select class="select2 form-control" id="inputTipeExam" name="inputTipeExam">
-                                        <option value="">--pilih tipe exam--</option>
-                                       <?php if($load_tipe_exam->num_rows() > 0){ ?>
-                                        <?php foreach($load_tipe_exam->result() as $data){ ?>
-                                            <option value="<?php echo $data->id; ?>"><?php echo $data->tipe_exam; ?></option>
-                                        <?php } ?>
-                                        <?php } ?>
-                                    </select>
+
+
+                            <div class="form-group row" id="show_dengan_exam" style="display: none;">
+                                <label class="col-sm-2">Dengan Exam</label>
+                                <div class="col-sm-5">
+                                    <div class="row">
+                                        <div class="col-xs-1">
+                                            <div class="radio radio-success">
+                                                <input name="inputDenganExam" class="denganExam" id="radio1" value="ya" type="radio">
+                                                <label for="radio1">
+                                                    Ya
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <div class="radio radio-success">
+                                                <input name="inputDenganExam" class="denganExam" id="radio2" value="tidak" type="radio">
+                                                <label for="radio2">
+                                                    Tidak
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group row" id="show_tipe_pelatihan">
@@ -124,35 +149,26 @@
                                     </select>
                                 </div>
                             </div>
-
-                            <div class="form-group row" id="show_dengan_exam" style="display: none;">
-                                <label class="col-sm-2">Dengan Exam</label>
-                                <div class="col-sm-5">
-                                    <div class="row">
-                                        <div class="col-xs-1">
-                                            <div class="radio radio-success">
-                                                <input name="inputDenganExam" id="radio1" value="ya" type="radio">
-                                                <label for="radio1">
-                                                    Ya
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-2">
-                                            <div class="radio radio-success">
-                                                <input name="inputDenganExam" id="radio2" value="tidak" type="radio">
-                                                <label for="radio2">
-                                                    Tidak
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
+                            <div class="form-group row" id="show_tipe_exam">
+                                <label class="col-sm-2">Tipe Exam</label>
+                                <div class="col-sm-2">
+                                <?php if($load_tipe_exam->num_rows() > 0){ ?>
+                                    <?php foreach($load_tipe_exam->result() as $data){ ?>
+                                    <label class="c-input c-checkbox">
+                                        <input type="checkbox" id="inputTipeExam" name="inputTipeExam[]" value="<?php echo $data->tipe_exam; ?>">
+                                        <span class="c-indicator"></span> 
+                                        <?php echo $data->tipe_exam; ?> 
+                                    </label> 
+                                    <?php } ?>
+                                <?php } ?>
                                 </div>
                             </div>
+                            
                             <div id="show_detail_exam" style="display: none;">
                                 <div class="form-group row">
                                     <label class="col-sm-2">Judul Exam</label>
                                     <div class="col-sm-4">
-                                        <input type="text" class="form-control" required="" id="judul_exam" required="" name="judul_exam" readonly=""/>
+                                        <input type="text" class="form-control" id="judul_exam" required="" name="judul_exam" readonly=""/>
                                         <input type="hidden" id="inputIdExam" name="inputIdExam">
                                         <input type="hidden" id="inputidjadwalexam" name="inputidjadwalexam">
                                     </div>
@@ -173,7 +189,7 @@
                                             <a class="nav-link" id="home-tab" data-toggle="tab" href="#daftar_peserta"
                                                role="tab" aria-controls="home" aria-expanded="true">Daftar Peserta</a>
                                         </li>
-                                         <li class="nav-item active" id="daftarpesertainput">
+                                         <li class="nav-item active" id="navdaftarpesertainput">
                                             <a class="nav-link" id="home-tab" data-toggle="tab" href="#daftar_peserta_input"
                                                role="tab" aria-controls="home" aria-expanded="true">Input Peserta</a>
                                         </li>
@@ -220,14 +236,22 @@
                                                         </tbody>
                                                     </table>
                                             </div>
-                                            
+                                            <input type="hidden" id="inputJumlahPeserta" name="inputJumlahPeserta">
+                                            <div id="wrapabcs">
+                                            <div>
+                                                
+                                            </div>
+                                            </div>
                                         </div>
                                         <div role="tabpanel" class="tab-pane fade in active" id="daftar_peserta_input"
                                              aria-labelledby="home-tab">
                                              <div class="p-20" id="show_tabel_peserta_input" style="display: none; position: relative;">
+                                             <div class="m-b-20">
+                                                <a class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target=".bs-get-list-peserta" id="get-list-psrt">Pilih List Peserta</a>
+                                            </div>
                                              <div class="form-group" id="loader" style="position:absolute;display:none;width: 100%;height:100%;text-align: center;background-color: #fff;z-index: 1000;">
-<img style="position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;" src="<?php echo base_url(); ?>assets/images/Preloader_2.gif">
-            </div>
+                                                <img style="position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;" src="<?php echo base_url(); ?>assets/images/Preloader_2.gif">
+                                            </div>
                                                    <table id="daftar_peserta_table_input" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                                         <thead>
                                                         <tr>
@@ -240,51 +264,129 @@
                                                         
                                                         </tbody>
                                                     </table>
-                                            </div>
-                                            <input type="hidden" id="inputJumlahPeserta" name="inputJumlahPeserta">
-                                            <!-- <input type="hidden" id="inputIdSdm" name="inputIdSdm[]">
-                                             <input type="hidden" id="inputNamaPeserta" name="inputNamaPeserta[]">
-                                             <input type="hidden" id="inputPosisiPeserta" name="inputPosisiPeserta[]">-->
-                                        </div>
-                                            <div class="tab-pane fade" id="PIC/Panitia" role="tabpanel"
-                                             aria-labelledby="profile-tab">
-                                                <div class="p-20">
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3">Materi Training <span class="text-danger">*</span></label>
-                                                        <div class="col-sm-5">
-                                                            <select class="select2 form-control">
-                                                                <option value="">--pilih materi--</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="tab-pane fade" id="pic-panitia" role="tabpanel"
                                              aria-labelledby="profile-tab">
                                                 <div class="p-20">
+                                                    <h4 class="header-title m-t-0">PIC / PANITIA</h4>
+                                                    <p class="text-muted font-13 m-b-30">Masukkan nama PIC atau nama panitia</p>
+                                                     <table id="table-picpanitia" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>NIK</th>
+                                                            <th>Nama PIC</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <td><input type="text" class="form-control" placeholder="Type something" id="inputNik" name="inputNik[]"/></td>
+                                                            <td><input type="text" class="form-control" placeholder="Type something" id="inputPIC" name="inputPIC[]"/></td>
+                                                            <td></td>
+                                                        </tbody>
+                                                    </table>
+                                                    <a id="add-pic"><i class="fa fa-3x fa-plus-square"></i></a>
+                                                </div>
+                                                <hr>
+                                                <div class="m-t-10"></div>
+                                                <div class="p-20">
+                                                    <h4 class="header-title m-t-0">Trainer</h4>
+                                                    <p class="text-muted font-13 m-b-30">pilih trainer yang diinginkan</p>
                                                     <div class="form-group row">
-                                                        <label class="col-sm-3">Materi Training <span class="text-danger">*</span></label>
+                                                        <label class="col-sm-2">NIK <span class="text-danger">*</span></label>
                                                         <div class="col-sm-5">
-                                                            <select class="select2 form-control">
-                                                                <option value="">--pilih materi--</option>
-
-                                                            </select>
+                                                            <input type="text" class="form-control" placeholder="Type something" id="COBA" name="COBA[]"/>
                                                         </div>
                                                     </div>
+                                                     <div class="form-group row">
+                                                        <label class="col-sm-2">Nama Panitia <span class="text-danger">*</span></label>
+                                                        <div class="col-sm-5">
+                                                            <input type="text" class="form-control"  placeholder="Type something" id="COBA" name="COBA[]"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="rab" role="tabpanel"
+                                             aria-labelledby="profile-tab">
+                                                <div class="p-20">
+                                                    <h4 class="header-title m-t-0">RAB</h4>
+                                                    <p class="text-muted font-13 m-b-30">tentukan rencana biaya yang dianggarkan.</p>
+                                                    <table id="table-rab" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                                        <thead>
+                                                        <tr>
+                                                            <th width="30">No</th>
+                                                            <th>Deskripsi</th>
+                                                            <th>Jumlah</th>
+                                                            <th>Unit</th>
+                                                            <th colspan="2">Frekwensi</th>
+                                                            <th>Unit Cost</th>
+                                                            <th>Total Cost</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                           <?php if($load_parent->num_rows() > 0){ ?>
+                                                            <?php 
+                                                                $hs=1;
+                                                                foreach($load_parent->result() as $data){ 
+                                                                    
+                                                                    $load_child = $this->kategori_rab_model->select_child_category($data->id);
+                                                                    $child_exist = 0; 
+                                                                    if($load_child->num_rows() > 0)
+                                                                    {
+                                                                        $child_exist = 1;
+                                                                    }
+                                                            ?> 
+                                                            <tr class="parent-class" id="parent_<?php echo $hs; ?>" style="background-color: #eaeaea;">
+                                                                <td colspan="7"><strong><?php echo ($child_exist==1 ? ' '.$data->deskripsi:$data->deskripsi); ?></strong></td>
+                                                                <td><input type="text" class="form-control autonumber" id="totalcost" name="totalcost[]" data-a-sign="Rp. " data-a-dec="," data-a-sep="." readonly=""></td>
+                                                            </tr>
+                                                           <?php 
+                                                                if($child_exist==1)
+                                                                {
+                                                                    $no=1;
+                                                                    foreach($load_child->result() as $c)
+                                                                    {
+                                                            ?>
+                                                            <tr id="parent_<?php echo $hs; ?>">
+                                                                <td><?php echo $no; ?></td>
+                                                                <td><?php echo $c->deskripsi; ?></td>
+                                                                <td><input type="text" class="form-control tinynumber" data-a-sep="." id="jumlah" name="jumlah[]" value="0"></td>
+                                                                <td width="30" ><?php echo $c->jumlah_unit; ?></td>
+                                                                <td><input type="text" class="form-control tinynumber" data-a-sep="." id="frekwensi"  name="frekwensi[]" value="0"></td>
+                                                                <td width="30"><?php echo $c->frekwensi; ?></td>
+                                                                <td><input type="text" class="form-control autonumber" data-a-sep="." id="unit_cost" name="unit_cost[]" data-a-sign="Rp. " value="0"></td>
+                                                                <td><input type="text" class="form-control autonumber" data-parent="<?php echo $c->id_parent; ?>" data-a-sep="." id="total_cost" name="total_cost[]" data-a-sign="Rp. " readonly="" value="0"></td>
+                                                            </tr>
+                                                            <?php
+                                                                    $no++;}
+                                                                }
+                                                            $hs++; } 
+                                                            ?>
+                                                        <?php } ?>
+                                                            <tr style="background-color: #eaeaea;">
+                                                                <td colspan="7"><strong>Uang Muka</strong></td>
+                                                                <td>
+                                                                <input type="text" class="form-control autonumber" data-a-sep="." id="down_payment" name="down_payment" data-a-sign="Rp. " value="0">    
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td colspan="7"><strong>Grand Total</strong></td>
+                                                                <td><input type="text" class="form-control autonumber" data-a-dec="," data-a-sep="." id="grand_total" name="grand_total" data-a-sign="Rp. " readonly=""></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
                                                 </div>
                                             </div>
                                             <div class="tab-pane fade" id="rundown" role="tabpanel"
                                              aria-labelledby="profile-tab">
                                                 <div class="p-20">
-                                                    <div class="form-group row">
-                                                        <label class="col-sm-3">Materi Training <span class="text-danger">*</span></label>
-                                                        <div class="col-sm-5">
-                                                            <select class="select2 form-control">
-                                                                <option value="">--pilih materi--</option>
-
-                                                            </select>
+                                                        <div class="form-group row">
+                                                            <label class="col-sm-2">Upload Rundown Acara</label>
+                                                            <div class="col-sm-6">
+                                                                <input type="file" name="files" id="filer_input2" multiple="multiple">
+                                                                <span class="font-13 text-muted">upload size maks : 2MB, File allowed: jpg, png, jpeg, gif, pdf</span>
+                                                            </div>
                                                         </div>
-                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="tab-pane fade" id="biayatraining" role="tabpanel"
@@ -316,16 +418,15 @@
                                                 </div>
                                             </div>
                                         </div>
-
                             </div>
                             
                             
                             <div class="form-group">
                                 <div style="margin-top: 40px;">
-                                    <button type="submit" class="btn btn-primary waves-effect waves-light">
+                                    <button type="submit" name="submit" class="btn btn-primary waves-effect waves-light">
                                         Submit
                                     </button>
-                                    <button type="submit" class="btn btn-warning waves-effect m-l-5">
+                                    <button type="submit" name="draft" class="btn btn-warning waves-effect m-l-5">
                                         Save as draft
                                     </button>
                                     <button type="reset" class="btn btn-secondary waves-effect m-l-5">
@@ -340,9 +441,9 @@
             </div>
         </div>  
     </div>
-    </div>
+</div>
 
-<!--  Modal content for the above example -->
+<!--  Modal content for the above example 
 <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -380,6 +481,70 @@
                         <?php } ?>
                         </tbody>
                     </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+-->
+<!--  Modal content for the above example -->
+<div class="modal fade bs-get-list-peserta" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myLargeModalLabel">Pilih Peserta</h4>
+            </div>
+            <div class="modal-body">
+             <div class="p-20">
+
+                    <button id="inputpeserta" class="btn btn-primary m-b-20" data-dismiss="modal">Masukkan peserta</button>
+                     <table id="get_list_peserta_table" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th><input type="checkbox" name="select_all" value="1" id="example-select-all"></th>
+                            <th>NIK</th>
+                            <th>Nama</th>
+                            <th>Posisi</th>
+                            <th>Unit Kerja</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            
+                        </tbody>
+                    </table>
+                    <div id="events"></div>
+                </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!--  Modal content for the above example -->
+<div class="modal fade gmap" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myLargeModalLabel">dapatkan Lokasi</h4>
+            </div>
+            <div class="modal-body">
+                <div class="p-20">
+                    <!-- google map will be shown here -->
+                        <div id="floating-panel">
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <input id="address" class="form-control" type="textbox" value="Indonesia">
+                                </div>
+                                 <div class="col-sm-6">
+                                    <input class="btn btn-default" id="submit" type="button" value="cari">
+                                    <input class="btn btn-primary" id="submit-map" type="button" value="masukkan data">
+                                </div>
+                            </div>
+                          
+                        </div>
+                    <div id="dvMap" class="m-t-30" style="width: 100%; height: 400px">
+                    </div>
                 </div>
             </div>
         </div><!-- /.modal-content -->

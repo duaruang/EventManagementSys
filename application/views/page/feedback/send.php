@@ -2,8 +2,7 @@
     <div class="container">
         <ol class="breadcrumb">
             <li><a href="<?php echo site_url('dashboard'); ?>">Dashboard</a></li>
-            <li><a href="<?php echo site_url('trainer-eksternal'); ?>">Trainer Eksternal Administration</a></li>
-            <li class="active">Tambah Trainer Eksternal</li>
+            <li class="active">Kirim Feedback</li>
         </ol>
     </div>
 </div>
@@ -13,7 +12,7 @@
 <!-- Page-Title -->
     <div class="row">
         <div class="col-sm-12">
-            <h4 class="page-title">Tambah Trainer Eksternal</h4>
+            <h4 class="page-title">Kirim Feedback</h4>
         </div>
     </div>
     <div class="row">
@@ -56,47 +55,47 @@
                     <div id="m-ap-cab"></div>
                     <div class="p-20">
                         <?php 
-                        $attrib = array('class' => 'form-horizontal','id'=>'form-add-trainereksternal','enctype'=>'multipart/form-data');
+                        $attrib = array('class' => 'form-horizontal','id'=>'form-send-feedback','enctype'=>'multipart/form-data');
                         echo form_open('',$attrib); ?>
                             <div class="form-group row">
-                                <label class="col-sm-2">Nama Pemateri <span class="text-danger">*</span></label>
-                                <div class="col-sm-4">
-                                    <input type="text" class="form-control" required name="nama_pemateri"/>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-2">Nama Perusahaan <span class="text-danger">*</span></label>
-                                <div class="col-sm-4">
-                                    <input type="text" class="form-control" required name="nama_perusahaan"/>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-2">Status <span class="text-danger">*</span></label>
-                                <div class="col-sm-2">
-                                    <select class="form-control select2" required name="status">
-                                    <option value="">--pilih status--</option>
-                                    <option value="active">Aktif</option>
-                                    <option value="disabled">Tidak Aktif</option>
+                                <label class="col-sm-2">Event <span class="text-danger">*</span></label>
+                                <div class="col-sm-5">
+                                    <select id="event" class="form-control select2" required name="event">
+                                    <option value="">--pilih event--</option>
+									<?php
+										foreach($load_event->result() as $e)
+										{
+									?>
+                                    <option value="<?php echo $e->id_event;?>"><?php echo $e->nama_event;?></option>
+									<?php
+										}
+									?>
                                     </select>
                                 </div>
                             </div>
-							<div class="form-group row">
-								<label class="col-sm-2">Upload Dokumen</label>
-								<div class="col-sm-6">
-									<input type="file" name="files[]" id="filer_input2" multiple="multiple">
-                                    <span class="font-13 text-muted">upload size maks : 2MB, File allowed: jpg,png,jpeg,gif,pdf</span>
-								</div>
-							</div>
+                            <div class="form-group row">
+                                <label class="col-sm-2">URL <span class="text-danger">*</span></label>
+                                <div class="col-sm-5">
+                                    <input type="url" required class="form-control" required name="url" placeholder="e.g.: http://www.xxx.com"/>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2">List Peserta <span class="text-danger">*</span></label>
+                                <div class="col-sm-4">
+									<a href='#' id='select-all'><i class="zmdi zmdi-check-square"></i> Select All</a> &nbsp;&nbsp;
+									<a href='#' id='deselect-all'><i class="zmdi zmdi-minus-square"></i> Deselect All</a>
+									<select multiple="multiple" required class="multi-select" id="my_multi_select1" name="my_multi_select1[]" data-plugin="multiselect">
+										<option value="0" disabled>Tidak ada data peserta.</option>
+									</select>
+                                </div>
+                            </div>
 
                             <div class="form-group">
                                 <div style="margin-top: 40px;">
                                     <hr>
                                     <button type="submit" class="btn btn-primary waves-effect waves-light">
-                                        Save
+                                        Send Feedback
                                     </button>
-                                    <a href="<?php echo site_url('trainer-eksternal'); ?>" class="btn btn-secondary waves-effect m-l-5">
-                                        Cancel
-                                    </a>
                                 </div>
                             </div>
                         <?php echo form_close(); ?>

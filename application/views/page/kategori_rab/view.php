@@ -55,6 +55,18 @@
 									</div>
 								</div>
 								<div class="form-group row">
+									<label class="col-sm-2">unit</label>
+									<div class="col-sm-4">
+										<input type="text" class="form-control" name="jumlah_unit" value="<?php echo $r[0]['jumlah_unit']?>" disabled />
+									</div>
+								</div>
+								<div class="form-group row">
+									<label class="col-sm-2">frekwensi </label>
+									<div class="col-sm-4">
+										<input type="text" class="form-control" name="frekwensi" value="<?php echo $r[0]['frekwensi']?>" disabled />
+									</div>
+								</div>
+								<div class="form-group row">
 									<label class="col-sm-2">Status</label>
 									<div class="col-sm-2">
 										<input type="text" class="form-control" value="<?php echo ($r[0]['is_active']=='active' ? 'Aktif' : 'Tidak Aktif' ); ?>" disabled />

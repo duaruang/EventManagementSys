@@ -36,6 +36,18 @@
 									</div>
 								</div>
 								<div class="form-group row">
+									<label class="col-sm-2">unit <span class="text-danger">*</span></label>
+									<div class="col-sm-4">
+										<input type="text" class="form-control" required name="jumlah_unit" placeholder="unit/pcs/item/pax" />
+									</div>
+								</div>
+								<div class="form-group row">
+									<label class="col-sm-2">frekwensi <span class="text-danger">*</span></label>
+									<div class="col-sm-4">
+										<input type="text" class="form-control" required name="frekwensi" placeholder="kali/hari"/>
+									</div>
+								</div>
+								<div class="form-group row">
 									<label class="col-sm-2">Status <span class="text-danger">*</span></label>
 									<div class="col-sm-2">
 										<select class="form-control select2" required name="status">
@@ -108,6 +120,18 @@
 									<label class="col-sm-2">Deskripsi <span class="text-danger">*</span></label>
 									<div class="col-sm-4">
 										<input type="text" class="form-control" required name="deskripsi"/>
+									</div>
+								</div>
+								<div class="form-group row">
+									<label class="col-sm-2">unit <span class="text-danger">*</span></label>
+									<div class="col-sm-2">
+										<input type="text" class="form-control" required name="jumlah_unit" placeholder="contoh : unit/pax/pcs" />
+									</div>
+								</div>
+								<div class="form-group row">
+									<label class="col-sm-2">frekwensi <span class="text-danger">*</span></label>
+									<div class="col-sm-2">
+										<input type="text" class="form-control" required name="frekwensi" placeholder="contoh : hari/kali" />
 									</div>
 								</div>
 								<div class="form-group row">

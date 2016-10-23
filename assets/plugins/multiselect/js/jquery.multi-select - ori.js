@@ -175,15 +175,15 @@
       var that = this;
 
       if (options.value) options = [options];
-      $.each(options, function(index, option){ 
-        //if (option.value && that.$element.find("option[value='"+option.value+"']").length === 0){
+      $.each(options, function(index, option){
+        if (option.value && that.$element.find("option[value='"+option.value+"']").length === 0){
           var $option = $('<option value="'+option.value+'">'+option.text+'</option>'),
               index = parseInt((typeof option.index === 'undefined' ? that.$element.children().length : option.index)),
               $container = option.nested == undefined ? that.$element : $("optgroup[label='"+option.nested+"']")
-			
+
           $option.insertAt(index, $container);
           that.generateLisFromOption($option.get(0), index, option.nested);
-        //}
+        }
       })
     },
 

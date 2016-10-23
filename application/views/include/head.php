@@ -13,7 +13,8 @@
 
         <!-- Switchery css -->
         <link href="<?php echo base_url(); ?>assets/plugins/switchery/switchery.min.css" rel="stylesheet" />
-
+        <!---------------------------------------- VENDOR ------------------------------------------>
+        <?php echo $css; ?>
         <!-- App CSS -->
         <link href="<?php echo base_url(); ?>assets/css/style.css" rel="stylesheet" type="text/css" />
 
@@ -26,5 +27,4 @@
         <!-- Modernizr js -->
         <script src="<?php echo base_url(); ?>assets/js/modernizr.min.js"></script>
 
-        <!---------------------------------------- VENDOR ------------------------------------------>
-        <?php echo $css; ?>
+        

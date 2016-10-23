@@ -22672,3 +22672,8 @@ table.privilage td .radio label, .checkbox label {
     background-color: #f5f5f5;
     border-color: #ddd #ddd transparent;
 }
+
+a.maps-google:hover
+{
+  cursor: pointer;
+}

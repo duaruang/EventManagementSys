@@ -19,14 +19,11 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#datatable').DataTable({
-            
-        });
+        $('#datatable').DataTable();
 
         //Buttons examples
         var table = $('#datatable-buttons').DataTable({
             lengthChange: false,
-            "order": [[ 0, "desc" ]],
             buttons: [
             {
                 extend: 'pdf',
@@ -46,16 +43,15 @@
 
         table.buttons().container()
                 .appendTo('#datatable-buttons_wrapper .col-md-6:eq(0)');
+				
+		
+		//Script: Delete 
+		$('#datatable-buttons tbody').on('click', '.delete-feedback', function () {
+			var id_feedback = $(this).data('idfeedback'); 
+			var event_name = $(this).data('eventname');
+			$('.hidden-idfeedback').val(id_feedback);
+			$('.hidden-eventname').val(event_name);
+			$('.del-feedback').html(event_name);
+		});
     } );
-
-        
-        //Script: Delete Divisi
-        $('#datatable-buttons tbody').on('click', '.delete-tipe_exam', function () {
-            var idtipe_exam = $(this).data('idtipe_exam'); 
-            $('.f-id-tipeexam').val(idtipe_exam);
-
-            var namatipe_exam = $(this).data('namatipe_exam'); 
-            $('.f-nama-tipeexam').val(namatipe_exam);
-            $(".ss").html(namatipe_exam);
-        } );
 </script>       

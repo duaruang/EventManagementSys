@@ -6,7 +6,7 @@ class Event_model extends CI_Model
     public function select_event()
     {
 		return $this->db
-                    ->select('em_event.*,em_kategori_event.*,em_event.is_active as eventactive')
+                    ->select('em_event.*,em_kategori_event.*,em_event.is_active as eventactive,em_event.created_date as crdate_event')
 					->from('em_event') 
                     ->join('em_kategori_event','em_kategori_event.id = em_event.id_kategori_event','left')
 					->where('em_event.is_active !=','deleted')
@@ -50,9 +50,9 @@ class Event_model extends CI_Model
 		$this->db->insert('em_event',$data_insert);		
 	}
 
-    public function insert_peserta_event($data_insert)
+    public function insert_peserta_event($data_array)
     {
-        $this->db->insert('em_event_listpeserta',$data_insert);     
+        $this->db->insert('em_event_listpeserta',$data_array);     
     }
 
 	//============================ Update Data ================================

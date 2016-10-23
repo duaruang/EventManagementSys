@@ -105,16 +105,6 @@ $route['menu/process_edit'] 		= 'Menu_controller/process_edit';
 $route['menu/delete'] 				= 'Menu_controller/process_delete';
 
 /*==============================================
-TRAINER CONTROLLER
-================================================*/
-$route['trainer'] 						= 'Trainer_controller/index';
-$route['trainer/add'] 					= 'Trainer_controller/add';
-$route['trainer/process_add'] 			= 'Trainer_controller/process_add';
-$route['trainer/edit/(:num)'] 			= 'Trainer_controller/edit/$1';
-$route['trainer/process_edit'] 			= 'Trainer_controller/process_edit';
-$route['trainer/delete'] 				= 'Trainer_controller/process_delete';
-
-/*==============================================
 TRAINER EKSTERNAL CONTROLLER
 ================================================*/
 $route['trainer-eksternal']					= 'TrainerEksternal_controller/index';
@@ -124,6 +114,16 @@ $route['trainer-eksternal/view/(:num)'] 	= 'TrainerEksternal_controller/view/$1'
 $route['trainer-eksternal/edit/(:num)'] 	= 'TrainerEksternal_controller/edit/$1';
 $route['trainer-eksternal/process-edit']	= 'TrainerEksternal_controller/process_edit';
 $route['trainer-eksternal/process-delete'] 	= 'TrainerEksternal_controller/process_delete';
+
+/*==============================================
+TRAINER CONTROLLER
+================================================*/
+$route['trainer'] 						= 'Trainer_controller/index';
+$route['trainer/add'] 					= 'Trainer_controller/add';
+$route['trainer/process_add'] 			= 'Trainer_controller/process_add';
+$route['trainer/edit/(:num)'] 			= 'Trainer_controller/edit/$1';
+$route['trainer/process_edit'] 			= 'Trainer_controller/process_edit';
+$route['trainer/delete'] 				= 'Trainer_controller/process_delete';
 
 /*==============================================
 MATERI CONTROLLER
@@ -230,3 +230,13 @@ $route['cabang/edit_cabang/(:num)']		= 'Cabang_controller/edit_cabang/$1';
 $route['cabang/process_add_cabang']		= 'Cabang_controller/process_add_cabang';
 $route['cabang/process_edit_cabang']	= 'Cabang_controller/process_edit_cabang';
 $route['cabang/process_delete_cabang']	= 'Cabang_controller/process_delete_cabang';
+
+/*==============================================
+FEEDBACK CONTROLLER
+================================================*/
+$route['kirim-feedback'] 						= 'Feedback_controller/send';
+$route['feedback/generate-participant'] 		= 'Feedback_controller/load_participant';
+$route['feedback/process-send'] 				= 'Feedback_controller/process_send';
+$route['list-feedback'] 						= 'Feedback_controller/index';
+$route['list-feedback/view/(:num)'] 			= 'Feedback_controller/view/$1';
+$route['feedback/process-delete'] 				= 'Feedback_controller/process_delete';

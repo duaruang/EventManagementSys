@@ -55,6 +55,7 @@
                             <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
+                                        <th hidden="">date</th>
                                         <th>Nomor Memo</th>
                                         <th>Nama Event</th>
                                         <th>Topik Event</th>
@@ -68,12 +69,34 @@
                                 <?php if($load_event->num_rows() > 0){ ?>
                                 <?php foreach($load_event->result() as $data){ ?>
                                     <tr>
+                                        <td hidden=""><?php echo $data->crdate_event; ?></td>
                                         <td><?php echo $data->nomor_memo; ?></td>
                                         <td><?php echo $data->nama_event; ?></td>
                                         <td><?php echo $data->topik_event; ?></td>
                                         <td><?php echo $data->kategori_event; ?></td>
                                         <td><?php echo $data->jumlah_peserta; ?></td>
-                                        <td><?php echo $data->status_event; ?></td>
+                                        <td>
+                                        <?php if($data->status_event == 'draft'){ ?>
+                                        <span class="label label-default">
+                                        <?php } ?>
+                                        <?php if($data->status_event == 'submitted'){ ?>
+                                        <span class="label label-primary">
+                                        <?php } ?>
+                                        <?php if($data->status_event == 'approved by atasan'){ ?>
+                                        <span class="label label-info">
+                                        <?php } ?>
+                                        <?php if($data->status_event == 'aprroved by pusat'){ ?>
+                                        <span class="label label-success">
+                                        <?php } ?>
+                                        <?php if($data->status_event == 'rejected by atasan' || $data->status_event == 'rejected by pusat'){ ?>
+                                        <span class="label label-warning">
+                                        <?php } ?>
+                                        <?php if($data->status_event == 'cancelled by user' || $data->status_event == 'cancelled by atasan' || $data->status_event == 'cancelled by pusat'){ ?>
+                                        <span class="label label-danger">
+                                        <?php } ?>
+                                        <?php echo $data->status_event; ?></span>
+
+                                        </td>
                                         <td>
                                             <a href="<?php echo site_url('pengajuan-event/view/'.$data->id_event); ?>" class="btn action btn-warning  waves-effect waves-light"><span class="btn-label"><i class="fa fa-eye"></i></span>View</a>&nbsp;&nbsp;
                                             <a href="<?php echo site_url('pengajuan-event/edit/'.$data->id_event); ?>" class="btn action btn-warning  waves-effect waves-light"><span class="btn-label"><i class="fa fa-pencil"></i></span>Edit</a>&nbsp;&nbsp;

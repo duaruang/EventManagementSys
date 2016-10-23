@@ -1367,7 +1367,7 @@
          * none = ''
          * NOTE: do not use numeric characters
          */
-        aSep: ',',
+        aSep: '.',
         /** digital grouping for the thousand separator used in Format
          * dGroup: '2', results in 99,99,99,999 common in India for values less than 1 billion and greater than -1 billion
          * dGroup: '3', results in 999,999,999 default
@@ -1378,7 +1378,7 @@
          * period "full stop" = '.'
          * comma = ','
          */
-        aDec: '.',
+        aDec: ',',
         /** allow to declare alternative decimal separator which is automatically replaced by aDec
          * developed for countries the use a comma ',' as the decimal character
          * and have keyboards\numeric pads that have a period 'full stop' as the decimal characters (Spain is an example)

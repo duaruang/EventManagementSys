@@ -4,5 +4,6 @@
 <script src="<?php echo base_url(); ?>assets/js/jquery.nicescroll.js"></script>
 <script src="<?php echo base_url(); ?>assets/plugins/switchery/switchery.min.js"></script>
 <!-- App js -->
+<script src="<?php echo base_url(); ?>assets/plugins/multiselect/js/jquery.multi-select.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/jquery.core.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/jquery.app.js"></script>
