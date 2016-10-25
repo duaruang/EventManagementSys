@@ -1,17 +1,15 @@
 ###################
-Update User Group
+Update Event
 ###################
-Config: 
-- Routes
-- Core
+- google maps api get location
+- input peserta
+- get peserta from exam api
+- option format memo
+- rab display data (not yet, insert to database)
 
-Controller:
-- Semua controller (update value data id user)
-- User Group Controller (Create, Update, Delete)
-
-Model: 
-- User Group Model
-
-Database: 
-- Semua table (update type)
-- Table user group, user group matrix, navigation menu
+###################
+Update Approval Event
+###################
+- generate pdf to detail approval
+- store to database event approval
+- status event has changed when event approval saved.
