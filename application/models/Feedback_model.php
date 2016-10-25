@@ -7,6 +7,7 @@ class Feedback_model extends CI_Model
     {
 		return $this->db
                     ->from('em_event')
+                    ->where('is_active','active')
                     ->order_by('nama_event','asc')
                     ->get();
     }

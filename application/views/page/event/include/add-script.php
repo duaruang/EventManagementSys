@@ -198,7 +198,7 @@ $(document).ready(function() {
 
 	  		/*===============================================================================
         	RULES IF CATEGORY EVENT IS TRAINING
-        	================================================================================
+        	================================================================================*/
 	  		if(this.value == '0000000001')
 	  		{
 				$("#inputTipeExam").removeAttr("required");
@@ -226,11 +226,11 @@ $(document).ready(function() {
 		   		//remove input hidden data peserta
 				$("#wrapabcs").children().remove();
 				$('#navdaftarpesertainput').hide();
-	  		}*/
+	  		}
 
 	  		/*===============================================================================
         	RULES IF CATEGORY EVENT IS EXAM
-        	================================================================================
+        	================================================================================*/
 	  		if(this.value == '0000000002')
 	  		{
 	  			$('#show_tipe_exam').show();
@@ -255,11 +255,11 @@ $(document).ready(function() {
 				$("#judul_exam").attr("required","");
 	  			$("#inputTipePelatihan").removeAttr("required");
 	  			$("#inputDenganExam").removeAttr("required");
-	  		}*/
+	  		}
 
 	  		/*===============================================================================
         	RULES IF CATEGORY EVENT IS OTHERS
-        	================================================================================
+        	================================================================================*/
 	  		if(this.value == '0000000004')
 	  		{
 	  			
@@ -280,7 +280,7 @@ $(document).ready(function() {
 	  			$('#show_tipe_exam').hide();
 	  			$('#show_tipe_pelatihan').hide();
 
-	  		}*/
+	  		}
 		});
 
 

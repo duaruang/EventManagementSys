@@ -1,6 +1,6 @@
-########################
-Update Kategori RAB
-########################
+################################
+Update Registration Event System
+################################
 Config: 
 - Autoload
 - Routes
@@ -15,9 +15,12 @@ Model:
 - Feedback
 
 View: 
-- Feedback
-- Email
+- Include -> Nav
+- Feedbcak -> Send
 
 Database: 
-- Add: Registrasi, Email Template, Settings
-- Update: Feedback, Feedback Detail
+- Add: Settings
+- Update: Navigation Menu, Registrasi
+
+Add System -> Registraion System
+This dev-system and database has been combined to the latest files (1.10)

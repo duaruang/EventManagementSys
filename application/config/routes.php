@@ -220,6 +220,11 @@ $route['pengajuan-event/process_add'] 			= 'Event_controller/process_add';
 $route['pengajuan-event/edit/(:num)'] 			= 'Event_controller/edit/$1';
 $route['pengajuan-event/process_edit'] 			= 'Event_controller/process_edit';
 $route['pengajuan-event/delete'] 				= 'Event_controller/process_delete';
+$route['pengajuan-event/list-approval'] 		= 'Event_controller/list_approval';
+$route['pengajuan-event/approval-atasan/(:any)']= 'Event_controller/approval_atasan/$1';
+$route['pengajuan-event/approval-pusat/(:any)']	= 'Event_controller/approval_pusat/$1';
+$route['pengajuan-event/memo_view/(:any)'] 		= 'Event_controller/make_pdf/$1';
+$route['pengajuan-event/process_approval'] 		= 'Event_controller/proccess_approval';
 
 /*==============================================
 CABANG CONTROLLER

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 23, 2016 at 09:47 AM
+-- Generation Time: Oct 25, 2016 at 07:40 PM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -526,6 +526,58 @@ INSERT INTO `em_event` (`id`, `id_event`, `nomor_memo`, `nama_event`, `topik_eve
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `em_event_approval`
+--
+
+CREATE TABLE IF NOT EXISTS `em_event_approval` (
+`id` int(11) NOT NULL,
+  `id_approval` varchar(255) NOT NULL,
+  `id_event` varchar(255) NOT NULL,
+  `rab_disetujui` bigint(20) NOT NULL,
+  `persetujuan` enum('agree','disagree') NOT NULL,
+  `catatan` text NOT NULL,
+  `created_by` int(10) unsigned zerofill NOT NULL,
+  `created_date` datetime NOT NULL,
+  `modified_by` int(10) unsigned zerofill DEFAULT NULL,
+  `modified_date` datetime DEFAULT NULL,
+  `is_active` enum('active','disabled','deleted') NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `em_event_approval`
+--
+
+INSERT INTO `em_event_approval` (`id`, `id_approval`, `id_event`, `rab_disetujui`, `persetujuan`, `catatan`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES
+(12, 'YKXOR3DW7H1476723600ap-1', 'YKXOR3DW7H1476723600', 1200000, 'agree', '<p>Test Approval</p>\r\n', 0000000001, '2016-10-25 15:14:50', NULL, NULL, 'active');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `em_event_approval_files`
+--
+
+CREATE TABLE IF NOT EXISTS `em_event_approval_files` (
+`id` int(11) NOT NULL,
+  `id_event_approval` varchar(255) NOT NULL,
+  `nama_file` varchar(255) NOT NULL,
+  `jenis_file` varchar(100) NOT NULL,
+  `created_by` int(10) unsigned zerofill NOT NULL,
+  `created_date` datetime NOT NULL,
+  `modified_by` int(10) unsigned zerofill DEFAULT NULL,
+  `modified_date` datetime DEFAULT NULL,
+  `is_active` enum('active','disabled','deleted') NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `em_event_approval_files`
+--
+
+INSERT INTO `em_event_approval_files` (`id`, `id_event_approval`, `nama_file`, `jenis_file`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES
+(2, 'YKXOR3DW7H1476723600ap-1', 'YKXOR3DW7H1476723600ap-1_20161025at151450_2.gif', 'image/gif', 0000000001, '2016-10-25 15:14:50', NULL, NULL, 'active');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `em_event_listpeserta`
 --
 
@@ -779,14 +831,14 @@ INSERT INTO `em_kategori_rab` (`id`, `id_parent`, `deskripsi`, `jumlah_unit`, `f
 --
 
 CREATE TABLE IF NOT EXISTS `em_kategori_tempat` (
-  `id` int(11) NOT NULL,
+`id` int(11) NOT NULL,
   `kategori_tempat` varchar(256) NOT NULL,
   `created_by` int(11) NOT NULL,
   `created_date` datetime NOT NULL,
   `modified_by` int(11) unsigned zerofill DEFAULT NULL,
   `modified_date` datetime DEFAULT NULL,
   `is_active` enum('active','disabled','deleted') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `em_kategori_tempat`
@@ -887,7 +939,7 @@ CREATE TABLE IF NOT EXISTS `em_navigationmenu` (
   `created_date` datetime NOT NULL,
   `modified_by` int(11) unsigned zerofill DEFAULT NULL,
   `modified_date` datetime DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `em_navigationmenu`
@@ -919,12 +971,13 @@ INSERT INTO `em_navigationmenu` (`id`, `id_parent`, `id_systemactive`, `icon_men
 (23, 22, 1, NULL, 'Kirim Feedback', 'kirim-feedback', 0, 1, NULL, 1, 'active', 00000000001, '2016-10-07 09:33:51', NULL, NULL),
 (24, 22, 1, NULL, 'List Feedback', 'list-feedback', 0, 1, NULL, 2, 'active', 00000000001, '2016-10-07 09:34:50', NULL, NULL),
 (27, NULL, 1, 'zmdi zmdi-collection-item', 'Audit Trail', 'audit-trail', 0, 0, 7, NULL, 'active', 00000000001, '2016-10-07 09:35:31', NULL, NULL),
-(28, NULL, 2, 'zmdi zmdi-collection-item', 'Registrasi Event', 'registrasi-event', 0, 1, 0, NULL, 'active', 00000000001, '2016-10-07 09:35:31', NULL, NULL),
+(28, NULL, 2, 'zmdi zmdi-collection-text', 'Registrasi Event', 'registrasi-event', 1, 1, 0, NULL, 'active', 00000000001, '2016-10-07 09:35:31', NULL, NULL),
 (29, 5, 1, NULL, 'Tipe Exam', 'tipe-exam', 0, 1, NULL, 9, 'active', 00000000001, '2016-10-14 09:45:45', NULL, NULL),
 (30, 5, 1, NULL, 'Kategori Tempat Event', 'kategori-tempat', 0, 1, NULL, 7, 'active', 00000000001, '2016-10-14 11:33:49', NULL, NULL),
 (31, 5, 1, NULL, 'Trainer Eksternal', 'trainer-eksternal', 0, 1, NULL, 3, 'active', 00000000001, '2016-10-07 09:29:24', 00000000001, '2016-10-07 09:47:44'),
 (32, 14, 1, NULL, 'List Event', 'event', 0, 1, NULL, 4, 'active', 00000000001, '2016-10-07 09:31:22', NULL, NULL),
-(33, 5, 1, NULL, 'Kategori RAB', 'kategori-rab', 0, 1, NULL, 8, 'active', 00000000001, '2016-10-07 09:29:24', 00000000001, '2016-10-07 09:47:44');
+(33, 5, 1, NULL, 'Kategori RAB', 'kategori-rab', 0, 1, NULL, 8, 'active', 00000000001, '2016-10-07 09:29:24', 00000000001, '2016-10-07 09:47:44'),
+(35, NULL, 2, 'zmdi zmdi-collection-item', 'List Peserta Event', 'list-peserta-event', 0, 0, 2, NULL, 'active', 00000000001, '2016-10-07 09:35:31', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1130,7 +1183,7 @@ CREATE TABLE IF NOT EXISTS `em_trainereksternal` (
 --
 
 INSERT INTO `em_trainereksternal` (`id`, `nama_pemateri`, `nama_perusahaan`, `is_active`, `created_by`, `created_date`, `modified_by`, `modified_date`) VALUES
-(0000000001, 'naama baru 213', 'nama baru 7586', 'active', 00000000011, '2016-10-17 20:43:36', 00000000011, '2016-10-18 14:09:33'),
+(0000000001, 'naama baru 213', 'nama baru 7586', 'active', 00000000011, '2016-10-17 20:43:36', NULL, '2016-10-24 16:00:05'),
 (0000000003, 'nama baru pemateri', 'nama baru perusahaan', 'deleted', 00000000011, '2016-10-18 11:10:03', 00000000011, '2016-10-18 12:00:22');
 
 -- --------------------------------------------------------
@@ -1399,6 +1452,18 @@ ALTER TABLE `em_event`
  ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `em_event_approval`
+--
+ALTER TABLE `em_event_approval`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `em_event_approval_files`
+--
+ALTER TABLE `em_event_approval_files`
+ ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `em_event_listpeserta`
 --
 ALTER TABLE `em_event_listpeserta`
@@ -1420,6 +1485,12 @@ ALTER TABLE `em_feedback_detail`
 -- Indexes for table `em_kategori_rab`
 --
 ALTER TABLE `em_kategori_rab`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `em_kategori_tempat`
+--
+ALTER TABLE `em_kategori_tempat`
  ADD PRIMARY KEY (`id`);
 
 --
@@ -1542,6 +1613,16 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 ALTER TABLE `em_event`
 MODIFY `id` int(10) unsigned zerofill NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
+-- AUTO_INCREMENT for table `em_event_approval`
+--
+ALTER TABLE `em_event_approval`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
+--
+-- AUTO_INCREMENT for table `em_event_approval_files`
+--
+ALTER TABLE `em_event_approval_files`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
 -- AUTO_INCREMENT for table `em_event_listpeserta`
 --
 ALTER TABLE `em_event_listpeserta`
@@ -1562,6 +1643,11 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
 ALTER TABLE `em_kategori_rab`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=29;
 --
+-- AUTO_INCREMENT for table `em_kategori_tempat`
+--
+ALTER TABLE `em_kategori_tempat`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
+--
 -- AUTO_INCREMENT for table `em_klasifikasimateri`
 --
 ALTER TABLE `em_klasifikasimateri`
@@ -1575,7 +1661,7 @@ MODIFY `id` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 -- AUTO_INCREMENT for table `em_navigationmenu`
 --
 ALTER TABLE `em_navigationmenu`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=34;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=36;
 --
 -- AUTO_INCREMENT for table `em_registrasi`
 --

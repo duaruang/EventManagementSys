@@ -335,6 +335,7 @@ class User_controller extends MY_Controller {
 								'sess_user_id_user_group'	=> $sql_user[0]['id_user_group'],
 								'sess_user_nik'       		=> $sql_user[0]['nik'],
 								'sess_user_nama'       		=> $sql_user[0]['fullname'],
+								'sess_user_posisinama' 		=> $posisinama,
 								'sess_user_username'       	=> $sql_user[0]['username'],
 								'sess_user_email'   	    => $sql_user[0]['email'],
 								'sess_user_nama_cabang'		=> $cabang,
