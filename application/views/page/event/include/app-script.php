@@ -3,10 +3,6 @@
 <script src="<?php echo base_url(); ?>assets/plugins/select2/js/select2.full.min.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>assets/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js" type="text/javascript"></script>
 
-<!-- Jquery filer js -->
-<script src="<?php echo base_url(); ?>assets/plugins/jquery.filer/js/jquery.filer.min.js"></script>
-<!-- Jquery Document Viewer -->
-<script src="<?php echo base_url(); ?>assets/plugins/jquery.zohoviewer/jquery.zohoviewer.min.js"></script>
 <!-- Validation js (Parsleyjs) -->
 <script src="<?php echo base_url(); ?>assets/plugins/bootstrap-inputmask/bootstrap-inputmask.min.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>assets/plugins/autoNumeric/autoNumeric.js" type="text/javascript"></script>
@@ -16,6 +12,11 @@
 <script src="<?php echo base_url(); ?>assets/plugins/ckeditor/ckeditor.js"></script>
 <script src="<?php echo base_url(); ?>assets/plugins/ckeditor/adapters/jquery.js"></script>
 <!-- Script: Form Validation -->
+
+<!-- Jquery filer js -->
+<script src="<?php echo base_url(); ?>assets/plugins/jquery.filer/js/jquery.filer.min.js"></script>
+<!-- Jquery Document Viewer -->
+<script src="<?php echo base_url(); ?>assets/plugins/jquery.zohoviewer/jquery.zohoviewer.min.js"></script>
 <script>
     $(document).ready(function() {
     	$('textarea.ckeditor').ckeditor();
@@ -33,7 +34,9 @@
 		//Script: Tambah Kategori RAB
 		$("#form-approval").submit(function(e){
 			e.preventDefault();
-			
+			for ( instance in CKEDITOR.instances ) {
+		        CKEDITOR.instances[instance].updateElement();
+		    }
 			var formURL = "<?php echo site_url('pengajuan-event/process_approval'); ?>";
 			var formDatas = new FormData(this);
 			$("#loader").show();

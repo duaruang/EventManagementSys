@@ -35,7 +35,7 @@ class MY_Controller extends CI_Controller
     {
         //==== Check Data ====
         $data = array(
-                        'id_user'       => /*$this->session->userdata('sess_user_id')*/1,
+                        'id_user'       => '1',
                         'description'   => $activities,
                         'item_id'       => $itemid,
                         'date'          => date('Y-m-d H:i:s'),

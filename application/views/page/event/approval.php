@@ -107,7 +107,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-2">Memo Persetujuan <span class="text-danger">*</span></label>
                                 <div class="col-sm-5">
-                                    <input type="file" name="userfile[]" id="filer_input2">
+                                    <input type="file" name="userfile" id="filer_input2">
                                     <span class="font-13 text-muted">upload size maks : 2MB, File allowed: jpg, png, jpeg, gif, pdf</span>
                                 </div>
                             </div>
@@ -117,7 +117,7 @@
                                     <div class="row">
                                         <div class="col-xs-5">
                                             <div class="radio radio-success">
-                                                <input name="inputDenganExam" class="persetujuan" required="" id="radio1" value="agree" type="radio">
+                                                <input name="persetujuan" class="persetujuan" required="" id="radio1" value="agree" type="radio">
                                                 <label for="radio1">
                                                     Pengajuan Disetujui
                                                 </label>
@@ -125,7 +125,7 @@
                                         </div>
                                         <div class="col-xs-7">
                                             <div class="radio radio-success">
-                                                <input name="inputDenganExam" class="persetujuan" id="radio2" value="disagree" type="radio">
+                                                <input name="persetujuan" class="persetujuan" id="radio2" value="disagree" type="radio">
                                                 <label for="radio2">
                                                     Pengajuan tidak disetujui
                                                 </label>

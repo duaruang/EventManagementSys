@@ -21,7 +21,7 @@ class Event_model extends CI_Model
                     ->from('em_event') 
                     ->join('em_kategori_event','em_kategori_event.id = em_event.id_kategori_event','left')
                     ->where('em_event.is_active !=','deleted')
-                    ->where('em_event.status_event','submitted')
+                    ->where('em_event.status_event !=','draft')
                     ->order_by('em_event.created_date','desc')
                     ->get();
     }
@@ -35,7 +35,7 @@ class Event_model extends CI_Model
                     ->join('em_event_listpeserta','em_event_listpeserta.id_event = em_event.id_event','left')
                     ->join('em_kategori_tempat','em_kategori_tempat.id = em_event.id_kategori_tempat_pelaksanaan','left')
                     ->where('em_event.is_active !=','deleted')
-                    ->where('em_event.status_event','submitted')
+                    ->where('em_event.status_event !=','draft')
                     ->where('em_event_listpeserta.id_event',$id)
                     ->get();
     }

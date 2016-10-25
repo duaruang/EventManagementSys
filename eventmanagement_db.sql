@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 24 Okt 2016 pada 14.35
+-- Generation Time: 25 Okt 2016 pada 10.50
 -- Versi Server: 10.1.10-MariaDB
 -- PHP Version: 7.0.4
 
@@ -388,7 +388,16 @@ INSERT INTO `em_activitiesuser` (`id`, `id_user`, `description`, `item_id`, `dat
 (350, '1', 'Proses Approval Event  dengan no.memo', NULL, '2016-10-24 19:26:01', '::1'),
 (351, '1', 'Proses Approval Event  dengan no.memo', NULL, '2016-10-24 19:27:21', '::1'),
 (352, '1', 'Proses Approval Event  dengan no.memo', NULL, '2016-10-24 19:30:43', '::1'),
-(353, '1', 'Proses Approval Event  dengan no.memo', NULL, '2016-10-24 19:32:04', '::1');
+(353, '1', 'Proses Approval Event  dengan no.memo', NULL, '2016-10-24 19:32:04', '::1'),
+(354, '1', 'Proses Approval Event  dengan no.memo', NULL, '2016-10-25 14:32:33', '::1'),
+(355, '1', 'Proses Approval Event  dengan no.memo', NULL, '2016-10-25 14:33:24', '::1'),
+(356, '1', 'Proses Approval Event  dengan no.memo', NULL, '2016-10-25 14:34:41', '::1'),
+(357, '1', 'Proses Approval Event  dengan no.memo', NULL, '2016-10-25 14:34:42', '::1'),
+(358, '1', 'Proses Approval Event  dengan no.memo', NULL, '2016-10-25 14:35:25', '::1'),
+(359, '1', 'Proses Approval Event  dengan no.memo', NULL, '2016-10-25 14:35:27', '::1'),
+(360, '1', 'Proses Approval Event  dengan no.memo', NULL, '2016-10-25 14:36:54', '::1'),
+(361, '1', 'Proses Approval Event  dengan no.memo', NULL, '2016-10-25 14:40:56', '::1'),
+(362, '1', 'Proses Approval Event Event Alakadarnya dengan no.memo', 'Nomor Memo Tanpa Menggunakan format', '2016-10-25 15:14:50', '::1');
 
 -- --------------------------------------------------------
 
@@ -498,8 +507,8 @@ CREATE TABLE `em_event` (
 --
 
 INSERT INTO `em_event` (`id`, `id_event`, `nomor_memo`, `nama_event`, `topik_event`, `lokasi_kerja`, `mulai_tanggal_pelaksanaan`, `selesai_tanggal_pelaksanaan`, `id_kategori_tempat_pelaksanaan`, `nama_tempat`, `latitude`, `longitude`, `target_sasaran`, `id_kategori_event`, `id_tipe_exam`, `id_tipe_pelatihan`, `dengan_exam`, `jumlah_peserta`, `id_exam`, `id_jadwal_exam`, `total_rab`, `is_active`, `created_by`, `created_date`, `modified_by`, `modified_date`, `status_event`) VALUES
-(0000000001, 'KO3UNGIP6H1476723600', 'A-222/PNM-PPI/JKL/2012', 'Event Dasawarsa', 'Topik Event ABC', '', '2016-10-21', '2016-10-22', 0000000002, 'Tempat Vila Indah', NULL, NULL, 'MKU', 0000000001, '', 0000000001, 'tidak', 9, 0000000000, 0000000000, NULL, 'active', 2, '2016-10-18 17:44:15', NULL, NULL, ''),
-(0000000002, 'YKXOR3DW7H1476723600', 'Nomor Memo Tanpa Menggunakan format', 'Event Alakadarnya', 'Topik yang menyenangkan tanpa rasa kantuk', '', '2016-10-22', '2016-10-24', 0000000002, 'Hotel Mulia', NULL, NULL, 'MKU', 0000000001, 'pre test', 0000000001, 'ya', 2, 0000000001, 0000000001, NULL, 'active', 2, '2016-10-18 17:47:38', NULL, NULL, 'submitted');
+(0000000001, 'KO3UNGIP6H1476723600', 'A-222/PNM-PPI/JKL/2012', 'Event Dasawarsa', 'Topik Event ABC', '', '2016-10-21', '2016-10-22', 0000000002, 'Tempat Vila Indah', NULL, NULL, 'MKU', 0000000001, '', 0000000001, 'tidak', 9, 0000000000, 0000000000, NULL, 'active', 2, '2016-10-18 17:44:15', NULL, NULL, 'submitted'),
+(0000000002, 'YKXOR3DW7H1476723600', 'Nomor Memo Tanpa Menggunakan format', 'Event Alakadarnya', 'Topik yang menyenangkan tanpa rasa kantuk', '', '2016-10-22', '2016-10-24', 0000000002, 'Hotel Mulia', NULL, NULL, 'MKU', 0000000001, 'pre test', 0000000001, 'ya', 2, 0000000001, 0000000001, NULL, 'active', 2, '2016-10-18 17:47:38', 1, '2016-10-25 15:14:50', 'approved by atasan');
 
 -- --------------------------------------------------------
 
@@ -526,9 +535,7 @@ CREATE TABLE `em_event_approval` (
 --
 
 INSERT INTO `em_event_approval` (`id`, `id_approval`, `id_event`, `rab_disetujui`, `persetujuan`, `catatan`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES
-(4, 'YKXOR3DW7H1476723600ap-1', 'YKXOR3DW7H1476723600', 0, '', '', 0000000001, '2016-10-24 19:27:21', NULL, NULL, 'active'),
-(5, 'YKXOR3DW7H1476723600ap-1', 'YKXOR3DW7H1476723600', -123123, '', '', 0000000001, '2016-10-24 19:30:43', NULL, NULL, 'active'),
-(6, 'KO3UNGIP6H1476723600ap-1', 'KO3UNGIP6H1476723600', -21312312312, '', '', 0000000001, '2016-10-24 19:32:04', NULL, NULL, 'active');
+(12, 'YKXOR3DW7H1476723600ap-1', 'YKXOR3DW7H1476723600', 1200000, 'agree', '<p>Test Approval</p>\r\n', 0000000001, '2016-10-25 15:14:50', NULL, NULL, 'active');
 
 -- --------------------------------------------------------
 
@@ -538,7 +545,7 @@ INSERT INTO `em_event_approval` (`id`, `id_approval`, `id_event`, `rab_disetujui
 
 CREATE TABLE `em_event_approval_files` (
   `id` int(11) NOT NULL,
-  `id_event_approval` int(11) NOT NULL,
+  `id_event_approval` varchar(255) NOT NULL,
   `nama_file` varchar(255) NOT NULL,
   `jenis_file` varchar(100) NOT NULL,
   `created_by` int(10) UNSIGNED ZEROFILL NOT NULL,
@@ -547,6 +554,13 @@ CREATE TABLE `em_event_approval_files` (
   `modified_date` datetime DEFAULT NULL,
   `is_active` enum('active','disabled','deleted') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `em_event_approval_files`
+--
+
+INSERT INTO `em_event_approval_files` (`id`, `id_event_approval`, `nama_file`, `jenis_file`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES
+(2, 'YKXOR3DW7H1476723600ap-1', 'YKXOR3DW7H1476723600ap-1_20161025at151450_2.gif', 'image/gif', 0000000001, '2016-10-25 15:14:50', NULL, NULL, 'active');
 
 -- --------------------------------------------------------
 
@@ -1460,7 +1474,7 @@ ALTER TABLE `em_usergroup_matrix`
 -- AUTO_INCREMENT for table `em_activitiesuser`
 --
 ALTER TABLE `em_activitiesuser`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=354;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=363;
 --
 -- AUTO_INCREMENT for table `em_cabang`
 --
@@ -1480,12 +1494,12 @@ ALTER TABLE `em_event`
 -- AUTO_INCREMENT for table `em_event_approval`
 --
 ALTER TABLE `em_event_approval`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `em_event_approval_files`
 --
 ALTER TABLE `em_event_approval_files`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `em_event_listpeserta`
 --
@@ -1520,7 +1534,7 @@ ALTER TABLE `em_materi`
 -- AUTO_INCREMENT for table `em_navigationmenu`
 --
 ALTER TABLE `em_navigationmenu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 --
 -- AUTO_INCREMENT for table `em_systemactive`
 --

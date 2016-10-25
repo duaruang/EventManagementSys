@@ -88,25 +88,26 @@ class Event_controller extends MY_Controller {
 	public function proccess_approval()
 	{
 		//No data -> redirected to page adding trainer eksternal
-		//if(count($_POST) == 0){
-			//redirect('pengajuan-event', 'list-approval');
-		//}
+		if(count($_POST) == 0){
+			redirect('pengajuan-event', 'list-approval');
+		}
+		else{
 		//Default value is OK. If validations fail result will change to NG.
-		$output = array(
-			'result'  	=> 'OK',
-			'msg'		=> ''
-		);
+		
 		
 		//Get Data
 		$id_event 			= $this->security->xss_clean(strip_image_tags($this->input->post('idevent')));
 		$id_event_approval	= $id_event.'ap-'.'1';
-		$rab_disetujui		= strreplace($this->security->xss_clean(strip_image_tags($this->input->post('inputRAB'))));
+		$rab_disetujui		= replace_currency($this->security->xss_clean(strip_image_tags($this->input->post('inputRAB'))));
 		$catatan			= $this->security->xss_clean(strip_image_tags($this->input->post('catatan')));
 		$persetujuan		= $this->security->xss_clean(strip_image_tags($this->input->post('persetujuan')));
-		$memo_persetujuan	= $_FILES['userfile'];
-		$id_user			= /*$this->session->userdata('sess_user_id')*/'1';
-		
-		//Insert Data to table trainer eksternal
+		$id_user			= /*$this->session->userdata('sess_user_id')*/1;
+
+		$output = array(
+			'result'  	=> 'OK',
+			'msg'		=> $_FILES['userfile']['name']
+		);
+		//Insert Data to table event
 		$data_approval	= array(
 								'id_approval'			=> $id_event_approval,
 								'id_event'				=> $id_event,
@@ -119,8 +120,8 @@ class Event_controller extends MY_Controller {
 							);
 		$this->event_model->insert_approval_event($data_approval);
            
-		//Insert Data Document if exists to table trainer eksternal filesize
-		if ($_FILES['userfile']) {
+		//Insert Data Document if exists to table event filesize
+		if (isset($_FILES['userfile']) != '') {
 			//$file_ary = rearray_files($_FILES['files']);
 			//$i = 0;
 			//==== Upload Photo ====
@@ -128,69 +129,63 @@ class Event_controller extends MY_Controller {
 			$config['allowed_types'] 	= 'pdf|gif|jpg|jpeg|png';
 			$config['max_size']    		= '2000';
 			$config['overwrite'] 		= TRUE;
-			$this->load->library('upload', $config);
-			
-			$doc_user = array();
-			
-			foreach ($document['name'] as $key => $doc_u) {
-				$_FILES['userfile[]']['name']= $document['name'][$key];
-				$_FILES['userfile[]']['type']= $document['type'][$key];
-				$_FILES['userfile[]']['tmp_name']= $document['tmp_name'][$key];
-				$_FILES['userfile[]']['error']= $document['error'][$key];
-				$_FILES['userfile[]']['size']= $document['size'][$key];
 
-				$doc_u = str_replace(' ', '', $doc_u);
-				$fileName = $id_trainer.'_'.date('Ymd').'at'.date('His').'_'.$doc_u;
+			$doc_u 		= str_replace(' ', '', $_FILES['userfile']['name']);
+			$fileName 	= $id_event_approval.'_'.date('Ymd').'at'.date('His').'_'.$doc_u;
+			$doc_user	= $fileName;
 
-				$doc_user[] = $fileName;
+			$config['file_name'] = $fileName;
 
-				$config['file_name'] = $fileName;
+			$this->upload->initialize($config);
 
-				$this->upload->initialize($config);
-
-				if ($this->upload->do_upload('files[]')) {
-					$this->upload->data();
-					
-					//Insert to table trainer eksternal files
-					$data_files = array(
-									'id_event_approval'		=> $id_event_approval,
-									'nama_file'				=> $fileName,
-									'jenis_file'			=> $document['type'][$key],
-									'is_active' 			=> 'active',
-									'created_by' 			=> $id_user,
-									'created_date' 			=> date('Y-m-d H:i:s')
-								);
-					$this->event_model->insert_approval_event_files($data_files);
-					
-					$success = true;
-				} else {
-					$success = false;
-				}
+			if ($this->upload->do_upload()) {
+				$this->upload->data();
+				
+				//Insert to table event files
+				$data_files = array(
+								'id_event_approval'		=> $id_event_approval,
+								'nama_file'				=> $this->upload->file_name,
+								'jenis_file'			=> $this->upload->file_type,
+								'is_active' 			=> 'active',
+								'created_by' 			=> $id_user,
+								'created_date' 			=> date('Y-m-d H:i:s')
+							);
+				$this->event_model->insert_approval_event_files($data_files);
+				
+				$success = true;
+			} else {
+				$this->upload->display_error();
+				$success = false;
 			}
+			
 		}
 
 		$update_status	= array(
-								'status_event'			=> 'approve by atasan'
+								'status_event'			=> 'approved by atasan',
+								'modified_date'			=> date('Y-m-d H:i:s'),
+								'modified_by'			=> $id_user
 								);
 		$this->event_model->update_status_event($update_status,$id_event);
-		
-		$sql_query 		= $this->event_model->select_event_submitted_test($id_event);
-		$data 			= $sql_query->result_array();
+		$id 		= $id_event;
+		$test 		= $this->event_model->select_event_submitted_test($id);
+		if($test->num_rows() > 0){
+			$data 			= $test->result_array();
 
-		//init data
-		$nomor_memo 	= $data[0]['nomor_memo'];
-		$nama_event		= $data[0]['nama_event'];
+			//init data
+			$nomor_memo 	= $data[0]['nomor_memo'];
+			$nama_event		= $data[0]['nama_event'];
 
-		//Insert Log
-		$activities = 'Proses Approval Event '.$nama_event.' dengan no.memo';
-		$itemid		= $nomor_memo;
-		$this->insert_activities_user($activities,$itemid);
-		
-		//Set session flashdata
-		$this->session->set_flashdata('message_success', 'Data telah berhasil disimpan.');
-		
+			//Insert Log
+			$activities = 'Proses Approval Event '.$nama_event.' dengan no.memo';
+			$itemid		= $nomor_memo;
+			$this->insert_activities_user($activities,$itemid);
+			
+			//Set session flashdata
+			$this->session->set_flashdata('message_success', 'Data telah berhasil disimpan.');
+		}
 		echo json_encode($output);
 		exit;
+		}
 	}
 
 	public function make_pdf($id)
