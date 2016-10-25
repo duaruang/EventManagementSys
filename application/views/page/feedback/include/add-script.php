@@ -1,9 +1,38 @@
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/plugins/jquery-quicksearch/jquery.quicksearch.js"></script>
 <script src="<?php echo base_url(); ?>assets/plugins/select2/js/select2.full.min.js" type="text/javascript"></script>
+<!-- Required datatable js -->
+<script src="<?php echo base_url(); ?>assets/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/plugins/datatables/dataTables.bootstrap4.min.js"></script>
+<!-- Buttons examples -->
+<script src="<?php echo base_url(); ?>assets/plugins/datatables/dataTables.buttons.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/plugins/datatables/buttons.bootstrap4.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/plugins/datatables/jszip.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/plugins/datatables/pdfmake.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/plugins/datatables/vfs_fonts.js"></script>
+<script src="<?php echo base_url(); ?>assets/plugins/datatables/buttons.html5.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/plugins/datatables/buttons.print.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/plugins/datatables/buttons.colVis.min.js"></script>
+
 <script src="<?php echo base_url(); ?>assets/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js" type="text/javascript"></script>
 <!-- Validation js (Parsleyjs) -->
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/plugins/parsleyjs/parsley.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/pages/jquery.formadvanced.init.js"></script>
+
+<!-- Script: DataTables -->
+<script>
+	$(document).ready(function(){ 
+		$('#datatable').DataTable();
+
+        //Buttons examples
+        var table = $('#datatable-buttons').DataTable({
+            lengthChange: false,
+			bFilter: false
+        });
+
+        table.buttons().container()
+                .appendTo('#datatable-buttons_wrapper .col-md-6:eq(0)');
+	});
+</script>
 
 <!-- Script: Multiselect (Select All/Deselect All) -->
 <script>
@@ -77,7 +106,8 @@
 				
 				if(obj.result == 'OK')
 				{
-					location.reload();
+					//location.reload();
+					window.location.href = '<?php echo site_url('list-feedback'); ?>';
 				}
 				
 				console.log(data);

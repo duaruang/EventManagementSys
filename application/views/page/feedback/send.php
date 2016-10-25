@@ -76,7 +76,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-2">URL <span class="text-danger">*</span></label>
                                 <div class="col-sm-5">
-                                    <input type="text" required class="form-control" required name="url"/>
+                                    <input type="url" required class="form-control" required name="url" placeholder="e.g.: http://www.xxx.com"/>
                                 </div>
                             </div>
                             <div class="form-group row">

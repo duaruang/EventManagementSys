@@ -48,9 +48,6 @@
                     ?>
                         <div class="card-box table-responsive">
                             <p class="text-muted font-13 m-b-30">
-                                 <a href="<?php echo site_url('pengajuan-event'); ?>" class="btn btn-primary waves-effect waves-light">
-                                    <span class="btn-label"><i class="fa fa-plus"></i></span>Pengajuan Event
-                                 </a>
                             </p>
                             <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                 <thead>
@@ -98,7 +95,8 @@
 
                                         </td>
                                         <td>
-                                            <a href="<?php echo site_url('pengajuan-event/approval/'.$data->id_event); ?>" class="btn action btn-success  waves-effect waves-light"><span class="btn-label"><i class="fa fa-check"></i></span>Approval</a>&nbsp;&nbsp;
+                                            <a href="<?php echo site_url('pengajuan-event/approval-atasan/'.$data->id_event); ?>" class="btn action btn-warning  waves-effect waves-light"><span class="btn-label"><i class="fa fa-check"></i></span>Approval Atasan</a>
+                                            <a href="<?php echo site_url('pengajuan-event/approval-pusat/'.$data->id_event); ?>" class="btn action btn-success  waves-effect waves-light"><span class="btn-label"><i class="fa fa-check"></i></span>Approval Pusat</a>&nbsp;&nbsp;
                                         </td>
                                     </tr>
                                 <?php } ?>

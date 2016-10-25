@@ -45,13 +45,13 @@
                 .appendTo('#datatable-buttons_wrapper .col-md-6:eq(0)');
 				
 		
-		//Script: Delete User Group
-		$('#datatable-buttons tbody').on('click', '.delete-trainereksternal', function () {
-			var id_trainer = $(this).data('idtrainer'); 
-			var trainer_name = $(this).data('trainername'); 
-			$('.hidden-idtrainer').val(id_trainer);
-			$('.hidden-trainername').val(trainer_name);
-			$('.del-trainer').html(trainer_name);
+		//Script: Delete 
+		$('#datatable-buttons tbody').on('click', '.delete-feedback', function () {
+			var id_feedback = $(this).data('idfeedback'); 
+			var event_name = $(this).data('eventname');
+			$('.hidden-idfeedback').val(id_feedback);
+			$('.hidden-eventname').val(event_name);
+			$('.del-feedback').html(event_name);
 		});
     } );
 </script>       

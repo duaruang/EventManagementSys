@@ -221,7 +221,8 @@ $route['pengajuan-event/edit/(:num)'] 			= 'Event_controller/edit/$1';
 $route['pengajuan-event/process_edit'] 			= 'Event_controller/process_edit';
 $route['pengajuan-event/delete'] 				= 'Event_controller/process_delete';
 $route['pengajuan-event/list-approval'] 		= 'Event_controller/list_approval';
-$route['pengajuan-event/approval/(:any)'] 		= 'Event_controller/approval/$1';
+$route['pengajuan-event/approval-atasan/(:any)']= 'Event_controller/approval_atasan/$1';
+$route['pengajuan-event/approval-pusat/(:any)']	= 'Event_controller/approval_pusat/$1';
 $route['pengajuan-event/memo_view/(:any)'] 		= 'Event_controller/make_pdf/$1';
 $route['pengajuan-event/process_approval'] 		= 'Event_controller/proccess_approval';
 
@@ -241,9 +242,7 @@ FEEDBACK CONTROLLER
 $route['kirim-feedback'] 						= 'Feedback_controller/send';
 $route['feedback/generate-participant'] 		= 'Feedback_controller/load_participant';
 $route['feedback/process-send'] 				= 'Feedback_controller/process_send';
-$route['kategori-rab/process-add-kategori'] 	= 'KategoriRab_controller/process_add_kategori';
-$route['kategori-rab/process-add-subkategori'] 	= 'KategoriRab_controller/process_add_subkategori';
-$route['kategori-rab/view/(:num)'] 				= 'KategoriRab_controller/view/$1';
-$route['kategori-rab/edit/(:num)'] 				= 'KategoriRab_controller/edit/$1';
-$route['kategori-rab/process-edit'] 			= 'KategoriRab_controller/process_edit';
-$route['kategori-rab/process-delete'] 			= 'KategoriRab_controller/process_delete';
+$route['list-feedback'] 						= 'Feedback_controller/index';
+$route['list-feedback/view/(:num)'] 			= 'Feedback_controller/view/$1';
+$route['feedback/process-delete'] 				= 'Feedback_controller/process_delete';
+

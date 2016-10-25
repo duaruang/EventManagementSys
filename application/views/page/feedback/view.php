@@ -1,10 +1,10 @@
-<?php $t = $load_trainer->result_array(); ?>
+<?php $f = $load_feedback->result_array(); ?>
 <div style="background: #fff;box-shadow: 0 0px 24px 0 rgba(0, 0, 0, 0.06), 0 1px 0px 0 rgba(0, 0, 0, 0.02);">
     <div class="container">
         <ol class="breadcrumb">
             <li><a href="<?php echo site_url('dashboard'); ?>">Dashboard</a></li>
-            <li><a href="<?php echo site_url('trainer-eksternal'); ?>">Trainer Eksternal Administration</a></li>
-            <li class="active">View Trainer Eksternal</li>
+            <li><a href="<?php echo site_url('list-feedback'); ?>">List Feedback Administration</a></li>
+            <li class="active">View List Feedback</li>
         </ol>
     </div>
 </div>
@@ -14,7 +14,7 @@
 <!-- Page-Title -->
     <div class="row">
         <div class="col-sm-12">
-            <h4 class="page-title">View Trainer Eksternal</h4>
+            <h4 class="page-title">View List Feedback</h4>
         </div>
     </div>
     <div class="row">
@@ -30,59 +30,64 @@
                         $attrib = array('class' => 'form-horizontal');
                         echo form_open('',$attrib); ?>
                             <div class="form-group row">
-                                <label class="col-sm-2">Nama Pemateri</label>
-                                <div class="col-sm-4">
-                                    <input type="text" class="form-control" value="<?php echo $t[0]['nama_pemateri']?>" disabled />
+                                <label class="col-sm-2">Nama Event</label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" value="<?php echo $f[0]['nama_event']?>" disabled />
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-2">Nama Perusahaan</label>
-                                <div class="col-sm-4">
-                                    <input type="text" class="form-control" value="<?php echo $t[0]['nama_perusahaan']?>" disabled />
+                                <label class="col-sm-2">URL Feedback</label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" value="<?php echo $f[0]['url_feedback']?>" disabled />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2">Tanggal dibuat</label>
+                                <div class="col-sm-2">
+                                    <input type="text" class="form-control" value="<?php echo tgl_indo_datetime($f[0]['created_date']);?>" disabled />
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-2">Status</label>
                                 <div class="col-sm-2">
-                                    <input type="text" class="form-control" value="<?php echo ($t[0]['is_active']=='active' ? 'Aktif' : 'Tidak Aktif' ); ?>" disabled />
+                                    <input type="text" class="form-control" value="<?php echo ($f[0]['is_active']=='active' ? 'Aktif' : 'Tidak Aktif' ); ?>" disabled />
                                 </div>
                             </div>
 							<div class="form-group row">
-								<?php
-									//Load files which status is active
-									if($load_files->num_rows() > 0)
-									{
-										$i = 0;
-										foreach($load_files->result() as $f)
-										{
-											if($i==0) echo "<label class='col-sm-2'>Dokumen</label>";
-											else echo "<label class='col-sm-2'>&nbsp;</label>";
-								?>
+								<label class="col-sm-2">List Peserta Terdaftar</label>
 								<div class="col-sm-10">
-									<div class="col-doc">
-										<a href="<?php echo base_url().'assets/attachments/'.$f->nama_file;?>" target="_blank" class="btn waves-effect waves-light btn-primary embed-preview"><i class="fa fa-eye"></i></a>
-										<a href="<?php echo base_url().'assets/attachments/'.$f->nama_file;?>" class="btn waves-effect waves-light btn-primary" download><i class="fa fa-download"></i></a>
-										&nbsp;<?php echo $f->nama_file;?>
-									</div>
+									 <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
+										<thead>
+											<tr>
+												<th>Nama Lengkap</th>
+												<th>Email</th>
+												<th>Waktu Pengiriman</th>
+												<th>Status</th>
+											</tr>
+										</thead>
+										<tbody>
+											<?php
+												foreach($load_feedback->result() as $lf)
+												{
+											?>
+											<tr>
+												<td><?php echo $lf->nama;?></td>
+												<td><?php echo $lf->email;?></td>
+												<td><?php echo tgl_indo_datetime($lf->sent_datetime);?></td>
+												<td><?php echo ($lf->status=='success'?'Terkirim':'Gagal');?></td>
+											</tr>
+											<?php
+												}
+											?>
+										</tbody>
+									</table>
 								</div>
-								<?php
-											$i++;
-										}
-									}
-									else
-									{
-								?>
-								<label class="col-sm-2">Dokumen</label>
-								<div class="col-sm-6">Tidak ada dokumen tersimpan.</div>
-								<?php
-									}
-								?>
 							</div>
 							
                             <div class="form-group">
                                 <div style="margin-top: 40px;">
                                     <hr>
-                                    <a href="<?php echo site_url('trainer-eksternal'); ?>" class="btn btn-secondary waves-effect m-l-5">
+                                    <a href="<?php echo site_url('list-feedback'); ?>" class="btn btn-secondary waves-effect m-l-5">
                                         Kembali
                                     </a>
                                 </div>

@@ -93,6 +93,11 @@ class Event_model extends CI_Model
         $this->db->insert('em_event_listpeserta',$data_array);     
     }
 
+    public function insert_rundown_event_files($data_files)
+    {
+        $this->db->insert('em_event_rundown',$data_files);     
+    }
+
     public function insert_approval_event($data_approval)
     {
         $this->db->insert('em_event_approval',$data_approval);     

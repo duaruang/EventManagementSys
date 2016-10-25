@@ -68,7 +68,7 @@ class Event_controller extends MY_Controller {
 	}
 
 
-	public function approval()
+	public function approval_atasan()
 	{
 	    //$this->is_logged();
         //Set Head Content
@@ -82,7 +82,24 @@ class Event_controller extends MY_Controller {
         $data['load_list_peserta'] 		= $this->event_model->get_list_peserta($id);
         //data['load_exam'] 				= $this->get_exam();
         //Load page
-		$this->template->view('page/event/approval',$data);
+		$this->template->view('page/event/approval-atasan',$data);
+	}
+
+	public function approval_pusat()
+	{
+	    //$this->is_logged();
+        //Set Head Content
+        $id 			= $this->uri->segment(3);
+		$head['title'] 	= 'Approval Event - Event Management System' ;
+		$head['css']	=  $this->load->view('page/event/include/app-css', NULL, TRUE);
+		$this->load->view('include/head', $head, TRUE);
+        
+        //Set Spesific Javascript page
+        $data['script']     			= $this->load->view('page/event/include/app-script', NULL, TRUE);
+        $data['load_list_peserta'] 		= $this->event_model->get_list_peserta($id);
+        //data['load_exam'] 				= $this->get_exam();
+        //Load page
+		$this->template->view('page/event/approval-pusat',$data);
 	}
 
 	public function proccess_approval()
@@ -381,7 +398,7 @@ class Event_controller extends MY_Controller {
 		$inputDenganExam			= trim($this->security->xss_clean(strip_image_tags($this->input->post('inputDenganExam'))));
 		$inputIdExam				= trim($this->security->xss_clean(strip_image_tags($this->input->post('inputIdExam'))));
 		$inputidjadwalexam			= trim($this->security->xss_clean(strip_image_tags($this->input->post('inputidjadwalexam'))));
-		$id_user					= $this->session->userdata('sess_user_id');
+		$id_user					= /*$this->session->userdata('sess_user_id')*/1;
 		
 		$randdate = strtotime(date('Y-m-d'));
 		$randalnum = random_string('alnum', 10);
@@ -398,6 +415,46 @@ class Event_controller extends MY_Controller {
 			 $array_tipeexam = $inputTipeExam[0].'|'.$inputTipeExam[1];
 		}
 		
+		//Insert Data Document if exists to table event filesize
+		if (isset($_FILES['rundown_input']) != '') {
+			//$file_ary = rearray_files($_FILES['files']);
+			//$i = 0;
+			//==== Upload Photo ====
+			$config['upload_path'] 		= './assets/attachments/rundown';
+			$config['allowed_types'] 	= 'pdf|gif|jpg|jpeg|png';
+			$config['max_size']    		= '2000';
+			$config['overwrite'] 		= TRUE;
+
+			$doc_u 		= str_replace(' ', '', $_FILES['rundown_input']['name']);
+			$fileName 	= $id_event.'_'.date('Ymd').'at'.date('His').'_'.$doc_u;
+			$doc_user	= $fileName;
+
+			$config['file_name'] = $fileName;
+
+			$this->upload->initialize($config);
+
+			if ($this->upload->do_upload()) {
+				$this->upload->data();
+				
+				//Insert to table event files
+				$data_files = array(
+								'id_event'				=> $id_event,
+								'nama_file'				=> $this->upload->file_name,
+								'tipe_file'				=> $this->upload->file_type,
+								'is_active' 			=> 'active',
+								'created_by' 			=> $id_user,
+								'created_date' 			=> date('Y-m-d H:i:s')
+							);
+				$this->event_model->insert_rundown_event_files($data_files);
+				
+				$success = true;
+			} else {
+				$this->upload->display_error();
+				$success = false;
+			}
+			
+		}
+
 		//==== Check Data ====
 		$sql_cab= $this->event_model->check_event($id_event);
 

@@ -383,7 +383,7 @@
                                                         <div class="form-group row">
                                                             <label class="col-sm-2">Upload Rundown Acara</label>
                                                             <div class="col-sm-6">
-                                                                <input type="file" name="files" id="filer_input2" multiple="multiple">
+                                                                <input type="file" name="rundown_input" id="filer_input2" multiple="multiple">
                                                                 <span class="font-13 text-muted">upload size maks : 2MB, File allowed: jpg, png, jpeg, gif, pdf</span>
                                                             </div>
                                                         </div>
