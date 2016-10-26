@@ -55,58 +55,33 @@
                     ?>
                     <div id="m-ap-cab"></div>
                     <div class="p-20">
+                    <button class="btn btn-primary waves-effect waves-light m-b-20" id="get_trainer" data-toggle="modal" data-target=".bs-example-modal-lg">Pilih Trainer</button>
                         <?php 
                         $attrib = array('class' => 'form-horizontal','id'=>'form-add-trainer');
                         echo form_open('',$attrib); ?>
                             <div class="form-group row">
-                                <label class="col-sm-3">Nomor NIK <span class="text-danger">*</span></label>
+                                <label class="col-sm-3">NIP<span class="text-danger">*</span></label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" required name="nik" id="nik"/>
+                                    <input type="text" class="form-control" required name="nip" id="nip" readonly=""/>
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-sm-3">Nama Pemateri <span class="text-danger">*</span></label>
+                                <label class="col-sm-3">Nama Trainer </label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" required name="nama_pemateri" id="nama_pemateri"/>
+                                    <input type="text" class="form-control" required name="nama_trainer" id="nama_trainer" readonly=""/>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-3">Inisial <span class="text-danger">*</span></label>
+                                <label class="col-sm-3">Posisi </label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" required name="inisial" id="inisial"/>
+                                    <input type="text" class="form-control" required name="posisi" id="posisi" readonly=""/>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-3">Jabatan <span class="text-danger">*</span></label>
+                                <label class="col-sm-3">Unit Kerja </label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" required name="jabatan" id="jabatan"/>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-3">Cabang <span class="text-danger">*</span></label>
-                                <div class="col-sm-5">
-                                    <select class="form-control select2" required name="cabang" id="cabang">
-                                    <option value="">--pilih cabang--</option>
-                                    <?php if($load_cabang->num_rows() > 0){ ?>
-                                    <?php foreach($load_cabang->result() as $data){ ?>
-                                    <option value="<?php echo $data->id; ?>"><?php echo $data->nama_cabang; ?></option>
-                                    <?php } ?>
-                                    <?php } ?>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-3">Divisi <span class="text-danger">*</span></label>
-                                <div class="col-sm-5">
-                                    <select class="form-control select2" required name="divisi" id="divisi">
-                                    <option value="">--pilih divisi--</option>
-                                    <?php if($load_divisi->num_rows() > 0){ ?>
-                                    <?php foreach($load_divisi->result() as $data){ ?>
-                                    <option value="<?php echo $data->id; ?>"><?php echo $data->nama_divisi; ?></option>
-                                    <?php } ?>
-                                    <?php } ?>
-                                    </select>
+                                <input type="text" class="form-control" required name="unit_kerja" id="unit_kerja" readonly="" />
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -139,3 +114,32 @@
         </div>  
     </div>
 </div>
+
+<!--  Modal content for the above example -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myLargeModalLabel">Tabel Karyawan</h4>
+            </div>
+            <div class="modal-body">
+             <div class="p-20">
+                     <table id="datatable-a" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th>NIP</th>
+                            <th>Nama Karyawan</th>
+                            <th>Posisi</th>
+                            <th>Unit Kerja</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

@@ -25,7 +25,6 @@ if ( ! function_exists('tgl_indo_datetime'))
     }
 }
 
-
 if ( ! function_exists('tgl_indo_tanpa_detik'))
 {
     function tgl_indo_tanpa_detik($tgl)
@@ -76,40 +75,40 @@ if ( ! function_exists('bulan'))
         switch ($bln)
         {
             case 1:
-                return "Januari";
+                return "Jan";
                 break;
             case 2:
-                return "Februari";
+                return "Feb";
                 break;
             case 3:
-                return "Maret";
+                return "Mar";
                 break;
             case 4:
-                return "April";
+                return "Apr";
                 break;
             case 5:
-                return "Mei";
+                return "May";
                 break;
             case 6:
-                return "Juni";
+                return "Jun";
                 break;
             case 7:
-                return "Juli";
+                return "Jul";
                 break;
             case 8:
-                return "Agustus";
+                return "Aug";
                 break;
             case 9:
-                return "September";
+                return "Sep";
                 break;
             case 10:
-                return "Oktober";
+                return "Oct";
                 break;
             case 11:
-                return "November";
+                return "Nov";
                 break;
             case 12:
-                return "Desember";
+                return "Des";
                 break;
         }
     }

@@ -75,7 +75,6 @@ class User_controller extends MY_Controller {
        
        //Set Spesific Javascript page
         $data['script'] = $this->load->view('page/user/include/adduser-script', NULL, TRUE);
-        $data['load_all_karyawan']		= $this->get_all_karyawan();
         $data['load_user_group']		= $this->user_group_model->select_usergroup_active();
 		$this->template->view('page/user/add-user',$data);
 	}
@@ -362,30 +361,38 @@ class User_controller extends MY_Controller {
 
 	public function get_all_karyawan()
 	{
+		$username = 'event';
+		$password = 'event';
+	     
+	    // Set up and execute the curl process
+	    $curl_handle = curl_init();
+	    curl_setopt($curl_handle, CURLOPT_URL, 'http://182.23.52.249/Dummy/WebService/SSO_Mobile/getSSObyAppCode.php?app_code=event');
+	    //curl_setopt($curl_handle, CURLOPT_URL, 'http://182.23.52.249/Dummy/WebService/SSO_Mobile/get_all_karyawan.php');
+	    curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
+	    curl_setopt($curl_handle, CURLOPT_POST, 1);
+	     
+	    // Optional, delete this line if your API is open
+	    curl_setopt($curl_handle, CURLOPT_USERPWD, $username . ':' . $password);
+	     
+	    $buffer = curl_exec($curl_handle);
+	    curl_close($curl_handle);
+	     
+	    $result = json_decode($buffer);
+		//count total data
+		$total = 0;
+		foreach ($result->profile[0]->data as $row) {
+		    $total ++;
+		};
 
-	$username = 'event';
-	$password = 'event';
-     
-    // Set up and execute the curl process
-    $curl_handle = curl_init();
-    curl_setopt($curl_handle, CURLOPT_URL, 'http://182.23.52.249/Dummy/WebService/SSO_Mobile/getSSObyAppCode.php?app_code=event');
-    //curl_setopt($curl_handle, CURLOPT_URL, 'http://182.23.52.249/Dummy/WebService/SSO_Mobile/get_all_karyawan.php');
-    curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($curl_handle, CURLOPT_POST, 1);
-     
-    // Optional, delete this line if your API is open
-    curl_setopt($curl_handle, CURLOPT_USERPWD, $username . ':' . $password);
-     
-    $buffer = curl_exec($curl_handle);
-    curl_close($curl_handle);
-     
-    $result = json_decode($buffer);
-	//foreach($result->karyawan[0]->data as $data)
-	//{
-	//	echo json_encode($data);
-	//	echo ',';
-	//}
-	return $result;
+		//sent data to datatables
+		$oleh = array(
+					'draw' 				=> 1,
+					'recordsTotal' 		=> $total,
+					'recordsFiltered' 	=> $total,
+					'data'				=> $result->profile[0]->data
+			);
+		echo json_encode($oleh);
+		exit;
 	}
 
 	public function lock_user()

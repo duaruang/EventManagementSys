@@ -10,11 +10,13 @@
 <div class="container"> 
 
 <!-- Page-Title -->
+	<!--
     <div class="row">
         <div class="col-sm-12">
             <h4 class="page-title">Kirim Feedback</h4>
         </div>
     </div>
+	-->
     <div class="row">
         <div class="col-xs-12">
             <div class="form-group" id="loader" style="position:absolute;display:none;width: 100%;height:100%;text-align: center;background-color: rgba(255,255,255,0.9);z-index: 1000;">
@@ -76,7 +78,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-2">URL <span class="text-danger">*</span></label>
                                 <div class="col-sm-5">
-                                    <input type="url" required class="form-control" required name="url" placeholder="e.g.: http://www.xxx.com"/>
+                                    <input type="url" required class="form-control" required name="url" placeholder="e.g.: http://pnm.co.id"/>
                                 </div>
                             </div>
                             <div class="form-group row">

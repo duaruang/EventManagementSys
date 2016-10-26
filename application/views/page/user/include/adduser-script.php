@@ -26,29 +26,6 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('form').parsley();
-		$('#datatable').DataTable();
-
-	    $('.select_karyawan').on('click', function () {
-	        var $row = $(this).closest("tr");    // Find the row
-	        var idsdm	 				= $row.find("td:nth-child(1)");
-	        var usernamekary 			= $row.find("td:nth-child(2)");
-	        var nikkaryawan				= $row.find("td:nth-child(3)");
-	        var namakaryawan			= $row.find("td:nth-child(4)");
-	        var email	 				= $row.find("td:nth-child(5)");
-	        var deskripsi_organisasi 	= $row.find("td:nth-child(6)");
-	        var nama_organisasi			= $row.find("td:nth-child(7)");
-
-	       document.getElementById("idsdm").value 			= idsdm.text(); 
-		   document.getElementById("nama_lengkap").value 	= namakaryawan.text();
-		   document.getElementById("username").value 		= usernamekary.text();
-		   document.getElementById("email").value 			= email.text();
-		   document.getElementById("nik").value 			= nikkaryawan.text();
-		   document.getElementById("deskripsi_organisasi").value = deskripsi_organisasi.text();
-		   document.getElementById("nama_organisasi").value = nama_organisasi.text();
-
-
-	    });
-
 	});
 
 	jQuery(function($) {
@@ -86,6 +63,52 @@
 				var failMsg = "Something error happened! as";
 				alert(failMsg);
 			});	
+		});
+
+		$('#get_user').on('click', function (e) {
+			e.preventDefault();
+			var table  = $('#datatable-a').DataTable({
+				"bRetrieve" : "true",
+				 ajax: {
+			        url: '<?php echo site_url('User_controller/get_all_karyawan'); ?>',
+			        type: 'POST',
+			    	dataSrc: 'data'
+			    },
+			    'columnDefs': [{
+			         'targets': 6,
+			         'searchable':true,
+			         'orderable':true,
+			         'className': 'dt-body-center',
+			         'render': function (data, type, full, meta){
+			             return '<button type="button" class="select_karyawan" data-dismiss="modal">pilih</button>';
+			         }
+			      }],
+				columns: [
+					{ data: "profile_username" },
+					{ data: "profile_nip"},
+					{ data: "profile_nama"},
+					{ data: "profile_email"},
+					{ data: "profile_organisasi_desc"},
+					{ data: "profile_organisasi_name"}
+				]
+			});
+
+			$('#datatable-a tbody').on('click', 'tr', function () {
+		        var $row = $(this).closest("tr");    // Find the row
+		        var usernamekary	 		= $row.find("td:nth-child(1)");
+		        var nikkaryawan 			= $row.find("td:nth-child(2)");
+		        var namakaryawan			= $row.find("td:nth-child(3)");
+		        var email					= $row.find("td:nth-child(4)");
+		        var deskripsi_organisasi	= $row.find("td:nth-child(5)");
+		        var nama_organisasi 		= $row.find("td:nth-child(6)");
+
+			   $("#nama_lengkap").val(namakaryawan.text());
+			   $("#username").val(usernamekary.text());
+			   $("#email").val(email.text());
+			   $("#nik").val(nikkaryawan.text());
+			   $("#deskripsi_organisasi").val(deskripsi_organisasi.text());
+			   $("#nama_organisasi").val(nama_organisasi.text());
+	   		});
 		});
 
 		//Script: Edit User

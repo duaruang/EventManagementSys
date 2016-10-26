@@ -85,12 +85,6 @@
                                     </select>
                                 </div>
                             </div>
-                             <div class="form-group row">
-                                <label class="col-sm-3">Nilai Minimum <span class="text-danger">*</span></label>
-                                <div class="col-sm-2">
-                                    <input type="number" class="form-control" required name="nilai_minimum" id="nilai_minimum"/>
-                                </div>
-                            </div>
                             <div class="form-group row">
                                 <label class="col-sm-3">Status <span class="text-danger">*</span></label>
                                 <div class="col-sm-5">

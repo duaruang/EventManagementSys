@@ -35,6 +35,7 @@
 										<input type="text" class="form-control" required name="deskripsi"/>
 									</div>
 								</div>
+								<!--
 								<div class="form-group row">
 									<label class="col-sm-2">unit <span class="text-danger">*</span></label>
 									<div class="col-sm-4">
@@ -47,6 +48,7 @@
 										<input type="text" class="form-control" required name="frekwensi" placeholder="kali/hari"/>
 									</div>
 								</div>
+								-->
 								<div class="form-group row">
 									<label class="col-sm-2">Status <span class="text-danger">*</span></label>
 									<div class="col-sm-2">

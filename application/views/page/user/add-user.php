@@ -49,7 +49,7 @@
                             }
                         ?>
                         <div id="m-ap-cab"></div>
-                    <button class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target=".bs-example-modal-lg">Pilih User</button>
+                    <button class="btn btn-primary waves-effect waves-light" id="get_user" data-toggle="modal" data-target=".bs-example-modal-lg">Pilih User</button>
                     <div class="p-20">
                         <?php 
                         $attrib = array('class' => 'form-horizontal','id'=>'form-add-user');
@@ -59,7 +59,6 @@
 
                                 <label class="col-sm-3">Nama Lengkap </label>
                                 <div class="col-sm-9">
-                                    <input type="hidden" id="idsdm" name="idsdm">
                                     <input type="text" name="nama_lengkap" readonly="" id="nama_lengkap" class="form-control" required="" />
                                 </div>
                             </div>
@@ -146,32 +145,19 @@
             </div>
             <div class="modal-body">
              <div class="p-20">
-                     <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                     <table id="datatable-a" class="table table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
                         <tr>
-                            <th hidden="">IDSDM</th>
                             <th>Nama Pengguna</th>
                             <th>NIK</th>
                             <th>Nama karyawan</th>
                             <th>Email</th>
-                            <th hidden="">Organisasi Desc</th>
-                            <th hidden="">Organisasi Name</th>
+                            <th>Organisasi Desc</th>
+                            <th>Organisasi Name</th>
                             <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <?php foreach($load_all_karyawan->profile[0]->data as $data){ ?>
-                        <tr>
-                            <td scope="row" hidden=""><?php echo $data->profile_id_sdm; ?></td>
-                            <td><?php echo $data->profile_username; ?></td>
-                            <td><?php echo $data->profile_nip; ?></td>
-                            <td><?php echo $data->profile_nama ?></td>
-                            <td><?php echo $data->profile_email; ?></td>
-                            <td hidden=""><?php echo $data->profile_organisasi_desc; ?></td>
-                            <td hidden=""><?php echo $data->profile_organisasi_name; ?></td>
-                            <td><button type="button" class="select_karyawan" data-dismiss="modal">pilih</button></td>
-                        </tr>
-                        <?php } ?>
                         </tbody>
                     </table>
                 </div>

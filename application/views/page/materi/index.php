@@ -58,7 +58,6 @@
                                         <th>Kode Materi</th>
                                         <th width="30%">Nama Materi</th>
                                         <th>Klasifikasi Materi</th>
-                                        <th>Nilai Minimum</th>
                                         <th>Status</th>
                                         <th width="200">Action</th>
                                     </tr>
@@ -70,7 +69,6 @@
                                         <td><?php echo $data->id_materi; ?></td>
                                         <td><?php echo $data->nama_materi; ?></td>
                                         <td><?php echo $data->nama_klasifikasi; ?></td>
-                                        <td><?php echo $data->nilai_minimum; ?></td>
                                         <td><?php echo $data->statmateri; ?></td>
                                         <td>
                                             <a href="<?php echo site_url('materi/edit/'.$data->idmateri); ?>" class="btn action btn-warning  waves-effect waves-light"><span class="btn-label"><i class="fa fa-pencil"></i></span>Edit</a>&nbsp;&nbsp;

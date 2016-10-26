@@ -58,7 +58,7 @@ $autoload['packages'] = array();
 |
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
-$autoload['libraries'] = array('database', 'session', 'form_validation', 'user_agent', 'template','upload');
+$autoload['libraries'] = array('database', 'session', 'form_validation', 'user_agent', 'template', 'upload');
 
 /*
 | -------------------------------------------------------------------
@@ -132,4 +132,4 @@ $autoload['language'] = array();
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = array('user_model','user_group_model','cabang_model','menu_model','trainer_model','divisi_model','klasifikasi_model','materi_model','tipe_pelatihan_model','tipe_exam_model','kategori_event_model','kategori_tempat_model','event_model','trainer_eksternal_model','kategori_rab_model','feedback_model');
+$autoload['model'] = array('user_model','user_group_model','cabang_model','menu_model','trainer_model','divisi_model','klasifikasi_model','materi_model','tipe_pelatihan_model','tipe_exam_model','kategori_event_model','kategori_tempat_model','event_model','trainer_eksternal_model','kategori_rab_model','feedback_model','bisnis_unit_model');

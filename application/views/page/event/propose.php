@@ -338,7 +338,7 @@
                                                             ?> 
                                                             <tr class="parent-class" id="parent_<?php echo $hs; ?>" style="background-color: #eaeaea;">
                                                                 <td colspan="7"><strong><?php echo ($child_exist==1 ? ' '.$data->deskripsi:$data->deskripsi); ?></strong></td>
-                                                                <td><input type="text" class="form-control autonumber" id="totalcost" name="totalcost[]" data-a-sign="Rp. " data-a-dec="," data-a-sep="." readonly=""></td>
+                                                                <td><input type="text" class="form-control autonumber" id="totalcost" name="totalcost[]" data-a-sign="Rp. " readonly=""></td>
                                                             </tr>
                                                            <?php 
                                                                 if($child_exist==1)
@@ -350,12 +350,12 @@
                                                             <tr id="parent_<?php echo $hs; ?>">
                                                                 <td><?php echo $no; ?></td>
                                                                 <td><?php echo $c->deskripsi; ?></td>
-                                                                <td><input type="text" class="form-control tinynumber" data-a-sep="." id="jumlah" name="jumlah[]" value="0"></td>
+                                                                <td><input type="text" class="form-control autonumber" id="jumlah" name="jumlah[]" value="0"></td>
                                                                 <td width="30" ><?php echo $c->jumlah_unit; ?></td>
-                                                                <td><input type="text" class="form-control tinynumber" data-a-sep="." id="frekwensi"  name="frekwensi[]" value="0"></td>
+                                                                <td><input type="text" class="form-control autonumber" id="frekwensi"  name="frekwensi[]" value="0"></td>
                                                                 <td width="30"><?php echo $c->frekwensi; ?></td>
-                                                                <td><input type="text" class="form-control autonumber" data-a-sep="." id="unit_cost" name="unit_cost[]" data-a-sign="Rp. " value="0"></td>
-                                                                <td><input type="text" class="form-control autonumber" data-parent="<?php echo $c->id_parent; ?>" data-a-sep="." id="total_cost" name="total_cost[]" data-a-sign="Rp. " readonly="" value="0"></td>
+                                                                <td><input type="text" class="form-control autonumber" id="unit_cost" name="unit_cost[]" data-a-sign="Rp. " value="0"></td>
+                                                                <td><input type="text" class="form-control autonumber" data-parent="<?php echo $c->id_parent; ?>" id="total_cost" name="total_cost[]" data-a-sign="Rp. " readonly="" value="0"></td>
                                                             </tr>
                                                             <?php
                                                                     $no++;}
@@ -366,12 +366,12 @@
                                                             <tr style="background-color: #eaeaea;">
                                                                 <td colspan="7"><strong>Uang Muka</strong></td>
                                                                 <td>
-                                                                <input type="text" class="form-control autonumber" data-a-sep="." id="down_payment" name="down_payment" data-a-sign="Rp. " value="0">    
+                                                                <input type="text" class="form-control autonumber" id="downpayment" name="downpayment" data-a-sign="Rp. " value="0">    
                                                                 </td>
                                                             </tr>
                                                             <tr>
                                                                 <td colspan="7"><strong>Grand Total</strong></td>
-                                                                <td><input type="text" class="form-control autonumber" data-a-dec="," data-a-sep="." id="grand_total" name="grand_total" data-a-sign="Rp. " readonly=""></td>
+                                                                <td><input type="text" class="form-control autonumber" id="grand_total" name="grand_total" data-a-sign="Rp. " readonly=""></td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -443,7 +443,7 @@
     </div>
 </div>
 
-<!--  Modal content for the above example 
+<!--  Modal content for the above example -->
 <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -486,7 +486,7 @@
         </div>
     </div>
 </div>
--->
+
 <!--  Modal content for the above example -->
 <div class="modal fade bs-get-list-peserta" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog modal-lg">

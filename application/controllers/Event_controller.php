@@ -62,7 +62,7 @@ class Event_controller extends MY_Controller {
         $data['load_tipe_exam'] 		= $this->tipe_exam_model->select_tipe_exam_active();
         $data['load_tipe_pelatihan'] 	= $this->tipe_pelatihan_model->select_tipe_pelatihan_active();
         $data['load_parent'] 			= $this->kategori_rab_model->select_parent_category();
-        //data['load_exam'] 				= $this->get_exam();
+        $data['load_exam'] 				= $this->get_exam();
         //Load page
 		$this->template->view('page/event/propose',$data);
 	}
@@ -97,7 +97,7 @@ class Event_controller extends MY_Controller {
         //Set Spesific Javascript page
         $data['script']     			= $this->load->view('page/event/include/app-script', NULL, TRUE);
         $data['load_list_peserta'] 		= $this->event_model->get_list_peserta($id);
-        //data['load_exam'] 				= $this->get_exam();
+        $data['load_exam'] 				= $this->get_exam();
         //Load page
 		$this->template->view('page/event/approval-pusat',$data);
 	}
@@ -118,7 +118,7 @@ class Event_controller extends MY_Controller {
 		$rab_disetujui		= replace_currency($this->security->xss_clean(strip_image_tags($this->input->post('inputRAB'))));
 		$catatan			= $this->security->xss_clean(strip_image_tags($this->input->post('catatan')));
 		$persetujuan		= $this->security->xss_clean(strip_image_tags($this->input->post('persetujuan')));
-		$id_user			= /*$this->session->userdata('sess_user_id')*/1;
+		$id_user			= $this->session->userdata('sess_user_id');
 
 		$output = array(
 			'result'  	=> 'OK',

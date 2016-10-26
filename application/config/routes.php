@@ -211,6 +211,11 @@ $route['kategori-rab/process-edit'] 			= 'KategoriRab_controller/process_edit';
 $route['kategori-rab/process-delete'] 			= 'KategoriRab_controller/process_delete';
 
 /*==============================================
+BISNIS UNIT CONTROLLER
+================================================*/
+$route['bisnis-unit'] 							= 'BisnisUnit_controller/index';
+
+/*==============================================
 EVENT CONTROLLER
 ================================================*/
 $route['pengajuan-event'] 						= 'Event_controller/propose';
@@ -245,4 +250,3 @@ $route['feedback/process-send'] 				= 'Feedback_controller/process_send';
 $route['list-feedback'] 						= 'Feedback_controller/index';
 $route['list-feedback/view/(:num)'] 			= 'Feedback_controller/view/$1';
 $route['feedback/process-delete'] 				= 'Feedback_controller/process_delete';
-

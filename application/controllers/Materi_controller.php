@@ -77,7 +77,6 @@ class Materi_controller extends MY_Controller {
 		$kode_materi	= trim($this->security->xss_clean(strip_image_tags($this->input->post('kode_materi'))));
 		$nama_materi	= trim($this->security->xss_clean(strip_image_tags($this->input->post('nama_materi'))));
 		$klasifikasi	= $this->security->xss_clean(strip_image_tags($this->input->post('klasifikasi')));
-		$nilai_minimum	= $this->security->xss_clean(strip_image_tags($this->input->post('nilai_minimum')));
 		$status_materi	= $this->security->xss_clean(strip_image_tags($this->input->post('status_materi')));
 		$id_user		= $this->session->userdata('sess_user_id');
 		
@@ -90,7 +89,6 @@ class Materi_controller extends MY_Controller {
 									'id_materi'				=> $kode_materi,
 									'nama_materi'			=> $nama_materi,
 									'id_klasifikasi_materi'	=> $klasifikasi,
-									'nilai_minimum'			=> $nilai_minimum,
 									'is_active' 			=> $status_materi,
 									'created_by' 			=> $id_user,
 									'created_date' 			=> date('Y-m-d H:i:s')
@@ -132,7 +130,6 @@ class Materi_controller extends MY_Controller {
 		$kode_materi	= trim($this->security->xss_clean(strip_image_tags($this->input->post('kode_materi'))));
 		$nama_materi	= trim($this->security->xss_clean(strip_image_tags($this->input->post('nama_materi'))));
 		$klasifikasi	= $this->security->xss_clean(strip_image_tags($this->input->post('klasifikasi')));
-		$nilai_minimum	= $this->security->xss_clean(strip_image_tags($this->input->post('nilai_minimum')));
 		$status_materi	= $this->security->xss_clean(strip_image_tags($this->input->post('status_materi')));
 		$id_user		= $this->session->userdata('sess_user_id');
 		$id 			= $this->input->post('idmateri');
@@ -143,7 +140,6 @@ class Materi_controller extends MY_Controller {
 									'id_materi'				=> $kode_materi,
 									'nama_materi'			=> $nama_materi,
 									'id_klasifikasi_materi'	=> $klasifikasi,
-									'nilai_minimum'			=> $nilai_minimum,
 									'is_active' 			=> $status_materi,
 									'modified_by' 			=> $id_user,
 									'modified_date' 		=> date('Y-m-d H:i:s')

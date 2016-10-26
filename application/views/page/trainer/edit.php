@@ -55,55 +55,43 @@
                     ?>
                     <div id="m-ap-cab"></div>
                     <div class="p-20">
+                     <button class="btn btn-primary waves-effect waves-light m-b-20" id="get_trainer" data-toggle="modal" data-target=".bs-example-modal-lg">Pilih Trainer</button>
                         <?php 
                         $attrib = array('class' => 'form-horizontal','id'=>'form-edit-trainer');
                         echo form_open('',$attrib); ?>
-                        <?php echo form_hidden('idtrainer', $data[0]['idtrain']); ?>
+                        <?php echo form_hidden('idtrainer', $data[0]['id']); ?>
                             <div class="form-group row">
                                 <label class="col-sm-3">Nomor NIK <span class="text-danger">*</span></label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" required name="nik" id="nik" value="<?php echo $data[0]['nik'] ?>" />
+                                    <input type="text" class="form-control" required name="nip" id="nip" readonly="" value="<?php echo $data[0]['nik'] ?>" />
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-sm-3">Nama Pemateri <span class="text-danger">*</span></label>
+                                <label class="col-sm-3">Nama Pemateri </label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" required name="nama_pemateri" id="nama_pemateri" value="<?php echo $data[0]['nama_pemateri']; ?>" />
+                                    <input type="text" class="form-control" name="nama_trainer" id="nama_trainer" readonly="" value="<?php echo $data[0]['nama_pemateri']; ?>" />
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-3">Inisial <span class="text-danger">*</span></label>
+                                <label class="col-sm-3">Posisi </label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" required name="inisial" id="inisial" value="<?php echo $data[0]['inisial']; ?>" />
+                                    <input type="text" class="form-control" name="posisi" id="posisi" readonly="" value="<?php echo $data[0]['posisi']; ?>" />
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-3">Jabatan <span class="text-danger">*</span></label>
+                                <label class="col-sm-3">Unit Kerja </label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" required name="jabatan" id="jabatan" value="<?php echo $data[0]['jabatan']; ?>"/>
+                                    <input type="text" class="form-control" name="unit_kerja" id="unit_kerja" readonly="" value="<?php echo $data[0]['unit_kerja']; ?>"/>
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-sm-3">Cabang <span class="text-danger">*</span></label>
-                                <div class="col-sm-5">
-                                    <?php $style_c= array('class'=>'form-control select2', 'Required'=>'','id'=>'cabang') ?>
-                                    <?php echo form_dropdown('cabang', $load_cabang, $data[0]['id_cabang'],$style_c); ?>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-3">Divisi <span class="text-danger">*</span></label>
-                                <div class="col-sm-5">
-                                    <?php $style_d= array('class'=>'form-control select2', 'Required'=>'','id'=>'divisi') ?>
-                                    <?php echo form_dropdown('divisi', $load_divisi, $data[0]['id_divisi'],$style_d); ?>
-                                </div>
-                            </div>
+                            
                             <div class="form-group row">
                                 <label class="col-sm-3">Status <span class="text-danger">*</span></label>
                                 <div class="col-sm-5">
-                                    <select class="form-control select2" required name="status" id="status">
-                                    <option <?php if($data[0]['statustrain'] == 'active'){ ?> selected <?php } ?> value="active">Aktif</option>
-                                    <option <?php if($data[0]['statustrain'] == 'disabled'){ ?> selected <?php } ?> value="disabled">Tidak Aktif</option>
+                                    <select class="form-control select2" required name="status_trainer" id="status_trainer">
+                                    <option <?php if($data[0]['is_active'] == 'active'){ ?> selected <?php } ?> value="active">Aktif</option>
+                                    <option <?php if($data[0]['is_active'] == 'disabled'){ ?> selected <?php } ?> value="disabled">Tidak Aktif</option>
                                     </select>
                                 </div>
                             </div>
@@ -127,3 +115,31 @@
         </div>  
     </div>
 </div>
+<!--  Modal content for the above example -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myLargeModalLabel">Tabel Karyawan</h4>
+            </div>
+            <div class="modal-body">
+             <div class="p-20">
+                     <table id="datatable-a" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th>NIP</th>
+                            <th>Nama Karyawan</th>
+                            <th>Posisi</th>
+                            <th>Unit Kerja</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

@@ -1,15 +1,26 @@
-###################
-Update Event
-###################
-- google maps api get location
-- input peserta
-- get peserta from exam api
-- option format memo
-- rab display data (not yet, insert to database)
+################################
+Update Registration Event System
+################################
+Config: 
+- Autoload
+- Routes
 
-###################
-Update Approval Event
-###################
-- generate pdf to detail approval
-- store to database event approval
-- status event has changed when event approval saved.
+Helpers: 
+- Tanggal 
+
+Controller:
+- Feedback
+
+Model: 
+- Feedback
+
+View: 
+- Include -> Nav
+- Feedbcak -> Send
+
+Database: 
+- Add: Settings
+- Update: Navigation Menu, Registrasi
+
+Add System -> Registraion System
+This dev-system and database has been combined to the latest files (1.10)

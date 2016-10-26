@@ -9,7 +9,7 @@ class Kategori_rab_model extends CI_Model
                     ->from('em_kategori_rab')
                     ->where('id_parent',NULL)
                     ->where('is_active!=','deleted')
-                    ->order_by('id','asc')
+                    ->order_by('id','desc')
                     ->get();
     }
 	
