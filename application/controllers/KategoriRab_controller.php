@@ -70,8 +70,8 @@ class KategoriRab_controller extends MY_Controller {
 		
 		//Get Data
 		$deskripsi		= trim($this->security->xss_clean(strip_image_tags($this->input->post('deskripsi'))));
-		$jumlah_unit	= trim($this->security->xss_clean(strip_image_tags($this->input->post('jumlah_unit'))));
-		$frekwensi		= trim($this->security->xss_clean(strip_image_tags($this->input->post('frekwensi'))));
+		//$jumlah_unit	= trim($this->security->xss_clean(strip_image_tags($this->input->post('jumlah_unit'))));
+		//$frekwensi		= trim($this->security->xss_clean(strip_image_tags($this->input->post('frekwensi'))));
 		$status			= $this->security->xss_clean(strip_image_tags($this->input->post('status')));
 		$id_user		= $this->session->userdata('sess_user_id');
 		
@@ -79,8 +79,8 @@ class KategoriRab_controller extends MY_Controller {
 		$data_rab	= array(
 							'id_parent'				=> NULL,
 							'deskripsi'				=> $deskripsi,
-							'jumlah_unit'			=> $jumlah_unit,
-							'frekwensi'				=> $frekwensi,
+							'jumlah_unit'			=> NULL,
+							'frekwensi'				=> NULL,
 							'is_active' 			=> $status,
 							'created_by' 			=> $id_user,
 							'created_date' 			=> date('Y-m-d H:i:s')
@@ -202,7 +202,20 @@ class KategoriRab_controller extends MY_Controller {
 		//Get Data
 		$id_rab		= $this->security->xss_clean(strip_image_tags($this->input->post('hidden-id-rab')));
 		$parent		= $this->security->xss_clean(strip_image_tags($this->input->post('parent')));
-		if($parent=='') $f_parent = NULL; else $f_parent = $parent;
+		$unit		= $this->security->xss_clean(strip_image_tags($this->input->post('jumlah_unit')));
+		$frekwensi	= $this->security->xss_clean(strip_image_tags($this->input->post('frekwensi')));
+		if($parent=='')
+		{
+			$f_parent = NULL;
+			$f_unit = NULL;
+			$f_frekwensi = NULL;
+		}
+		else
+		{
+			$f_parent = $parent;
+			$f_unit = $unit;
+			$f_frekwensi = $frekwensi;
+		}
 		$deskripsi	= trim($this->security->xss_clean(strip_image_tags($this->input->post('deskripsi'))));
 		$status		= $this->security->xss_clean(strip_image_tags($this->input->post('status')));
 		$id_user	= $this->session->userdata('sess_user_id');
@@ -211,6 +224,8 @@ class KategoriRab_controller extends MY_Controller {
 		$data_rab	= array(
 							'id_parent'				=> $f_parent,
 							'deskripsi'				=> $deskripsi,
+							'jumlah_unit'			=> $f_unit,
+							'frekwensi'				=> $f_frekwensi,
 							'is_active' 			=> $status,
 							'modified_by' 			=> $id_user,
 							'modified_date' 		=> date('Y-m-d H:i:s')

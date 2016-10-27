@@ -73,18 +73,25 @@
 										<input type="text" class="form-control" name="deskripsi" value="<?php echo $r[0]['deskripsi']?>" required />
 									</div>
 								</div>
+								<?php 
+									if($r[0]['id_parent']!=NULL or $r[0]['id_parent']!='')
+									{ 
+								?>
 								<div class="form-group row">
-									<label class="col-sm-2">unit <span class="text-danger">*</span></label>
+									<label class="col-sm-2">Unit <span class="text-danger">*</span></label>
 									<div class="col-sm-4">
 										<input type="text" class="form-control" required name="jumlah_unit" value="<?php echo $r[0]['jumlah_unit']?>" />
 									</div>
 								</div>
 								<div class="form-group row">
-									<label class="col-sm-2">frekwensi <span class="text-danger">*</span></label>
+									<label class="col-sm-2">Frekwensi <span class="text-danger">*</span></label>
 									<div class="col-sm-4">
 										<input type="text" class="form-control" required name="frekwensi" value="<?php echo $r[0]['frekwensi']?>" />
 									</div>
 								</div>
+								<?php
+									}
+								?>
 								<div class="form-group row">
 									<label class="col-sm-2">Status <span class="text-danger">*</span></label>
 									<div class="col-sm-2">

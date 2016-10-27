@@ -1,26 +1,24 @@
 ################################
-Update Registration Event System
+Update Bisnis Unit & Jabatan
 ################################
 Config: 
 - Autoload
 - Routes
 
-Helpers: 
-- Tanggal 
-
 Controller:
-- Feedback
+- Bisnis Unit
+- Kategori RAB
 
 Model: 
-- Feedback
+- Bisnis Unit
+- Kategori RAB
 
 View: 
-- Include -> Nav
-- Feedbcak -> Send
+- Bisnis Unit 
+- Kategori RAB
 
 Database: 
-- Add: Settings
-- Update: Navigation Menu, Registrasi
+- Add: Bisnis Unit, Bisnis Unit Jabatan
+- Update: Navigation Menu (Content), Kategori Event (PK), Materi (Del->Nilai Minimum), Replace Trainer + PK
 
-Add System -> Registraion System
-This dev-system and database has been combined to the latest files (1.10)
+This dev-system and database has been updated with the latest files (from FD)

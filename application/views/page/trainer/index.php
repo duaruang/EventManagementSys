@@ -55,14 +55,12 @@
                             <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>Nomor NIK</th>
-                                        <th width="30%">Nama Pemateri</th>
-                                        <th>Inisial</th>
-                                        <th>Jabatan</th>
-                                        <th>Cabang</th>
-                                        <th>Divisi</th>
+                                        <th>NIP</th>
+                                        <th width="30%">Nama Trainer</th>
+                                        <th>Posisi</th>
+                                        <th>Unit Kerja</th>
                                         <th>Status</th>
-                                        <th width="200">Action</th>
+                                        <th width="300">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -71,14 +69,13 @@
                                     <tr>
                                         <td><?php echo $data->nik; ?></td>
                                         <td><?php echo $data->nama_pemateri; ?></td>
-                                        <td><?php echo $data->inisial; ?></td>
-                                        <td><?php echo $data->jabatan; ?></td>
-                                        <td><?php echo $data->nama_cabang; ?></td>
-                                        <td><?php echo $data->nama_divisi; ?></td>
-                                        <td><?php echo $data->statustrain; ?></td>
+                                        <td><?php echo $data->posisi; ?></td>
+                                        <td><?php echo $data->unit_kerja; ?></td>
+                                        <td><?php echo $data->is_active; ?></td>
                                         <td>
-                                            <a href="<?php echo site_url('trainer/edit/'.$data->idtrain); ?>" class="btn action btn-warning  waves-effect waves-light"><span class="btn-label"><i class="fa fa-pencil"></i></span>Edit</a>&nbsp;&nbsp;
-                                            <a href="#custom-modal" class="btn action btn-danger waves-effect waves-light delete-trainer" data-animation="blur" data-plugin="custommodal" data-overlaySpeed="100" data-overlayColor="#36404a" data-idtrainer="<?php echo $data->idtrain ?>" data-namatrainer="<?php echo $data->nama_pemateri ?>"><span class="btn-label"><i class="fa fa-times"></i></span>Delete</a>
+                                            <a href="<?php echo site_url('trainer/view/'.$data->id); ?>" class="btn action btn-warning  waves-effect waves-light"><span class="btn-label"><i class="fa fa-eye"></i></span>View</a>&nbsp;&nbsp;
+                                            <a href="<?php echo site_url('trainer/edit/'.$data->id); ?>" class="btn action btn-warning  waves-effect waves-light"><span class="btn-label"><i class="fa fa-pencil"></i></span>Edit</a>&nbsp;&nbsp;
+                                            <a href="#custom-modal" class="btn action btn-danger waves-effect waves-light delete-trainer" data-animation="blur" data-plugin="custommodal" data-overlaySpeed="100" data-overlayColor="#36404a" data-idtrainer="<?php echo $data->id ?>" data-namatrainer="<?php echo $data->nama_pemateri ?>"><span class="btn-label"><i class="fa fa-times"></i></span>Delete</a>
                                         </td>
                                     </tr>
                                 <?php } ?>

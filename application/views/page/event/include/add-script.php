@@ -29,9 +29,9 @@ $(document).ready(function() {
 		//FORM VALIDATION
 		$('form').parsley();
 		//RULES SOME FIELD TO NUMBERIC
-		$('.autonumber').autoNumeric('init', {vMin: '0', vMax: '99999999999' });
-		$('.tinynumber').autoNumeric('init', {vMin: '0', vMax: '9999' });
-
+		$('.autonumber').autoNumeric('init');
+		$('.tinynumber').autoNumeric('init');
+		$('.sss').autoNumeric('init');
 		//INIT DATATABLE
 		$('#exam_table').DataTable();
 
@@ -286,15 +286,15 @@ $(document).ready(function() {
 
 
 		//validasi untuk menampilkan rab
-		//$('#tipe_pelatihan').on('change', function() {
-	  		//$('#show_exam').hide();
-	  		//$('#navmateri').hide();
-  			//$('#navrab').hide();
-  			//$('#navrundown').hide();
-  			//$('#navbiayatraining').hide();
-  			//$('#navpicpanitia').hide();
+		$('#tipe_pelatihan').on('change', function() {
+	  		$('#show_exam').hide();
+	  		$('#navmateri').hide();
+  			$('#navrab').hide();
+  			$('#navrundown').hide();
+  			$('#navbiayatraining').hide();
+  			$('#navpicpanitia').hide();
 	  			
-		//});
+		});
 
 		$('input[name="inputDenganExam"]').on('click change', function(e) {
 		    var variabel_x = $('input[name="inputDenganExam"]:checked').val();
@@ -312,7 +312,11 @@ $(document).ready(function() {
 		    	//hide 
 		    	$('#navdaftarpesertainput').hide();
 	  			$('#show_tabel_peserta_input').hide();
-
+	  			$('#navmateri').hide();
+	  			$('#navrab').hide();
+	  			$('#navrundown').hide();
+	  			$('#navbiayatraining').hide();
+	  			$('#navpicpanitia').hide();
 
 		    	//reset value
 		    	$("#show_tabel_peserta tbody tr").children().remove();
@@ -341,6 +345,11 @@ $(document).ready(function() {
 		    	$('#navdaftarpeserta').hide();
 		    	$('#show_tabel_peserta').hide();
 		    	
+		    	$('#navmateri').show();
+	  			$('#navrab').show();
+	  			$('#navrundown').show();
+	  			$('#navbiayatraining').show();
+	  			$('#navpicpanitia').show();
 
 		    	//remove input hidden data peserta
 				$("#wrapabcs").children().remove();
@@ -398,17 +407,18 @@ $(document).ready(function() {
 				var rowData = [];
 	            var rowData = table.rows('.selected').data();
 	            var countdata = table.rows('.selected').data().length;
-	            var obj = JSON.stringify(rowData);
-	            var parsejson = JSON.parse(obj);
-                document.getElementById("inputJumlahPeserta").value = countdata; 
+	            //console.log(countdata);
+	            //var obj = JSON.stringify(rowData);
+	            //var parsejson = JSON.parse(obj);
+                //$("#inputJumlahPeserta").val(countdata); 
 
 				$("#wrapabcs").children().remove();
 	            for(i=0;i<countdata;i++)
 	            {
 
-	            $('<div>').html ('<input type="hidden" id="inputIdSdm" name="inputIdSdm[]" value="'+parsejson[i].karyawan_id +'"><input type="hidden" id="inputNamaPeserta" name="inputNamaPeserta[]" value="'+parsejson[i].karyawan_nama +'"><input type="hidden" id="inputPosisiPeserta" name="inputPosisiPeserta[]" value="'+parsejson[i].karyawan_posisi +'">').appendTo('#wrapabcs');	
+	            $('<div>').html ('<input type="hidden" id="inputIdSdm" name="inputIdSdm[]" value="'+rowData[i].karyawan_id +'"><input type="hidden" id="inputNamaPeserta" name="inputNamaPeserta[]" value="'+rowData[i].karyawan_nama +'"><input type="hidden" id="inputPosisiPeserta" name="inputPosisiPeserta[]" value="'+rowData[i].karyawan_posisi +'">').appendTo('#wrapabcs');	
 
-	            $('#daftar_peserta_table_input tbody').prepend( '<tr><td>'+parsejson[i].karyawan_nip+'</td><td> '+parsejson[i].karyawan_nama+'</td><td> '+parsejson[i].karyawan_posisi+'</td></tr>' );
+	            $('#daftar_peserta_table_input tbody').prepend( '<tr><td>'+rowData[i].karyawan_nip+'</td><td> '+rowData[i].karyawan_nama+'</td><td> '+rowData[i].karyawan_posisi+'</td></tr>' );
 	        	}
 	        });
 			/*===============================================================================
@@ -582,46 +592,56 @@ $(document).ready(function() {
 
 			 });
 
-			$('#table-rab input').keyup(function(event) {
+			 	
+				   var total = 0;
+				   var $table;
+				$('input#jumlah,input#frekwensi,input#unit_cost').keyup(function(event) {
+					//var abc = $("input#downpayment").autoNumeric('get');
 				  	var sum = 0;
 				    var thisRow = $(this).closest('tr');
-				    var total = 0;
-				    var $table = $(this).closest('table');
-				    var downpayment=0;
+				    $table = $('#table-rab input').closest('table');
 
-				    var jumlah_unit = parseInt($(thisRow).find("td:nth-child(3) input").val());
-				    var frekwensi 	= parseInt($(thisRow).find("td:nth-child(5) input").val());
-				    var harga_unit 	= parseInt($(thisRow).find("td:nth-child(7) input").val().replace(/Rp./g,''));
-				    var harga_unit1 = parseInt($(thisRow).find("td:nth-child(7) input").val().replace(/,/g,''));
-				    var downpayment = parseInt($(thisRow).find("td:nth-child(8) input#down_payment").val().replace(/Rp.,/g,''));
+				    var jumlah_unit 	= thisRow.find("input#jumlah").autoNumeric('get');
+				    var frekwensi 		= thisRow.find("input#frekwensi").autoNumeric('get');
+				    var harga_unit 		= thisRow.find("td input#unit_cost").autoNumeric('get');
+
+				    
 				    var sum = (jumlah_unit*harga_unit)*frekwensi;
-
-				    var total_jumlah = $(thisRow).find("td input#total_cost").val(sum);
+				    
+				    var total_jumlah = thisRow.find("td input#total_cost").val(sum);
 				    $(thisRow).find('td input#total_cost').autoNumeric('set', sum);
 
 				    $table.find('td input#total_cost').each(function() {
-				         total += parseInt($(this).val().replace(/[Rp. ,]/g,''));
+				         total += parseInt($(this).autoNumeric('get'));
 				    });
 
 				    $table.find('tr input#grand_total').val(total);
 				    $('#grand_total').autoNumeric('set', total);
 
 				    var id_parent=1;
-				    //downpayment = parseInt($('#down_payment').val());
-				    console.log(downpayment);
+				    
 				    $table.find('tr.parent-class').each(function() {
 				    	var totaltr=0;
 				    	$table.find('tr#parent_'+id_parent+' input#total_cost').each(function() {
-				    		totaltr += parseInt($(this).val().replace(/Rp. /g,''));
+				    		totaltr += parseInt($(this).autoNumeric('get'));
 				    	});
-				    	var grandtotal = totaltr;
-				    	$table.find('tr#parent_'+id_parent+' input#totalcost').val(grandtotal);
+				    	$table.find('tr#parent_'+id_parent+' input#totalcost').val(totaltr);
 
-				    	$('tr#parent_'+id_parent+' input#totalcost').autoNumeric('set', grandtotal);
+				    	$('tr#parent_'+id_parent+' input#totalcost').autoNumeric('set', totaltr);
 				    	id_parent++;
+
 				    });
 
-
+				    return total;
 			});
-			    
+			$('input#downpayment').keyup(function() {
+
+				    var down = $("input#downpayment").autoNumeric('get');
+			  		
+			  		var all_total= total-down;
+
+				    $table.find('tr input#grand_total').val(all_total);
+				    $('#grand_total').autoNumeric('set', all_total);
+
+				});
 		</script>

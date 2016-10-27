@@ -211,6 +211,18 @@ $route['kategori-rab/process-edit'] 			= 'KategoriRab_controller/process_edit';
 $route['kategori-rab/process-delete'] 			= 'KategoriRab_controller/process_delete';
 
 /*==============================================
+BISNIS UNIT CONTROLLER
+================================================*/
+$route['bisnis-unit-jabatan'] 							= 'BisnisUnit_controller/index';
+$route['bisnis-unit-jabatan/add'] 						= 'BisnisUnit_controller/add';
+$route['bisnis-unit-jabatan/process-add-bisnis-unit'] 	= 'BisnisUnit_controller/process_add_bisnisunit';
+$route['bisnis-unit-jabatan/process-add-jabatan'] 		= 'BisnisUnit_controller/process_add_jabatan';
+$route['bisnis-unit-jabatan/view/(:num)/(:num)'] 		= 'BisnisUnit_controller/view/$1/$2';
+$route['bisnis-unit-jabatan/edit/(:num)/(:num)'] 		= 'BisnisUnit_controller/edit/$1/$2';
+$route['bisnis-unit-jabatan/process-edit'] 				= 'BisnisUnit_controller/process_edit';
+$route['bisnis-unit-jabatan/process-delete'] 			= 'BisnisUnit_controller/process_delete';
+
+/*==============================================
 EVENT CONTROLLER
 ================================================*/
 $route['pengajuan-event'] 						= 'Event_controller/propose';

@@ -62,10 +62,24 @@ class Trainer_controller extends MY_Controller {
         //Set Spesific Javascript page
         $data['script']     	= $this->load->view('page/trainer/include/add-script', NULL, TRUE);
         $data['load_trainer']	= $this->trainer_model->select_trainer_id($id);
-        $data['load_cabang']	= $this->cabang_model->select_cabang_dropdown();
-        $data['load_divisi']	= $this->divisi_model->select_divisi_dropdown();
         //Load page
 		$this->template->view('page/trainer/edit',$data);
+	}
+
+	public function view()
+	{
+	    //$this->is_logged();
+	    $id		= $this->uri->segment(3);
+        //Set Head Content
+		$head['title'] 			= 'View Trainer - Event Management System' ;
+		$head['css']			=  $this->load->view('page/trainer/include/add-css', NULL, TRUE);
+		$this->load->view('include/head', $head, TRUE);
+        
+        //Set Spesific Javascript page
+        $data['script']     	= $this->load->view('page/trainer/include/add-script', NULL, TRUE);
+        $data['load_trainer']	= $this->trainer_model->select_trainer_id($id);
+        //Load page
+		$this->template->view('page/trainer/view',$data);
 	}
 
 	public function process_add()
@@ -76,12 +90,10 @@ class Trainer_controller extends MY_Controller {
 			'msg'		=> ''
 		);
 		//==== Get Data ====
-		$nik			= trim($this->security->xss_clean(strip_image_tags($this->input->post('nik'))));
-		$nama_trainer	= trim($this->security->xss_clean(strip_image_tags($this->input->post('nama_pemateri'))));
-		$inisial		= $this->security->xss_clean(strip_image_tags($this->input->post('inisial')));
-		$jabatan		= $this->security->xss_clean(strip_image_tags($this->input->post('jabatan')));
-		$cabang			= $this->security->xss_clean(strip_image_tags($this->input->post('cabang')));
-		$divisi			= $this->security->xss_clean(strip_image_tags($this->input->post('divisi')));
+		$nik			= trim($this->security->xss_clean(strip_image_tags($this->input->post('nip'))));
+		$nama_trainer	= trim($this->security->xss_clean(strip_image_tags($this->input->post('nama_trainer'))));
+		$posisi			= $this->security->xss_clean(strip_image_tags($this->input->post('posisi')));
+		$unit_kerja		= $this->security->xss_clean(strip_image_tags($this->input->post('unit_kerja')));
 		$status_trainer	= $this->security->xss_clean(strip_image_tags($this->input->post('status_trainer')));
 		$id_user		= $this->session->userdata('sess_user_id');
 		
@@ -93,10 +105,8 @@ class Trainer_controller extends MY_Controller {
 			$data_insert	= array(
 									'nik'					=> $nik,
 									'nama_pemateri'			=> $nama_trainer,
-									'inisial'				=> $inisial,
-									'jabatan'				=> $jabatan,
-									'id_cabang'				=> $cabang,
-									'id_divisi'				=> $divisi,
+									'posisi'				=> $posisi,
+									'unit_kerja'			=> $unit_kerja,
 									'is_active' 			=> $status_trainer,
 									'created_by' 			=> $id_user,
 									'created_date' 			=> date('Y-m-d H:i:s')
@@ -116,7 +126,7 @@ class Trainer_controller extends MY_Controller {
 		{  
 			$output = array(
 				'result'  	=> 'NG',
-				'msg'		=> 'Nomor NIK sudah ada, gunakan Nomor NIK yang lain.'
+				'msg'		=> 'Trainer sudah terdaftar, Pilih trainer yang lain.'
 			);
 			
 			//Set session flashdata
@@ -135,13 +145,11 @@ class Trainer_controller extends MY_Controller {
 			'msg'		=> ''
 		);
 		//==== Get Data ====
-		$nik			= trim($this->security->xss_clean(strip_image_tags($this->input->post('nik'))));
-		$nama_trainer	= trim($this->security->xss_clean(strip_image_tags($this->input->post('nama_pemateri'))));
-		$inisial		= $this->security->xss_clean(strip_image_tags($this->input->post('inisial')));
-		$jabatan		= $this->security->xss_clean(strip_image_tags($this->input->post('jabatan')));
-		$cabang			= $this->security->xss_clean(strip_image_tags($this->input->post('cabang')));
-		$divisi			= $this->security->xss_clean(strip_image_tags($this->input->post('divisi')));
-		$status			= $this->security->xss_clean(strip_image_tags($this->input->post('status_trainer')));
+		$nik			= trim($this->security->xss_clean(strip_image_tags($this->input->post('nip'))));
+		$nama_trainer	= trim($this->security->xss_clean(strip_image_tags($this->input->post('nama_trainer'))));
+		$posisi			= $this->security->xss_clean(strip_image_tags($this->input->post('posisi')));
+		$unit_kerja		= $this->security->xss_clean(strip_image_tags($this->input->post('unit_kerja')));
+		$status_trainer	= $this->security->xss_clean(strip_image_tags($this->input->post('status_trainer')));
 		$id_user		= $this->session->userdata('sess_user_id');
 		$id 			= $this->input->post('idtrainer');
 		
@@ -150,11 +158,9 @@ class Trainer_controller extends MY_Controller {
 			$data_insert	= array(
 									'nik'					=> $nik,
 									'nama_pemateri'			=> $nama_trainer,
-									'inisial'				=> $inisial,
-									'jabatan'				=> $jabatan,
-									'id_cabang'				=> $cabang,
-									'id_divisi'				=> $divisi,
-									'is_active' 			=> $status,
+									'posisi'				=> $posisi,
+									'unit_kerja'			=> $unit_kerja,
+									'is_active' 			=> $status_trainer,
 									'modified_by' 			=> $id_user,
 									'modified_date' 		=> date('Y-m-d H:i:s')
 								);
@@ -207,5 +213,43 @@ class Trainer_controller extends MY_Controller {
 			$this->session->set_flashdata('message_error', 'errorrrr');
 			redirect('trainer');
 		}
+	}
+
+	public function get_all_karyawan()
+	{
+		$this->is_logged();
+		$username 		= 'event';
+		$password 		= 'event';
+	     
+	    // Set up and execute the curl process
+	    $curl_handle = curl_init();
+	    curl_setopt($curl_handle, CURLOPT_URL, 'http://182.23.52.249/Dummy/WebService/SSO_Mobile/get_all_karyawan.php');
+	    //curl_setopt($curl_handle, CURLOPT_URL, 'http://182.23.52.249/Dummy/WebService/SSO_Mobile/get_all_karyawan.php');
+	    curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
+	    curl_setopt($curl_handle, CURLOPT_POST, 1);
+	     
+	    // Optional, delete this line if your API is open
+	    curl_setopt($curl_handle, CURLOPT_USERPWD, $username . ':' . $password);
+	     
+	    $buffer = curl_exec($curl_handle);
+	    curl_close($curl_handle);
+	     
+	    $result = json_decode($buffer);
+
+	    //count total data
+		$total = 0;
+		foreach ($result->karyawan[0]->data as $row) {
+		    $total ++;
+		};
+
+		//sent data to datatables
+		$oleh = array(
+					'draw' 				=> 1,
+					'recordsTotal' 		=> $total,
+					'recordsFiltered' 	=> $total,
+					'data'				=> $result->karyawan[0]->data
+			);
+		echo json_encode($oleh);
+		exit;
 	}
 }

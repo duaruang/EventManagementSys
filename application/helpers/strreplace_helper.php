@@ -13,3 +13,15 @@ if ( ! function_exists('strreplace'))
         return strtolower($string);
     }
 }
+
+
+if ( ! function_exists('replace_currency'))
+{
+    function replace_currency($string)
+    {
+        $string = str_replace('Rp. ','',$string);
+        $string = str_replace('.','',$string);
+        
+        return strtolower($string);
+    }
+}
