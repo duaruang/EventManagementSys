@@ -26,6 +26,16 @@
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/pages/jquery.formadvanced.init.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
+		$('#filer_input3').filer({
+			limit: 1,
+			maxSize: 1, //1 MB
+			extensions: ['xls', 'xlsx'],
+			changeInput: true,
+			showThumbs: true,
+			addMore: false
+		});
+});
+$(document).ready(function() {
 		//FORM VALIDATION
 		$('form').parsley();
 		//RULES SOME FIELD TO NUMBERIC
@@ -34,6 +44,9 @@ $(document).ready(function() {
 		$('.sss').autoNumeric('init');
 		//INIT DATATABLE
 		$('#exam_table').DataTable();
+
+		$('.embed-preview').zohoViewer();
+		$('.zohoviewer').hide();
 
 		$('#denganFormat').on('click', function(e) {
 
@@ -88,7 +101,7 @@ $(document).ready(function() {
 				        STORE DATA FROM SELECTED EXAM TO TABLE PARTICIPANT AND TITLE EXAM
 				        ================================================================================*/
                     	var jml_peserta = data.length;
-                		document.getElementById("inputJumlahPeserta").value = jml_peserta; 
+                		$("#inputJumlahPeserta").val(jml_peserta); 
 
                     	$('#loader').hide();
                     	$.each(data, function(i, item) {
@@ -110,7 +123,7 @@ $(document).ready(function() {
 		/*==================================================================================================================
         START/FUNCTION SUBMIT FORM EVENT TO DATABASE
         ====================================================================================================================*/
-	    /*$("#add-form-event").submit(function(e){
+	    $("#add-form-event").submit(function(e){
 			e.preventDefault();
 			
 			var formURL = "<?php echo site_url('pengajuan-event/process_add'); ?>";
@@ -120,8 +133,6 @@ $(document).ready(function() {
 			var xhr = $.ajax({
 				url: formURL,
 				type: 'POST',
-
-      			dataType : 'json',
 				data: frmdata,
 				processData: false,
 				contentType: false
@@ -133,18 +144,21 @@ $(document).ready(function() {
 				{
 					window.location.href = '<?php echo site_url('event'); ?>';
 				}
+				if(obj.result == 'UP')
+				{
+					console.log(data);
+				}
 				if(obj.result == 'NG')
 				{
 					$("#loader_container").hide();
 					$("#m-ap-cab").html('<div class="alert alert-danger fade in"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a> '+obj.msg+'</div>');
 				}
-				//console.log(data);
 			});
 			xhr.fail(function() {
 				$("#loader_container").hide();
 				var failMsg = "Something error happened! as";
 			});	
-		});*/
+		});
 	    /*==================================================================================================================
         END/FUNCTION SUBMIT FORM EVENT TO DATABASE
         ====================================================================================================================*/
@@ -280,6 +294,9 @@ $(document).ready(function() {
 	  			$('#show_tipe_exam').hide();
 	  			$('#show_tipe_pelatihan').hide();
 
+	  			$("#inputTipeExam").removeAttr("required");
+	  			$("#deskripsi").removeAttr("required");
+				$("#judul_exam").removeAttr("required");
 	  		}
 		});
 
@@ -330,6 +347,11 @@ $(document).ready(function() {
 		   		$("#inputTipeExam").attr("required","");
 	  			$("#deskripsi").attr("required","");
 				$("#judul_exam").attr("required","");
+
+				//set zero value rab
+				$('#table-rab').find('input').each(function() {
+					$(this).val(0);
+				});
 
 		    }
 
@@ -400,10 +422,11 @@ $(document).ready(function() {
 				]
 			});
 			/*===============================================================================
-        	FUNCTION STORE DATA TO TABLE PARTICIPANT FROM SELECTED EMPLOYEE 
+        	METHOD STORE DATA TO TABLE PARTICIPANT FROM SELECTED EMPLOYEE 
         	================================================================================*/
 			$('#inputpeserta').on('click', function(){
 				$("#daftar_peserta_table_input tbody tr").children().remove();
+				var jml_peserta=0;
 				var rowData = [];
 	            var rowData = table.rows('.selected').data();
 	            var countdata = table.rows('.selected').data().length;
@@ -413,16 +436,18 @@ $(document).ready(function() {
                 //$("#inputJumlahPeserta").val(countdata); 
 
 				$("#wrapabcs").children().remove();
+				jml_peserta = countdata;
+                $("#inputJumlahPeserta").val(jml_peserta); 
 	            for(i=0;i<countdata;i++)
 	            {
 
-	            $('<div>').html ('<input type="hidden" id="inputIdSdm" name="inputIdSdm[]" value="'+rowData[i].karyawan_id +'"><input type="hidden" id="inputNamaPeserta" name="inputNamaPeserta[]" value="'+rowData[i].karyawan_nama +'"><input type="hidden" id="inputPosisiPeserta" name="inputPosisiPeserta[]" value="'+rowData[i].karyawan_posisi +'">').appendTo('#wrapabcs');	
+	            $('<div>').html ('<input type="hidden" id="inputIdSdm" name="inputIdSdm[]" value="'+rowData[i].karyawan_id +'"><input type="hidden" id="inputNikPeserta" name="inputNikPeserta[]" value="'+rowData[i].karyawan_nip +'"><input type="hidden" id="inputNamaPeserta" name="inputNamaPeserta[]" value="'+rowData[i].karyawan_nama +'"><input type="hidden" id="inputPosisiPeserta" name="inputPosisiPeserta[]" value="'+rowData[i].karyawan_posisi +'">').appendTo('#wrapabcs');	
 
 	            $('#daftar_peserta_table_input tbody').prepend( '<tr><td>'+rowData[i].karyawan_nip+'</td><td> '+rowData[i].karyawan_nama+'</td><td> '+rowData[i].karyawan_posisi+'</td></tr>' );
 	        	}
 	        });
 			/*===============================================================================
-        	FUNCTION SELECT ALL EMPLOYEE TO TABLE PARTICIPANT
+        	METHOD SELECT ALL EMPLOYEE TO TABLE PARTICIPANT
         	================================================================================*/
 			$('#example-select-all').on('click', function(){
 		      // Get all rows with search applied
@@ -441,10 +466,158 @@ $(document).ready(function() {
 		});
 
 		/*===============================================================================
-    	FUNCTION ADD ROWS PIC / TRAINER
+        FUNCTION GET TRAINER INTERNAL
+        ================================================================================*/
+		$('#get-trainer-internal').on('click', function (e) {
+			e.preventDefault();
+			var table_trainer  = $('#get_list_trainer_internal_table').DataTable({
+				"bRetrieve" : "true",
+				 ajax: {
+			        url: '<?php echo site_url('Event_controller/get_trainer_internal'); ?>',
+			        type: 'POST',
+			    	dataSrc: 'data'
+			    },
+			    'columnDefs': [{
+			         'targets': 0,
+			         'searchable':false,
+			         'orderable':false,
+			         'className': 'dt-body-center',
+			         'render': function (data, type, full, meta){
+			             return '<input type="checkbox" name="id[]" value="' + $('<div/>').text(data).html() + '">';
+			         }
+			      }],
+		        select: {
+		            style: 'multi',
+		            selector: 'input[type="checkbox"]'
+		        },
+				columns: [
+					{ data: "id" },
+					{ data: "nama_pemateri" },
+					{ data: "posisi" },
+					{ data: "unit_kerja" }
+				]
+			});
+
+			/*===============================================================================
+        	METHOD STORE DATA TO TABLE TRAINER FROM SELECTED TRAINER 
+        	================================================================================*/
+			$('#inputtrainer').on('click', function(){
+				$("#table-trainer tbody tr").children().remove();
+				var rowData = [];
+	            var rowData = table_trainer.rows('.selected').data();
+	            var countdata = table_trainer.rows('.selected').data().length;
+	            //console.log(countdata);
+	            //var obj = JSON.stringify(rowData);
+	            //var parsejson = JSON.parse(obj);
+                //$("#inputJumlahPeserta").val(countdata); 
+
+	            for(i=0;i<countdata;i++)
+	            {
+
+	            	$('#table-trainer tbody').prepend( '<tr><td> '+rowData[i].nama_pemateri+'<input type="hidden" id="inputIdTrainer" name="inputIdTrainer[]" value="'+rowData[i].id +'"><input type="hidden" id="inputPerusahaan" name="inputPerusahaan[]" value="internal"></td><td>PNM</td><td><a href="javascript:void(0);" class="remTrainer" class="btn btn-danger remove-pic" type="button"><i class="fa fa-2x fa-times text-danger"></i></a></td></tr>' );
+	        	}
+	        });
+			/*===============================================================================
+        	METHOD SELECT ALL TRAINER 
+        	================================================================================*/
+			$('#select_all_trainer').on('click', function(){
+		      // Get all rows with search applied
+		      var rows = table_trainer.rows({ 'search': 'applied' }).nodes();
+
+		      // Check/uncheck checkboxes for all rows in the table
+		     	if (this.checked == true){
+		     		$('input[type="checkbox"]', rows).prop('checked', this.checked, true);
+		      		table_trainer.rows({filter:'applied'}).select();
+		  		}else
+		  		{
+		  			$('input[type="checkbox"]', rows).prop('checked', this.checked, false);
+		  			table_trainer.rows({filter:'applied'}).deselect();
+		  		}
+		   	});
+		});
+		/*===============================================================================
+    	FUNCTION remove ROWS TRAINER
+    	================================================================================*/
+		 $("#table-trainer tbody").on('click','.remTrainer',function(){
+	        $(this).parent().parent().remove();
+	    });
+
+
+		/*===============================================================================
+        FUNCTION GET PIC
+        ================================================================================*/
+		$('#get-pic').on('click', function (e) {
+			e.preventDefault();
+			var table_pic  = $('#get_list_pic_table').DataTable({
+				"bRetrieve" : "true",
+				 ajax: {
+			        url: '<?php echo site_url('Event_controller/get_all_list_peserta'); ?>',
+			        type: 'POST',
+			    	dataSrc: 'data'
+			    },
+			    'columnDefs': [{
+			         'targets': 0,
+			         'searchable':false,
+			         'orderable':false,
+			         'className': 'dt-body-center',
+			         'render': function (data, type, full, meta){
+			             return '<input type="checkbox" name="id[]" value="' + $('<div/>').text(data).html() + '">';
+			         }
+			      }],
+		        select: {
+		            style: 'multi',
+		            selector: 'input[type="checkbox"]'
+		        },
+				columns: [
+					{ data: "karyawan_id" },
+					{ data: "karyawan_nip" },
+					{ data: "karyawan_nama"},
+					{ data: "karyawan_posisi"},
+					{ data: "karyawan_unit_kerja"}
+				]
+			});
+
+			/*===============================================================================
+        	METHOD STORE DATA TO TABLE PIC FROM SELECTED PIC 
+        	================================================================================*/
+			$('#inputpic').on('click', function(){
+				$("#table-picpanitia tbody tr").children().remove();
+				var rowData = [];
+	            var rowData = table_pic.rows('.selected').data();
+	            var countdata = table_pic.rows('.selected').data().length;
+	            //console.log(countdata);
+	            //var obj = JSON.stringify(rowData);
+	            //var parsejson = JSON.parse(obj);
+                //$("#inputJumlahPeserta").val(countdata); 
+	            for(i=0;i<countdata;i++)
+	            {
+
+	            	$('#table-picpanitia tbody').prepend( '<tr><td> '+rowData[i].karyawan_nama+'<input type="hidden" id="nama_pic" name="nama_pic[]" value="'+rowData[i].karyawan_nama +'"><input type="hidden" id="id_karyawan" name="id_karyawan[]" value="'+rowData[i].karyawan_nip+'"></td><td><a href="javascript:void(0);" class="remCF" class="btn btn-danger remove-pic" type="button"><i class="fa fa-2x fa-times text-danger"></i></a></td></tr>' );
+	        	}
+	        });
+			/*===============================================================================
+        	METHOD SELECT ALL PIC 
+        	================================================================================*/
+			$('#select_all_pic').on('click', function(){
+		      // Get all rows with search applied
+		      var rows = table_pic.rows({ 'search': 'applied' }).nodes();
+
+		      // Check/uncheck checkboxes for all rows in the table
+		     	if (this.checked == true){
+		     		$('input[type="checkbox"]', rows).prop('checked', this.checked, true);
+		      		table_pic.rows({filter:'applied'}).select();
+		  		}else
+		  		{
+		  			$('input[type="checkbox"]', rows).prop('checked', this.checked, false);
+		  			table_pic.rows({filter:'applied'}).deselect();
+		  		}
+		   	});
+		});
+		/*===============================================================================
+    	FUNCTION ADD ROWS PIC 
     	================================================================================*/
 		$('#add-pic').on('click', function(){
-			 $('#table-picpanitia tbody').append('<tr><td><input type="text" class="form-control" placeholder="Type something" id="inputNik" name="inputNik[]"/></td><td><input type="text" class="form-control" placeholder="Type something" id="inputPIC" name="inputPIC[]"/></td><td><a href="javascript:void(0);" class="remCF" class="btn btn-danger remove-pic" type="button">REMOVE</a></td></tr>');
+			 $('#table-picpanitia tbody').append('<tr><td><input type="text" class="form-control" placeholder="Type something" id="nama_pic" name="nama_pic[]"/><input type="hidden" id="id_karyawan" name="id_karyawan[]" value=""></td><td><a href="javascript:void(0);" class="remCF" class="btn btn-danger remove-pic" type="button"><i class="fa fa-2x fa-times text-danger"></i></a></td></tr>');
 		});
 
 		 $("#table-picpanitia tbody").on('click','.remCF',function(){
@@ -519,8 +692,8 @@ $(document).ready(function() {
 					}else
 					{
 						//set empty
-						document.getElementById("ev_latitude").value 	= '';
-						document.getElementById("ev_longitude").value 	= ''; 
+						$("#ev_latitude").val('');
+						$("#ev_longitude").val(''); 
 						$('#inputNamaTempat').val('');
 				    	$('span#lat').empty();
 						$('span#lng').empty();
@@ -529,8 +702,8 @@ $(document).ready(function() {
 						$('span#lat').append(lats);
 						$('span#lng').append(lngs);
 						$('#inputNamaTempat').val(address);
-						document.getElementById("ev_latitude").value 	= lats;
-						document.getElementById("ev_longitude").value 	= lngs;
+						$("#ev_latitude").val(lats);
+						$("#ev_longitude").val(lngs);
 
 						//close popup 
 						$('.gmap').modal('toggle');
@@ -595,7 +768,8 @@ $(document).ready(function() {
 			 	
 				   var total = 0;
 				   var $table;
-				$('input#jumlah,input#frekwensi,input#unit_cost').keyup(function(event) {
+				   var ac;
+				$('#table-rab input#jumlah,#table-rab input#frekwensi,#table-rab input#unit_cost').keyup(function(event) {
 					//var abc = $("input#downpayment").autoNumeric('get');
 				  	var sum = 0;
 				    var thisRow = $(this).closest('tr');
@@ -609,14 +783,7 @@ $(document).ready(function() {
 				    var sum = (jumlah_unit*harga_unit)*frekwensi;
 				    
 				    var total_jumlah = thisRow.find("td input#total_cost").val(sum);
-				    $(thisRow).find('td input#total_cost').autoNumeric('set', sum);
-
-				    $table.find('td input#total_cost').each(function() {
-				         total += parseInt($(this).autoNumeric('get'));
-				    });
-
-				    $table.find('tr input#grand_total').val(total);
-				    $('#grand_total').autoNumeric('set', total);
+				    total_jumlah.autoNumeric('set', sum);
 
 				    var id_parent=1;
 				    
@@ -632,13 +799,20 @@ $(document).ready(function() {
 
 				    });
 
-				    return total;
+				    ac = 0;
+				    $('#table-rab').find('tr.parent-class').each(function() {
+				    	ac +=  parseInt($(this).find('input#totalcost').autoNumeric('get'));
+				    	
+					    $table.find('tr input#grand_total').val(ac);
+					    $('#grand_total').autoNumeric('set', ac);
+				    });
 			});
+
 			$('input#downpayment').keyup(function() {
 
 				    var down = $("input#downpayment").autoNumeric('get');
 			  		
-			  		var all_total= total-down;
+			  		var all_total= ac-down;
 
 				    $table.find('tr input#grand_total').val(all_total);
 				    $('#grand_total').autoNumeric('set', all_total);
