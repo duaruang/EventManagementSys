@@ -34,6 +34,14 @@ $(document).ready(function() {
 			showThumbs: true,
 			addMore: false
 		});
+		$('#filer_input4').filer({
+			limit: 1,
+			maxSize: 2, //1 MB
+			extensions: ['docx', 'pdf','jpg', 'jpeg'],
+			changeInput: true,
+			showThumbs: true,
+			addMore: false
+		});
 });
 $(document).ready(function() {
 		//FORM VALIDATION
@@ -106,11 +114,11 @@ $(document).ready(function() {
                     	$('#loader').hide();
                     	$.each(data, function(i, item) {
                     		//ADD INPUT HIDDEN 
-                    		$('<div>').html ('<input type="hidden" id="inputIdSdm" name="inputIdSdm[]" value="'+data[i].id_sdm +'"><input type="hidden" id="inputNamaPeserta" name="inputNamaPeserta[]" value="'+data[i].nama +'"><input type="hidden" id="inputPosisiPeserta" name="inputPosisiPeserta[]" value="'+data[i].posisi +'">').appendTo('#wrapabcs');
+                    		$('<div>').html ('<input type="hidden" id="inputIdSdm" name="inputIdSdm[]" value="'+data[i].id_sdm +'"><input type="hidden" id="inputNikPeserta" name="inputNikPeserta[]" value="'+data[i].nip +'"><input type="hidden" id="inputNamaPeserta" name="inputNamaPeserta[]" value="'+data[i].nama +'"><input type="hidden" id="inputPosisiPeserta" name="inputPosisiPeserta[]" value="'+data[i].posisi +'">').appendTo('#wrapabcs');
                     	
 	                		//STORE DATA TO TABLE PARTICIPANT
 						    $('<tr>').html(
-						        "<td>" + data[i].nip_hris + "</td><td>" + data[i].nama + "</td><td>" + data[i].posisi + "</td>").appendTo('#daftar_peserta_table');
+						        "<td>" + data[i].nip + "</td><td>" + data[i].nama + "</td><td>" + data[i].posisi + "</td>").appendTo('#daftar_peserta_table');
 					    });
                     },
                     error: function (e) {

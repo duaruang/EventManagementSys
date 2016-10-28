@@ -62,7 +62,7 @@
                                         <th>Kategori Event</th>
                                         <th>Jumlah Peserta</th>
                                         <th>Status</th>
-                                        <th width="300">Action</th>
+                                        <th width="250">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -98,9 +98,14 @@
 
                                         </td>
                                         <td>
-                                            <a href="<?php echo site_url('pengajuan-event/view/'.$data->id_event); ?>" class="btn action btn-primary  waves-effect waves-light"><span class="btn-label"><i class="fa fa-eye"></i></span>View</a>&nbsp;&nbsp;
-                                            <a href="<?php echo site_url('pengajuan-event/edit/'.$data->id_event); ?>" class="btn action btn-warning  waves-effect waves-light"><span class="btn-label"><i class="fa fa-pencil"></i></span>Edit</a>&nbsp;&nbsp;
-                                            <a href="#custom-modal" class="btn action btn-danger waves-effect waves-light delete-event" data-animation="blur" data-plugin="custommodal" data-overlaySpeed="100" data-overlayColor="#36404a" data-idtipe_exam="<?php echo $data->id_event ?>" data-namatipe_exam="<?php echo $data->nama_event; ?>"><span class="btn-label"><i class="fa fa-times"></i></span>Delete</a>
+                                        <?php if($data->status_event == 'draft'){ ?>
+                                            <a href="<?php echo site_url('pengajuan-event/view/'.$data->id_event); ?>" class="btn action btn-primary  waves-effect waves-light m-b-10"><span class="btn-label"><i class="fa fa-eye"></i></span>View</a>&nbsp;&nbsp;
+                                            <a href="<?php echo site_url('pengajuan-event/edit/'.$data->id_event); ?>" class="btn action btn-warning  waves-effect waves-light m-b-10"><span class="btn-label"><i class="fa fa-pencil"></i></span>Edit</a>&nbsp;&nbsp;
+                                            <a href="#custom-modal" class="btn action btn-danger waves-effect waves-light delete-event m-b-10" data-animation="blur" data-plugin="custommodal" data-overlaySpeed="100" data-overlayColor="#36404a" data-idtipe_exam="<?php echo $data->id_event ?>" data-namatipe_exam="<?php echo $data->nama_event; ?>"><span class="btn-label"><i class="fa fa-times"></i></span>Delete</a>
+                                        <?php }else{ ?>
+                                            <a href="<?php echo site_url('pengajuan-event/view/'.$data->id_event); ?>" class="btn action btn-primary  waves-effect waves-light m-b-10"><span class="btn-label"><i class="fa fa-eye"></i></span>View</a>&nbsp;&nbsp;
+                                            <a href="<?php echo site_url('pengajuan-event/edit-tanggal/'.$data->id_event); ?>" class="btn action btn-warning  waves-effect waves-light m-b-10"><span class="btn-label"><i class="fa fa-pencil"></i></span>Edit Tanngal</a>&nbsp;&nbsp;
+                                            <?php } ?>
                                         </td>
                                     </tr>
                                 <?php } ?>

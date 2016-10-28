@@ -21,7 +21,7 @@ class Event_controller extends MY_Controller {
 	public function index()
 	{
 		//$this->is_logged();
-		$head['title'] 			= 'Tipe Exam - Event Management System' ;
+		$head['title'] 			= 'List Event- Event Management System' ;
 		$head['css']			=  $this->load->view('page/event/include/index-css', NULL, TRUE);
 		$this->load->view('include/head', $head, TRUE);
         
@@ -30,6 +30,51 @@ class Event_controller extends MY_Controller {
         $data['load_event']		= $this->event_model->select_event();
         //Load page
 		$this->template->view('page/event/index',$data);
+
+	}
+
+
+	public function edit()
+	{
+		//$this->is_logged();
+		$id 					= $this->uri->segment(3);
+		$head['title'] 			= 'Edit Event - Event Management System' ;
+		$head['css']			=  $this->load->view('page/event/include/add-css', NULL, TRUE);
+		$this->load->view('include/head', $head, TRUE);
+        
+        //Set Spesific Javascript page
+        $data['script']     			= $this->load->view('page/event/include/add-script', NULL, TRUE);
+        $data['load_event']				= $this->event_model->select_detail_event($id);
+        $data['load_kategori_tempat']	= $this->kategori_tempat_model->select_kategori_tempat_dropdown();
+        $data['load_kategori_event']	= $this->kategori_event_model->select_kategori_event_dropdown();
+        $data['load_tipe_pelatihan'] 	= $this->tipe_pelatihan_model->select_tipe_pelatihan_active();
+        $data['load_tipe_exam'] 		= $this->tipe_exam_model->select_tipe_exam_active();
+        $data['load_parent'] 			= $this->kategori_rab_model->select_parent_category();
+        $data['load_exam'] 				= $this->get_exam();
+        //Load page
+		$this->template->view('page/event/edit',$data);
+
+	}
+
+	public function edit_tanggal()
+	{
+		//$this->is_logged();
+		$id 					= $this->uri->segment(3);
+		$head['title'] 			= 'Edit Event - Event Management System' ;
+		$head['css']			=  $this->load->view('page/event/include/add-css', NULL, TRUE);
+		$this->load->view('include/head', $head, TRUE);
+        
+        //Set Spesific Javascript page
+        $data['script']     			= $this->load->view('page/event/include/add-script', NULL, TRUE);
+        $data['load_event']				= $this->event_model->select_detail_event($id);
+        $data['load_kategori_tempat']	= $this->kategori_tempat_model->select_kategori_tempat_dropdown();
+        $data['load_kategori_event']	= $this->kategori_event_model->select_kategori_event_dropdown();
+        $data['load_tipe_pelatihan'] 	= $this->tipe_pelatihan_model->select_tipe_pelatihan_active();
+        $data['load_tipe_exam'] 		= $this->tipe_exam_model->select_tipe_exam_active();
+        $data['load_parent'] 			= $this->kategori_rab_model->select_parent_category();
+        $data['load_exam'] 				= $this->get_exam();
+        //Load page
+		$this->template->view('page/event/edit-tanggal',$data);
 
 	}
 
@@ -409,12 +454,17 @@ class Event_controller extends MY_Controller {
 		if(count($_POST) == 0){
 			redirect('pengajuan-event');
 		}
+
+		
 		//Default value is OK. If validations fail result will change to NG.
 		$output = array(
 			'result'  	=> 'OK',
 			'msg'		=> ''
 		);
+		$status_draft ="";
+
 		//==== Get Data ====
+		$inputDraft					= $this->input->post('draft');
 		$inputNomorMemo				= trim($this->security->xss_clean(strip_image_tags($this->input->post('inputNomorMemo'))));
 		$inputNamaEvent				= trim($this->security->xss_clean(strip_image_tags($this->input->post('inputNamaEvent'))));
 		$inputTopikEvent			= trim($this->security->xss_clean(strip_image_tags($this->input->post('inputTopikEvent'))));
@@ -433,10 +483,18 @@ class Event_controller extends MY_Controller {
 		$inputIdExam				= trim($this->security->xss_clean(strip_image_tags($this->input->post('inputIdExam'))));
 		$inputidjadwalexam			= trim($this->security->xss_clean(strip_image_tags($this->input->post('inputidjadwalexam'))));
 		$inputGrandTotal			= trim($this->security->xss_clean(strip_image_tags($this->input->post('grand_total'))));
-		$inputNamaTrainer			= trim($this->security->xss_clean(strip_image_tags($this->input->post('inputNamaTrainer'))));
+		$inputIdTrainer				= $this->security->xss_clean(strip_image_tags($this->input->post('inputIdTrainer')));
 		$inputNamaPic				= $this->security->xss_clean(strip_image_tags($this->input->post('nama_pic')));
 		$id_user					= $this->session->userdata('sess_user_id');
 		
+		if($status_draft == $inputDraft)
+		{
+			$status_draft = 'draft';
+		}else
+		{
+			$status_draft = 'submitted';
+		}
+
 		$randdate = strtotime(date('Y-m-d'));
 		$randalnum = random_string('alnum', 10);
 		$id_event = strtoupper($randalnum.$randdate);
@@ -480,17 +538,16 @@ class Event_controller extends MY_Controller {
 		}
 
 		//check trainer
-		if($inputNamaTrainer != '')
+		if($inputIdTrainer != '')
 		{
-			$inputIdTrainer			= $this->security->xss_clean(strip_image_tags($this->input->post('inputIdTrainer')));
 			$inputPerusahaan		= $this->security->xss_clean(strip_image_tags($this->input->post('inputPerusahaan')));
 
-			$temp =count($inputIdSdm);
+			$temp =count($inputIdTrainer);
 			for($i=0; $i<$temp;$i++){
   				$data_trainer = array(
 								'id_event'				=> $id_event,
 								'kategori_trainer'		=> $inputPerusahaan[$i],
-								'kategori_id_trainer'	=> $inputIdTrainer[$i],
+								'id_kategori_trainer'	=> $inputIdTrainer[$i],
 								'is_active'				=> 'active',
 								'created_by' 			=> $id_user,
 								'created_date' 			=> date('Y-m-d H:i:s')
@@ -531,6 +588,48 @@ class Event_controller extends MY_Controller {
 								'created_date' 			=> date('Y-m-d H:i:s')
 							);
 				$this->event_model->insert_rundown_event_files($data_files);
+				
+			} else {
+
+				$output = array(
+					'result'  	=> 'UP',
+					'msg'		=>  $this->upload->display_errors().' nama->'.$fileName
+				);
+			}
+			
+		}
+
+		//check Materi
+		if (isset($_FILES['materi_input']['name']) != '') {
+			//$file_ary = rearray_files($_FILES['files']);
+			//$i = 0;
+			//==== Upload Photo ====
+			$config['upload_path'] 		= './assets/attachments/materi';
+			$config['allowed_types'] 	= 'docx|jpg|jpeg|png|pdf';
+			$config['max_size']    		= '2000';
+			$config['overwrite'] 		= TRUE;
+
+			$doc_u 		= $_FILES['materi_input']['name'];
+			$fileName 	= $id_event.'_'.date('Ymd').'at'.date('His').'_'.$doc_u;
+			$doc_user	= $fileName;
+
+			$config['file_name'] = $fileName;
+
+			$this->upload->initialize($config);
+
+			if ($this->upload->do_upload('materi_input')) {
+				$this->upload->data();
+				
+				//Insert to table event files
+				$data_files = array(
+								'id_event'				=> $id_event,
+								'nama_file'				=> $fileName,
+								'tipe_file'				=> $this->upload->file_type,
+								'is_active' 			=> 'active',
+								'created_by' 			=> $id_user,
+								'created_date' 			=> date('Y-m-d H:i:s')
+							);
+				$this->event_model->insert_materi_event_files($data_files);
 				
 			} else {
 
@@ -652,7 +751,7 @@ class Event_controller extends MY_Controller {
 									'total_rab'							=> $total_rab,
 									'id_exam'							=> $inputIdExam,
 									'id_jadwal_exam'					=> $inputidjadwalexam,
-									'status_event' 						=> 'submitted',
+									'status_event' 						=> $status_draft,
 									'is_active' 						=> 'active',
 									'created_by' 						=> $id_user,
 									'created_date' 						=> date('Y-m-d H:i:s')

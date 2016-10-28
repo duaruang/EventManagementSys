@@ -1,10 +1,10 @@
-<?php $r = $load_rab->result_array(); ?>
+<?php $data = $load_data->result_array(); ?>
 <div style="background: #fff;box-shadow: 0 0px 24px 0 rgba(0, 0, 0, 0.06), 0 1px 0px 0 rgba(0, 0, 0, 0.02);">
     <div class="container">
         <ol class="breadcrumb">
             <li><a href="<?php echo site_url('dashboard'); ?>">Dashboard</a></li>
-            <li><a href="<?php echo site_url('kategori-rab'); ?>">Kategori RAB Administration</a></li>
-            <li class="active">Edit Kategori RAB</li>
+            <li><a href="<?php echo site_url('bisnis-unit-jabatan'); ?>">Bisnis Unit dan Jabatan Administration</a></li>
+            <li class="active">Edit Bisnis Unit dan Jabatan</li>
         </ol>
     </div>
 </div>
@@ -14,7 +14,7 @@
 <!-- Page-Title -->
     <div class="row">
         <div class="col-sm-12">
-            <h4 class="page-title">Edit Kategori RAB</h4>
+            <h4 class="page-title">Edit Bisnis Unit dan Jabatan</h4>
         </div>
     </div>
     <div class="row">
@@ -27,31 +27,39 @@
 					<div class="col-sm-12">
 						<div class="p-20">
 							<?php 
-							$attrib = array('class' => 'form-horizontal','id'=>'form-edit-rab');
+							$attrib = array('class' => 'form-horizontal','id'=>'form-edit-bisnis-jabatan');
 							echo form_open('',$attrib); ?>
-								<input type="hidden" id="hidden-id-rab" name="hidden-id-rab" value="<?php echo $id_rab;?>" />
-								<input type="hidden" id="hidden-id-parent" value="<?php echo $r[0]['id_parent'];?>" />
+								<input type="hidden" id="hidden-id" name="hidden-id" value="<?php echo $id;?>" />
+								<input type="hidden" id="hidden-type" name="hidden-type" value="<?php echo $type;?>" />
 								<?php 
-									if($r[0]['id_parent']!=NULL or $r[0]['id_parent']!='')
+									$data = $load_data->result_array();
+									
+									if($type==1) //Bisnis Unit View
 									{ 
-										$load_kategori = $this->kategori_rab_model->select_category_id($r[0]['id_parent']);
-										
-										if($load_kategori->num_rows() > 0)
-										{
-											$k = $load_kategori->result_array();
 								?>
 								<div class="form-group row">
-									<label class="col-sm-2">Kategori Utama <span class="text-danger">*</span></label>
+									<label class="col-sm-2">Deskripsi</label>
 									<div class="col-sm-4">
-										<select id="edit-parent" class="form-control select2" required name="parent">
-										<option value="">--pilih kategori--</option>
+										<input type="text" class="form-control" name="deskripsi" value="<?php echo $data[0]['deskripsi']?>" />
+									</div>
+								</div>
+								<?php 
+									} 
+									else //Jabatan View
+									{
+								?>
+								<div class="form-group row">
+									<label class="col-sm-2">Bisnis Unit</label>
+									<div class="col-sm-4">
+										<select class="form-control select2" required name="bisnis_unit">
+										<option value="">--pilih bisnis unit--</option>
 										<?php
-											if($load_parent->num_rows() > 0)
+											if($load_bisnis->num_rows() > 0)
 											{
-												foreach($load_parent->result() as $p)
+												foreach($load_bisnis->result() as $b)
 												{
 										?>
-										<option value="<?php echo $p->id;?>" <?php echo ($p->id==$r[0]['id_parent'] ? "selected" : "");?>><?php echo $p->deskripsi;?></option>
+										<option value="<?php echo $b->id;?>" <?php if($data[0]['id_bisnis_unit']==$b->id) echo 'selected'; ?>><?php echo $b->deskripsi;?></option>
 										<?php
 												}
 											}
@@ -59,38 +67,21 @@
 										</select>
 									</div>
 								</div>
-								<?php 
-										}
-									} 
-									else
-									{
-										echo '<input type="hidden" class="form-control" name="parent" value="" />';
+								<div class="form-group row">
+									<label class="col-sm-2">Nama Jabatan</label>
+									<div class="col-sm-4">
+										<input type="text" class="form-control" name="nama_jabatan" value="<?php echo $data[0]['nama_jabatan']?>" />
+									</div>
+								</div>
+								<?php
 									}
 								?>
 								<div class="form-group row">
-									<label class="col-sm-2">Deskripsi <span class="text-danger">*</span></label>
-									<div class="col-sm-4">
-										<input type="text" class="form-control" name="deskripsi" value="<?php echo $r[0]['deskripsi']?>" required />
-									</div>
-								</div>
-								<div class="form-group row">
-									<label class="col-sm-2">unit <span class="text-danger">*</span></label>
-									<div class="col-sm-4">
-										<input type="text" class="form-control" required name="jumlah_unit" value="<?php echo $r[0]['jumlah_unit']?>" />
-									</div>
-								</div>
-								<div class="form-group row">
-									<label class="col-sm-2">frekwensi <span class="text-danger">*</span></label>
-									<div class="col-sm-4">
-										<input type="text" class="form-control" required name="frekwensi" value="<?php echo $r[0]['frekwensi']?>" />
-									</div>
-								</div>
-								<div class="form-group row">
-									<label class="col-sm-2">Status <span class="text-danger">*</span></label>
+									<label class="col-sm-2">Status</label>
 									<div class="col-sm-2">
-										<select class="form-control select2" name="status" required>
-											<option value="active" <?php echo ($r[0]['is_active']=='active' ? "selected" : "");?>>Aktif</option>
-											<option value="disabled" <?php echo ($r[0]['is_active']=='disabled' ? "selected" : "");?>>Tidak Aktif</option>
+										<select class="form-control select2" required name="status">
+										<option value="active" <?php if($data[0]['is_active']=='active') echo 'selected';?>>Aktif</option>
+										<option value="disabled" <?php if($data[0]['is_active']=='disabled') echo 'selected';?>>Tidak Aktif</option>
 										</select>
 									</div>
 								</div>
@@ -101,7 +92,7 @@
 										<button type="submit" class="btn btn-primary waves-effect waves-light">
 											Save
 										</button>
-										<a href="<?php echo site_url('kategori-rab'); ?>" class="btn btn-secondary waves-effect m-l-5">
+										<a href="<?php echo site_url('bisnis-unit-jabatan'); ?>" class="btn btn-secondary waves-effect m-l-5">
 											Cancel
 										</a>
 									</div>

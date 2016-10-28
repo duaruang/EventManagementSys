@@ -8,8 +8,8 @@ class Kategori_rab_model extends CI_Model
 		return $this->db
                     ->from('em_kategori_rab')
                     ->where('id_parent',NULL)
-                    ->where('is_active !=','deleted')
-                    ->order_by('id','asc')
+                    ->where('is_active!=','deleted')
+                    ->order_by('deskripsi','asc')
                     ->get();
     }
 	
@@ -18,8 +18,8 @@ class Kategori_rab_model extends CI_Model
 		return $this->db
                     ->from('em_kategori_rab')
                     ->where('id_parent',$id_parent)
-                    ->where('is_active !=','deleted')
-                    ->order_by('id','asc')
+                    ->where('is_active!=','deleted')
+                    ->order_by('deskripsi','asc')
                     ->get();
     }
 	

@@ -12,12 +12,12 @@
         $('form').parsley();
     
 		//Script: Tambah Kategori RAB
-		$("#form-add-rab-parent").submit(function(e){
+		$("#form-add-bisnis-unit").submit(function(e){
 			e.preventDefault();
 			
-			var formURL = "<?php echo site_url('kategori-rab/process-add-kategori'); ?>";
+			var formURL = "<?php echo site_url('bisnis-unit-jabatan/process-add-bisnis-unit'); ?>";
 			var formDatas = new FormData(this);
-			$("#loader").show();
+			$("#loader1").show();
 			var xhr = $.ajax({
 				url: formURL,
 				type: 'POST',
@@ -31,25 +31,25 @@
 				if(obj.result == 'OK')
 				{
 					//location.reload();
-					window.location.href = '<?php echo site_url('kategori-rab'); ?>';
+					window.location.href = '<?php echo site_url('bisnis-unit-jabatan'); ?>';
 				}
 				
 				console.log(data);
 			});
 			xhr.fail(function() {
-				$("#loader").hide();
+				$("#loader1").hide();
 				var failMsg = "Something error happened!";
 				alert(failMsg);
 			});	
 		});
     
-		//Script: Tambah Sub Kategori RAB
-		$("#form-add-rab-child").submit(function(e){
+		//Script: Tambah Jabatan
+		$("#form-add-jabatan").submit(function(e){
 			e.preventDefault();
 			
-			var formURL = "<?php echo site_url('kategori-rab/process-add-subkategori'); ?>";
+			var formURL = "<?php echo site_url('bisnis-unit-jabatan/process-add-jabatan'); ?>";
 			var formDatas = new FormData(this);
-			$("#loader").show();
+			$("#loader2").show();
 			var xhr = $.ajax({
 				url: formURL,
 				type: 'POST',
@@ -63,23 +63,23 @@
 				if(obj.result == 'OK')
 				{
 					//location.reload();
-					window.location.href = '<?php echo site_url('kategori-rab'); ?>';
+					window.location.href = '<?php echo site_url('bisnis-unit-jabatan'); ?>';
 				}
 				
 				console.log(data);
 			});
 			xhr.fail(function() {
-				$("#loader").hide();
+				$("#loader2").hide();
 				var failMsg = "Something error happened!";
 				alert(failMsg);
 			});	
 		});
 
-		//Script: Edit Kategori/Sub Kategori RAB
-		$("#form-edit-rab").submit(function(e){
+		//Script: Edit Bisnis Unit dan Jabatan
+		$("#form-edit-bisnis-jabatan").submit(function(e){
 			e.preventDefault();
 			
-			var formURL = "<?php echo site_url('kategori-rab/process-edit'); ?>";
+			var formURL = "<?php echo site_url('bisnis-unit-jabatan/process-edit'); ?>";
 			var formDatas = new FormData(this);
 			$("#loader").show();
 			var xhr = $.ajax({
@@ -94,7 +94,7 @@
 				
 				if(obj.result == 'OK')
 				{
-					window.location.href = '<?php echo site_url('kategori-rab'); ?>';
+					window.location.href = '<?php echo site_url('bisnis-unit-jabatan'); ?>';
 				}
 				
 				console.log(data);

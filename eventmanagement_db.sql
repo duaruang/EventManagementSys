@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 27 Okt 2016 pada 14.52
+-- Generation Time: 28 Okt 2016 pada 09.03
 -- Versi Server: 10.1.10-MariaDB
 -- PHP Version: 7.0.4
 
@@ -416,7 +416,76 @@ INSERT INTO `em_activitiesuser` (`id`, `id_user`, `description`, `item_id`, `dat
 (378, '00000000013', 'Tambah Event', 'Gathering 2016', '2016-10-27 18:19:28', '::1'),
 (379, '00000000013', 'Tambah Event', 'Outbound Road to Sukabumi', '2016-10-27 18:25:36', '::1'),
 (380, '00000000013', 'Tambah Event', 'Training Character Building', '2016-10-27 18:29:47', '::1'),
-(381, '00000000013', 'Tambah Event', 'Event Turoning', '2016-10-27 18:42:22', '::1');
+(381, '00000000013', 'Tambah Event', 'Event Turoning', '2016-10-27 18:42:22', '::1'),
+(382, '00000000013', 'Sign in', '', '2016-10-28 09:57:37', '::1'),
+(383, '00000000013', 'Tambah Event', 'Event Hari Jumat', '2016-10-28 10:36:01', '::1'),
+(384, '00000000013', 'Tambah Event', 'Event ABCD', '2016-10-28 10:40:08', '::1'),
+(385, '00000000013', 'Tambah Event', '546456456456', '2016-10-28 10:43:19', '::1'),
+(386, '00000000013', 'Tambah Event', 'Gathering ABCD', '2016-10-28 10:50:04', '::1'),
+(387, '00000000013', 'Tambah Event', 'Event ABCD', '2016-10-28 10:54:53', '::1'),
+(388, '00000000013', 'Sign out', '', '2016-10-28 11:05:17', '::1'),
+(389, '00000000013', 'Sign in', '', '2016-10-28 11:05:22', '::1'),
+(390, '00000000013', 'Tambah Matriks Program & Anggaran (lv1)', 'Level 1', '2016-10-28 11:05:46', '::1'),
+(391, '00000000013', 'Tambah Matriks Program & Anggaran (lv2)', 'deskripsi level 2', '2016-10-28 11:06:16', '::1'),
+(392, '00000000013', 'Tambah Matriks Program & Anggaran (lv3)', 'program event test', '2016-10-28 11:06:35', '::1'),
+(393, '00000000013', 'Tambah Bisnis Unit', 'Deskripsi', '2016-10-28 11:07:25', '::1'),
+(394, '00000000013', 'Tambah Bisnis Unit-Jabatan', 'ABCD', '2016-10-28 11:07:42', '::1'),
+(395, '00000000013', 'Tambah Event', 'sdfsdfsdf', '2016-10-28 13:10:05', '::1'),
+(396, '00000000013', 'Tambah Event', 'sdfsdfsd', '2016-10-28 13:11:54', '::1');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `em_bisnis_unit`
+--
+
+CREATE TABLE `em_bisnis_unit` (
+  `id` int(11) UNSIGNED ZEROFILL NOT NULL,
+  `deskripsi` varchar(256) NOT NULL,
+  `is_active` enum('active','disabled','deleted') NOT NULL,
+  `created_by` int(11) UNSIGNED ZEROFILL NOT NULL,
+  `created_date` datetime NOT NULL,
+  `modified_by` int(11) UNSIGNED ZEROFILL DEFAULT NULL,
+  `modified_date` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `em_bisnis_unit`
+--
+
+INSERT INTO `em_bisnis_unit` (`id`, `deskripsi`, `is_active`, `created_by`, `created_date`, `modified_by`, `modified_date`) VALUES
+(00000000001, 'test bisnis unit 1', 'active', 00000000011, '2016-10-26 15:24:08', NULL, NULL),
+(00000000002, 'test bisnis unit 2', 'active', 00000000011, '2016-10-26 15:26:45', NULL, NULL),
+(00000000003, 'test bisnis unit 3', 'deleted', 00000000011, '2016-10-26 15:33:18', 00000000011, '2016-10-26 18:19:09'),
+(00000000004, 'Deskripsi', 'active', 00000000013, '2016-10-28 11:07:25', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `em_bisnis_unit_jabatan`
+--
+
+CREATE TABLE `em_bisnis_unit_jabatan` (
+  `id` int(11) NOT NULL,
+  `id_bisnis_unit` int(11) UNSIGNED ZEROFILL NOT NULL,
+  `nama_jabatan` varchar(256) NOT NULL,
+  `is_active` enum('active','disabled','deleted') NOT NULL,
+  `created_by` int(11) UNSIGNED ZEROFILL NOT NULL,
+  `created_date` datetime NOT NULL,
+  `modified_by` int(11) UNSIGNED ZEROFILL DEFAULT NULL,
+  `modified_date` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `em_bisnis_unit_jabatan`
+--
+
+INSERT INTO `em_bisnis_unit_jabatan` (`id`, `id_bisnis_unit`, `nama_jabatan`, `is_active`, `created_by`, `created_date`, `modified_by`, `modified_date`) VALUES
+(1, 00000000001, 'test jabatan 1.1', 'active', 00000000011, '2016-10-26 15:26:05', NULL, NULL),
+(2, 00000000001, 'test jabatan 1.2', 'active', 00000000011, '2016-10-26 15:26:36', NULL, NULL),
+(3, 00000000003, 'test jabatan 2.1awdasd', 'deleted', 00000000011, '2016-10-26 15:26:58', 00000000011, '2016-10-26 18:19:09'),
+(4, 00000000002, 'test jabatan 2.2', 'deleted', 00000000011, '2016-10-26 15:33:41', 00000000011, '2016-10-26 18:19:15'),
+(5, 00000000004, 'ABCD', 'active', 00000000013, '2016-10-28 11:07:42', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -553,7 +622,10 @@ CREATE TABLE `em_event` (
 --
 
 INSERT INTO `em_event` (`id`, `id_event`, `nomor_memo`, `nama_event`, `topik_event`, `lokasi_kerja`, `mulai_tanggal_pelaksanaan`, `selesai_tanggal_pelaksanaan`, `id_kategori_tempat_pelaksanaan`, `nama_tempat`, `latitude`, `longitude`, `target_sasaran`, `id_kategori_event`, `id_tipe_exam`, `id_tipe_pelatihan`, `dengan_exam`, `jumlah_peserta`, `id_exam`, `id_jadwal_exam`, `uang_muka`, `total_rab`, `is_active`, `created_by`, `created_date`, `modified_by`, `modified_date`, `status_event`) VALUES
-(0000000005, '5HZX3SS94A1477501200', 'A-231/PNM-ASS/XA/2312', 'Event Turoning', 'Topik Event ABCD', '', '2016-10-31', '2016-11-02', 0000000002, 'Hotel, Grand Indonesia', '-6.194485806945051', '106.8197250366211', 'MKU', 0000000004, NULL, 0000000000, '', 3, 0000000000, 0000000000, 0, 40000, 'active', 13, '2016-10-27 18:42:22', NULL, NULL, 'submitted');
+(0000000009, 'K4SHEYJNXW1477587600', 'A-299/PNM-PPL/OX/2016', 'Gathering ABCD', 'Semangat Indonesia', '', '2016-11-01', '2016-11-02', 0000000002, 'Indonesia', '-0.789275', '113.92132700000002', 'ASE', 0000000001, NULL, 0000000004, 'tidak', 2, 0000000000, 0000000000, 0, 705000, 'active', 13, '2016-10-28 10:50:04', NULL, NULL, 'submitted'),
+(0000000010, 'F30HOHNSUT1477587600', 'A-232/PNM-DDD/XX/2091', 'Event ABCD', 'Topik ABCD', '', '2016-11-01', '2016-11-10', 0000000002, 'Indonesia', '-0.789275', '113.92132700000002', 'MKU', 0000000001, NULL, 0000000004, 'tidak', 2, 0000000000, 0000000000, 0, 0, 'active', 13, '2016-10-28 10:54:52', NULL, NULL, 'submitted'),
+(0000000011, 'ZIDSMRBAOX1477587600', 'asdasdasdasdas', 'sdfsdfsdf', 'dfgdfgfdgdfg', '', '2016-11-01', '2016-11-10', 0000000002, 'Indonesia', '-0.789275', '113.92132700000002', 'dgdgdg', 0000000002, 'post test', 0000000000, 'ya', 2, 0000000001, 0000000001, 0, 0, 'active', 13, '2016-10-28 13:10:04', NULL, NULL, 'submitted'),
+(0000000012, 'UEL8AM3OVE1477587600', 's-324/PNM-sdf/sd/3242', 'sdfsdfsd', 'dfgdfg', '', '2016-11-17', '2016-11-25', 0000000002, 'Indonesias', '-0.789275', '113.92132700000002', 'sfs', 0000000002, 'pre test', 0000000000, '', 2, 0000000001, 0000000004, 0, 0, 'active', 13, '2016-10-28 13:11:54', NULL, NULL, 'draft');
 
 -- --------------------------------------------------------
 
@@ -617,9 +689,14 @@ CREATE TABLE `em_event_listpeserta` (
 --
 
 INSERT INTO `em_event_listpeserta` (`id`, `id_event`, `idsdm`, `nik`, `nama`, `posisi`, `created_by`, `created_date`, `modified_by`, `modified_date`) VALUES
-(0000000011, '5HZX3SS94A1477501200', 'DA272D7FCB7ADEFF251E1C52760506C7', 'MKR0032.01.16', 'SOVENDA SEPTA HASTOYO', 'Area Manager Solo', 0000000013, '2016-10-27', NULL, NULL),
-(0000000012, '5HZX3SS94A1477501200', '4688304202F2853346A0D49A95730B02', 'MKR2295.07.16', 'RUDI BUDIONO', 'Auditor Area Semarang', 0000000013, '2016-10-27', NULL, NULL),
-(0000000013, '5HZX3SS94A1477501200', '4F4D5D8D6F769359B5421A939A4214C7', 'MKR1328.05.16', 'FITRIANI SULAEMAN', 'Auditor Area Sukabumi', 0000000013, '2016-10-27', NULL, NULL);
+(0000000020, 'K4SHEYJNXW1477587600', 'EE6C13783F449DB5489DCABC60436E2F', 'MKR0043.01.16', 'YAYANG IQBAL', 'Area Manager Bogor - Cianjur', 0000000013, '2016-10-28', NULL, NULL),
+(0000000021, 'K4SHEYJNXW1477587600', 'DA272D7FCB7ADEFF251E1C52760506C7', 'MKR0032.01.16', 'SOVENDA SEPTA HASTOYO', 'Area Manager Solo', 0000000013, '2016-10-28', NULL, NULL),
+(0000000022, 'F30HOHNSUT1477587600', '20D6EB8F2A2C270F51A28297FEC61440', 'MKR0050.01.16', 'IRWAN ZACKY', 'Auditor Area Jawa Barat', 0000000013, '2016-10-28', NULL, NULL),
+(0000000023, 'F30HOHNSUT1477587600', 'EE6C13783F449DB5489DCABC60436E2F', 'MKR0043.01.16', 'YAYANG IQBAL', 'Area Manager Bogor - Cianjur', 0000000013, '2016-10-28', NULL, NULL),
+(0000000024, 'ZIDSMRBAOX1477587600', '38B636D94B1CA3B1F2532DB740DA446C', '9649.08.15', 'Andika Permana Putra Purba', 'Officer Aplication Developer', 0000000013, '2016-10-28', NULL, NULL),
+(0000000025, 'ZIDSMRBAOX1477587600', 'ECD2FD56BAAA7D522748DB3BA18CB79B', '9319.06.15', 'Ilham Hidayat', 'Officer IT Development', 0000000013, '2016-10-28', NULL, NULL),
+(0000000026, 'UEL8AM3OVE1477587600', '38B636D94B1CA3B1F2532DB740DA446C', '9649.08.15', 'Andika Permana Putra Purba', 'Officer Aplication Developer', 0000000013, '2016-10-28', NULL, NULL),
+(0000000027, 'UEL8AM3OVE1477587600', 'ECD2FD56BAAA7D522748DB3BA18CB79B', '9319.06.15', 'Ilham Hidayat', 'Officer IT Development', 0000000013, '2016-10-28', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -638,6 +715,13 @@ CREATE TABLE `em_event_materikm` (
   `modified_by` int(10) UNSIGNED ZEROFILL DEFAULT NULL,
   `modified_date` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `em_event_materikm`
+--
+
+INSERT INTO `em_event_materikm` (`id`, `id_event`, `nama_file`, `tipe_file`, `is_active`, `created_by`, `created_date`, `modified_by`, `modified_date`) VALUES
+(3, 'K4SHEYJNXW1477587600', 'K4SHEYJNXW1477587600_20161028at105004_Format Functional Design.docx', 'application/vnd.openxmlformats-officedocument.word', 'active', 0000000013, '2016-10-28 10:50:04', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -662,8 +746,13 @@ CREATE TABLE `em_event_pic` (
 --
 
 INSERT INTO `em_event_pic` (`id`, `id_event`, `id_karyawan`, `nama_pic`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES
-(8, '5HZX3SS94A1477501200', 'MKR0025.12.15', 'ADI SETIA HARMAWAN', 0000000013, '2016-10-27 18:42:22', NULL, NULL, 'active'),
-(9, '5HZX3SS94A1477501200', 'MKR1328.05.16', 'FITRIANI SULAEMAN', 0000000013, '2016-10-27 18:42:22', NULL, NULL, 'active');
+(15, 'K4SHEYJNXW1477587600', 'MKR1442.05.16', 'IRMA DAMAYANTI', 0000000013, '2016-10-28 10:50:03', NULL, NULL, 'active'),
+(16, 'K4SHEYJNXW1477587600', 'MKR2294.08.16', 'YULLY YULYAWATI', 0000000013, '2016-10-28 10:50:03', NULL, NULL, 'active'),
+(17, 'K4SHEYJNXW1477587600', 'MKR2259.07.16', 'HAFIEDH PERWITASARI', 0000000013, '2016-10-28 10:50:03', NULL, NULL, 'active'),
+(18, 'EVI1KSNLFW1477587600', 'MKR0050.01.16', 'IRWAN ZACKY', 0000000013, '2016-10-28 10:53:48', NULL, NULL, 'active'),
+(19, 'EVI1KSNLFW1477587600', 'MKR1442.05.16', 'IRMA DAMAYANTI', 0000000013, '2016-10-28 10:53:48', NULL, NULL, 'active'),
+(20, 'F30HOHNSUT1477587600', 'MKR0050.01.16', 'IRWAN ZACKY', 0000000013, '2016-10-28 10:54:52', NULL, NULL, 'active'),
+(21, 'F30HOHNSUT1477587600', 'MKR1442.05.16', 'IRMA DAMAYANTI', 0000000013, '2016-10-28 10:54:52', NULL, NULL, 'active');
 
 -- --------------------------------------------------------
 
@@ -692,10 +781,12 @@ CREATE TABLE `em_event_rab` (
 --
 
 INSERT INTO `em_event_rab` (`id`, `id_event`, `id_rab`, `id_rab_parent`, `jumlah`, `qty`, `unit_cost`, `total`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES
-(21, '5HZX3SS94A1477501200', 1, NULL, NULL, NULL, NULL, 20000, 13, '2016-10-27 18:42:22', NULL, NULL, 'active'),
-(22, '5HZX3SS94A1477501200', 2, 1, 1, 1, 20000, 20000, 13, '2016-10-27 18:42:22', NULL, NULL, 'active'),
-(23, '5HZX3SS94A1477501200', 18, NULL, NULL, NULL, NULL, 20000, 13, '2016-10-27 18:42:22', NULL, NULL, 'active'),
-(24, '5HZX3SS94A1477501200', 19, 18, 1, 1, 20000, 20000, 13, '2016-10-27 18:42:22', NULL, NULL, 'active');
+(31, 'K4SHEYJNXW1477587600', 1, NULL, NULL, NULL, NULL, 200000, 13, '2016-10-28 10:50:04', NULL, NULL, 'active'),
+(32, 'K4SHEYJNXW1477587600', 2, 1, 1, 1, 200000, 200000, 13, '2016-10-28 10:50:04', NULL, NULL, 'active'),
+(33, 'K4SHEYJNXW1477587600', 5, NULL, NULL, NULL, NULL, 505000, 13, '2016-10-28 10:50:04', NULL, NULL, 'active'),
+(34, 'K4SHEYJNXW1477587600', 6, 5, 2, 1, 50000, 100000, 13, '2016-10-28 10:50:04', NULL, NULL, 'active'),
+(35, 'K4SHEYJNXW1477587600', 7, 5, 3, 1, 75000, 225000, 13, '2016-10-28 10:50:04', NULL, NULL, 'active'),
+(36, 'K4SHEYJNXW1477587600', 10, 5, 6, 1, 30000, 180000, 13, '2016-10-28 10:50:04', NULL, NULL, 'active');
 
 -- --------------------------------------------------------
 
@@ -715,6 +806,13 @@ CREATE TABLE `em_event_rundown` (
   `modified_date` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data untuk tabel `em_event_rundown`
+--
+
+INSERT INTO `em_event_rundown` (`id`, `id_event`, `nama_file`, `tipe_file`, `is_active`, `created_by`, `created_date`, `modified_by`, `modified_date`) VALUES
+(5, 'K4SHEYJNXW1477587600', 'K4SHEYJNXW1477587600_20161028at105003_duaruang.xlsx', 'application/vnd.openxmlformats-officedocument.spre', 'active', 0000000013, '2016-10-28 10:50:03', NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -732,6 +830,13 @@ CREATE TABLE `em_event_trainer` (
   `modified_by` int(11) DEFAULT NULL,
   `modified_date` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `em_event_trainer`
+--
+
+INSERT INTO `em_event_trainer` (`id`, `id_event`, `kategori_trainer`, `id_kategori_trainer`, `is_active`, `created_by`, `created_date`, `modified_by`, `modified_date`) VALUES
+(1, 'F30HOHNSUT1477587600', 'internal', 8, 'active', 13, '2016-10-28 10:54:52', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1015,7 +1120,7 @@ INSERT INTO `em_navigationmenu` (`id`, `id_parent`, `id_systemactive`, `icon_men
 (3, 2, 1, NULL, 'User', 'users', 0, 1, NULL, 1, 'active', 00000000001, '2016-10-07 09:28:19', NULL, NULL),
 (4, 2, 1, NULL, 'User Group', 'user-group', 0, 1, NULL, 2, 'active', 00000000001, '2016-10-07 09:28:40', NULL, NULL),
 (5, NULL, 1, 'zmdi zmdi-collection-text', 'Master Data', NULL, 0, 1, 3, NULL, 'active', 00000000001, '2016-10-07 09:28:19', NULL, NULL),
-(6, 5, 1, NULL, 'Matriks Program & Anggaran', 'matriks', 0, 1, NULL, 1, 'active', 00000000001, '2016-10-07 09:29:06', NULL, NULL),
+(6, 5, 1, NULL, 'Matriks Program & Anggaran', 'matriks-program-anggaran', 0, 1, NULL, 1, 'active', 00000000001, '2016-10-07 09:29:06', NULL, NULL),
 (7, 5, 1, NULL, 'Trainer', 'trainer', 0, 1, NULL, 2, 'active', 00000000001, '2016-10-07 09:29:24', 00000000001, '2016-10-07 09:47:44'),
 (8, 5, 1, NULL, 'Materi', 'materi', 0, 1, NULL, 5, 'active', 00000000001, '2016-10-07 09:29:53', NULL, NULL),
 (9, 5, 1, NULL, 'Kategori Event', 'kategori-event', 0, 1, NULL, 6, 'active', 00000000001, '2016-10-07 09:30:08', NULL, NULL),
@@ -1042,7 +1147,45 @@ INSERT INTO `em_navigationmenu` (`id`, `id_parent`, `id_systemactive`, `icon_men
 (32, 14, 1, NULL, 'List Event', 'event', 0, 1, NULL, 4, 'active', 00000000001, '2016-10-07 09:31:22', NULL, NULL),
 (33, 5, 1, NULL, 'Kategori RAB', 'kategori-rab', 0, 1, NULL, 8, 'active', 00000000001, '2016-10-07 09:29:24', 00000000001, '2016-10-07 09:47:44'),
 (35, NULL, 2, 'zmdi zmdi-collection-item', 'List Peserta Event', 'list-peserta-event', 0, 0, 2, NULL, 'active', 00000000001, '2016-10-07 09:35:31', NULL, NULL),
-(36, 5, 1, NULL, 'Bisnis Unit', 'bisnis-unit', 0, 1, NULL, 11, 'active', 00000000001, '2016-10-07 09:30:28', NULL, NULL);
+(36, 5, 1, NULL, 'Bisnis Unit & Jabatan', 'bisnis-unit-jabatan', 0, 1, NULL, 11, 'active', 00000000001, '2016-10-07 09:30:28', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `em_program_anggaran`
+--
+
+CREATE TABLE `em_program_anggaran` (
+  `id` int(11) NOT NULL,
+  `id_root` int(11) DEFAULT NULL COMMENT 'Its parent root ID, if NULL then it is a root',
+  `id_parent` int(11) DEFAULT NULL COMMENT 'Jika NULL, maka dia root nya (setelah RKAP)',
+  `level` int(11) NOT NULL COMMENT '1=bisnis unit;2=kategori program;3=program',
+  `deskripsi` varchar(256) NOT NULL,
+  `budget` varchar(50) DEFAULT NULL,
+  `is_active` enum('active','disabled','deleted') NOT NULL,
+  `created_by` int(10) UNSIGNED ZEROFILL NOT NULL,
+  `created_date` datetime NOT NULL,
+  `modified_by` int(10) UNSIGNED ZEROFILL DEFAULT NULL,
+  `modified_date` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `em_program_anggaran`
+--
+
+INSERT INTO `em_program_anggaran` (`id`, `id_root`, `id_parent`, `level`, `deskripsi`, `budget`, `is_active`, `created_by`, `created_date`, `modified_by`, `modified_date`) VALUES
+(1, NULL, NULL, 1, 'Test Parent 1aa', '1314', 'active', 0000000011, '2016-10-27 20:04:23', 0000000011, '2016-10-28 06:58:35'),
+(2, 8, 8, 2, 'Test Child 1.1aaaa', '25445', 'deleted', 0000000011, '2016-10-27 20:04:55', 0000000011, '2016-10-28 08:39:27'),
+(3, 1, 7, 3, 'Test Child 1.1.1 bbbbb', NULL, 'deleted', 0000000011, '2016-10-27 20:05:11', 0000000011, '2016-10-28 08:39:10'),
+(7, 1, 1, 2, 'Test Child 1.2', NULL, 'active', 0000000011, '2016-10-27 20:04:55', NULL, NULL),
+(8, NULL, NULL, 1, 'Test Parent 2', '23131232', 'deleted', 0000000011, '2016-10-28 01:56:33', 0000000011, '2016-10-28 08:39:27'),
+(9, NULL, 8, 2, 'Test Child 2.1', '35234324', 'active', 0000000011, '2016-10-28 01:59:52', NULL, NULL),
+(10, 8, 8, 2, 'Test Child 2.2', NULL, 'deleted', 0000000011, '2016-10-28 02:02:06', 0000000011, '2016-10-28 08:39:27'),
+(11, 1, 2, 3, 'Test Child 1.1.1', NULL, 'deleted', 0000000011, '2016-10-28 02:03:13', 0000000011, '2016-10-28 08:39:19'),
+(12, 8, 9, 3, 'Test Child 2.1.1', NULL, 'deleted', 0000000011, '2016-10-28 02:03:54', 0000000011, '2016-10-28 08:39:27'),
+(13, NULL, NULL, 1, 'Level 1', '20000000', 'active', 0000000013, '2016-10-28 11:05:46', NULL, NULL),
+(14, 13, 13, 2, 'deskripsi level 2', NULL, 'active', 0000000013, '2016-10-28 11:06:16', NULL, NULL),
+(15, 8, 9, 3, 'program event test', NULL, 'active', 0000000013, '2016-10-28 11:06:35', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1491,6 +1634,18 @@ ALTER TABLE `em_activitiesuser`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `em_bisnis_unit`
+--
+ALTER TABLE `em_bisnis_unit`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `em_bisnis_unit_jabatan`
+--
+ALTER TABLE `em_bisnis_unit_jabatan`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `em_cabang`
 --
 ALTER TABLE `em_cabang`
@@ -1533,6 +1688,12 @@ ALTER TABLE `em_event_listpeserta`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `em_event_materikm`
+--
+ALTER TABLE `em_event_materikm`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `em_event_pic`
 --
 ALTER TABLE `em_event_pic`
@@ -1569,6 +1730,12 @@ ALTER TABLE `em_feedback_detail`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `em_kategori_event`
+--
+ALTER TABLE `em_kategori_event`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `em_kategori_rab`
 --
 ALTER TABLE `em_kategori_rab`
@@ -1596,6 +1763,12 @@ ALTER TABLE `em_materi`
 -- Indexes for table `em_navigationmenu`
 --
 ALTER TABLE `em_navigationmenu`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `em_program_anggaran`
+--
+ALTER TABLE `em_program_anggaran`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1678,7 +1851,17 @@ ALTER TABLE `em_usergroup_matrix`
 -- AUTO_INCREMENT for table `em_activitiesuser`
 --
 ALTER TABLE `em_activitiesuser`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=382;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=397;
+--
+-- AUTO_INCREMENT for table `em_bisnis_unit`
+--
+ALTER TABLE `em_bisnis_unit`
+  MODIFY `id` int(11) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `em_bisnis_unit_jabatan`
+--
+ALTER TABLE `em_bisnis_unit_jabatan`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `em_cabang`
 --
@@ -1698,7 +1881,7 @@ ALTER TABLE `em_email_template`
 -- AUTO_INCREMENT for table `em_event`
 --
 ALTER TABLE `em_event`
-  MODIFY `id` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `em_event_approval`
 --
@@ -1713,27 +1896,32 @@ ALTER TABLE `em_event_approval_files`
 -- AUTO_INCREMENT for table `em_event_listpeserta`
 --
 ALTER TABLE `em_event_listpeserta`
-  MODIFY `id` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+--
+-- AUTO_INCREMENT for table `em_event_materikm`
+--
+ALTER TABLE `em_event_materikm`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `em_event_pic`
 --
 ALTER TABLE `em_event_pic`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT for table `em_event_rab`
 --
 ALTER TABLE `em_event_rab`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 --
 -- AUTO_INCREMENT for table `em_event_rundown`
 --
 ALTER TABLE `em_event_rundown`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `em_event_trainer`
 --
 ALTER TABLE `em_event_trainer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `em_feedback`
 --
@@ -1744,6 +1932,11 @@ ALTER TABLE `em_feedback`
 --
 ALTER TABLE `em_feedback_detail`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+--
+-- AUTO_INCREMENT for table `em_kategori_event`
+--
+ALTER TABLE `em_kategori_event`
+  MODIFY `id` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `em_kategori_rab`
 --
@@ -1769,6 +1962,11 @@ ALTER TABLE `em_materi`
 --
 ALTER TABLE `em_navigationmenu`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+--
+-- AUTO_INCREMENT for table `em_program_anggaran`
+--
+ALTER TABLE `em_program_anggaran`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `em_registrasi`
 --

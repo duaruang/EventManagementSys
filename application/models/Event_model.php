@@ -81,6 +81,31 @@ class Event_model extends CI_Model
         return $return;
     }
 
+    //============================ Select Edit Event================================
+    public function select_detail_event($id)
+    {
+        return $this->db
+                    ->select('em_event.*,
+                        em_event_listpeserta.*,
+                        em_event_materikm.*,
+                        em_event_pic.*,
+                        em_event_rab.*,
+                        em_event_rundown.*,
+                        em_event_trainer.*,
+                        em_kategori_event.id,em_kategori_event.kategori_event,em_kategori_event.is_active')
+                    ->from('em_event') 
+                    ->join('em_event_listpeserta','em_event_listpeserta.id_event = em_event.id_event','left')
+                    ->join('em_event_materikm','em_event_materikm.id_event = em_event.id_event','left')
+                    ->join('em_event_pic','em_event_pic.id_event = em_event.id_event','left')
+                    ->join('em_event_rab','em_event_rab.id_event = em_event.id_event','left')
+                    ->join('em_event_rundown','em_event_rundown.id_event = em_event.id_event','left')
+                    ->join('em_event_trainer','em_event_trainer.id_event = em_event.id_event','left')
+                    ->join('em_kategori_event','em_kategori_event.id = em_event.id_kategori_event','left')
+                    ->where('em_event.is_active !=','deleted')
+                    ->where('em_event.id_event',$id)
+                    ->order_by('em_event.created_date','desc')
+                    ->get();
+    }
     //============================ Select Data RAB================================
     public function select_rab_parent_category($id)
     {
@@ -145,6 +170,11 @@ class Event_model extends CI_Model
     public function insert_rundown_event_files($data_files)
     {
         $this->db->insert('em_event_rundown',$data_files);     
+    }
+
+    public function insert_materi_event_files($data_files)
+    {
+        $this->db->insert('em_event_materikm',$data_files);     
     }
 
     public function insert_pic_event($data_pic)

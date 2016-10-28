@@ -220,9 +220,10 @@ EVENT CONTROLLER
 ================================================*/
 $route['pengajuan-event'] 						= 'Event_controller/propose';
 $route['event'] 								= 'Event_controller/index';
-$route['pengajuan-event/view/(:num)'] 			= 'Event_controller/view/$1';
+$route['pengajuan-event/view/(:any)'] 			= 'Event_controller/view/$1';
 $route['pengajuan-event/process_add'] 			= 'Event_controller/process_add';
-$route['pengajuan-event/edit/(:num)'] 			= 'Event_controller/edit/$1';
+$route['pengajuan-event/edit/(:any)'] 			= 'Event_controller/edit/$1';
+$route['pengajuan-event/edit-tanggal/(:any)'] 	= 'Event_controller/edit_tanggal/$1';
 $route['pengajuan-event/process_edit'] 			= 'Event_controller/process_edit';
 $route['pengajuan-event/delete'] 				= 'Event_controller/process_delete';
 $route['pengajuan-event/list-approval'] 		= 'Event_controller/list_approval';
@@ -250,3 +251,30 @@ $route['feedback/process-send'] 				= 'Feedback_controller/process_send';
 $route['list-feedback'] 						= 'Feedback_controller/index';
 $route['list-feedback/view/(:num)'] 			= 'Feedback_controller/view/$1';
 $route['feedback/process-delete'] 				= 'Feedback_controller/process_delete';
+
+/*==============================================
+BISNIS UNIT CONTROLLER
+================================================*/
+$route['bisnis-unit-jabatan'] 							= 'BisnisUnit_controller/index';
+$route['bisnis-unit-jabatan/add'] 						= 'BisnisUnit_controller/add';
+$route['bisnis-unit-jabatan/process-add-bisnis-unit'] 	= 'BisnisUnit_controller/process_add_bisnisunit';
+$route['bisnis-unit-jabatan/process-add-jabatan'] 		= 'BisnisUnit_controller/process_add_jabatan';
+$route['bisnis-unit-jabatan/view/(:num)/(:num)'] 		= 'BisnisUnit_controller/view/$1/$2';
+$route['bisnis-unit-jabatan/edit/(:num)/(:num)'] 		= 'BisnisUnit_controller/edit/$1/$2';
+$route['bisnis-unit-jabatan/process-edit'] 				= 'BisnisUnit_controller/process_edit';
+$route['bisnis-unit-jabatan/process-delete'] 			= 'BisnisUnit_controller/process_delete';
+
+/*==============================================
+MATRIKS PROGRAM ANGGARAN CONTROLLER
+================================================*/
+$route['matriks-program-anggaran'] 							= 'ProgramAnggaran_controller/index';
+$route['matriks-program-anggaran/add'] 						= 'ProgramAnggaran_controller/add';
+$route['matriks-program-anggaran/process-add-lv1'] 			= 'ProgramAnggaran_controller/process_add_level1';
+$route['matriks-program-anggaran/process-add-lv2'] 			= 'ProgramAnggaran_controller/process_add_level2';
+$route['matriks-program-anggaran/process-add-lv3'] 			= 'ProgramAnggaran_controller/process_add_level3';
+$route['matriks-program-anggaran/load-lv2'] 				= 'ProgramAnggaran_controller/load_level2';
+$route['matriks-program-anggaran/view/(:num)/(:num)'] 		= 'ProgramAnggaran_controller/view/$1/$2';
+$route['matriks-program-anggaran/edit/(:num)/(:num)'] 		= 'ProgramAnggaran_controller/edit/$1/$2';
+$route['matriks-program-anggaran/process-edit'] 			= 'ProgramAnggaran_controller/process_edit';
+$route['matriks-program-anggaran/load-kategori-program'] 	= 'ProgramAnggaran_controller/load_kategori';
+$route['matriks-program-anggaran/process-delete'] 			= 'ProgramAnggaran_controller/process_delete';

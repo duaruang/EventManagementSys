@@ -20,10 +20,11 @@ class BisnisUnit_controller extends MY_Controller {
 	 */
 	public function index()
 	{
-	    //$this->is_logged();
+	    //Check user is logged or not
+	    $this->is_logged();
 		
-        //Set Head Content
-		$head['title'] 			= 'Bisnis Unit - Event Management System' ;
+		//Set Head Content
+		$head['title'] 			= 'Bisnis Unit dan Jabatan - Event Management System' ;
 		$head['css']			=  $this->load->view('page/bisnis_unit/include/index-css', NULL, TRUE);
 		$this->load->view('include/head', $head, TRUE);
         
@@ -31,7 +32,7 @@ class BisnisUnit_controller extends MY_Controller {
         $data['script']    		= $this->load->view('page/bisnis_unit/include/index-script', NULL, TRUE);
 		
 		//Set Data
-        $data['load_parent']	= $this->bisnis_unit_model->select_parent_category();
+        $data['load_bisnis']	= $this->bisnis_unit_model->select_bisnis_unit();
 		
         //Load page
 		$this->template->view('page/bisnis_unit/index',$data);
@@ -39,28 +40,32 @@ class BisnisUnit_controller extends MY_Controller {
 
 	public function add()
 	{
-	    //$this->is_logged();
+	    //Check user is logged or not
+	    $this->is_logged();
 		
-        //Set Head Content
-		$head['title'] 			= 'Tambah Kategori RAB - Event Management System' ;
-		$head['css']			=  $this->load->view('page/kategori_rab/include/add-css', NULL, TRUE);
+		//Set Head Content
+		$head['title'] 			= 'Tambah Bisnis Unit dan Jabatan - Event Management System' ;
+		$head['css']			=  $this->load->view('page/bisnis_unit/include/add-css', NULL, TRUE);
 		$this->load->view('include/head', $head, TRUE);
         
 		//Set Content
-		$data['load_parent']	= $this->kategori_rab_model->select_parent_category();
+		$data['load_bisnis']	= $this->bisnis_unit_model->select_bisnis_unit();
 		
         //Set Spesific Javascript page
-        $data['script']     	= $this->load->view('page/kategori_rab/include/add-script', NULL, TRUE);
+        $data['script']     	= $this->load->view('page/bisnis_unit/include/add-script', NULL, TRUE);
         
         //Load page
-		$this->template->view('page/kategori_rab/add',$data);
+		$this->template->view('page/bisnis_unit/add',$data);
 	}
 
-	public function process_add_kategori()
+	public function process_add_bisnisunit()
 	{
-		//No data -> redirected to page adding kategori rab
+		//Check user is logged or not
+	    $this->is_logged();
+		
+		//No data -> redirected to page adding bisnis unit
 		if(count($_POST) == 0){
-			redirect('kategori-rab/add', 'location');
+			redirect('bisnis-unit-jabatan/add', 'location');
 		}
 		//Default value is OK. If validations fail result will change to NG.
 		$output = array(
@@ -70,25 +75,20 @@ class BisnisUnit_controller extends MY_Controller {
 		
 		//Get Data
 		$deskripsi		= trim($this->security->xss_clean(strip_image_tags($this->input->post('deskripsi'))));
-		$jumlah_unit	= trim($this->security->xss_clean(strip_image_tags($this->input->post('jumlah_unit'))));
-		$frekwensi		= trim($this->security->xss_clean(strip_image_tags($this->input->post('frekwensi'))));
 		$status			= $this->security->xss_clean(strip_image_tags($this->input->post('status')));
 		$id_user		= $this->session->userdata('sess_user_id');
 		
-		//Insert Data to table kategori rab
-		$data_rab	= array(
-							'id_parent'				=> NULL,
+		//Insert Data to table bisnis unit
+		$data_bisnis	= array(
 							'deskripsi'				=> $deskripsi,
-							'jumlah_unit'			=> $jumlah_unit,
-							'frekwensi'				=> $frekwensi,
 							'is_active' 			=> $status,
 							'created_by' 			=> $id_user,
 							'created_date' 			=> date('Y-m-d H:i:s')
 						);
-		$this->kategori_rab_model->insert_category_rab($data_rab);
+		$this->bisnis_unit_model->insert_bisnis_unit($data_bisnis);
 		
 		//Insert Log
-		$activities = 'Tambah Kategori RAB';
+		$activities = 'Tambah Bisnis Unit';
 		$itemid		= $deskripsi;
 		$this->insert_activities_user($activities,$itemid);
 		
@@ -99,11 +99,14 @@ class BisnisUnit_controller extends MY_Controller {
 		exit;
 	}
 
-	public function process_add_subkategori()
+	public function process_add_jabatan()
 	{
-		//No data -> redirected to page adding kategori rab
+		//Check user is logged or not
+	    $this->is_logged();
+		
+		//No data -> redirected to page adding jabatan
 		if(count($_POST) == 0){
-			redirect('kategori-rab/add', 'location');
+			redirect('bisnis-unit-jabatan/add', 'location');
 		}
 		//Default value is OK. If validations fail result will change to NG.
 		$output = array(
@@ -112,28 +115,24 @@ class BisnisUnit_controller extends MY_Controller {
 		);
 		
 		//Get Data
-		$parent		= $this->security->xss_clean(strip_image_tags($this->input->post('parent')));
-		$deskripsi	= trim($this->security->xss_clean(strip_image_tags($this->input->post('deskripsi'))));
-		$jumlah_unit	= trim($this->security->xss_clean(strip_image_tags($this->input->post('jumlah_unit'))));
-		$frekwensi		= trim($this->security->xss_clean(strip_image_tags($this->input->post('frekwensi'))));
-		$status		= $this->security->xss_clean(strip_image_tags($this->input->post('status')));
-		$id_user	= $this->session->userdata('sess_user_id');
+		$id_bisnis_unit	= $this->security->xss_clean(strip_image_tags($this->input->post('bisnis_unit')));
+		$nama_jabatan	= trim($this->security->xss_clean(strip_image_tags($this->input->post('nama_jabatan'))));
+		$status			= $this->security->xss_clean(strip_image_tags($this->input->post('status')));
+		$id_user		= $this->session->userdata('sess_user_id');
 		
 		//Insert Data to table kategori rab
 		$data_rab	= array(
-							'id_parent'				=> $parent,
-							'deskripsi'				=> $deskripsi,
-							'jumlah_unit'			=> $jumlah_unit,
-							'frekwensi'				=> $frekwensi,
+							'id_bisnis_unit'		=> $id_bisnis_unit,
+							'nama_jabatan'			=> $nama_jabatan,
 							'is_active' 			=> $status,
 							'created_by' 			=> $id_user,
 							'created_date' 			=> date('Y-m-d H:i:s')
 						);
-		$this->kategori_rab_model->insert_category_rab($data_rab);
+		$this->bisnis_unit_model->insert_jabatan($data_rab);
 		
 		//Insert Log
-		$activities = 'Tambah Kategori RAB';
-		$itemid		= $deskripsi;
+		$activities = 'Tambah Bisnis Unit-Jabatan';
+		$itemid		= $nama_jabatan;
 		$this->insert_activities_user($activities,$itemid);
 		
 		//Set session flashdata
@@ -145,50 +144,83 @@ class BisnisUnit_controller extends MY_Controller {
 
 	public function view()
 	{
-	    //$this->is_logged();
+	    //Check user is logged or not
+	    $this->is_logged();
+		
 		//Get Data
-		$id_rab = $this->uri->segment(3);
+		$type 	= $this->uri->segment(3);
+		$id		= $this->uri->segment(4);
 		
         //Set Head Content
-		$head['title'] 			= 'View Kategori RAB - Event Management System' ;
-		$head['css']			=  $this->load->view('page/kategori_rab/include/add-css', NULL, TRUE);
+		$head['title'] 			= 'View Bisnis Unit dan Jabatan - Event Management System' ;
+		$head['css']			=  $this->load->view('page/bisnis_unit/include/add-css', NULL, TRUE);
 		$this->load->view('include/head', $head, TRUE);
         
         //Set Spesific Javascript page
-        $data['script']     	= $this->load->view('page/kategori_rab/include/add-script', NULL, TRUE);
+        $data['script']     	= $this->load->view('page/bisnis_unit/include/add-script', NULL, TRUE);
         
 		//Set Data 
-		$data['load_rab']		= $this->kategori_rab_model->select_category_id($id_rab);
+		$data['type']			= $type; //1=bisnis unit; 2=jabatan
+		if($type==1) //Bisnis Unit View
+		{
+			$data['load_data']		= $this->bisnis_unit_model->select_bisnis_unit_id($id);
+		}
+		elseif($type==2) //Jabatan View
+		{
+			$data['load_data']		= $this->bisnis_unit_model->select_jabatan_id($id);
+		}
+		else
+		{
+			show_404();
+		}
 		
         //Load page
-		$this->template->view('page/kategori_rab/view',$data);
+		$this->template->view('page/bisnis_unit/view',$data);
 	}
 
 	public function edit()
 	{
-	    //$this->is_logged();
-	    //Get Data
-		$id_rab = $this->uri->segment(3);
+	    //Check user is logged or not
+	    $this->is_logged();
+		
+		//Get Data
+		$type 	= $this->uri->segment(3);
+		$id		= $this->uri->segment(4);
 		
         //Set Head Content
-		$head['title'] 			= 'Edit Kategori RAB - Event Management System' ;
-		$head['css']			=  $this->load->view('page/kategori_rab/include/add-css', NULL, TRUE);
+		$head['title'] 			= 'Edit Bisnis Unit dan Jabatan - Event Management System' ;
+		$head['css']			=  $this->load->view('page/bisnis_unit/include/add-css', NULL, TRUE);
 		$this->load->view('include/head', $head, TRUE);
         
         //Set Spesific Javascript page
-        $data['script']     	= $this->load->view('page/kategori_rab/include/add-script', NULL, TRUE);
+        $data['script']     	= $this->load->view('page/bisnis_unit/include/add-script', NULL, TRUE);
         
 		//Set Data 
-		$data['id_rab']			= $id_rab;
-		$data['load_rab']		= $this->kategori_rab_model->select_category_id($id_rab);
-		$data['load_parent']	= $this->kategori_rab_model->select_parent_category();
+		$data['id']				= $id;
+		$data['type']			= $type;
+		if($type==1) //Bisnis Unit View
+		{
+			$data['load_data']		= $this->bisnis_unit_model->select_bisnis_unit_id($id);
+		}
+		elseif($type==2) //Jabatan View
+		{
+			$data['load_data']		= $this->bisnis_unit_model->select_jabatan_id($id);
+		}
+		else
+		{
+			show_404();
+		}
+		$data['load_bisnis']	= $this->bisnis_unit_model->select_bisnis_unit();
 		
         //Load page
-		$this->template->view('page/kategori_rab/edit',$data);
+		$this->template->view('page/bisnis_unit/edit',$data);
 	}
 
 	public function process_edit()
 	{
+		//Check user is logged or not
+	    $this->is_logged();
+		
 		//No data -> redirected to page editing kategori rab
 		if(count($_POST) == 0){
 			redirect('kategori-rab/edit', 'location');
@@ -200,27 +232,47 @@ class BisnisUnit_controller extends MY_Controller {
 		);
 		
 		//Get Data
-		$id_rab		= $this->security->xss_clean(strip_image_tags($this->input->post('hidden-id-rab')));
-		$parent		= $this->security->xss_clean(strip_image_tags($this->input->post('parent')));
-		if($parent=='') $f_parent = NULL; else $f_parent = $parent;
-		$deskripsi	= trim($this->security->xss_clean(strip_image_tags($this->input->post('deskripsi'))));
-		$status		= $this->security->xss_clean(strip_image_tags($this->input->post('status')));
-		$id_user	= $this->session->userdata('sess_user_id');
+		$id				= $this->security->xss_clean(strip_image_tags($this->input->post('hidden-id')));
+		$type			= $this->security->xss_clean(strip_image_tags($this->input->post('hidden-type')));
+		$deskripsi		= trim($this->security->xss_clean(strip_image_tags($this->input->post('deskripsi'))));
+		$id_bisnis_unit	= $this->security->xss_clean(strip_image_tags($this->input->post('bisnis_unit')));
+		$nama_jabatan	= trim($this->security->xss_clean(strip_image_tags($this->input->post('nama_jabatan'))));
+		$status			= $this->security->xss_clean(strip_image_tags($this->input->post('status')));
+		$id_user		= $this->session->userdata('sess_user_id');
 		
-		//Update Data to table kategori rab
-		$data_rab	= array(
-							'id_parent'				=> $f_parent,
-							'deskripsi'				=> $deskripsi,
-							'is_active' 			=> $status,
-							'modified_by' 			=> $id_user,
-							'modified_date' 		=> date('Y-m-d H:i:s')
-						);
-		$this->kategori_rab_model->update_category_rab($id_rab,$data_rab);
-		
-		//Insert Log
-		$activities = 'Edit Kategori RAB';
-		$itemid		= $deskripsi;
-		$this->insert_activities_user($activities,$itemid);
+		if($type==1) //Bisnis Unit Process Edit
+		{
+			//Update Data to table bisnis unit
+			$data	= array(
+								'deskripsi'				=> $deskripsi,
+								'is_active' 			=> $status,
+								'modified_by' 			=> $id_user,
+								'modified_date' 		=> date('Y-m-d H:i:s')
+							);
+			$this->bisnis_unit_model->update_bisnis_unit($id,$data);
+			
+			//Insert Log
+			$activities = 'Edit Bisnis Unit';
+			$itemid		= $deskripsi;
+			$this->insert_activities_user($activities,$itemid);
+		}
+		elseif($type==2) //Jabatan Process Edit
+		{
+			//Update Data to table bisnis unit jabatan
+			$data	= array(
+								'id_bisnis_unit'		=> $id_bisnis_unit,
+								'nama_jabatan'			=> $nama_jabatan,
+								'is_active' 			=> $status,
+								'modified_by' 			=> $id_user,
+								'modified_date' 		=> date('Y-m-d H:i:s')
+							);
+			$this->bisnis_unit_model->update_jabatan($id,$data);
+			
+			//Insert Log
+			$activities = 'Edit Bisnis Unit-Jabatan';
+			$itemid		= $nama_jabatan;
+			$this->insert_activities_user($activities,$itemid);
+		}
 		
 		//Set session flashdata
 		$this->session->set_flashdata('message_success', 'Data telah berhasil disimpan.');
@@ -232,38 +284,38 @@ class BisnisUnit_controller extends MY_Controller {
 	public function process_delete()
 	{
 		//Check user is logged or not
-	    //$this->is_logged();
+	    $this->is_logged();
 		
 		//Get Data
-		$id_rab		 = $this->security->xss_clean(strip_image_tags($this->input->post('hidden-idrab'))); 
-		$id_parent	 = $this->security->xss_clean(strip_image_tags($this->input->post('hidden-idparent'))); 
-		$deskripsi   = $this->security->xss_clean(strip_image_tags($this->input->post('hidden-deskripsi')));
-		$id_user	 = $this->session->userdata('sess_user_id');
+		$id		 	= $this->security->xss_clean(strip_image_tags($this->input->post('hidden-id'))); 
+		$type	 	= $this->security->xss_clean(strip_image_tags($this->input->post('hidden-type'))); 
+		$deskripsi  = $this->security->xss_clean(strip_image_tags($this->input->post('hidden-deskripsi')));
+		$id_user 	= $this->session->userdata('sess_user_id');
 		
-		if($id_rab != '') {
-			if($id_parent=='') //Kategori Utama (parent)
+		if($id != '') {
+			if($type==1) //Delete Bisnis Unit
 			{
-				//Update Data table Kategori RAB -> is_active = deleted, delete parent
+				//Update Data table bisnis unit -> is_active = deleted, delete parent
 				$data = array('is_active'=>'deleted','modified_by'=> $id_user,'modified_date'=> date('Y-m-d H:i:s'));
-				$this->kategori_rab_model->update_category_rab($id_rab,$data);
+				$this->bisnis_unit_model->update_bisnis_unit($id,$data);
 				
-				//Update Data table Kategori RAB -> is_active = deleted, delete child
+				//Update Data table bisnis unit jabatan (based on id bisnis_unit) -> is_active = deleted, delete child
 				$data = array('is_active'=>'deleted','modified_by'=> $id_user,'modified_date'=> date('Y-m-d H:i:s'));
-				$this->kategori_rab_model->update_subcategory_rab($id_rab,$data);
+				$this->bisnis_unit_model->update_bisnis_unit_jabatan($id,$data);
 				
 				//insert log
-				$activities = 'Hapus Kategori (beserta Sub-Kategori nya) RAB';
+				$activities = 'Hapus Bisnis Unit (beserta List Jabatan nya)';
 				$itemid		= $deskripsi;
 				$this->insert_activities_user($activities,$itemid);
 			}
-			else //Sub-Kategori (child)
+			else //Delete Jabatan
 			{
-				//Update Data table Kategori RAB -> is_active = deleted, delete current sub category
+				//Update Data table bisnis unit jabatan -> is_active = deleted
 				$data = array('is_active'=>'deleted','modified_by'=> $id_user,'modified_date'=> date('Y-m-d H:i:s'));
-				$this->kategori_rab_model->update_category_rab($id_rab,$data);
+				$this->bisnis_unit_model->update_jabatan($id,$data);
 				
 				//insert log
-				$activities = 'Hapus Sub-Kategori RAB';
+				$activities = 'Hapus Bisnis Unit-Jabatan';
 				$itemid		= $deskripsi;
 				$this->insert_activities_user($activities,$itemid);
 			}
@@ -277,6 +329,6 @@ class BisnisUnit_controller extends MY_Controller {
 			$this->session->set_flashdata('message_error', 'Terjadi kesalahan, mohon ulangi kembali.');
 		}
 		
-		redirect('kategori-rab');
+		redirect('bisnis-unit-jabatan');
 	}
 }

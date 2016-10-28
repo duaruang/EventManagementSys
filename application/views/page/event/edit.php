@@ -3,11 +3,11 @@
         <ol class="breadcrumb">
             <li><a href="<?php echo site_url('dashboard'); ?>">Dashboard</a></li>
             <li><a href="<?php echo site_url('event'); ?>">List Event</a></li>
-            <li class="active">Pengajuan Event</li>
+            <li class="active">Edit Pengajuan Event</li>
         </ol>
     </div>
 </div>
-
+<?php $data = $load_event->result_array(); ?>
 <div class="container"> 
 
 <!-- Page-Title -->
@@ -26,12 +26,13 @@
                     <div class="col-sm-12">
                     <div class="p-20">
                         <?php 
-                        $attrib = array('class' => 'form-horizontal','id'=>'add-form-event','name'=>'add-form-event','enctype'=>'multipart/form-data');
+                        $attrib = array('class' => 'form-horizontal','id'=>'edit-form-event','name'=>'edit-form-event','enctype'=>'multipart/form-data');
                         echo form_open('',$attrib); ?>
+                            <?php echo form_hidden('id_event',$data[0]['id_event']); ?>
                             <div class="form-group row">
                                 <label class="col-sm-2">Nomor Memo <span class="text-danger">*</span></label>
                                 <div class="col-sm-3" id="maskinput">
-                                    <input type="text" class="form-control" data-mask="a-999/PNM-aaa/aa/9999" required id="inputNomorMemo" name="inputNomorMemo" placeholder="contoh : X-999/PNM-XXX/XX/9999" />
+                                    <input type="text" class="form-control" data-mask="a-999/PNM-aaa/aa/9999" required id="inputNomorMemo" name="inputNomorMemo" placeholder="contoh : X-999/PNM-XXX/XX/9999" value="<?php echo $data[0]['nomor_memo']; ?>" />
                                 </div>
                                 <div class="col-sm-2">
                                      <label class="c-input c-checkbox">
@@ -44,13 +45,13 @@
                             <div class="form-group row">
                                 <label class="col-sm-2">Nama Event <span class="text-danger">*</span></label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control" required placeholder="Type something" id="inputNamaEvent" name="inputNamaEvent"/>
+                                    <input type="text" class="form-control" required placeholder="Type something" id="inputNamaEvent" name="inputNamaEvent" value="<?php echo $data[0]['nama_event']; ?>"/>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-2">Topik Event <span class="text-danger">*</span></label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control" required placeholder="Type something" id="inputTopikEvent" name="inputTopikEvent"/>
+                                    <input type="text" class="form-control" required placeholder="Type something" id="inputTopikEvent" name="inputTopikEvent" value="<?php echo $data[0]['topik_event']; ?>"/>
                                 </div>
                             </div>
                             <!--
@@ -64,9 +65,9 @@
                                 <label class="col-sm-2">Tanggal Pelaksanaan <span class="text-danger">*</span></label>
                                 <div class="col-sm-5">
                                      <div class="input-group">
-                                        <input type="text" class="form-control input-limit-datepicker" id="inputStartTglPelaksanaan" name="inputStartTglPelaksanaan" required />
+                                        <input type="text" class="form-control input-limit-datepicker" id="inputStartTglPelaksanaan" name="inputStartTglPelaksanaan" required value="<?php echo $data[0]['mulai_tanggal_pelaksanaan']; ?>"/>
                                         <span class="input-group-addon bg-custom b-0">s/d</span>
-                                            <input type="text" class="form-control" readonly="" id="inputAkhirTglPelaksanaan" name="inputAkhirTglPelaksanaan"/>
+                                            <input type="text" class="form-control" readonly="" id="inputAkhirTglPelaksanaan" name="inputAkhirTglPelaksanaan" value="<?php echo $data[0]['selesai_tanggal_pelaksanaan']; ?>"/>
                                         <span class="input-group-addon bg-custom b-0"><i class="icon-calender"></i></span>
                                     </div><!-- input-group -->
                                 </div>
@@ -74,42 +75,30 @@
                              <div class="form-group row">
                                 <label class="col-sm-2">Tempat Pelaksanaan <span class="text-danger">*</span></label>
                                 <div class="col-sm-2">
-                                    <select class="form-control select2" required="" id="inputTempatPelaksanaan" name="inputTempatPelaksanaan">
-                                        <option value="">--pilih kategori--</option>
-                                        <?php if($load_kategori_tempat->num_rows() > 0){ ?>
-                                        <?php foreach($load_kategori_tempat->result() as $data){ ?>
-                                            <option value="<?php echo $data->id; ?>"><?php echo $data->kategori_tempat; ?></option>
-                                        <?php } ?>
-                                        <?php } ?>
-                                    </select>
+                                     <?php $style_d= array('class'=>'form-control select2', 'Required'=>'','id'=>'inputTempatPelaksanaan'); ?>
+                                    <?php echo form_dropdown('inputTempatPelaksanaan', $load_kategori_tempat, $data[0]['id_kategori_tempat_pelaksanaan'],$style_d); ?>
                                 </div>
                                 <div class="col-sm-2"><a class="maps-google" data-toggle="modal" data-target=".gmap"><i class="fa fa-2x fa-map-marker"></i> get location</a></div>
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-offset-2 col-sm-5">
-                                    <textarea type="text" class="form-control" required="" placeholder="Nama Tempat" id="inputNamaTempat" name="inputNamaTempat" rows="3"></textarea>
-                                    <span class="font-13 text-muted">latitude : <span id="lat" class="text-dark"></span>, longitude :<span id="lng" class="text-dark"></span></span>
-                                    <input type="hidden" id="ev_latitude" name="ev_latitude">
-                                    <input type="hidden" id="ev_longitude" name="ev_longitude">
+                                    <textarea type="text" class="form-control" required="" placeholder="Nama Tempat" id="inputNamaTempat" name="inputNamaTempat" rows="3"><?php echo $data[0]['nama_tempat']; ?></textarea>
+                                    <span class="font-13 text-muted">latitude : <span id="lat" class="text-dark"><?php echo $data[0]['latitude']; ?></span>, longitude :<span id="lng" class="text-dark"><?php echo $data[0]['longitude']; ?></span></span>
+                                    <input type="hidden" id="ev_latitude" name="ev_latitude" value="<?php echo $data[0]['latitude']; ?>">
+                                    <input type="hidden" id="ev_longitude" name="ev_longitude" value="<?php echo $data[0]['longitude']; ?>">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-2">Target / Sasaran Peserta <span class="text-danger">*</span></label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control" required="" id="inputSasaranTarget" name="inputSasaranTarget"/>
+                                    <input type="text" class="form-control" required="" id="inputSasaranTarget" name="inputSasaranTarget" value="<?php echo $data[0]['target_sasaran']; ?>"/>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-2">Kategori Event <span class="text-danger">*</span></label>
                                 <div class="col-sm-3">
-                                    <select class="form-control select2" id="inputKategoriEvent" name="inputKategoriEvent"  required="">
-                                     <option value="">--pilih kategori--</option>
-                                        <?php if($load_kategori_event->num_rows() > 0){ ?>
-                                        <?php foreach($load_kategori_event->result() as $data){ ?>
-                                            <option value="<?php echo $data->id; ?>"><?php echo $data->kategori_event; ?></option>
-                                        <?php } ?>
-                                        <?php } ?>
-                                    </select>
+                                    <?php $style_d= array('class'=>'form-control select2', 'Required'=>'','id'=>'inputKategoriEvent'); ?>
+                                    <?php echo form_dropdown('inputKategoriEvent', $load_kategori_event, $data[0]['id_kategori_event'],$style_d); ?>
                                 </div>
                             </div>
 
@@ -425,9 +414,9 @@
                                     <button type="submit" name="draft" class="btn btn-warning waves-effect m-l-5">
                                         Save as draft
                                     </button>
-                                    <button type="reset" class="btn btn-secondary waves-effect m-l-5">
+                                     <a href="<?php echo site_url('event'); ?>" class="btn btn-secondary waves-effect m-l-5">
                                         Cancel
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
                         </form>

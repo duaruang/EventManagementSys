@@ -17,7 +17,7 @@
 			
 			var formURL = "<?php echo site_url('kategori-rab/process-add-kategori'); ?>";
 			var formDatas = new FormData(this);
-			$("#loader").show();
+			$("#loader1").show();
 			var xhr = $.ajax({
 				url: formURL,
 				type: 'POST',
@@ -37,7 +37,7 @@
 				console.log(data);
 			});
 			xhr.fail(function() {
-				$("#loader").hide();
+				$("#loader1").hide();
 				var failMsg = "Something error happened!";
 				alert(failMsg);
 			});	
@@ -49,7 +49,7 @@
 			
 			var formURL = "<?php echo site_url('kategori-rab/process-add-subkategori'); ?>";
 			var formDatas = new FormData(this);
-			$("#loader").show();
+			$("#loader2").show();
 			var xhr = $.ajax({
 				url: formURL,
 				type: 'POST',
@@ -69,7 +69,7 @@
 				console.log(data);
 			});
 			xhr.fail(function() {
-				$("#loader").hide();
+				$("#loader2").hide();
 				var failMsg = "Something error happened!";
 				alert(failMsg);
 			});	

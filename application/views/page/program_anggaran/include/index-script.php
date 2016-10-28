@@ -47,17 +47,21 @@
 				
 		
 		//Script: Delete User Group
-		$('#datatable-buttons tbody').on('click', '.delete-bisnis-jabatan', function () {
+		$('#datatable-buttons tbody').on('click', '.delete-pa', function () {
 			var id = $(this).data('id'); 
 			var type = $(this).data('type'); 
 			var deskripsi = $(this).data('deskripsi'); 
 			
-			if(type=='1') $('.text-delete-custom').html('Apakah Anda yakin ingin menghapus Bisnis Unit <strong>"<span class="ss text-danger">' + deskripsi + '</span>"</strong> beserta List Jabatan nya?');
-			else $('.text-delete-custom').html('Apakah Anda yakin ingin menghapus Bisnis Unit-Jabatan <strong>"<span class="ss text-danger">' + deskripsi + '</span>"</strong>?');
+			if(type==1) $('.text-delete-custom').html('Apakah Anda yakin ingin menghapus Bisnis Unit <strong>"<span class="ss text-danger">' + deskripsi + '</span>"</strong> beserta Kategori Program dan Program nya?');
+			else if(type==2) $('.text-delete-custom').html('Apakah Anda yakin ingin menghapus Kategori Program <strong>"<span class="ss text-danger">' + deskripsi + '</span>"</strong> beserta Program nya?');
+			else $('.text-delete-custom').html('Apakah Anda yakin ingin menghapus Program <strong>"<span class="ss text-danger">' + deskripsi + '</span>"</strong>?');
 			
 			$('.hidden-id').val(id);
 			$('.hidden-type').val(type);
 			$('.hidden-deskripsi').val(deskripsi);
 		});
+		
+		
+		
     } );
 </script>       

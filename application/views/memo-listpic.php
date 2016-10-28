@@ -43,14 +43,12 @@ th {
     text-align: left;
 }
 </style>
-<div style="margin-bottom:20px;border:2px dashed #000;padding: 7px 5px;background-color: #eaeaea;font-size: 12px;">Lampiran list peserta</div>
+<div style="margin-bottom:20px;border:2px dashed #000;padding: 7px 5px;background-color: #eaeaea;font-size: 12px;">Lampiran PIC/Panitia</div>
 <table id="get_list_peserta_table" class="table table-striped table-bordered" cellspacing="0" width="100%">
 <thead>
 <tr>
     <th width="20">No.</th>                                            
-    <th>NIK</th>
     <th>Nama</th>
-    <th>Posisi</th>
 </tr>
 </thead>
 <tbody>

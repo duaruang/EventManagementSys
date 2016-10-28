@@ -2,8 +2,8 @@
     <div class="container">
         <ol class="breadcrumb">
             <li><a href="<?php echo site_url('dashboard'); ?>">Dashboard</a></li>
-            <li><a href="<?php echo site_url('kategori-rab'); ?>">Kategori RAB Administration</a></li>
-            <li class="active">Tambah Kategori RAB</li>
+            <li><a href="<?php echo site_url('matriks-program-anggaran'); ?>">Matriks Program & Anggaran Administration</a></li>
+            <li class="active">Tambah Matriks Program & Anggaran</li>
         </ol>
     </div>
 </div>
@@ -11,10 +11,10 @@
 <div class="container"> 
 
 	<!-- Page-Title -->
-	<!-- Form: Tambah Judul(Parent) Kategori RAB-->
+	<!-- Form: Tambah Matriks Program & Anggaran Level 1-->
     <div class="row">
         <div class="col-sm-12">
-            <h4 class="page-title">Tambah Kategori RAB</h4>
+            <h4 class="page-title">Tambah Bisnis Unit (Level 1)</h4>
         </div>
     </div>
     <div class="row">
@@ -27,7 +27,7 @@
                     <div class="col-sm-12">
 						<div class="p-20">
 							<?php 
-							$attrib = array('class' => 'form-horizontal','id'=>'form-add-rab-parent');
+							$attrib = array('class' => 'form-horizontal','id'=>'form-add-level1');
 							echo form_open('',$attrib); ?>
 								<div class="form-group row">
 									<label class="col-sm-2">Deskripsi <span class="text-danger">*</span></label>
@@ -35,20 +35,12 @@
 										<input type="text" class="form-control" required name="deskripsi"/>
 									</div>
 								</div>
-								<!--
 								<div class="form-group row">
-									<label class="col-sm-2">unit <span class="text-danger">*</span></label>
+									<label class="col-sm-2">Budget</label>
 									<div class="col-sm-4">
-										<input type="text" class="form-control" required name="jumlah_unit" placeholder="unit/pcs/item/pax" />
+										<input type="text" placeholder="" data-a-sign="Rp. " id="budget1" name="budget" class="form-control autonumber">
 									</div>
 								</div>
-								<div class="form-group row">
-									<label class="col-sm-2">frekwensi <span class="text-danger">*</span></label>
-									<div class="col-sm-4">
-										<input type="text" class="form-control" required name="frekwensi" placeholder="kali/hari"/>
-									</div>
-								</div>
-								-->
 								<div class="form-group row">
 									<label class="col-sm-2">Status <span class="text-danger">*</span></label>
 									<div class="col-sm-2">
@@ -66,7 +58,7 @@
 										<button type="submit" class="btn btn-primary waves-effect waves-light">
 											Save
 										</button>
-										<a href="<?php echo site_url('kategori-rab'); ?>" class="btn btn-secondary waves-effect m-l-5">
+										<a href="<?php echo site_url('matriks-program-anggaran'); ?>" class="btn btn-secondary waves-effect m-l-5">
 											Cancel
 										</a>
 									</div>
@@ -80,11 +72,10 @@
     </div>
 	
 	
-	<!-- Page-Title -->
-	<!-- Form: Tambah Child Kategori RAB-->
+	<!-- Form: Tambah Matriks Program & Anggaran Level 2-->
     <div class="row">
         <div class="col-sm-12">
-            <h4 class="page-title">Tambah Sub-Kategori RAB</h4>
+            <h4 class="page-title">Tambah Kategori Program (Level 2)</h4>
         </div>
     </div>
     <div class="row">
@@ -97,27 +88,25 @@
                     <div class="col-sm-12">
 						<div class="p-20">
 							<?php 
-							$attrib = array('class' => 'form-horizontal','id'=>'form-add-rab-child');
+							$attrib = array('class' => 'form-horizontal','id'=>'form-add-level2');
 							echo form_open('',$attrib); ?>
 								<div class="form-group row">
-									<label class="col-sm-2">Kategori Utama <span class="text-danger">*</span></label>
+									<label class="col-sm-2">Bisnis Unit (lv1)  <span class="text-danger">*</span></label>
 									<div class="col-sm-4">
-										<select class="form-control select2" required name="parent">
-										<option value="">--pilih kategori--</option>
+										<select id="level1" class="form-control select2" required name="id_parent">
+										<option value="">--pilih bisnis unit--</option>
 										<?php
-											if($load_parent->num_rows() > 0)
+											foreach($load_level1->result() as $l1)
 											{
-												foreach($load_parent->result() as $p)
-												{
 										?>
-										<option value="<?php echo $p->id;?>"><?php echo $p->deskripsi;?></option>
+										<option value="<?php echo $l1->id;?>"><?php echo $l1->deskripsi;?></option>
 										<?php
-												}
 											}
 										?>
 										</select>
 									</div>
 								</div>
+								<div id="detail-lv1"></div>
 								<div class="form-group row">
 									<label class="col-sm-2">Deskripsi <span class="text-danger">*</span></label>
 									<div class="col-sm-4">
@@ -125,15 +114,9 @@
 									</div>
 								</div>
 								<div class="form-group row">
-									<label class="col-sm-2">unit <span class="text-danger">*</span></label>
-									<div class="col-sm-2">
-										<input type="text" class="form-control" required name="jumlah_unit" placeholder="contoh : unit/pax/pcs" />
-									</div>
-								</div>
-								<div class="form-group row">
-									<label class="col-sm-2">frekwensi <span class="text-danger">*</span></label>
-									<div class="col-sm-2">
-										<input type="text" class="form-control" required name="frekwensi" placeholder="contoh : hari/kali" />
+									<label class="col-sm-2">Budget</label>
+									<div class="col-sm-4">
+										<input type="text" placeholder="" data-a-sign="Rp. " id="budget2" name="budget" class="form-control autonumber">
 									</div>
 								</div>
 								<div class="form-group row">
@@ -153,7 +136,79 @@
 										<button type="submit" class="btn btn-primary waves-effect waves-light">
 											Save
 										</button>
-										<a href="<?php echo site_url('kategori-rab'); ?>" class="btn btn-secondary waves-effect m-l-5">
+										<a href="<?php echo site_url('matriks-program-anggaran'); ?>" class="btn btn-secondary waves-effect m-l-5">
+											Cancel
+										</a>
+									</div>
+								</div>
+							<?php echo form_close(); ?>
+						</div>
+                    </div>
+                </div>
+            </div>
+        </div>  
+    </div>
+	
+	
+	<!-- Form: Tambah Matriks Program & Anggaran Level 3-->
+    <div class="row">
+        <div class="col-sm-12">
+            <h4 class="page-title">Tambah Program (Level 3)</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group" id="loader3" style="position:absolute;display:none;width: 100%;height:100%;text-align: center;background-color: rgba(255,255,255,0.9);z-index: 1000;">
+			<img style="position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;" src="<?php echo base_url(); ?>assets/images/Preloader_2.gif">
+            </div>
+            <div class="card-box">
+                <div class="row m-t-10">
+                    <div class="col-sm-12">
+						<div class="p-20">
+							<?php 
+							$attrib = array('class' => 'form-horizontal','id'=>'form-add-level3');
+							echo form_open('',$attrib); ?>
+								<div class="form-group row">
+									<label class="col-sm-2">Kategori Program (lv2)  <span class="text-danger">*</span></label>
+									<div class="col-sm-4">
+										<select id="level2" class="form-control select2" required name="id_parent">
+										<option value="">--pilih kategori program--</option>
+										<?php
+											foreach($load_level2->result() as $l2)
+											{
+										?>
+										<option value="<?php echo $l2->id;?>"><?php echo $l2->deskripsi;?></option>
+										<?php
+											}
+										?>
+										</select>
+									</div>
+									<div id="detail-lv2" class="col-sm-6"></div>
+								</div>
+								<div class="form-group row">
+									<label class="col-sm-2">Deskripsi <span class="text-danger">*</span></label>
+									<div class="col-sm-4">
+										<input type="text" class="form-control" required name="deskripsi"/>
+									</div>
+								</div>
+								<div class="form-group row">
+									<label class="col-sm-2">Status <span class="text-danger">*</span></label>
+									<div class="col-sm-2">
+										<select class="form-control select2" required name="status">
+										<option value="">--pilih status--</option>
+										<option value="active">Aktif</option>
+										<option value="disabled">Tidak Aktif</option>
+										</select>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<div style="margin-top: 40px;">
+										<hr>
+										<button type="submit" class="btn btn-primary waves-effect waves-light">
+											Save
+										</button>
+										<a href="<?php echo site_url('matriks-program-anggaran'); ?>" class="btn btn-secondary waves-effect m-l-5">
 											Cancel
 										</a>
 									</div>

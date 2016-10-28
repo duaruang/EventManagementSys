@@ -1,10 +1,10 @@
-<?php $r = $load_rab->result_array(); ?>
+<?php $d = $load_data->result_array(); ?>
 <div style="background: #fff;box-shadow: 0 0px 24px 0 rgba(0, 0, 0, 0.06), 0 1px 0px 0 rgba(0, 0, 0, 0.02);">
     <div class="container">
         <ol class="breadcrumb">
             <li><a href="<?php echo site_url('dashboard'); ?>">Dashboard</a></li>
-            <li><a href="<?php echo site_url('kategori-rab'); ?>">Kategori RAB Administration</a></li>
-            <li class="active">View Kategori RAB</li>
+            <li><a href="<?php echo site_url('matriks-program-anggaran'); ?>">Matriks Program dan Anggaran Administration</a></li>
+            <li class="active">View Matriks Program dan Anggaran</li>
         </ol>
     </div>
 </div>
@@ -14,7 +14,7 @@
 <!-- Page-Title -->
     <div class="row">
         <div class="col-sm-12">
-            <h4 class="page-title">View Kategori RAB</h4>
+            <h4 class="page-title">View Matriks Program dan Anggaran</h4>
         </div>
     </div>
     <div class="row">
@@ -30,60 +30,48 @@
 							$attrib = array('class' => 'form-horizontal');
 							echo form_open('',$attrib); ?>
 								<?php 
-									if($r[0]['id_parent']!=NULL or $r[0]['id_parent']!='')
+									if($type==2 or $type==3)
 									{ 
-										$load_kategori = $this->kategori_rab_model->select_category_id($r[0]['id_parent']);
-										
-										if($load_kategori->num_rows() > 0)
-										{
-											$k = $load_kategori->result_array();
 								?>
 								<div class="form-group row">
-									<label class="col-sm-2">Kategori Utama</label>
+									<label class="col-sm-2">Bisnis Unit (lv1)</label>
 									<div class="col-sm-4">
-										<input type="text" class="form-control" value="<?php echo $k[0]['deskripsi']?>" disabled />
+										<input type="text" class="form-control" value="<?php echo $bisnis_unit;?>" disabled />
 									</div>
 								</div>
 								<?php 
-										}
+									} 
+								?>
+								<?php 
+									if($type==3)
+									{ 
+								?>
+								<div class="form-group row">
+									<label class="col-sm-2">Kategori Program (lv2)</label>
+									<div class="col-sm-4">
+										<input type="text" class="form-control" value="<?php echo $kategori_program;?>" disabled />
+									</div>
+								</div>
+								<?php 
 									} 
 								?>
 								<div class="form-group row">
 									<label class="col-sm-2">Deskripsi</label>
 									<div class="col-sm-4">
-										<input type="text" class="form-control" value="<?php echo $r[0]['deskripsi']?>" disabled />
+										<input type="text" class="form-control" value="<?php echo $d[0]['deskripsi']?>" disabled />
 									</div>
 								</div>
-								<?php 
-									if($r[0]['id_parent']!=NULL or $r[0]['id_parent']!='')
-									{
-								?>
-								<div class="form-group row">
-									<label class="col-sm-2">Unit</label>
-									<div class="col-sm-4">
-										<input type="text" class="form-control" name="jumlah_unit" value="<?php echo $r[0]['jumlah_unit']?>" disabled />
-									</div>
-								</div>
-								<div class="form-group row">
-									<label class="col-sm-2">Frekwensi </label>
-									<div class="col-sm-4">
-										<input type="text" class="form-control" name="frekwensi" value="<?php echo $r[0]['frekwensi']?>" disabled />
-									</div>
-								</div>
-								<?php
-									}
-								?>
 								<div class="form-group row">
 									<label class="col-sm-2">Status</label>
 									<div class="col-sm-2">
-										<input type="text" class="form-control" value="<?php echo ($r[0]['is_active']=='active' ? 'Aktif' : 'Tidak Aktif' ); ?>" disabled />
+										<input type="text" class="form-control" value="<?php echo ($d[0]['is_active']=='active' ? 'Aktif' : 'Tidak Aktif' ); ?>" disabled />
 									</div>
 								</div>
 								
 								<div class="form-group">
 									<div style="margin-top: 40px;">
 										<hr>
-										<a href="<?php echo site_url('kategori-rab'); ?>" class="btn btn-secondary waves-effect m-l-5">
+										<a href="<?php echo site_url('matriks-program-anggaran'); ?>" class="btn btn-secondary waves-effect m-l-5">
 											Kembali
 										</a>
 									</div>
