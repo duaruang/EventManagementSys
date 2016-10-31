@@ -56,7 +56,7 @@
                     <div id="m-ap-cab"></div>
                     <div class="p-20">
                         <?php 
-                        $attrib = array('class' => 'form-horizontal','id'=>'form-approval','enctype'=>'multipart/form-data');
+                        $attrib = array('class' => 'form-horizontal','id'=>'form-approval-pusat','enctype'=>'multipart/form-data');
                         echo form_open('',$attrib); ?>
                         <?php echo form_hidden('idevent',$this->uri->segment(3)); ?>
                             <div class="form-group row">
@@ -101,7 +101,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-2">RAB yang disetujui </label>
                                 <div class="col-sm-3">
-                                     <input type="text" class="form-control autonumber" data-a-sign="Rp. " data-a-sep="." required placeholder="Type something" id="inputRAB" name="inputRAB"/>
+                                     <input type="text" class="form-control autonumber" data-a-sign="Rp. " required placeholder="Type something" id="inputRAB" name="inputRAB"/>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -117,7 +117,7 @@
                                     <div class="row">
                                         <div class="col-xs-5">
                                             <div class="radio radio-success">
-                                                <input name="persetujuan" class="persetujuan" required="" id="radio1" value="agree" type="radio">
+                                                <input name="persetujuan" class="persetujuan" required="" id="radio1" value="approved" type="radio">
                                                 <label for="radio1">
                                                     Pengajuan Disetujui
                                                 </label>
@@ -125,13 +125,19 @@
                                         </div>
                                         <div class="col-xs-7">
                                             <div class="radio radio-success">
-                                                <input name="persetujuan" class="persetujuan" id="radio2" value="disagree" type="radio">
+                                                <input name="persetujuan" class="persetujuan" id="radio2" value="rejected" type="radio">
                                                 <label for="radio2">
                                                     Pengajuan tidak disetujui
                                                 </label>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2">Catatan oleh atasan</label>
+                                <div class="col-sm-7">
+                                <textarea class="ckeditor form-control" cols="10" rows="10" disabled><?php echo $catatan_atasan;?></textarea>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -146,7 +152,7 @@
                                     <button type="submit" class="btn btn-primary waves-effect waves-light">
                                         Simpan
                                     </button>
-                                    <a href="<?php echo site_url('pengajuan-event/list-approval'); ?>" class="btn btn-secondary waves-effect m-l-5">
+                                    <a href="<?php echo site_url('pengajuan-event/list-approval-pusat'); ?>" class="btn btn-secondary waves-effect m-l-5">
                                         Cancel
                                     </a>
                                 </div>

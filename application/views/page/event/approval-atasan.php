@@ -104,7 +104,7 @@
                                     <div class="row">
                                         <div class="col-xs-5">
                                             <div class="radio radio-success">
-                                                <input name="persetujuan" class="persetujuan" required="" id="radio1" value="agree" type="radio">
+                                                <input name="persetujuan" class="persetujuan" required="" id="radio1" value="approved" type="radio">
                                                 <label for="radio1">
                                                     Pengajuan Disetujui
                                                 </label>
@@ -112,7 +112,7 @@
                                         </div>
                                         <div class="col-xs-7">
                                             <div class="radio radio-success">
-                                                <input name="persetujuan" class="persetujuan" id="radio2" value="disagree" type="radio">
+                                                <input name="persetujuan" class="persetujuan" id="radio2" value="rejected" type="radio">
                                                 <label for="radio2">
                                                     Pengajuan tidak disetujui
                                                 </label>
@@ -133,7 +133,7 @@
                                     <button type="submit" class="btn btn-primary waves-effect waves-light">
                                         Simpan
                                     </button>
-                                    <a href="<?php echo site_url('pengajuan-event/list-approval'); ?>" class="btn btn-secondary waves-effect m-l-5">
+                                    <a href="<?php echo site_url('pengajuan-event/list-approval-atasan'); ?>" class="btn btn-secondary waves-effect m-l-5">
                                         Cancel
                                     </a>
                                 </div>
