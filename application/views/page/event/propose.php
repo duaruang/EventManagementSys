@@ -2,7 +2,6 @@
     <div class="container">
         <ol class="breadcrumb">
             <li><a href="<?php echo site_url('dashboard'); ?>">Dashboard</a></li>
-            <li><a href="<?php echo site_url('event'); ?>">List Event</a></li>
             <li class="active">Pengajuan Event</li>
         </ol>
     </div>
@@ -419,18 +418,14 @@
                             
                             <div class="form-group">
                                 <div style="margin-top: 40px;">
-                                    <button type="submit" name="submit" class="btn btn-primary waves-effect waves-light">
-                                        Submit
-                                    </button>
-                                    <button type="submit" name="draft" class="btn btn-warning waves-effect m-l-5">
-                                        Save as draft
-                                    </button>
+                                    <?php echo form_submit('submit', 'Submit', 'class="buttonstyle btn-primary"'); ?>
+                                    <?php echo form_submit('draft', 'save as draft', 'class="buttonstyle btn-warning"'); ?>
                                     <button type="reset" class="btn btn-secondary waves-effect m-l-5">
                                         Cancel
                                     </button>
                                 </div>
                             </div>
-                        </form>
+                        <?php echo form_close(); ?>
                     </div>
                     </div>
                 </div>

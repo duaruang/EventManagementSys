@@ -17,7 +17,7 @@
 			
 			var formURL = "<?php echo site_url('bisnis-unit-jabatan/process-add-bisnis-unit'); ?>";
 			var formDatas = new FormData(this);
-			$("#loader1").show();
+			$("#loader").show();
 			var xhr = $.ajax({
 				url: formURL,
 				type: 'POST',
@@ -37,7 +37,7 @@
 				console.log(data);
 			});
 			xhr.fail(function() {
-				$("#loader1").hide();
+				$("#loader").hide();
 				var failMsg = "Something error happened!";
 				alert(failMsg);
 			});	
@@ -49,7 +49,7 @@
 			
 			var formURL = "<?php echo site_url('bisnis-unit-jabatan/process-add-jabatan'); ?>";
 			var formDatas = new FormData(this);
-			$("#loader2").show();
+			$("#loader").show();
 			var xhr = $.ajax({
 				url: formURL,
 				type: 'POST',
@@ -69,7 +69,7 @@
 				console.log(data);
 			});
 			xhr.fail(function() {
-				$("#loader2").hide();
+				$("#loader").hide();
 				var failMsg = "Something error happened!";
 				alert(failMsg);
 			});	

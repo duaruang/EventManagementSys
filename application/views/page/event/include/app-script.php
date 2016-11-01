@@ -31,13 +31,14 @@
 			showThumbs: true,
 			addMore: false
 		});
-		//Script: Tambah Kategori RAB
-		$("#form-approval").submit(function(e){
+		
+		//Script: Approval oleh Atasan
+		$("#form-approval-atasan").submit(function(e){
 			e.preventDefault();
 			for ( instance in CKEDITOR.instances ) {
 		        CKEDITOR.instances[instance].updateElement();
 		    }
-			var formURL = "<?php echo site_url('pengajuan-event/process_approval'); ?>";
+			var formURL = "<?php echo site_url('pengajuan-event/process_approval_atasan'); ?>";
 			var formDatas = new FormData(this);
 			$("#loader").show();
 			var xhr = $.ajax({
@@ -53,7 +54,7 @@
 				if(obj.result == 'OK')
 				{
 					//location.reload();
-					window.location.href = '<?php echo site_url('pengajuan-event/list-approval'); ?>';
+					window.location.href = '<?php echo site_url('pengajuan-event/list-approval-atasan'); ?>';
 				}
 				
 				console.log(data);
@@ -64,14 +65,14 @@
 				alert(failMsg);
 			});	
 		});
-    
 		
-
-		//Script: Edit Kategori/Sub Kategori RAB
-		$("#form-edit-rab").submit(function(e){
+		//Script: Approval dan Data Validasi oleh Pusat
+		$("#form-approval-pusat").submit(function(e){
 			e.preventDefault();
-			
-			var formURL = "<?php echo site_url('kategori-rab/process-edit'); ?>";
+			for ( instance in CKEDITOR.instances ) {
+		        CKEDITOR.instances[instance].updateElement();
+		    }
+			var formURL = "<?php echo site_url('pengajuan-event/process_approval_pusat'); ?>";
 			var formDatas = new FormData(this);
 			$("#loader").show();
 			var xhr = $.ajax({
@@ -86,7 +87,8 @@
 				
 				if(obj.result == 'OK')
 				{
-					window.location.href = '<?php echo site_url('kategori-rab'); ?>';
+					//location.reload();
+					window.location.href = '<?php echo site_url('pengajuan-event/list-approval-pusat'); ?>';
 				}
 				
 				console.log(data);

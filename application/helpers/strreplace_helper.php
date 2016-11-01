@@ -25,3 +25,13 @@ if ( ! function_exists('replace_currency'))
         return strtolower($string);
     }
 }
+
+if ( ! function_exists('replace_tipeexam'))
+{
+    function replace_tipeexam($string)
+    {
+        $string = str_replace('|',' ',$string);
+        
+        return strtolower($string);
+    }
+}
