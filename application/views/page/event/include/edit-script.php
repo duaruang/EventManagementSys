@@ -70,6 +70,7 @@ $(document).ready(function() {
 				$('<input type="text" class="form-control" required id="inputNomorMemo" name="inputNomorMemo" placeholder=""/>').appendTo($('#maskinput'));
 
 			}
+
 		});
 		/*===============================================================================
         FUNCTION CLICK PILIH EXAM
@@ -89,8 +90,7 @@ $(document).ready(function() {
 		   document.getElementById("deskripsi").value 			= kategori.text();
 		   document.getElementById("inputidjadwalexam").value 	= idjadwalexam.text();
 		   var id_jadwal_exam= idjadwalexam.text();
-		   //Menampilkan Tabel Peserta
-		   $('#show_tabel_peserta').show();
+		  
 		   //remove data tabel daftar peserta
 		   $("#show_tabel_peserta tbody tr").children().remove();
 		   $('#loader').show();
@@ -131,12 +131,12 @@ $(document).ready(function() {
 		/*==================================================================================================================
         START/FUNCTION SUBMIT FORM EVENT TO DATABASE
         ====================================================================================================================*/
-	    $("#add-form-event").submit(function(e){
+	    $("#edit-form-event").submit(function(e){
 			e.preventDefault();
 			
         	var button_boolean	= $('input[name="draft"]').is(':focus');
         	
-			var formURL = "<?php echo site_url('pengajuan-event/process_add'); ?>";
+			var formURL = "<?php echo site_url('pengajuan-event/process_edit'); ?>";
 			var frmdata = new FormData(this);
 			if(button_boolean == true)
 			{
@@ -192,7 +192,6 @@ $(document).ready(function() {
 	        autoUpdateInput: false,
 	        format: 'DD-MM-YYYY',
 	        minDate: '<?php echo tgl_eng(date('Y-m-d', $tomorrow_timestamp)); ?>'
-
 	    });
 
 	    //SET VALUE TO FIELD START DATE
@@ -205,10 +204,6 @@ $(document).ready(function() {
 	      $('#inputAkhirTglPelaksanaan').val(picker.endDate.format('YYYY-MM-DD'));
 	  	});
  		
- 		$("#show_tipe_exam").hide();
-	  	$('#show_tipe_pelatihan').hide();
-		$('#myTab').hide();
-
 		/*===============================================================================
     	FUNCTION IF EVENT CATEGORY ON CHANGE
     	================================================================================*/
@@ -788,10 +783,11 @@ $(document).ready(function() {
 			 	
 				   var total = 0;
 				   var $table;
-				   var ac;
+				   var ac = $('#grand_total').val();
 				$('#table-rab input#jumlah,#table-rab input#frekwensi,#table-rab input#unit_cost').keyup(function(event) {
 					//var abc = $("input#downpayment").autoNumeric('get');
 				  	var sum = 0;
+				  	 ac = 0;
 				    var thisRow = $(this).closest('tr');
 				    $table = $('#table-rab input').closest('table');
 
@@ -819,23 +815,27 @@ $(document).ready(function() {
 
 				    });
 
-				    ac = 0;
+				   
 				    $('#table-rab').find('tr.parent-class').each(function() {
 				    	ac +=  parseInt($(this).find('input#totalcost').autoNumeric('get'));
 				    	
 					    $table.find('tr input#grand_total').val(ac);
 					    $('#grand_total').autoNumeric('set', ac);
 				    });
+				    var down = $("input#downpayment").autoNumeric('get');
+			  		 
+			  		var all_total= ac-down;
+				    $('#table-rab input').find('tr input#grand_total').val(all_total);
+				    $('#grand_total').autoNumeric('set', all_total);
 			});
 
 			$('input#downpayment').keyup(function() {
 
 				    var down = $("input#downpayment").autoNumeric('get');
-			  		
+			  		 
 			  		var all_total= ac-down;
-
-				    $table.find('tr input#grand_total').val(all_total);
+				    $('#table-rab input').find('tr input#grand_total').val(all_total);
 				    $('#grand_total').autoNumeric('set', all_total);
 
-				});
+			});
 		</script>

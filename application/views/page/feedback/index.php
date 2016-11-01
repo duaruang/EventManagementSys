@@ -64,7 +64,7 @@
 							<td><?php echo $data->nama_event; ?></td>
 							<td><?php echo tgl_indo_datetime($data->f_date); ?></td>
 							<td>
-								<a href="<?php echo site_url('list-feedback/view/'.$data->id);?>" class="btn action btn-warning waves-effect waves-light"><span class="btn-label"><i class="fa fa-eye"></i></span>View</a>&nbsp;&nbsp;
+								<a href="<?php echo site_url('list-feedback/view/'.$data->id_feedback);?>" class="btn action btn-warning waves-effect waves-light"><span class="btn-label"><i class="fa fa-eye"></i></span>View</a>&nbsp;&nbsp;
 								<a href="#custom-modal" class="btn action btn-danger waves-effect waves-light delete-feedback" data-animation="blur" data-plugin="custommodal" data-overlaySpeed="100" data-overlayColor="#36404a" data-idfeedback="<?php echo $data->id_feedback; ?>" data-eventname="<?php echo $data->nama_event; ?>"><span class="btn-label"><i class="fa fa-times"></i></span>Delete</a>
 							</td>
 						</tr>

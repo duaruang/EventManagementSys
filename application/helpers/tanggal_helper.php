@@ -42,6 +42,19 @@ if ( ! function_exists('tgl_indo_tanpa_detik'))
     }
 }
 
+if ( ! function_exists('tgl_indo_dengan_detik'))
+{
+    function tgl_indo_dengan_detik($tgl)
+    {
+        $ubah = gmdate($tgl, time()+60*60*8);
+        $pecah = explode("-",$ubah);
+        $tanggal = $pecah[2];
+        $bulan = bulan($pecah[1]);
+        $tahun = $pecah[0];
+        return $tanggal.' '.$bulan.' '.$tahun;
+    }
+}
+
 if ( ! function_exists('tgl_eng'))
 {
     function tgl_eng($tgl)

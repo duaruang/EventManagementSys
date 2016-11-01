@@ -50,12 +50,12 @@
 
         
         //Script: Delete Divisi
-        $('#datatable-buttons tbody').on('click', '.delete-tipe_exam', function () {
-            var idtipe_exam = $(this).data('idtipe_exam'); 
-            $('.f-id-tipeexam').val(idtipe_exam);
+        $('#datatable-buttons tbody').on('click', '.delete-event', function () {
+            var id_event = $(this).data('id_event'); 
+            $('.f-id-event').val(id_event);
 
-            var namatipe_exam = $(this).data('namatipe_exam'); 
-            $('.f-nama-tipeexam').val(namatipe_exam);
-            $(".ss").html(namatipe_exam);
+            var nama_event = $(this).data('nama_event'); 
+            $('.f-nama-event').val(nama_event);
+            $(".ss").html(nama_event);
         } );
 </script>       

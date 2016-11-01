@@ -48,9 +48,6 @@
                     ?>
                         <div class="card-box table-responsive">
                             <p class="text-muted font-13 m-b-30">
-                                 <a href="<?php echo site_url('pengajuan-event'); ?>" class="btn btn-primary waves-effect waves-light">
-                                    <span class="btn-label"><i class="fa fa-plus"></i></span>Pengajuan Event
-                                 </a>
                             </p>
                             <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                 <thead>
@@ -62,7 +59,7 @@
                                         <th>Kategori Event</th>
                                         <th>Jumlah Peserta</th>
                                         <th>Status</th>
-                                        <th width="300">Action</th>
+                                        <th width="100">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -91,8 +88,8 @@
                                         <?php if($data->status_event == 'rejected_atasan'){ $s ='rejected oleh atasan'; ?>
                                         <span class="label label-danger">
                                         <?php } ?>
-										<?php if($data->status_event == 'rejected_pusat'){ $s ='rejected oleh pusat'; ?>
-										<span class="label label-danger">
+                                        <?php if($data->status_event == 'rejected_pusat'){ $s ='rejected oleh pusat'; ?>
+                                        <span class="label label-danger">
                                         <?php } ?>
                                         <?php if($data->status_event == 'cancelled by user'){ $s=$data->status_event; ?>
                                         <span class="label label-warning">
@@ -101,16 +98,8 @@
 
                                         </td>
                                         <td>
-                                            <?php if($data->status_event == 'draft'){ ?>
-                                            <a href="<?php echo site_url('pengajuan-event/view/'.$data->id_event); ?>" class="btn action btn-primary  waves-effect waves-light m-b-10"><span class="btn-label"><i class="fa fa-eye"></i></span>View</a>&nbsp;&nbsp;
-                                            <a href="<?php echo site_url('pengajuan-event/edit/'.$data->id_event); ?>" class="btn action btn-warning  waves-effect waves-light m-b-10"><span class="btn-label"><i class="fa fa-pencil"></i></span>Edit</a>&nbsp;&nbsp;
-                                            <a href="#custom-modal" class="btn action btn-danger waves-effect waves-light delete-event m-b-10" data-animation="blur" data-plugin="custommodal" data-overlaySpeed="100" data-overlayColor="#36404a" data-id_event="<?php echo $data->id_event ?>" data-nama_event="<?php echo $data->nama_event; ?>"><span class="btn-label"><i class="fa fa-times"></i></span>Delete</a>
-                                        <?php }else{ ?>
-                                            <a href="<?php echo site_url('pengajuan-event/view/'.$data->id_event); ?>" class="btn action btn-primary  waves-effect waves-light m-b-10"><span class="btn-label"><i class="fa fa-eye"></i></span>View</a>&nbsp;&nbsp;
-                                            <?php if($data->status_event == 'submitted'){ ?>
-                                            <a href="<?php echo site_url('pengajuan-event/edit-tanggal/'.$data->id_event); ?>" class="btn action btn-warning  waves-effect waves-light m-b-10"><span class="btn-label"><i class="fa fa-pencil"></i></span>Edit Tanngal</a>&nbsp;&nbsp;
-                                            <?php } ?>
-                                            <?php } ?>
+                                            <a href="<?php echo site_url('pengajuan-event/approval-atasan/'.$data->id_event); ?>" class="btn action btn-warning  waves-effect waves-light"><span class="btn-label"><i class="fa fa-check"></i></span>Approval Atasan</a>
+                                            <!--<a href="<?php echo site_url('pengajuan-event/approval-pusat/'.$data->id_event); ?>" class="btn action btn-success  waves-effect waves-light"><span class="btn-label"><i class="fa fa-check"></i></span>Approval Pusat</a>&nbsp;&nbsp;-->
                                         </td>
                                     </tr>
                                 <?php } ?>
@@ -121,22 +110,5 @@
                     </div>
                 </div> <!-- end row -->
 
-                <!-- Modal -->
-                <div id="custom-modal" class="modal-demo">
-                    <button type="button" class="close" onclick="Custombox.close();">
-                        <span>&times;</span><span class="sr-only">Close</span>
-                    </button>
-                    <?php echo form_open('pengajuan-event/delete'); ?>
-                    <h4 class="custom-modal-title" style="background-color: #E9311B;">Delete</h4>
-                    <div class="custom-modal-text">
-                        Apakah anda yakin ingin menghapus <strong>"<span class="ss text-danger"></span>"</strong>?
-                    </div>
-                    <input type="hidden" class="f-id-event" name="f-id-event" value=""/>
-                    <input type="hidden" class="f-nama-event" name="f-nama-event" value=""/>
-                    <div class="modal-footer" style="border:none">
-                        <button type="button" class="btn btn-default" onclick="Custombox.close();">Batal</button>
-                        <button type="submit" class="btn btn-danger">Hapus</a>
-                    </div>
-                    <?php echo form_close(); ?>
-                </div>
+               
 </div>

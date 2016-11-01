@@ -218,19 +218,22 @@ $route['bisnis-unit'] 							= 'BisnisUnit_controller/index';
 /*==============================================
 EVENT CONTROLLER
 ================================================*/
-$route['pengajuan-event'] 						= 'Event_controller/propose';
-$route['event'] 								= 'Event_controller/index';
-$route['pengajuan-event/view/(:any)'] 			= 'Event_controller/view/$1';
-$route['pengajuan-event/process_add'] 			= 'Event_controller/process_add';
-$route['pengajuan-event/edit/(:any)'] 			= 'Event_controller/edit/$1';
-$route['pengajuan-event/edit-tanggal/(:any)'] 	= 'Event_controller/edit_tanggal/$1';
-$route['pengajuan-event/process_edit'] 			= 'Event_controller/process_edit';
-$route['pengajuan-event/delete'] 				= 'Event_controller/process_delete';
-$route['pengajuan-event/list-approval'] 		= 'Event_controller/list_approval';
-$route['pengajuan-event/approval-atasan/(:any)']= 'Event_controller/approval_atasan/$1';
-$route['pengajuan-event/approval-pusat/(:any)']	= 'Event_controller/approval_pusat/$1';
-$route['pengajuan-event/memo_view/(:any)'] 		= 'Event_controller/make_pdf/$1';
-$route['pengajuan-event/process_approval'] 		= 'Event_controller/proccess_approval';
+$route['pengajuan-event'] 							= 'Event_controller/propose';
+$route['event'] 									= 'Event_controller/index';
+$route['pengajuan-event/view/(:any)'] 				= 'Event_controller/view/$1';
+$route['pengajuan-event/process_add'] 				= 'Event_controller/process_add';
+$route['pengajuan-event/edit/(:any)'] 				= 'Event_controller/edit/$1';
+$route['pengajuan-event/edit-tanggal/(:any)'] 		= 'Event_controller/edit_tanggal/$1';
+$route['pengajuan-event/process_edit'] 				= 'Event_controller/process_edit';
+$route['pengajuan-event/process_edit_tanggal'] 		= 'Event_controller/process_edit_tanggal';
+$route['pengajuan-event/delete'] 					= 'Event_controller/process_delete';
+$route['pengajuan-event/list-approval-atasan'] 		= 'Event_controller/list_approval_atasan';
+$route['pengajuan-event/list-approval-pusat'] 		= 'Event_controller/list_approval_pusat';
+$route['pengajuan-event/approval-atasan/(:any)']	= 'Event_controller/approval_atasan/$1';
+$route['pengajuan-event/approval-pusat/(:any)']		= 'Event_controller/approval_pusat/$1';
+$route['pengajuan-event/memo_view/(:any)'] 			= 'Event_controller/make_pdf/$1';
+$route['pengajuan-event/process_approval_atasan'] 	= 'Event_controller/proccess_approval_atasan';
+$route['pengajuan-event/process_approval_pusat'] 	= 'Event_controller/proccess_approval_pusat';
 
 /*==============================================
 CABANG CONTROLLER

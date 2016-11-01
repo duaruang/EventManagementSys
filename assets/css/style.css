@@ -22677,3 +22677,12 @@ a.maps-google:hover
 {
   cursor: pointer;
 }
+.buttonstyle 
+{   
+  border: 1px solid transparent;
+  cursor:pointer;
+  -webkit-border-radius: 0.25rem;
+  border-radius: 0.25rem;
+  margin-left: 5px;
+  padding: 0.375rem 1rem;
+}

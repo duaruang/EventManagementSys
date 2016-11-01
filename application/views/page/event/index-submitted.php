@@ -73,25 +73,28 @@
                                         <td><?php echo $data->kategori_event; ?></td>
                                         <td><?php echo $data->jumlah_peserta; ?></td>
                                         <td>
-                                        <?php if($data->status_event == 'draft'){ ?>
+                                        <?php if($data->status_event == 'draft'){ $s ='draft';?>
                                         <span class="label label-default">
                                         <?php } ?>
-                                        <?php if($data->status_event == 'submitted'){ ?>
+                                        <?php if($data->status_event == 'submitted'){ $s ='submitted';?>
                                         <span class="label label-primary">
                                         <?php } ?>
-                                        <?php if($data->status_event == 'approved by atasan'){ ?>
+                                        <?php if($data->status_event == 'approved_atasan'){ $s ='approved oleh atasan';?>
                                         <span class="label label-info">
                                         <?php } ?>
-                                        <?php if($data->status_event == 'aprroved by pusat'){ ?>
+                                        <?php if($data->status_event == 'approved_pusat'){ $s ='approved oleh pusat';?>
                                         <span class="label label-success">
                                         <?php } ?>
-                                        <?php if($data->status_event == 'rejected by atasan' || $data->status_event == 'rejected by pusat'){ ?>
-                                        <span class="label label-warning">
-                                        <?php } ?>
-                                        <?php if($data->status_event == 'cancelled by user' || $data->status_event == 'cancelled by atasan' || $data->status_event == 'cancelled by pusat'){ ?>
+                                        <?php if($data->status_event == 'rejected_atasan'){ $s ='rejected oleh atasan'; ?>
                                         <span class="label label-danger">
                                         <?php } ?>
-                                        <?php echo $data->status_event; ?></span>
+                                        <?php if($data->status_event == 'rejected_pusat'){ $s ='rejected oleh pusat'; ?>
+                                        <span class="label label-danger">
+                                        <?php } ?>
+                                        <?php if($data->status_event == 'cancelled by user'){ $s=$data->status_event; ?>
+                                        <span class="label label-warning">
+                                        <?php } ?>
+                                        <?php echo $s; ?></span>
 
                                         </td>
                                         <td>

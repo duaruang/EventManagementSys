@@ -72,8 +72,6 @@
 		$("#form-add-level1").submit(function(e){
 			e.preventDefault();
 			
-			$("#loader1").show();
-			
 			//Replace value of budget
 			var v = $('input#budget1').autoNumeric('get');
             $('input#budget1').autoNumeric('destroy');
@@ -81,7 +79,7 @@
 			
 			var formURL = "<?php echo site_url('matriks-program-anggaran/process-add-lv1'); ?>";
 			var formDatas = new FormData(this);
-			
+			$("#loader1").show();
 			var xhr = $.ajax({
 				url: formURL,
 				type: 'POST',
@@ -111,8 +109,6 @@
 		$("#form-add-level2").submit(function(e){
 			e.preventDefault();
 			
-			$("#loader2").show();
-			
 			//Replace value of budget
 			var v = $('input#budget2').autoNumeric('get');
             $('input#budget2').autoNumeric('destroy');
@@ -120,7 +116,7 @@
 			
 			var formURL = "<?php echo site_url('matriks-program-anggaran/process-add-lv2'); ?>";
 			var formDatas = new FormData(this);
-			
+			$("#loader2").show();
 			var xhr = $.ajax({
 				url: formURL,
 				type: 'POST',
