@@ -108,7 +108,7 @@ class Event_model extends CI_Model
     public function select_detail_event($id)
     {
         return $this->db
-                    ->select('em_event.*,
+                    ->select('em_event.*,em_event.id_event as idevent,
                         em_event_listpeserta.*,
                         em_event_materikm.*,
                         em_event_exam.*,

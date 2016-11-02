@@ -38,6 +38,28 @@ class Bisnis_unit_model extends CI_Model
                     ->where('buj.id',$id_jabatan)
                     ->get();
     }
+
+    public function select_bisnis_unit_dropdown()
+    {
+        $result = $this->db
+                    ->select('em_bisnis_unit.*,em_bisnis_unit_jabatan.*,em_bisnis_unit.deskripsi as desbu')
+                    ->from('em_bisnis_unit')
+                    ->join('em_bisnis_unit_jabatan','em_bisnis_unit_jabatan.id_bisnis_unit = em_bisnis_unit.id','left')
+                    ->where('em_bisnis_unit.is_active','active')
+                    ->where('em_bisnis_unit_jabatan.is_active','active')
+                    ->order_by('em_bisnis_unit.deskripsi','asc')
+                    ->get();
+        $return = array();
+        
+        if ($result->num_rows() > 0){
+            foreach($result->result_array() as $row)      
+            {   
+                $return[$row['desbu']][$row['nama_jabatan']]=  $row['nama_jabatan'];
+            }
+        }
+        
+        return $return;
+    }
 	
 
     //============================ Insert Data ================================

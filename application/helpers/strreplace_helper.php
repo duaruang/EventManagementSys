@@ -35,3 +35,13 @@ if ( ! function_exists('replace_tipeexam'))
         return strtolower($string);
     }
 }
+
+if ( ! function_exists('replace_sasaran'))
+{
+    function replace_sasaran($string)
+    {
+        $string = str_replace(';',',',$string);
+        
+        return strtolower($string);
+    }
+}

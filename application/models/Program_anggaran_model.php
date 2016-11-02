@@ -71,6 +71,46 @@ class Program_anggaran_model extends CI_Model
                     ->order_by('deskripsi','asc')
                     ->get();
     }
+
+    public function select_program_anggaran_dropdown()
+    {
+        $result = $this->db
+                    ->from('em_program_anggaran')
+                    ->where('level',3) 
+                    ->where('is_active','active')
+                    ->order_by('deskripsi','asc')
+                    ->get();
+        $return = array();
+        
+        if ($result->num_rows() > 0){
+            $return['']= '--Pilih Program Anggaran--';
+            foreach($result->result_array() as $row)      
+            {   
+                $return[$row['id']]=  $row['deskripsi'];
+            }
+        }
+        
+        return $return;
+    }
+
+    public function select_desc_anggaran($id_k)
+    {
+        return $this->db
+                    ->from('em_program_anggaran')
+                    ->where('id',$id_k)
+                    ->where('is_active','active')
+                    ->get();
+
+    }
+
+    public function select_parent_active($id_parent)
+    {
+        return $this->db
+                    ->from('em_program_anggaran')
+                    ->where('id_root',$id_parent)
+                    ->where('is_active','active')
+                    ->get();
+    }
 	
 
     //============================ Insert Data ================================

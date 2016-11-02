@@ -28,7 +28,7 @@
                         <?php 
                         $attrib = array('class' => 'form-horizontal','id'=>'edit-form-event','name'=>'edit-form-event','enctype'=>'multipart/form-data');
                         echo form_open('',$attrib); ?>
-                            <?php echo form_hidden('id_event',$data[0]['id_event']); ?>
+                            <?php echo form_hidden('id_event',$data[0]['idevent']); ?>
                             <div class="form-group row">
                                 <label class="col-sm-2">Nomor Memo <span class="text-danger">*</span></label>
                                 <div class="col-sm-3" id="maskinput">

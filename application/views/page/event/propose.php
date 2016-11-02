@@ -92,10 +92,20 @@
                                     <input type="hidden" id="ev_longitude" name="ev_longitude">
                                 </div>
                             </div>
+                            <div class="form-group row input_anggaran">
+                                <label class="col-sm-2">Program Anggaran <span class="text-danger">*</span></label>
+                                <div class="col-sm-5">
+                                    <?php $style_d= array('class'=>'form-control select2', 'Required'=>'','id'=>'inputProgramAnggaran'); ?>
+                                    <?php echo form_dropdown('inputProgramAnggaran', $load_program_anggaran, NULL,$style_d); ?>
+                                    <span class="text-muted" id="anggaran"></span>
+                                </div>
+                            </div>
+
                             <div class="form-group row">
                                 <label class="col-sm-2">Target / Sasaran Peserta <span class="text-danger">*</span></label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control" required="" id="inputSasaranTarget" name="inputSasaranTarget"/>
+                                     <?php $style_d= array('class'=>'select2 form-control select2-multiple', 'Required'=>'','id'=>'inputSasaranTarget','multiple'=>'multiple', 'multiple','placeholder'=>'--pilih target--'); ?>
+                                    <?php echo form_dropdown('inputSasaranTarget[]', $load_bu, NULL,$style_d); ?>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -420,9 +430,9 @@
                                 <div style="margin-top: 40px;">
                                     <?php echo form_submit('submit', 'Submit', 'class="buttonstyle btn-primary"'); ?>
                                     <?php echo form_submit('draft', 'save as draft', 'class="buttonstyle btn-warning"'); ?>
-                                    <button type="reset" class="btn btn-secondary waves-effect m-l-5">
+                                    <a href="<?php echo site_url('event'); ?>" class="btn btn-secondary waves-effect m-l-5">
                                         Cancel
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
                         <?php echo form_close(); ?>

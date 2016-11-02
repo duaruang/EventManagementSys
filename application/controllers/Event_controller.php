@@ -48,9 +48,21 @@ class Event_controller extends MY_Controller {
         $data['load_tipe_exam'] 		= $this->tipe_exam_model->select_tipe_exam_active();
         $data['load_tipe_pelatihan'] 	= $this->tipe_pelatihan_model->select_tipe_pelatihan_active();
         $data['load_parent'] 			= $this->kategori_rab_model->select_parent_category();
+        $data['load_program_anggaran']	= $this->program_anggaran_model->select_program_anggaran_dropdown();
+        $data['load_bu'] 				= $this->bisnis_unit_model->select_bisnis_unit_dropdown();
         $data['load_exam'] 				= $this->get_exam();
         //Load page
 		$this->template->view('page/event/propose',$data);
+	}
+
+	public function get_parent_anggaran()
+	{
+        //Get Data
+		$id_k 			= $_GET['anggaran_id'];
+        $anggaran		= $this->program_anggaran_model->select_desc_anggaran($id_k)->result_array();
+		$budget			=  $this->program_anggaran_model->select_parent_active($anggaran[0]['id_root'])->result_array();
+        //Load Data
+		echo 'Kategori '.$budget[0]['deskripsi'].' dengan anggaran Rp. '.number_format($budget[0]['budget'],0,'.','.');
 	}
 	
 	public function edit()
@@ -62,14 +74,16 @@ class Event_controller extends MY_Controller {
 		$this->load->view('include/head', $head, TRUE);
         
         //Set Spesific Javascript page
-        $data['script']     			= $this->load->view('page/event/include/edit-script', NULL, TRUE);
         $data['load_event']				= $this->event_model->select_detail_event($id);
+        $ss['load_events']				= $this->event_model->select_detail_event($id);
         $data['load_kategori_tempat']	= $this->kategori_tempat_model->select_kategori_tempat_dropdown();
         $data['load_kategori_event']	= $this->kategori_event_model->select_kategori_event_dropdown();
         $data['load_tipe_pelatihan'] 	= $this->tipe_pelatihan_model->select_tipe_pelatihan_dropdown();
         $data['load_tipe_exam'] 		= $this->tipe_exam_model->select_tipe_exam_active();
         $data['load_parent'] 			= $this->kategori_rab_model->select_parent_category();
         $data['load_exam'] 				= $this->get_exam();
+        $data['load_program_anggaran']	= $this->program_anggaran_model->select_program_anggaran_dropdown();
+        $data['load_bu'] 				= $this->bisnis_unit_model->select_bisnis_unit_dropdown();
 
         $data['load_peserta'] 			= $this->event_model->select_peserta($id);
         $data['load_pic'] 				= $this->event_model->select_pic($id);
@@ -77,6 +91,8 @@ class Event_controller extends MY_Controller {
         //$data['load_rab'] 				= $this->event_model->select_rab($id);
         $data['load_materi'] 			= $this->event_model->select_materi($id);
         $data['load_rundown'] 			= $this->event_model->select_rundown($id);
+
+        $data['script']     			= $this->load->view('page/event/include/edit-script', $ss, TRUE);
         //Load page
 		$this->template->view('page/event/edit',$data);
 
@@ -99,6 +115,8 @@ class Event_controller extends MY_Controller {
         $data['load_tipe_exam'] 		= $this->tipe_exam_model->select_tipe_exam_active();
         $data['load_parent'] 			= $this->kategori_rab_model->select_parent_category();
         $data['load_exam'] 				= $this->get_exam();
+        $data['load_program_anggaran']	= $this->program_anggaran_model->select_program_anggaran_dropdown();
+        $data['load_bu'] 				= $this->bisnis_unit_model->select_bisnis_unit_dropdown();
 
         $data['load_peserta'] 			= $this->event_model->select_peserta($id);
         $data['load_pic'] 				= $this->event_model->select_pic($id);
@@ -122,14 +140,16 @@ class Event_controller extends MY_Controller {
 		$this->load->view('include/head', $head, TRUE);
         
         //Set Spesific Javascript page
-        $data['script']     			= $this->load->view('page/event/include/edit-script', NULL, TRUE);
         $data['load_event']				= $this->event_model->select_detail_event($id);
+        $ss['load_events']				= $this->event_model->select_detail_event($id);
         $data['load_kategori_tempat']	= $this->kategori_tempat_model->select_kategori_tempat_dropdown();
         $data['load_kategori_event']	= $this->kategori_event_model->select_kategori_event_dropdown();
         $data['load_tipe_pelatihan'] 	= $this->tipe_pelatihan_model->select_tipe_pelatihan_dropdown();
         $data['load_tipe_exam'] 		= $this->tipe_exam_model->select_tipe_exam_active();
         $data['load_parent'] 			= $this->kategori_rab_model->select_parent_category();
         $data['load_exam'] 				= $this->get_exam();
+        $data['load_program_anggaran']	= $this->program_anggaran_model->select_program_anggaran_dropdown();
+        $data['load_bu'] 				= $this->bisnis_unit_model->select_bisnis_unit_dropdown();
 
         $data['load_peserta'] 			= $this->event_model->select_peserta($id);
         $data['load_pic'] 				= $this->event_model->select_pic($id);
@@ -138,6 +158,7 @@ class Event_controller extends MY_Controller {
         $data['load_materi'] 			= $this->event_model->select_materi($id);
         $data['load_rundown'] 			= $this->event_model->select_rundown($id);
         $data['load_tanggal'] 			= $this->event_model->select_tanggal_ubah($id);
+        $data['script']     			= $this->load->view('page/event/include/edit-script', $ss, TRUE);
         //Load page
 		$this->template->view('page/event/view',$data);
 
@@ -217,10 +238,11 @@ class Event_controller extends MY_Controller {
 		$inputStartTglPelaksanaan	= trim($this->security->xss_clean(strip_image_tags($this->input->post('inputStartTglPelaksanaan'))));
 		$inputAkhirTglPelaksanaan	= trim($this->security->xss_clean(strip_image_tags($this->input->post('inputAkhirTglPelaksanaan'))));
 		$inputTempatPelaksanaan		= trim($this->security->xss_clean(strip_image_tags($this->input->post('inputTempatPelaksanaan'))));
+		$inputProgramAnggaran		= trim($this->security->xss_clean(strip_image_tags($this->input->post('inputProgramAnggaran'))));
 		$inputNamaTempat			= trim($this->security->xss_clean(strip_image_tags($this->input->post('inputNamaTempat'))));
 		$latitude					= trim($this->security->xss_clean(strip_image_tags($this->input->post('ev_latitude'))));
 		$longitude					= trim($this->security->xss_clean(strip_image_tags($this->input->post('ev_longitude'))));
-		$inputSasaranTarget			= trim($this->security->xss_clean(strip_image_tags($this->input->post('inputSasaranTarget'))));
+		$inputSasaranTarget			= $this->security->xss_clean(strip_image_tags($this->input->post('inputSasaranTarget')));
 		$inputKategoriEvent			= trim($this->security->xss_clean(strip_image_tags($this->input->post('inputKategoriEvent'))));
 		$inputTipePelatihan			= trim($this->security->xss_clean(strip_image_tags($this->input->post('inputTipePelatihan'))));
 		$inputTipeExam				= $this->security->xss_clean(strip_image_tags($this->input->post('inputTipeExam')));
@@ -230,7 +252,9 @@ class Event_controller extends MY_Controller {
 		$inputIdTrainer				= $this->security->xss_clean(strip_image_tags($this->input->post('inputIdTrainer')));
 		$inputNamaPic				= $this->security->xss_clean(strip_image_tags($this->input->post('nama_pic')));
 		$id_user					= $this->session->userdata('sess_user_id');
-		
+
+		$comma_separated = implode(";", $inputSasaranTarget);
+
 		if ($this->input->post('submit')) {
 		    $status_event = 'submitted';
 		}
@@ -321,10 +345,9 @@ class Event_controller extends MY_Controller {
 		}
 
 		//check rundown
-		if (isset($_FILES['rundown_input']['name']) != '') {
+		if ($_FILES['rundown_input']) {
 			//$file_ary = rearray_files($_FILES['files']);
 			//$i = 0;
-			$this->event_model->delete_event_rundown($id_event);
 			//==== Upload Photo ====
 			$config['upload_path'] 		= './assets/attachments/rundown';
 			$config['allowed_types'] 	= 'xls|xlsx';
@@ -340,6 +363,8 @@ class Event_controller extends MY_Controller {
 			$this->upload->initialize($config);
 
 			if ($this->upload->do_upload('rundown_input')) {
+
+				$this->event_model->delete_event_rundown($id_event);
 				$this->upload->data();
 				
 				//Insert to table event files
@@ -364,10 +389,9 @@ class Event_controller extends MY_Controller {
 		}
 
 		//check Materi
-		if (isset($_FILES['materi_input']['name']) != '') {
+		if ($_FILES['materi_input']) {
 			//$file_ary = rearray_files($_FILES['files']);
 			//$i = 0;
-			$this->event_model->delete_event_materi($id_event);
 			//==== Upload Photo ====
 			$config['upload_path'] 		= './assets/attachments/materi';
 			$config['allowed_types'] 	= 'docx|jpg|jpeg|png|pdf';
@@ -383,6 +407,8 @@ class Event_controller extends MY_Controller {
 			$this->upload->initialize($config);
 
 			if ($this->upload->do_upload('materi_input')) {
+
+				$this->event_model->delete_event_materi($id_event);
 				$this->upload->data();
 				
 				//Insert to table event files
@@ -503,7 +529,8 @@ class Event_controller extends MY_Controller {
 									'nama_tempat'						=> $inputNamaTempat,
 									'latitude'							=> $latitude,
 									'longitude'							=> $longitude,
-									'target_sasaran'					=> $inputSasaranTarget,
+									'id_program_anggaran'				=> $inputProgramAnggaran,
+									'target_sasaran'					=> $comma_separated,
 									'id_kategori_event'					=> $inputKategoriEvent,
 									'id_tipe_pelatihan'					=> $inputTipePelatihan,
 									'dengan_exam'						=> $inputDenganExam,
@@ -824,7 +851,7 @@ class Event_controller extends MY_Controller {
 		$nomor_memo 	= $data[0]['nomor_memo'];
 		$kepada			= 'Divisi Pusat Pendidikan dan Pelatihan';
 		$tanggal 		= $data[0]['crdate_event'];
-		$perihal 		= 'Usulan '.$data[0]['nama_event'].' '.$data[0]['target_sasaran'];
+		$perihal 		= 'Usulan '.$data[0]['nama_event'];
 		$nama_event		= $data[0]['nama_event'];
 		$topik_event	= $data[0]['topik_event'];
 		$sasaran 		= $data[0]['target_sasaran'];
@@ -873,12 +900,13 @@ class Event_controller extends MY_Controller {
 
 		$data_rab['load_parent']		= $this->event_model->select_rab_parent_category($id);
 		$data_listpic['load_listpic']	= $this->event_model->select_data_pic($id);
+		$data_trainer['load_trainer']	= $this->event_model->select_data_trainer($id);
 
 		$html 			 	= $this->load->view('memo-template', $data, true); // render the view into HTML
 		$load_listpeserta 	= $this->load->view('memo-lampiranlistpeserta', $atu, true); // render the view into HTML 
 		$load_rab		 	= $this->load->view('memo-rab', $data_rab, true); // render the view into HTML
 		$load_pic		 	= $this->load->view('memo-listpic', $data_listpic, true); // render the view into HTML
-
+		$load_trainer		= $this->load->view('memo-listtrainer', $data_trainer, true); // render the view into HTML
 		//load RAB
 
 		$this->load->library('m_pdf');
@@ -887,14 +915,42 @@ class Event_controller extends MY_Controller {
 		$pdf->setAutoTopMargin = 'stretch'; // Set pdf top margin to stretch to avoid content overlapping
 		$pdf->setAutoBottomMargin = 'stretch'; // Set pdf bottom margin to stretch to avoid content overlapping
 		$pdf->setHTMLHeader('<img style="width: 120px;" src="'.base_url().'assets/images/logo-pnm.png">');
-		$pdf->SetFooter($perihal.'|{PAGENO}|'.$nomor_memo); // Add a footer for good measure 😉
+		$pdf->defaultfooterline=0;
+		$pdf->SetFooter('
+		<div class="signatur-footer" style="margin-top:70px;float: right;width: 35%;font-family: "Roboto", sans-serif;">
+			<table cellspacing="0" width="100%" style="border:0.5px solid #000;text-align: center;font-size: 12px;">
+				<tr>
+					<td style="height: 50px;width: 25%; border: 1px solid #000;"></td>
+					<td style="height: 50px;width: 25%; border: 1px solid #000;"></td>
+					<td style="height: 50px;width: 25%; border: 1px solid #000;"></td>
+					<td style="height: 50px;width: 25%; border: 1px solid #000;"></td>
+				</tr>
+				<tr>
+					<td style="width: 25%;height: 20px; border: 1px solid #000;">AS</td>
+					<td style="width: 25%;height: 20px; border: 1px solid #000;"></td>
+					<td style="width: 25%;height: 20px; border: 1px solid #000;"></td>
+					<td style="width: 25%;height: 20px; border: 1px solid #000;"></td>
+				</tr>
+			</table>
+		</div>'); 
 		$pdf->WriteHTML($html); // write the HTML into the PDF
-		$pdf->AddPage();
-		$pdf->WriteHTML($load_listpeserta);
-		$pdf->AddPage();
-		$pdf->WriteHTML($load_rab);
-		$pdf->AddPage();
-		$pdf->WriteHTML($load_pic);
+		if($jumlah_peserta!=0){
+			$pdf->AddPage();
+			$pdf->WriteHTML($load_listpeserta);
+		}
+		if($jumlah_rab!=''){
+			$pdf->AddPage();
+			$pdf->WriteHTML($load_rab);
+		}
+		if($jumlah_panitia!=0){
+			$pdf->AddPage();
+			$pdf->WriteHTML($load_pic);
+		}
+
+		if($jumlah_pengajar!=0){
+			$pdf->AddPage();
+			$pdf->WriteHTML($load_trainer);
+		}
 		$pdf->Output($pdfFilePath, 'I');
 	}
 
@@ -1030,10 +1086,11 @@ class Event_controller extends MY_Controller {
 		$inputStartTglPelaksanaan	= trim($this->security->xss_clean(strip_image_tags($this->input->post('inputStartTglPelaksanaan'))));
 		$inputAkhirTglPelaksanaan	= trim($this->security->xss_clean(strip_image_tags($this->input->post('inputAkhirTglPelaksanaan'))));
 		$inputTempatPelaksanaan		= trim($this->security->xss_clean(strip_image_tags($this->input->post('inputTempatPelaksanaan'))));
+		$inputProgramAnggaran		= trim($this->security->xss_clean(strip_image_tags($this->input->post('inputProgramAnggaran'))));
 		$inputNamaTempat			= trim($this->security->xss_clean(strip_image_tags($this->input->post('inputNamaTempat'))));
 		$latitude					= trim($this->security->xss_clean(strip_image_tags($this->input->post('ev_latitude'))));
 		$longitude					= trim($this->security->xss_clean(strip_image_tags($this->input->post('ev_longitude'))));
-		$inputSasaranTarget			= trim($this->security->xss_clean(strip_image_tags($this->input->post('inputSasaranTarget'))));
+		$inputSasaranTarget			= $this->security->xss_clean(strip_image_tags($this->input->post('inputSasaranTarget')));
 		$inputKategoriEvent			= trim($this->security->xss_clean(strip_image_tags($this->input->post('inputKategoriEvent'))));
 		$inputTipePelatihan			= trim($this->security->xss_clean(strip_image_tags($this->input->post('inputTipePelatihan'))));
 		$inputTipeExam				= $this->security->xss_clean(strip_image_tags($this->input->post('inputTipeExam')));
@@ -1044,6 +1101,7 @@ class Event_controller extends MY_Controller {
 		$inputNamaPic				= $this->security->xss_clean(strip_image_tags($this->input->post('nama_pic')));
 		$id_user					= $this->session->userdata('sess_user_id');
 		
+		$comma_separated = implode(";", $inputSasaranTarget);
 		if ($this->input->post('submit')) {
 		    $status_event = 'submitted';
 		}
@@ -1319,7 +1377,8 @@ class Event_controller extends MY_Controller {
 									'nama_tempat'						=> $inputNamaTempat,
 									'latitude'							=> $latitude,
 									'longitude'							=> $longitude,
-									'target_sasaran'					=> $inputSasaranTarget,
+									'id_program_anggaran'				=> $inputProgramAnggaran,
+									'target_sasaran'					=> $comma_separated,
 									'id_kategori_event'					=> $inputKategoriEvent,
 									'id_tipe_pelatihan'					=> $inputTipePelatihan,
 									'dengan_exam'						=> $inputDenganExam,

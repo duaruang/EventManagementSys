@@ -71,6 +71,31 @@ $(document).ready(function() {
 
 			}
 		});
+
+		$('#anggaran').hide();
+		$('#inputProgramAnggaran').on('change', function (e) {
+			e.preventDefault(); 
+			
+			var inputanggaran = $(this).val(); 
+			
+			//Load Deskripsi Kegiatan
+			if(inputanggaran != '')
+			{
+				$.ajax({
+					url: "<?php echo base_url()?>event/get_parent_anggaran",
+					data: "anggaran_id="+inputanggaran,
+					cache: false,
+					success: function(data){
+						$('#anggaran').show(10);
+						$("#anggaran").html(data);
+					}
+				});
+			}
+			else
+			{
+				$('#anggaran').hide(650);
+			}
+		});
 		/*===============================================================================
         FUNCTION CLICK PILIH EXAM
         ================================================================================*/

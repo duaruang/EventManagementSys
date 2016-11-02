@@ -24,6 +24,16 @@
 <script src="<?php echo base_url(); ?>assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
 <script src="<?php echo base_url(); ?>assets/plugins/timepicker/bootstrap-timepicker.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/pages/jquery.formadvanced.init.js"></script>
+<script>
+<?php $data = $load_events->result_array(); ?>
+	var selectedValues = new Array();
+	<?php $array_es = explode(';', $data[0]['target_sasaran']); 
+	$arrlength = count($array_es);
+	for($x = 0; $x < $arrlength; $x++) { ?>  
+	selectedValues[<?php echo $x; ?>] = <?php echo '"'.$array_es[$x].'"'; ?>;
+	<?php } ?>
+$("#inputSasaranTarget").val(selectedValues);
+</script>
 <script type="text/javascript">
 $(document).ready(function() {
 		$('#filer_input3').filer({
@@ -71,6 +81,32 @@ $(document).ready(function() {
 
 			}
 
+		});
+
+		
+		$('#anggaran').hide();
+		$('#inputProgramAnggaran').on('change', function (e) {
+			e.preventDefault(); 
+			
+			var inputanggaran = $(this).val(); 
+			
+			//Load Deskripsi Kegiatan
+			if(inputanggaran != '')
+			{
+				$.ajax({
+					url: "<?php echo base_url()?>event/get_parent_anggaran",
+					data: "anggaran_id="+inputanggaran,
+					cache: false,
+					success: function(data){
+						$('#anggaran').show(10);
+						$("#anggaran").html(data);
+					}
+				});
+			}
+			else
+			{
+				$('#anggaran').hide(650);
+			}
 		});
 		/*===============================================================================
         FUNCTION CLICK PILIH EXAM

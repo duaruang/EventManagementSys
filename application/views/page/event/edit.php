@@ -28,7 +28,7 @@
                         <?php 
                         $attrib = array('class' => 'form-horizontal','id'=>'edit-form-event','name'=>'edit-form-event','enctype'=>'multipart/form-data');
                         echo form_open('',$attrib); ?>
-                            <?php echo form_hidden('id_event',$data[0]['id_event']); ?>
+                            <?php echo form_hidden('id_event', $data[0]['idevent']); ?>
                             <div class="form-group row">
                                 <label class="col-sm-2">Nomor Memo <span class="text-danger">*</span></label>
                                 <div class="col-sm-3" id="maskinput">
@@ -88,10 +88,20 @@
                                     <input type="hidden" id="ev_longitude" name="ev_longitude" value="<?php echo $data[0]['longitude']; ?>">
                                 </div>
                             </div>
+                            <div class="form-group row input_anggaran">
+                                <label class="col-sm-2">Program Anggaran <span class="text-danger">*</span></label>
+                                <div class="col-sm-5">
+                                    <?php $style_d= array('class'=>'form-control select2', 'Required'=>'','id'=>'inputProgramAnggaran'); ?>
+                                    <?php echo form_dropdown('inputProgramAnggaran', $load_program_anggaran, $data[0]['id_program_anggaran'],$style_d); ?>
+                                    <span class="text-muted" id="anggaran"></span>
+                                </div>
+                            </div>
+
                             <div class="form-group row">
                                 <label class="col-sm-2">Target / Sasaran Peserta <span class="text-danger">*</span></label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control" required="" id="inputSasaranTarget" name="inputSasaranTarget" value="<?php echo $data[0]['target_sasaran']; ?>"/>
+                                     <?php $style_d= array('class'=>'select2 form-control select2-multiple', 'Required'=>'','id'=>'inputSasaranTarget','multiple'=>'multiple', 'multiple','placeholder'=>'--pilih target--'); ?>
+                                    <?php echo form_dropdown('inputSasaranTarget[]', $load_bu, $data[0]['target_sasaran'],$style_d); ?>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -99,9 +109,9 @@
                                 <div class="col-sm-3">
                                     <?php $style_d= array('class'=>'form-control select2', 'Required'=>'','id'=>'inputKategoriEvent'); ?>
                                     <?php echo form_dropdown('inputKategoriEvent', $load_kategori_event, $data[0]['id_kategori_event'],$style_d); ?>
+                               
                                 </div>
                             </div>
-
 
                             <div class="form-group row" id="show_dengan_exam"  <?php  if($data[0]['kategori_event'] ==  'Training' ){ ?> style="display: show;" <?php }else{ ?> style="display: none;" <?php }?>>
                                 <label class="col-sm-2">Dengan Exam</label>

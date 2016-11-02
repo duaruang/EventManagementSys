@@ -82,10 +82,20 @@
                                     <input type="hidden" id="ev_longitude" name="ev_longitude" value="<?php echo $data[0]['longitude']; ?>">
                                 </div>
                             </div>
+
+                            <div class="form-group row input_anggaran">
+                                <label class="col-sm-2">Program Anggaran <span class="text-danger">*</span></label>
+                                <div class="col-sm-5">
+                                    <?php $style_d= array('class'=>'form-control select2', 'Required'=>'','id'=>'inputProgramAnggaran','disabled'=>''); ?>
+                                    <?php echo form_dropdown('inputProgramAnggaran', $load_program_anggaran, $data[0]['id_program_anggaran'],$style_d); ?>
+                                    <span class="text-muted" id="anggaran"></span>
+                                </div>
+                            </div>
                             <div class="form-group row">
                                 <label class="col-sm-2">Target / Sasaran Peserta <span class="text-danger">*</span></label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control" required="" id="inputSasaranTarget" name="inputSasaranTarget" value="<?php echo $data[0]['target_sasaran']; ?>" disabled/>
+                                    <?php $style_d= array('class'=>'select2 form-control select2-multiple', 'Required'=>'','id'=>'inputSasaranTarget','multiple'=>'multiple', 'multiple','disabled'=>'disabled'); ?>
+                                    <?php echo form_dropdown('inputSasaranTarget[]', $load_bu, $data[0]['target_sasaran'],$style_d); ?>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -204,7 +214,7 @@
                                             <a class="nav-link" id="profile-tab" data-toggle="tab" href="#biayatraining"
                                                role="tab" aria-controls="profile">Biaya Training dan Vendor</a>
                                         </li>-->
-                                        <li class="nav-item" id="navmateri"  <?php  if($data[0]['id_exam'] == '' || $data[0]['dengan_exam'] == 'tidak'){ ?> style="display: block;" <?php }else{ ?> style="display: none;" <?php }?>>
+                                        <li class="nav-item" id="navmateri"  <?php  if($data[0]['kategori_event']== 'Exam' || $data[0]['kategori_event']== 'others' || $data[0]['dengan_exam']== 'ya'){ ?> style="display: none;" <?php }else{ ?> style="display: block;" <?php }?>>
                                             <a class="nav-link" id="profile-tab" data-toggle="tab" href="#materi"
                                                role="tab" aria-controls="profile">Materi</a>
                                         </li>

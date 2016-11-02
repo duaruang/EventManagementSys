@@ -220,6 +220,7 @@ EVENT CONTROLLER
 ================================================*/
 $route['pengajuan-event'] 							= 'Event_controller/propose';
 $route['event'] 									= 'Event_controller/index';
+$route['event/get_parent_anggaran'] 				= 'Event_controller/get_parent_anggaran';
 $route['pengajuan-event/view/(:any)'] 				= 'Event_controller/view/$1';
 $route['pengajuan-event/process_add'] 				= 'Event_controller/process_add';
 $route['pengajuan-event/edit/(:any)'] 				= 'Event_controller/edit/$1';
