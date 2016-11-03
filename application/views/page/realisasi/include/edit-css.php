@@ -1,6 +1,5 @@
 <link href="<?php echo base_url(); ?>assets/plugins/multiselect/css/multi-select.css"  rel="stylesheet" type="text/css" />
 <link href="<?php echo base_url(); ?>assets/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <!-- Plugins css -->
 <link href="<?php echo base_url(); ?>assets/plugins/timepicker/bootstrap-timepicker.min.css" rel="stylesheet">
 <link href="<?php echo base_url(); ?>assets/plugins/mjolnic-bootstrap-colorpicker/css/bootstrap-colorpicker.min.css" rel="stylesheet">

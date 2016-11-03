@@ -233,6 +233,7 @@
                                                             <th>NIK</th>
                                                             <th>Nama</th>
                                                             <th>Posisi</th>
+                                                            <th>Unit Kerja</th>
                                                         </tr>
                                                         </thead>
                                                         <tbody>
@@ -242,6 +243,7 @@
                                                             <td><?php echo $result_peserta->nik; ?></td>
                                                             <td><?php echo $result_peserta->nama; ?></td>
                                                             <td><?php echo $result_peserta->posisi; ?></td>
+                                                            <td><?php echo $result_peserta->unit_kerja; ?></td>
                                                         </tr>
                                                         <?php } ?>
                                                         <?php } ?>
@@ -262,6 +264,7 @@
                                                                 <th>NIK</th>
                                                                 <th>Nama</th>
                                                                 <th>Posisi</th>
+                                                                <th>Unit Kerja</th>
                                                             </tr>
                                                             </thead>
                                                             <tbody>
@@ -271,6 +274,7 @@
                                                                     <td><?php echo $result_peserta->nik; ?></td>
                                                                     <td><?php echo $result_peserta->nama; ?></td>
                                                                     <td><?php echo $result_peserta->posisi; ?></td>
+                                                                    <td><?php echo $result_peserta->unit_kerja; ?></td>
                                                                 </tr>
                                                                 <?php } ?>
                                                                 <?php } ?>
@@ -314,7 +318,7 @@
                                                         <thead>
                                                         <tr>
                                                             <th>Nama Trainer</th>
-                                                            <th>Perusahaan</th>
+                                                            <th>Materi</th>
                                                         </tr>
                                                         </thead>
                                                         <tbody>
@@ -324,7 +328,7 @@
                                                                     <td><?php echo $result_trainer->nama_pemateri; ?>
                                                                         <input type="hidden" id="inputIdTrainer" name="inputIdTrainer[]" value="<?php echo $result_trainer->id_kategori_trainer; ?>"><input type="hidden" id="inputPerusahaan" name="inputPerusahaan[]" value="internal">
                                                                     </td>
-                                                                    <td>PNM</td>
+                                                                    <td><?php echo $result_trainer->materi; ?></td>
                                                                    
                                                                 </tr>
                                                                 <?php } ?>

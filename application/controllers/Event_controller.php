@@ -20,7 +20,7 @@ class Event_controller extends MY_Controller {
 	 */
 	public function index()
 	{
-		//$this->is_logged();
+		$this->is_logged();
 		$head['title'] 			= 'List Event - Event Management System' ;
 		$head['css']			=  $this->load->view('page/event/include/index-css', NULL, TRUE);
 		$this->load->view('include/head', $head, TRUE);
@@ -35,7 +35,7 @@ class Event_controller extends MY_Controller {
 
 	public function propose()
 	{
-	    //$this->is_logged();
+	    $this->is_logged();
         //Set Head Content
 		$head['title'] 	= 'Propose Event - Event Management System' ;
 		$head['css']	=  $this->load->view('page/event/include/add-css', NULL, TRUE);
@@ -63,6 +63,68 @@ class Event_controller extends MY_Controller {
 		$budget			=  $this->program_anggaran_model->select_parent_active($anggaran[0]['id_root'])->result_array();
         //Load Data
 		echo 'Kategori '.$budget[0]['deskripsi'].' dengan anggaran Rp. '.number_format($budget[0]['budget'],0,'.','.');
+	}
+
+	public function get_materi()
+	{
+		$materi		= $this->materi_model->select_materi_active();
+		//sent data to datatables
+		
+		foreach($materi->result_array() as $data)
+		{
+			json_encode($data);
+			$ass[] =  array(
+											'data' =>  $data['id'],
+											'value' => $data['nama_materi']
+						);
+		}
+		$oleh = array(
+					'query' 			=> 'Unit',
+					'suggestions'		=>  $ass
+			);
+
+		echo json_encode($oleh);
+	}
+
+	public function get_pic_autocomplete()
+	{
+		$this->is_logged();
+		$username 		= 'event';
+		$password 		= 'event';
+	     
+	    // Set up and execute the curl process
+	    $curl_handle = curl_init();
+	    curl_setopt($curl_handle, CURLOPT_URL, 'http://182.23.52.249/Dummy/WebService/SSO_Mobile/get_all_karyawan.php');
+	    //curl_setopt($curl_handle, CURLOPT_URL, 'http://182.23.52.249/Dummy/WebService/SSO_Mobile/get_all_karyawan.php');
+	    curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
+	    curl_setopt($curl_handle, CURLOPT_POST, 1);
+	     
+	    // Optional, delete this line if your API is open
+	    curl_setopt($curl_handle, CURLOPT_USERPWD, $username . ':' . $password);
+	     
+	    $buffer = curl_exec($curl_handle);
+	    curl_close($curl_handle);
+	     
+	    $result = json_decode($buffer);
+
+	    //count total data
+		$total = 0;
+		foreach ($result->karyawan[0]->data as $row) {
+			$ass[] =  array(
+											'data' =>  $row->karyawan_id,
+											'value' => $row->karyawan_nama
+						);
+			$total++;
+		};
+
+
+		//sent data to datatables
+		$oleh = array(
+					'query' 			=> 'Unit',
+					'suggestions'		=>  $ass
+			);
+		echo json_encode($oleh);
+		exit;
 	}
 	
 	public function edit()
@@ -241,6 +303,7 @@ class Event_controller extends MY_Controller {
 		$inputProgramAnggaran		= trim($this->security->xss_clean(strip_image_tags($this->input->post('inputProgramAnggaran'))));
 		$inputNamaTempat			= trim($this->security->xss_clean(strip_image_tags($this->input->post('inputNamaTempat'))));
 		$latitude					= trim($this->security->xss_clean(strip_image_tags($this->input->post('ev_latitude'))));
+		$inputIdSdm					= $this->security->xss_clean(strip_image_tags($this->input->post('inputIdSdm')));
 		$longitude					= trim($this->security->xss_clean(strip_image_tags($this->input->post('ev_longitude'))));
 		$inputSasaranTarget			= $this->security->xss_clean(strip_image_tags($this->input->post('inputSasaranTarget')));
 		$inputKategoriEvent			= trim($this->security->xss_clean(strip_image_tags($this->input->post('inputKategoriEvent'))));
@@ -328,6 +391,8 @@ class Event_controller extends MY_Controller {
 		if($inputIdTrainer != '')
 		{
 			$inputPerusahaan		= $this->security->xss_clean(strip_image_tags($this->input->post('inputPerusahaan')));
+			$inputMateri			= $this->security->xss_clean(strip_image_tags($this->input->post('inputMateri')));
+
 			$this->event_model->delete_event_trainer($id_event);
 			$temp =count($inputIdTrainer);
 			for($i=0; $i<$temp;$i++){
@@ -335,6 +400,7 @@ class Event_controller extends MY_Controller {
   								'id_event'				=> $id_event,
 								'kategori_trainer'		=> $inputPerusahaan[$i],
 								'id_kategori_trainer'	=> $inputIdTrainer[$i],
+								'materi'				=> $inputMateri[$i],
 								'is_active'				=> 'active',
 								'created_by' 			=> $id_user,
 								'created_date' 			=> date('Y-m-d H:i:s')
@@ -515,6 +581,34 @@ class Event_controller extends MY_Controller {
 			}
 		}
 
+		//check peserta
+		if($inputIdSdm !== 0)
+		{
+			$this->event_model->delete_event_list_peserta($id_event);
+
+			$inputIdSdm					= $this->security->xss_clean(strip_image_tags($this->input->post('inputIdSdm')));
+			$inputNikPeserta			= $this->security->xss_clean(strip_image_tags($this->input->post('inputNikPeserta')));
+			$inputNamaPeserta			= $this->security->xss_clean(strip_image_tags($this->input->post('inputNamaPeserta')));
+			$inputPosisiPeserta			= $this->security->xss_clean(strip_image_tags($this->input->post('inputPosisiPeserta')));
+			$inputUnitKerjaPeserta		= $this->security->xss_clean(strip_image_tags($this->input->post('inputUnitKerjaPeserta')));
+
+			$temp =count($inputIdSdm);
+			for($i=0; $i<$temp;$i++){
+  				$data_array = array(
+  								'id_event'			=> $id_event,
+								'idsdm'				=> $inputIdSdm[$i],
+								'nik'				=> $inputNikPeserta[$i],
+								'nama'				=> $inputNamaPeserta[$i],
+								'posisi'			=> $inputPosisiPeserta[$i],
+								'unit_kerja'		=> $inputUnitKerjaPeserta[$i],
+								'created_by' 		=> $id_user,
+								'created_date' 		=> date('Y-m-d H:i:s')
+					);
+
+  				$this->event_model->insert_peserta_event($data_array);
+  			}
+  		}
+
 		//==== Check Data ====
 
 		//==== Insert Data ====
@@ -544,29 +638,6 @@ class Event_controller extends MY_Controller {
 								);
 
 			$this->event_model->update_event($data_insert_event,$id_event);
-
-			
-			$this->event_model->delete_event_list_peserta($id_event);
-
-			$inputIdSdm					= $this->security->xss_clean(strip_image_tags($this->input->post('inputIdSdm')));
-			$inputNikPeserta			= $this->security->xss_clean(strip_image_tags($this->input->post('inputNikPeserta')));
-			$inputNamaPeserta			= $this->security->xss_clean(strip_image_tags($this->input->post('inputNamaPeserta')));
-			$inputPosisiPeserta			= $this->security->xss_clean(strip_image_tags($this->input->post('inputPosisiPeserta')));
-
-			$temp =count($inputIdSdm);
-			for($i=0; $i<$temp;$i++){
-  				$data_array = array(
-  								'id_event'			=> $id_event,
-								'idsdm'				=> $inputIdSdm[$i],
-								'nik'				=> $inputNikPeserta[$i],
-								'nama'				=> $inputNamaPeserta[$i],
-								'posisi'			=> $inputPosisiPeserta[$i],
-								'created_by' 		=> $id_user,
-								'created_date' 		=> date('Y-m-d H:i:s')
-					);
-
-  				$this->event_model->insert_peserta_event($data_array);
-  			}
 
 			
             //insert log
@@ -769,7 +840,18 @@ class Event_controller extends MY_Controller {
 								'created_date' 			=> date('Y-m-d H:i:s')
 							);
 		$this->event_model->insert_approval_event($data_approval);
-           
+
+
+		$randdate 		= strtotime(date('Y-m-d'));
+		$randalnum 		= 'rea-'.random_string('alnum', 10);
+		$id_realisasi 	= strtoupper($randalnum.$randdate);
+		$data_realisasi	= array(
+								'id_event'				=> $id_event,
+								'id_realisasi'			=> $id_realisasi,
+		);
+        $this->realisasi_model->insert_event($data_realisasi);   
+
+
 		//Insert Data Document if exists to table event filesize
 		if (isset($_FILES['userfile']) != '') {
 			//$file_ary = rearray_files($_FILES['files']);
@@ -1094,6 +1176,7 @@ class Event_controller extends MY_Controller {
 		$inputKategoriEvent			= trim($this->security->xss_clean(strip_image_tags($this->input->post('inputKategoriEvent'))));
 		$inputTipePelatihan			= trim($this->security->xss_clean(strip_image_tags($this->input->post('inputTipePelatihan'))));
 		$inputTipeExam				= $this->security->xss_clean(strip_image_tags($this->input->post('inputTipeExam')));
+		$inputIdSdm					= $this->security->xss_clean(strip_image_tags($this->input->post('inputIdSdm')));
 		$inputDenganExam			= trim($this->security->xss_clean(strip_image_tags($this->input->post('inputDenganExam'))));
 		$inputIdExam				= trim($this->security->xss_clean(strip_image_tags($this->input->post('inputIdExam'))));
 		$inputGrandTotal			= trim($this->security->xss_clean(strip_image_tags($this->input->post('grand_total'))));
@@ -1177,13 +1260,14 @@ class Event_controller extends MY_Controller {
 		if($inputIdTrainer != '')
 		{
 			$inputPerusahaan		= $this->security->xss_clean(strip_image_tags($this->input->post('inputPerusahaan')));
-
+			$inputMateri		= $this->security->xss_clean(strip_image_tags($this->input->post('inputMateri')));
 			$temp =count($inputIdTrainer);
 			for($i=0; $i<$temp;$i++){
   				$data_trainer = array(
 								'id_event'				=> $id_event,
 								'kategori_trainer'		=> $inputPerusahaan[$i],
 								'id_kategori_trainer'	=> $inputIdTrainer[$i],
+								'materi'				=> $inputMateri[$i],
 								'is_active'				=> 'active',
 								'created_by' 			=> $id_user,
 								'created_date' 			=> date('Y-m-d H:i:s')
@@ -1359,6 +1443,34 @@ class Event_controller extends MY_Controller {
 			}
 		}
 
+		//check peserta
+		if($inputIdSdm !== 0)
+		{
+		$this->event_model->delete_event_list_peserta($id_event);
+
+			$inputIdSdm					= $this->security->xss_clean(strip_image_tags($this->input->post('inputIdSdm')));
+			$inputNikPeserta			= $this->security->xss_clean(strip_image_tags($this->input->post('inputNikPeserta')));
+			$inputNamaPeserta			= $this->security->xss_clean(strip_image_tags($this->input->post('inputNamaPeserta')));
+			$inputPosisiPeserta			= $this->security->xss_clean(strip_image_tags($this->input->post('inputPosisiPeserta')));
+			$inputUnitKerjaPeserta		= $this->security->xss_clean(strip_image_tags($this->input->post('inputUnitKerjaPeserta')));
+
+			$temp =count($inputIdSdm);
+			for($i=0; $i<$temp;$i++){
+  				$data_array = array(
+  								'id_event'			=> $id_event,
+								'idsdm'				=> $inputIdSdm[$i],
+								'nik'				=> $inputNikPeserta[$i],
+								'nama'				=> $inputNamaPeserta[$i],
+								'posisi'			=> $inputPosisiPeserta[$i],
+								'unit_kerja'		=> $inputUnitKerjaPeserta[$i],
+								'created_by' 		=> $id_user,
+								'created_date' 		=> date('Y-m-d H:i:s')
+					);
+
+  				$this->event_model->insert_peserta_event($data_array);
+  			}
+  		}
+
 		//==== Check Data ====
 		$sql_cab= $this->event_model->check_event($id_event);
 
@@ -1393,27 +1505,6 @@ class Event_controller extends MY_Controller {
 
 			$this->event_model->insert_event($data_insert_event);
 
-			
-			$inputIdSdm					= $this->security->xss_clean(strip_image_tags($this->input->post('inputIdSdm')));
-			$inputNikPeserta			= $this->security->xss_clean(strip_image_tags($this->input->post('inputNikPeserta')));
-			$inputNamaPeserta			= $this->security->xss_clean(strip_image_tags($this->input->post('inputNamaPeserta')));
-			$inputPosisiPeserta			= $this->security->xss_clean(strip_image_tags($this->input->post('inputPosisiPeserta')));
-
-			$temp =count($inputIdSdm);
-			for($i=0; $i<$temp;$i++){
-  				$data_array = array(
-								'id_event'			=> $id_event,
-								'idsdm'				=> $inputIdSdm[$i],
-								'nik'				=> $inputNikPeserta[$i],
-								'nama'				=> $inputNamaPeserta[$i],
-								'posisi'			=> $inputPosisiPeserta[$i],
-								'is_active'			=> 'active',
-								'created_by' 		=> $id_user,
-								'created_date' 		=> date('Y-m-d H:i:s')
-					);
-
-  				$this->event_model->insert_peserta_event($data_array);
-  			}
 
 			
             //insert log

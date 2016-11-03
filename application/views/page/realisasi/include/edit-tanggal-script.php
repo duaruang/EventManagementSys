@@ -4,9 +4,6 @@
 <script src="https://cdn.datatables.net/select/1.2.0/js/dataTables.select.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
 
- <!-- Autocomplete -->
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/plugins/autocomplete/jquery.mockjax.js"></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/plugins/autocomplete/jquery.autocomplete.min.js"></script>
 <!-- Jquery filer js -->
 <script src="<?php echo base_url(); ?>assets/plugins/jquery.filer/js/jquery.filer.min.js"></script>
 <!-- Jquery Document Viewer -->
@@ -27,16 +24,6 @@
 <script src="<?php echo base_url(); ?>assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
 <script src="<?php echo base_url(); ?>assets/plugins/timepicker/bootstrap-timepicker.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/pages/jquery.formadvanced.init.js"></script>
-<script>
-<?php $data = $load_events->result_array(); ?>
-	var selectedValues = new Array();
-	<?php $array_es = explode(';', $data[0]['target_sasaran']); 
-	$arrlength = count($array_es);
-	for($x = 0; $x < $arrlength; $x++) { ?>  
-	selectedValues[<?php echo $x; ?>] = <?php echo '"'.$array_es[$x].'"'; ?>;
-	<?php } ?>
-$("#inputSasaranTarget").val(selectedValues);
-</script>
 <script type="text/javascript">
 $(document).ready(function() {
 		$('#filer_input3').filer({
@@ -84,32 +71,6 @@ $(document).ready(function() {
 
 			}
 
-		});
-
-		
-		$('#anggaran').hide();
-		$('#inputProgramAnggaran').on('change', function (e) {
-			e.preventDefault(); 
-			
-			var inputanggaran = $(this).val(); 
-			
-			//Load Deskripsi Kegiatan
-			if(inputanggaran != '')
-			{
-				$.ajax({
-					url: "<?php echo base_url()?>event/get_parent_anggaran",
-					data: "anggaran_id="+inputanggaran,
-					cache: false,
-					success: function(data){
-						$('#anggaran').show(10);
-						$("#anggaran").html(data);
-					}
-				});
-			}
-			else
-			{
-				$('#anggaran').hide(650);
-			}
 		});
 		/*===============================================================================
         FUNCTION CLICK PILIH EXAM
@@ -175,11 +136,12 @@ $(document).ready(function() {
 			
         	var button_boolean	= $('input[name="draft"]').is(':focus');
         	
-			var formURL = "<?php echo site_url('pengajuan-event/process_edit'); ?>";
+			var formURL = "<?php echo site_url('pengajuan-event/process_edit_tanggal'); ?>";
 			var frmdata = new FormData(this);
 			if(button_boolean == true)
 			{
 				frmdata.append('draft', 'draft');
+				console.log(button_boolean);
 			}
 			if(button_boolean == false)
 			{
@@ -229,8 +191,7 @@ $(document).ready(function() {
 		$('.input-limit-datepicker').daterangepicker({
 	        toggleActive: true,
 	        autoUpdateInput: false,
-	        format: 'DD-MM-YYYY',
-	        minDate: '<?php echo tgl_eng(date('Y-m-d', $tomorrow_timestamp)); ?>'
+	        format: 'DD-MM-YYYY'
 	    });
 
 	    //SET VALUE TO FIELD START DATE
@@ -495,9 +456,9 @@ $(document).ready(function() {
 	            for(i=0;i<countdata;i++)
 	            {
 
-	             $('<div>').html ('<input type="hidden" id="inputIdSdm" name="inputIdSdm[]" value="'+rowData[i].karyawan_id +'"><input type="hidden" id="inputNikPeserta" name="inputNikPeserta[]" value="'+rowData[i].karyawan_nip +'"><input type="hidden" id="inputNamaPeserta" name="inputNamaPeserta[]" value="'+rowData[i].karyawan_nama +'"><input type="hidden" id="inputPosisiPeserta" name="inputPosisiPeserta[]" value="'+rowData[i].karyawan_posisi +'"><input type="hidden" id="inputUnitKerjaPeserta" name="inputUnitKerjaPeserta[]" value="'+rowData[i].karyawan_unit_kerja +'">').appendTo('#wrapabcs');	
+	            $('<div>').html ('<input type="hidden" id="inputIdSdm" name="inputIdSdm[]" value="'+rowData[i].karyawan_id +'"><input type="hidden" id="inputNikPeserta" name="inputNikPeserta[]" value="'+rowData[i].karyawan_nip +'"><input type="hidden" id="inputNamaPeserta" name="inputNamaPeserta[]" value="'+rowData[i].karyawan_nama +'"><input type="hidden" id="inputPosisiPeserta" name="inputPosisiPeserta[]" value="'+rowData[i].karyawan_posisi +'">').appendTo('#wrapabcs');	
 
-	            $('#daftar_peserta_table_input tbody').prepend( '<tr><td>'+rowData[i].karyawan_nip+'</td><td> '+rowData[i].karyawan_nama+'</td><td> '+rowData[i].karyawan_posisi+'</td><td> '+rowData[i].karyawan_unit_kerja+'</td></tr>' );
+	            $('#daftar_peserta_table_input tbody').prepend( '<tr><td>'+rowData[i].karyawan_nip+'</td><td> '+rowData[i].karyawan_nama+'</td><td> '+rowData[i].karyawan_posisi+'</td></tr>' );
 	        	}
 	        });
 			/*===============================================================================
@@ -568,16 +529,8 @@ $(document).ready(function() {
 	            for(i=0;i<countdata;i++)
 	            {
 
-	            	$('#table-trainer tbody').prepend( '<tr><td> '+rowData[i].nama_pemateri+'<input type="hidden" id="inputIdTrainer" name="inputIdTrainer[]" value="'+rowData[i].id +'"><input type="hidden" id="inputPerusahaan" name="inputPerusahaan[]" value="internal"></td><td><input type="text" name="inputMateri[]" id="autocomplete-ajax'+i+'" class="form-control" style=" z-index: 2; background: transparent;"/><input type="text" name="inputMateri[]" id="autocomplete-ajax-x'+i+'" disabled="disabled" class="form-control" style="color: #CCC; position: absolute; background: transparent; z-index: 1;display: none;"/></td><td><a href="javascript:void(0);" class="remTrainer" class="btn btn-danger remove-pic" type="button"><i class="fa fa-2x fa-times text-danger"></i></a></td></tr>' );
-
-	            	$('#autocomplete-ajax'+i).autocomplete({
-					    	serviceUrl: '<?php echo base_url() ?>event/get_materi'
-					    });
+	            	$('#table-trainer tbody').prepend( '<tr><td> '+rowData[i].nama_pemateri+'<input type="hidden" id="inputIdTrainer" name="inputIdTrainer[]" value="'+rowData[i].id +'"><input type="hidden" id="inputPerusahaan" name="inputPerusahaan[]" value="internal"></td><td>PNM</td><td><a href="javascript:void(0);" class="remTrainer" class="btn btn-danger remove-pic" type="button"><i class="fa fa-2x fa-times text-danger"></i></a></td></tr>' );
 	        	}
-	        	
-	        	$('#autocomplete-ajax').autocomplete({
-			    	serviceUrl: '<?php echo base_url() ?>event/get_materi'
-			    });
 	        });
 			/*===============================================================================
         	METHOD SELECT ALL TRAINER 

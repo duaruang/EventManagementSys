@@ -4,6 +4,10 @@
 <script src="https://cdn.datatables.net/select/1.2.0/js/dataTables.select.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
 
+ <!-- Autocomplete -->
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/plugins/autocomplete/jquery.mockjax.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/plugins/autocomplete/jquery.autocomplete.min.js"></script>
+
 <!-- Jquery filer js -->
 <script src="<?php echo base_url(); ?>assets/plugins/jquery.filer/js/jquery.filer.min.js"></script>
 <!-- Jquery Document Viewer -->
@@ -26,6 +30,7 @@
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/pages/jquery.formadvanced.init.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
+		
 		$('#filer_input3').filer({
 			limit: 1,
 			maxSize: 1, //1 MB
@@ -486,9 +491,9 @@ $(document).ready(function() {
 	            for(i=0;i<countdata;i++)
 	            {
 
-	            $('<div>').html ('<input type="hidden" id="inputIdSdm" name="inputIdSdm[]" value="'+rowData[i].karyawan_id +'"><input type="hidden" id="inputNikPeserta" name="inputNikPeserta[]" value="'+rowData[i].karyawan_nip +'"><input type="hidden" id="inputNamaPeserta" name="inputNamaPeserta[]" value="'+rowData[i].karyawan_nama +'"><input type="hidden" id="inputPosisiPeserta" name="inputPosisiPeserta[]" value="'+rowData[i].karyawan_posisi +'">').appendTo('#wrapabcs');	
+	            $('<div>').html ('<input type="hidden" id="inputIdSdm" name="inputIdSdm[]" value="'+rowData[i].karyawan_id +'"><input type="hidden" id="inputNikPeserta" name="inputNikPeserta[]" value="'+rowData[i].karyawan_nip +'"><input type="hidden" id="inputNamaPeserta" name="inputNamaPeserta[]" value="'+rowData[i].karyawan_nama +'"><input type="hidden" id="inputPosisiPeserta" name="inputPosisiPeserta[]" value="'+rowData[i].karyawan_posisi +'"><input type="hidden" id="inputUnitKerjaPeserta" name="inputUnitKerjaPeserta[]" value="'+rowData[i].karyawan_unit_kerja +'">').appendTo('#wrapabcs');	
 
-	            $('#daftar_peserta_table_input tbody').prepend( '<tr><td>'+rowData[i].karyawan_nip+'</td><td> '+rowData[i].karyawan_nama+'</td><td> '+rowData[i].karyawan_posisi+'</td></tr>' );
+	            $('#daftar_peserta_table_input tbody').prepend( '<tr><td>'+rowData[i].karyawan_nip+'</td><td> '+rowData[i].karyawan_nama+'</td><td> '+rowData[i].karyawan_posisi+'</td><td> '+rowData[i].karyawan_unit_kerja+'</td></tr>' );
 	        	}
 	        });
 			/*===============================================================================
@@ -555,13 +560,28 @@ $(document).ready(function() {
 	            //var obj = JSON.stringify(rowData);
 	            //var parsejson = JSON.parse(obj);
                 //$("#inputJumlahPeserta").val(countdata); 
-
 	            for(i=0;i<countdata;i++)
 	            {
 
-	            	$('#table-trainer tbody').prepend( '<tr><td> '+rowData[i].nama_pemateri+'<input type="hidden" id="inputIdTrainer" name="inputIdTrainer[]" value="'+rowData[i].id +'"><input type="hidden" id="inputPerusahaan" name="inputPerusahaan[]" value="internal"></td><td>PNM</td><td><a href="javascript:void(0);" class="remTrainer" class="btn btn-danger remove-pic" type="button"><i class="fa fa-2x fa-times text-danger"></i></a></td></tr>' );
+	            	$('#table-trainer tbody').prepend( '<tr><td> '+rowData[i].nama_pemateri+'<input type="hidden" id="inputIdTrainer" name="inputIdTrainer[]" value="'+rowData[i].id +'"><input type="hidden" id="inputPerusahaan" name="inputPerusahaan[]" value="internal"></td><td><input type="text" name="inputMateri[]" id="autocomplete-ajax'+i+'" class="form-control" style=" z-index: 2; background: transparent;"/><input type="text" name="inputMateri[]" id="autocomplete-ajax-x'+i+'" disabled="disabled" class="form-control" style="color: #CCC; position: absolute; background: transparent; z-index: 1;display: none;"/></td><td><a href="javascript:void(0);" class="remTrainer" class="btn btn-danger remove-pic" type="button"><i class="fa fa-2x fa-times text-danger"></i></a></td></tr>' );
+
+	            		$('#autocomplete-ajax'+i).autocomplete({
+					    	serviceUrl: '<?php echo base_url() ?>event/get_materi'
+					    });
 	        	}
+
+	        	$('#autocomplete-ajax').autocomplete({
+			    	serviceUrl: '<?php echo base_url() ?>event/get_materi'
+			    });
 	        });
+		 	/*
+		    $( "#inputMateriTrainer" ). ({
+		      source: "search.php",
+		      minLength: 2,
+		      select: function( event, ui ) {
+		        log( "Selected: " + ui.item.value + " aka " + ui.item.id );
+		      }
+		    });*/
 			/*===============================================================================
         	METHOD SELECT ALL TRAINER 
         	================================================================================*/
@@ -661,9 +681,21 @@ $(document).ready(function() {
 		/*===============================================================================
     	FUNCTION ADD ROWS PIC 
     	================================================================================*/
+    	var counting=0;
 		$('#add-pic').on('click', function(){
-			 $('#table-picpanitia tbody').append('<tr><td><input type="text" class="form-control" placeholder="Type something" id="nama_pic" name="nama_pic[]"/><input type="hidden" id="id_karyawan" name="id_karyawan[]" value=""></td><td><a href="javascript:void(0);" class="remCF" class="btn btn-danger remove-pic" type="button"><i class="fa fa-2x fa-times text-danger"></i></a></td></tr>');
+			 $('#table-picpanitia tbody').append('<tr><td><input type="text" class="form-control" placeholder="Type something" id="nama_pic'+(++counting)+'" name="nama_pic[]"/><input type="hidden" id="id_karyawan_pic'+counting+'" name="id_karyawan[]" value=""></td><td><a href="javascript:void(0);" class="remCF" class="btn btn-danger remove-pic" type="button"><i class="fa fa-2x fa-times text-danger"></i></a></td></tr>');
+			 /*
+			 $('#nama_pic'+counting).autocomplete({
+					    	serviceUrl: '<?php echo base_url() ?>Event_controller/get_pic_autocomplete',
+					    	onSelect: function (suggestion) {
+						        $('#id_karyawan_pic'+counting).val(suggestion.data);
+						    }
+					    });*/
 		});
+		/*
+		$('#autocomplete-ajax').autocomplete({
+	    	serviceUrl: '<?php echo base_url() ?>Event_controller/get_pic_autocomplete'
+	    });*/
 
 		 $("#table-picpanitia tbody").on('click','.remCF',function(){
 	        $(this).parent().parent().remove();

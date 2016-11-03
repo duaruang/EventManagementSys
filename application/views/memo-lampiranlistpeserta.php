@@ -51,6 +51,7 @@ th {
     <th>NIK</th>
     <th>Nama</th>
     <th>Posisi</th>
+    <th>Unit Kerja</th>
 </tr>
 </thead>
 <tbody>
@@ -63,6 +64,7 @@ foreach($load_list_peserta->result() as $data){ ?>
         <td><?php echo $data->nik; ?></td>
         <td><?php echo $data->nama; ?></td>
         <td><?php echo $data->posisi; ?></td>
+        <td><?php echo $data->unit_kerja; ?></td>
     </tr> 
 <?php $no++; } ?>
 <?php }else{ ?>

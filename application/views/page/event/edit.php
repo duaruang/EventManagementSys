@@ -241,6 +241,7 @@
                                                             <th>NIK</th>
                                                             <th>Nama</th>
                                                             <th>Posisi</th>
+                                                            <th>Unit Kerja</th>
                                                         </tr>
                                                         </thead>
                                                         <tbody>
@@ -250,6 +251,7 @@
                                                             <td><?php echo $result_peserta->nik; ?></td>
                                                             <td><?php echo $result_peserta->nama; ?></td>
                                                             <td><?php echo $result_peserta->posisi; ?></td>
+                                                            <td><?php echo $result_peserta->unit_kerja; ?></td>
                                                         </tr>
                                                         <?php } ?>
                                                         <?php } ?>
@@ -260,7 +262,7 @@
                                             <div id="wrapabcs">
                                             <?php if($load_peserta->num_rows() > 0){ ?>
                                                         <?php foreach($load_peserta->result() as $result_peserta){ ?>
-                                            <div><input type="hidden" id="inputIdSdm" name="inputIdSdm[]" value="<?php echo $result_peserta->idsdm; ?>"><input type="hidden" id="inputNikPeserta" name="inputNikPeserta[]" value="<?php echo $result_peserta->nik; ?>"><input type="hidden" id="inputNamaPeserta" name="inputNamaPeserta[]" value="<?php echo $result_peserta->nama; ?>"><input type="hidden" id="inputPosisiPeserta" name="inputPosisiPeserta[]" value="<?php echo $result_peserta->posisi; ?>"></div>  
+                                            <div><input type="hidden" id="inputIdSdm" name="inputIdSdm[]" value="<?php echo $result_peserta->idsdm; ?>"><input type="hidden" id="inputNikPeserta" name="inputNikPeserta[]" value="<?php echo $result_peserta->nik; ?>"><input type="hidden" id="inputNamaPeserta" name="inputNamaPeserta[]" value="<?php echo $result_peserta->nama; ?>"><input type="hidden" id="inputPosisiPeserta" name="inputPosisiPeserta[]" value="<?php echo $result_peserta->posisi; ?>"><input type="hidden" id="inputUnitKerjaPeserta" name="inputUnitKerjaPeserta[]" value="<?php echo $result_peserta->unit_kerja; ?>"></div>  
                                             <?php } ?>
                                                         <?php } ?>
                                             </div>
@@ -279,6 +281,7 @@
                                                                 <th>NIK</th>
                                                                 <th>Nama</th>
                                                                 <th>Posisi</th>
+                                                                <th>Unit Kerja</th>
                                                             </tr>
                                                             </thead>
                                                             <tbody>
@@ -288,6 +291,7 @@
                                                                     <td><?php echo $result_peserta->nik; ?></td>
                                                                     <td><?php echo $result_peserta->nama; ?></td>
                                                                     <td><?php echo $result_peserta->posisi; ?></td>
+                                                                    <td><?php echo $result_peserta->unit_kerja; ?></td>
                                                                 </tr>
                                                                 <?php } ?>
                                                                 <?php } ?>
@@ -337,21 +341,23 @@
                                                         <thead>
                                                         <tr>
                                                             <th>Nama Trainer</th>
-                                                            <th>Perusahaan</th>
+                                                            <th>Nama Materi</th>
                                                             <th width="15">Action</th>
                                                         </tr>
                                                         </thead>
                                                         <tbody>
                                                             <?php if($load_trainer->num_rows() > 0){ ?>
-                                                                <?php foreach($load_trainer->result() as $result_trainer){ ?>
+                                                                <?php 
+                                                                $no=0;
+                                                                foreach($load_trainer->result() as $result_trainer){ ?>
                                                                 <tr>
                                                                     <td><?php echo $result_trainer->nama_pemateri; ?>
                                                                         <input type="hidden" id="inputIdTrainer" name="inputIdTrainer[]" value="<?php echo $result_trainer->id_kategori_trainer; ?>"><input type="hidden" id="inputPerusahaan" name="inputPerusahaan[]" value="internal">
                                                                     </td>
-                                                                    <td>PNM</td>
+                                                                    <td><input type="text" class="form-control" id="autocomplete-ajax<?php echo $no; ?>" name="inputMateri[]" value="<?php echo $result_trainer->materi; ?>"></td>
                                                                     <td><a href="javascript:void(0);" class="remCF" class="btn btn-danger remove-pic" type="button"><i class="fa fa-2x fa-times text-danger"></i></a></td>
                                                                 </tr>
-                                                                <?php } ?>
+                                                                <?php $no++;} ?>
                                                         <?php } ?>
                                                         </tbody>
                                                     </table>

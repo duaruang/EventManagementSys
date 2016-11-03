@@ -240,7 +240,6 @@
                                                             <th>NIK</th>
                                                             <th>Nama</th>
                                                             <th>Posisi</th>
-                                                            <th>Unit Kerja</th>
                                                         </tr>
                                                         </thead>
                                                         <tbody>
@@ -265,7 +264,6 @@
                                                                 <th>NIK</th>
                                                                 <th>Nama</th>
                                                                 <th>Posisi</th>
-                                                                <th>Unit Kerja</th>
                                                             </tr>
                                                             </thead>
                                                             <tbody>
