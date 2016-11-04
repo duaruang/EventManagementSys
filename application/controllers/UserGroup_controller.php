@@ -22,12 +22,15 @@ class UserGroup_controller extends MY_Controller {
     //Function: table user group
 	public function index()
 	{
-        //Set Head Content
+        //Check user is logged or not
+	    $this->is_logged();
+		
+		//Set Head Content
 		$head['title'] 		= 'User Group Administration - Event Management System V.1.0' ;
 		$head['css']		= $this->load->view('page/user_group/include/index-css', NULL, TRUE);
 		$this->load->view('include/head', $head, TRUE);
-       
-       //Set Spesific Javascript page
+		
+		//Set Spesific Javascript page
         $data['script'] 		= $this->load->view('page/user_group/include/index-script', NULL, TRUE);
         $data['load_usergroup']	= $this->user_group_model->select_usergroup();
         
@@ -36,6 +39,9 @@ class UserGroup_controller extends MY_Controller {
 
 	public function add()
 	{
+		//Check user is logged or not
+	    $this->is_logged();
+		
         //Set Head Content
 		$head['title'] 		= 'User Group Administration - Event Management System V.1.0' ;
 		$head['css']		= $this->load->view('page/user_group/include/add-css', NULL, TRUE);
@@ -130,6 +136,9 @@ class UserGroup_controller extends MY_Controller {
 
 	public function view()
 	{
+		//Check user is logged or not
+	    $this->is_logged();
+		
         //Get Data
 		$id_usergroup = $this->uri->segment(3);
         
@@ -143,14 +152,19 @@ class UserGroup_controller extends MY_Controller {
         
 		//Set Content Data 
 		$data['id_usergroup']	= $id_usergroup;
-        $data['load_usergroup']	= $this->user_group_model->select_usergroup_id($id_usergroup);
+		$load_usergroup			= $this->user_group_model->select_usergroup_id($id_usergroup);
+        $data['load_usergroup']	= $load_usergroup;
         $data['load_system']	= $this->user_group_model->select_privilege_system();
 		
-		$this->template->view('page/user_group/view',$data);
+		if($load_usergroup->num_rows() > 0) $this->template->view('page/user_group/view',$data);
+		else show_404();
 	}
 
 	public function edit()
 	{
+		//Check user is logged or not
+	    $this->is_logged();
+		
         //Get Data
 		$id_usergroup = $this->uri->segment(3);
         
@@ -164,10 +178,12 @@ class UserGroup_controller extends MY_Controller {
         
 		//Set Content Data 
 		$data['id_usergroup']	= $id_usergroup;
-        $data['load_usergroup']	= $this->user_group_model->select_usergroup_id($id_usergroup);
+		$load_usergroup			= $this->user_group_model->select_usergroup_id($id_usergroup);
+        $data['load_usergroup']	= $load_usergroup;
         $data['load_system']	= $this->user_group_model->select_privilege_system();
         
-		$this->template->view('page/user_group/edit',$data);
+		if($load_usergroup->num_rows() > 0) $this->template->view('page/user_group/edit',$data);
+		else show_404();
 	}
 
 	public function process_edit()
@@ -269,7 +285,7 @@ class UserGroup_controller extends MY_Controller {
 	public function process_delete()
 	{
 		//Check user is logged or not
-	    //$this->is_logged();
+	    $this->is_logged();
 		
 		//Get Data
 		$id_usergroup = $this->security->xss_clean(strip_image_tags($this->input->post('hidden-idusergroup'))); 

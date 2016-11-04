@@ -58,51 +58,69 @@
                                         <th>Peserta</th>
                                         <th>Realisasi Biaya</th>
                                         <th>Status</th>
-                                        <th width="100">Action</th>
+                                        <th width="80">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <?php if($load_event->num_rows() > 0){ ?>
-                                <?php foreach($load_event->result() as $data){ ?>
+                                <?php if($load_realisasi->num_rows() > 0){ ?>
+                                <?php foreach($load_realisasi->result() as $data){ ?>
                                     <tr>
-                                        <td><?php echo $data->memo_pertanggungjawaban; ?></td>
-                                        <td><?php echo $data->nomor_memo_pengajuan; ?></td>
+                                        <td>
+                                        <?php 
+                                        if($data->memo_pertanggungjawaban == null)
+                                        {
+                                            echo '<span class="text-danger">LPJ BELUM DIBUAT</span>';
+                                        }else{
+                                        echo $data->memo_pertanggungjawaban;} ?>
+                                            
+                                        </td>
+                                        <td><?php echo $data->nomor_memo; ?></td>
                                         <td><?php echo $data->lokasi_kerja; ?></td>
                                         <td><?php echo $data->nama_event; ?></td>
-                                        <td><?php echo $data->mulai_tanggal_pelaksanaan; ?> - <?php echo $data->selesai_tanggal_pelaksanaan; ?></td>
-                                        <td><?php echo $data->jumlah_peserta; ?></td>
-                                        <td><?php echo $data->total_rab; ?></td>
                                         <td>
-                                        <?php if($data->status_event == 'draft'){ $s ='draft';?>
+
+                                        <?php 
+                                             if($data->mulai_tanggal_pelaksanaan != $data->selesai_tanggal_pelaksanaan){
+                                        echo tgl_saja($data->mulai_tanggal_pelaksanaan); ?> - <?php echo tgl_indo_tanpa_detik($data->selesai_tanggal_pelaksanaan); 
+                                            }else
+                                            {
+                                                 echo tgl_indo_tanpa_detik($data->selesai_tanggal_pelaksanaan);
+                                            }
+                                        ?>
+                                            
+                                        </td>
+                                        <td><?php echo $data->jumlah_peserta_realisasi; ?></td>
+                                        <td><?php echo $data->realisasi_rab; ?></td>
+                                        <td>
+                                        <?php if($data->status_realisasi == 'belum realisasi'){ $s ='belum realisasi';?>
                                         <span class="label label-default">
                                         <?php } ?>
-                                        <?php if($data->status_event == 'submitted'){ $s ='submitted';?>
+                                        <?php if($data->status_realisasi == 'submitted'){ $s ='submitted';?>
                                         <span class="label label-primary">
                                         <?php } ?>
-                                        <?php if($data->status_event == 'approved_atasan'){ $s ='approved oleh atasan';?>
+                                        <?php if($data->status_realisasi == 'approved_atasan'){ $s ='approved oleh atasan';?>
                                         <span class="label label-info">
                                         <?php } ?>
-                                        <?php if($data->status_event == 'approved_pusat'){ $s ='approved oleh pusat';?>
+                                        <?php if($data->status_realisasi == 'approved_pusat'){ $s ='approved oleh pusat';?>
                                         <span class="label label-success">
                                         <?php } ?>
-                                        <?php if($data->status_event == 'rejected_atasan'){ $s ='rejected oleh atasan'; ?>
+                                        <?php if($data->status_realisasi == 'rejected_atasan'){ $s ='rejected oleh atasan'; ?>
                                         <span class="label label-danger">
                                         <?php } ?>
-										<?php if($data->status_event == 'rejected_pusat'){ $s ='rejected oleh pusat'; ?>
+										<?php if($data->status_realisasi == 'rejected_pusat'){ $s ='rejected oleh pusat'; ?>
 										<span class="label label-danger">
                                         <?php } ?>
-                                        <?php if($data->status_event == 'cancelled by user'){ $s=$data->status_event; ?>
+                                        <?php if($data->status_realisasi == 'cancelled by user'){ $s=$data->status_realisasi; ?>
                                         <span class="label label-warning">
                                         <?php } ?>
                                         <?php echo $s; ?></span>
 
                                         </td>
                                         <td>
-                                            <?php if($data->status_event == 'draft'){ ?>
-                                            <a href="<?php echo site_url('pengajuan-event/view/'.$data->id_event); ?>" class="btn action btn-primary  waves-effect waves-light m-b-10"><span class="btn-label"><i class="fa fa-eye"></i></span>View</a>
+                                            <?php if($data->status_realisasi == 'belum realisasi'){ ?>
+                                            <a href="<?php echo site_url('realisasi/edit/'.$data->id_event); ?>" class="btn action btn-primary  waves-effect waves-light m-b-10">Buat LPJ</a>
                                             <?php }else{ ?>
                                             <a href="<?php echo site_url('pengajuan-event/view/'.$data->id_event); ?>" class="btn action btn-primary  waves-effect waves-light m-b-10"><span class="btn-label"><i class="fa fa-file-pdf-o"></i></span></a>&nbsp;&nbsp;
-                                            <?php } ?>
                                             <?php } ?>
                                         </td>
                                     </tr>

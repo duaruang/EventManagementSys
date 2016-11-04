@@ -20,7 +20,8 @@ class ProgramAnggaran_controller extends MY_Controller {
 	 */
 	public function index()
 	{
-	    //$this->is_logged();
+	    //Check user is logged or not
+	    $this->is_logged();
 		
         //Set Head Content
 		$head['title'] 			= 'Matriks Program dan Anggaran - Event Management System' ;
@@ -39,7 +40,8 @@ class ProgramAnggaran_controller extends MY_Controller {
 
 	public function add()
 	{
-	    //$this->is_logged();
+	    //Check user is logged or not
+	    $this->is_logged();
 		
         //Set Head Content
 		$head['title'] 			= 'Tambah Matriks Program dan Anggaran - Event Management System' ;
@@ -245,7 +247,9 @@ class ProgramAnggaran_controller extends MY_Controller {
 
 	public function view()
 	{
-	    //$this->is_logged();
+	    //Check user is logged or not
+	    $this->is_logged();
+		
 		//Get Data
 		$type = $this->uri->segment(3);
 		$id = $this->uri->segment(4);
@@ -294,7 +298,9 @@ class ProgramAnggaran_controller extends MY_Controller {
 
 	public function edit()
 	{
-	    //$this->is_logged();
+	    //Check user is logged or not
+	    $this->is_logged();
+		
 	    //Get Data
 		$type = $this->uri->segment(3);
 		$id = $this->uri->segment(4);
@@ -346,8 +352,6 @@ class ProgramAnggaran_controller extends MY_Controller {
 	
 	public function load_kategori()
 	{	
-		//$this->is_logged();
-		
 		$id_root = $this->security->xss_clean(strip_image_tags($this->input->post('idroot')));
 		$load_content = $this->program_anggaran_model->select_child($id_root);
 		
@@ -430,13 +434,13 @@ class ProgramAnggaran_controller extends MY_Controller {
 	public function process_delete()
 	{
 		//Check user is logged or not
-	    //$this->is_logged();
+	    $this->is_logged();
 		
 		//Get Data
 		$id		 	= $this->security->xss_clean(strip_image_tags($this->input->post('hidden-id'))); 
 		$type	 	= $this->security->xss_clean(strip_image_tags($this->input->post('hidden-type'))); 
 		$deskripsi  = $this->security->xss_clean(strip_image_tags($this->input->post('hidden-deskripsi')));
-		$id_user = $this->session->userdata('sess_user_id');
+		$id_user 	= $this->session->userdata('sess_user_id');
 		
 		if($id != '') {
 			if($type==1) //Level 1 : Bisnis Unit

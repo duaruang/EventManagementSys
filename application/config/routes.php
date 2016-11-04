@@ -283,3 +283,44 @@ $route['matriks-program-anggaran/edit/(:num)/(:num)'] 		= 'ProgramAnggaran_contr
 $route['matriks-program-anggaran/process-edit'] 			= 'ProgramAnggaran_controller/process_edit';
 $route['matriks-program-anggaran/load-kategori-program'] 	= 'ProgramAnggaran_controller/load_kategori';
 $route['matriks-program-anggaran/process-delete'] 			= 'ProgramAnggaran_controller/process_delete';
+
+/*==============================================
+PERSETUJUAN USULAN CONTROLLER
+================================================*/
+$route['list-persetujuan'] 								= 'PersetujuanUsulan_controller/index';
+$route['list-persetujuan/add'] 							= 'PersetujuanUsulan_controller/add';
+$route['list-persetujuan/process-add'] 					= 'PersetujuanUsulan_controller/process_add';
+$route['list-persetujuan/view/(:num)'] 					= 'PersetujuanUsulan_controller/view/$1';
+$route['list-persetujuan/edit/(:num)'] 					= 'PersetujuanUsulan_controller/edit/$1';
+$route['list-persetujuan/process-edit'] 				= 'PersetujuanUsulan_controller/process_edit';
+$route['list-persetujuan/process-delete'] 				= 'PersetujuanUsulan_controller/process_delete';
+$route['list-persetujuan-pengganti'] 					= 'PersetujuanUsulan_controller/index_alt';
+$route['list-persetujuan-pengganti/add'] 				= 'PersetujuanUsulan_controller/add_alt';
+$route['list-persetujuan-pengganti/process-add'] 		= 'PersetujuanUsulan_controller/process_add_alt';
+$route['list-persetujuan-pengganti/view/(:num)'] 		= 'PersetujuanUsulan_controller/view_alt/$1';
+$route['list-persetujuan-pengganti/get-user-content'] 	= 'PersetujuanUsulan_controller/get_content_user_alt';
+$route['list-persetujuan-pengganti/edit/(:num)'] 		= 'PersetujuanUsulan_controller/edit_alt/$1';
+$route['list-persetujuan-pengganti/process-edit'] 		= 'PersetujuanUsulan_controller/process_edit_alt';
+$route['list-persetujuan-pengganti/process-delete'] 	= 'PersetujuanUsulan_controller/process_delete_alt';
+
+
+/*==============================================
+Realisasi CONTROLLER
+================================================*/
+$route['realisasi/edit/(:any)'] 				= 'Realisasi_controller/edit/$1';
+$route['realisasi/list'] 						= 'Realisasi_controller/index';
+$route['realisasi/get_parent_anggaran'] 		= 'Realisasi_controller/get_parent_anggaran';
+$route['realisasi/get_materi'] 					= 'Realisasi_controller/get_materi';
+$route['realisasi/view/(:any)'] 				= 'Realisasi_controller/view/$1';
+$route['realisasi/process_add'] 				= 'Realisasi_controller/process_add';
+$route['realisasi/edit-tanggal/(:any)'] 		= 'Realisasi_controller/edit_tanggal/$1';
+$route['realisasi/process_edit'] 				= 'Realisasi_controller/process_edit';
+$route['realisasi/process_edit_tanggal'] 		= 'Realisasi_controller/process_edit_tanggal';
+$route['realisasi/delete'] 						= 'Realisasi_controller/process_delete';
+$route['realisasi/list-approval-atasan'] 		= 'Realisasi_controller/list_approval_atasan';
+$route['realisasi/list-approval-pusat'] 		= 'Realisasi_controller/list_approval_pusat';
+$route['realisasi/approval-atasan/(:any)']		= 'Realisasi_controller/approval_atasan/$1';
+$route['realisasi/approval-pusat/(:any)']		= 'Realisasi_controller/approval_pusat/$1';
+$route['realisasi/memo_view/(:any)'] 			= 'Realisasi_controller/make_pdf/$1';
+$route['realisasi/process_approval_atasan'] 	= 'Realisasi_controller/proccess_approval_atasan';
+$route['realisasi/process_approval_pusat'] 		= 'Realisasi_controller/proccess_approval_pusat';

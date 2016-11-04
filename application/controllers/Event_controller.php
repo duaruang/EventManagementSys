@@ -846,8 +846,11 @@ class Event_controller extends MY_Controller {
 		$randalnum 		= 'rea-'.random_string('alnum', 10);
 		$id_realisasi 	= strtoupper($randalnum.$randdate);
 		$data_realisasi	= array(
-								'id_event'				=> $id_event,
-								'id_realisasi'			=> $id_realisasi,
+								'id_event'					=> $id_event,
+								'id_realisasi'				=> $id_realisasi,
+								'jumlah_peserta_realisasi'	=> 0,
+								'realisasi_rab'				=> 0,
+								'status_realisasi'			=> 'belum realisasi'
 		);
         $this->realisasi_model->insert_event($data_realisasi);   
 

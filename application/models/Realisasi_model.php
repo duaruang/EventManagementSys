@@ -3,12 +3,14 @@
 class Realisasi_model extends CI_Model
 {
 	//============================ Select Data ================================
-    public function select_kategori_event()
+    public function select_realisasi()
     {
 		return $this->db
-					->from('em_kategori_event') 
-					->where('is_active !=','deleted')
-					->order_by('kategori_event','asc')
+					->select('em_realisasi.*,em_event.*')
+					->from('em_realisasi') 
+					->join('em_event','em_event.id_event = em_realisasi.id_event','left')
+					->where('em_realisasi.is_active','active')
+					->order_by('em_realisasi.created_date','desc')
 					->get();
     }
 

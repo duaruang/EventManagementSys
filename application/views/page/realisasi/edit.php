@@ -32,26 +32,25 @@
                             <div class="form-group row">
                                 <label class="col-sm-2">Nomor Memo <span class="text-danger">*</span></label>
                                 <div class="col-sm-3" id="maskinput">
-                                    <input type="text" class="form-control" data-mask="a-999/PNM-aaa/aa/9999" required id="inputNomorMemo" name="inputNomorMemo" placeholder="contoh : X-999/PNM-XXX/XX/9999" value="<?php echo $data[0]['nomor_memo']; ?>" />
-                                </div>
-                                <div class="col-sm-2">
-                                     <label class="c-input c-checkbox">
-                                        <input type="checkbox" id="denganFormat" name="denganFormat" value="use" checked="">
-                                        <span class="c-indicator"></span> 
-                                        Gunakan Format Nomor Memo
-                                    </label> 
+                                    <input type="text" disabled="" class="form-control" data-mask="a-999/PNM-aaa/aa/9999" required id="inputNomorMemo" name="inputNomorMemo" placeholder="contoh : X-999/PNM-XXX/XX/9999" value="<?php echo $data[0]['nomor_memo']; ?>" />
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-2">Nama Event <span class="text-danger">*</span></label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control" required placeholder="Type something" id="inputNamaEvent" name="inputNamaEvent" value="<?php echo $data[0]['nama_event']; ?>"/>
+                                    <input type="text" disabled="" class="form-control" required placeholder="Type something" id="inputNamaEvent" name="inputNamaEvent" value="<?php echo $data[0]['nama_event']; ?>"/>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-2">Topik Event <span class="text-danger">*</span></label>
                                 <div class="col-sm-5">
                                     <input type="text" class="form-control" required placeholder="Type something" id="inputTopikEvent" name="inputTopikEvent" value="<?php echo $data[0]['topik_event']; ?>"/>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2">Nomor Memo LPJ <span class="text-danger">*</span></label>
+                                <div class="col-sm-3" id="maskinput">
+                                    <input type="text" class="form-control" data-mask="a-999/PNM-aaa/aa/9999" required id="inputNomorMemoLPJ" name="inputNomorMemoLPJ" placeholder="contoh : X-999/PNM-XXX/XX/9999"  />
                                 </div>
                             </div>
                             <!--
@@ -88,31 +87,17 @@
                                     <input type="hidden" id="ev_longitude" name="ev_longitude" value="<?php echo $data[0]['longitude']; ?>">
                                 </div>
                             </div>
-                            <div class="form-group row input_anggaran">
-                                <label class="col-sm-2">Program Anggaran <span class="text-danger">*</span></label>
-                                <div class="col-sm-5">
-                                    <?php $style_d= array('class'=>'form-control select2', 'Required'=>'','id'=>'inputProgramAnggaran'); ?>
-                                    <?php echo form_dropdown('inputProgramAnggaran', $load_program_anggaran, $data[0]['id_program_anggaran'],$style_d); ?>
-                                    <span class="text-muted" id="anggaran"></span>
-                                </div>
-                            </div>
-
+                            <?php 
+                            echo form_hidden('inputProgramAnggaran',$data[0]['id_program_anggaran']); 
+                            echo form_hidden('inputSasaranTarget[]',$data[0]['target_sasaran']);
+                            echo form_hidden('inputKategoriEvent',$data[0]['id_kategori_event']);  
+                            ?>
                             <div class="form-group row">
-                                <label class="col-sm-2">Target / Sasaran Peserta <span class="text-danger">*</span></label>
-                                <div class="col-sm-5">
-                                     <?php $style_d= array('class'=>'select2 form-control select2-multiple', 'Required'=>'','id'=>'inputSasaranTarget','multiple'=>'multiple', 'multiple','placeholder'=>'--pilih target--'); ?>
-                                    <?php echo form_dropdown('inputSasaranTarget[]', $load_bu, $data[0]['target_sasaran'],$style_d); ?>
+                                <label class="col-sm-2">Gambaran Kegiatan <span class="text-danger">*</span></label>
+                                <div class="col-sm-7">
+                                <textarea class="ckeditor form-control" id="inputGambaranKegiatan" name="inputGambaranKegiatan" cols="10" rows="10"></textarea>
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-sm-2">Kategori Event <span class="text-danger">*</span></label>
-                                <div class="col-sm-3">
-                                    <?php $style_d= array('class'=>'form-control select2', 'Required'=>'','id'=>'inputKategoriEvent'); ?>
-                                    <?php echo form_dropdown('inputKategoriEvent', $load_kategori_event, $data[0]['id_kategori_event'],$style_d); ?>
-                               
-                                </div>
-                            </div>
-
                             <div class="form-group row" id="show_dengan_exam"  <?php  if($data[0]['kategori_event'] ==  'Training' ){ ?> style="display: show;" <?php }else{ ?> style="display: none;" <?php }?>>
                                 <label class="col-sm-2">Dengan Exam</label>
                                 <div class="col-sm-5">
@@ -203,7 +188,7 @@
                                         </li>
                                          <li class="nav-item active" id="navdaftarpesertainput"  <?php  if($data[0]['id_exam'] == '' || $data[0]['dengan_exam'] == 'tidak'){ ?> style="display: block;" <?php }else{ ?> style="display: none;" <?php }?>>
                                             <a class="nav-link" id="home-tab" data-toggle="tab" href="#daftar_peserta_input"
-                                               role="tab" aria-controls="home" aria-expanded="true">Input Peserta</a>
+                                               role="tab" aria-controls="home" aria-expanded="true">Daftar Peserta</a>
                                         </li>
                                         <li class="nav-item" id="navpicpanitia"  <?php  if($data[0]['id_exam'] == '' || $data[0]['dengan_exam'] == 'tidak'){ ?> style="display: block;" <?php }else{ ?> style="display: none;" <?php }?>>
                                             <a class="nav-link" id="home-tab" data-toggle="tab" href="#pic-panitia"
@@ -213,9 +198,9 @@
                                             <a class="nav-link" id="profile-tab" data-toggle="tab" href="#rab"
                                                role="tab" aria-controls="profile">Rencana Anggaran Biaya</a>
                                         </li>
-                                        <li class="nav-item" id="navrundown"  <?php  if($data[0]['id_exam'] == '' || $data[0]['dengan_exam'] == 'tidak'){ ?> style="display: block;" <?php }else{ ?> style="display: none;" <?php }?>>
-                                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#rundown"
-                                               role="tab" aria-controls="profile">Rundown</a>
+                                        <li class="nav-item" id="documentation" >
+                                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#dokumentasi"
+                                               role="tab" aria-controls="profile">Dokumentasi</a>
                                         </li>
                                         <!--
                                         <li class="nav-item" id="navbiayatraining">
@@ -229,48 +214,10 @@
                                         
                                     </ul>
                                     <div class="tab-content" id="myTabContent">
-                                        <div role="tabpanel" class="tab-pane fade in active" id="daftar_peserta"
-                                             aria-labelledby="home-tab">
-                                             <div class="p-20" id="show_tabel_peserta" <?php  if($data[0]['id_exam'] != '' || $data[0]['dengan_exam'] == 'ya'){ ?> style="display: block;position: relative;" <?php }else{ ?> style="display: none;" <?php }?>>
-                                             <div class="form-group" id="loader" style="position:absolute;display:none;width: 100%;height:100%;text-align: center;background-color: #fff;z-index: 1000;">
-<img style="position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;" src="<?php echo base_url(); ?>assets/images/Preloader_2.gif">
-            </div>
-                                                   <table id="daftar_peserta_table" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                                                        <thead>
-                                                        <tr>
-                                                            <th>NIK</th>
-                                                            <th>Nama</th>
-                                                            <th>Posisi</th>
-                                                        </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                        <?php if($load_peserta->num_rows() > 0){ ?>
-                                                        <?php foreach($load_peserta->result() as $result_peserta){ ?>
-                                                        <tr>
-                                                            <td><?php echo $result_peserta->nik; ?></td>
-                                                            <td><?php echo $result_peserta->nama; ?></td>
-                                                            <td><?php echo $result_peserta->posisi; ?></td>
-                                                        </tr>
-                                                        <?php } ?>
-                                                        <?php } ?>
-                                                        </tbody>
-                                                    </table>
-                                            </div>
-                                            <input type="hidden" id="inputJumlahPeserta" name="inputJumlahPeserta" value="<?php echo $data[0]['jumlah_peserta'];  ?>">
-                                            <div id="wrapabcs">
-                                            <?php if($load_peserta->num_rows() > 0){ ?>
-                                                        <?php foreach($load_peserta->result() as $result_peserta){ ?>
-                                            <div><input type="hidden" id="inputIdSdm" name="inputIdSdm[]" value="<?php echo $result_peserta->idsdm; ?>"><input type="hidden" id="inputNikPeserta" name="inputNikPeserta[]" value="<?php echo $result_peserta->nik; ?>"><input type="hidden" id="inputNamaPeserta" name="inputNamaPeserta[]" value="<?php echo $result_peserta->nama; ?>"><input type="hidden" id="inputPosisiPeserta" name="inputPosisiPeserta[]" value="<?php echo $result_peserta->posisi; ?>"></div>  
-                                            <?php } ?>
-                                                        <?php } ?>
-                                            </div>
-                                        </div>
                                         <div role="tabpanel" class="tab-pane fade in active" id="daftar_peserta_input"
                                              aria-labelledby="home-tab">
-                                                <div class="p-20" id="show_tabel_peserta_input"  <?php  if(($data[0]['kategori_event'] == 'Training' && $data[0]['dengan_exam'] == 'tidak') || ($data[0]['kategori_event'] == 'others')){ ?> style="display: block;position: relative;" <?php }else{ ?> style="display: none;position: relative;" <?php } ?>>
-                                                    <div class="m-b-20">
-                                                        <a class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target=".bs-get-list-peserta" id="get-list-psrt">Pilih List Peserta</a>
-                                                    </div>
+                                                <div class="p-20" id="show_tabel_peserta_input" >
+                                                    <h4 class="header-title m-t-30">Daftar Absensi Peserta</h4>
                                                     <div class="form-group" id="loader" style="position:absolute;display:none;width: 100%;height:100%;text-align: center;background-color: #fff;z-index: 1000;">
                                                     <img style="position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;" src="<?php echo base_url(); ?>assets/images/Preloader_2.gif"></div>
                                                        <table id="daftar_peserta_table_input" class="table table-striped table-bordered" cellspacing="0" width="100%">
@@ -279,6 +226,7 @@
                                                                 <th>NIK</th>
                                                                 <th>Nama</th>
                                                                 <th>Posisi</th>
+                                                                <th>Unit Kerja</th>
                                                             </tr>
                                                             </thead>
                                                             <tbody>
@@ -288,6 +236,34 @@
                                                                     <td><?php echo $result_peserta->nik; ?></td>
                                                                     <td><?php echo $result_peserta->nama; ?></td>
                                                                     <td><?php echo $result_peserta->posisi; ?></td>
+                                                                    <td><?php echo $result_peserta->unit_kerja; ?></td>
+                                                                </tr>
+                                                                <?php } ?>
+                                                                <?php } ?>
+                                                            </tbody>
+                                                        </table>
+                                                    <h4 class="header-title m-t-30">Daftar Peserta</h4>
+                                                    <div class="form-group" id="loader" style="position:absolute;display:none;width: 100%;height:100%;text-align: center;background-color: #fff;z-index: 1000;">
+                                                    <img style="position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;" src="<?php echo base_url(); ?>assets/images/Preloader_2.gif"></div>
+                                                       <table id="daftar_peserta_table_input" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                                            <thead>
+                                                            <tr>
+                                                                <th>NIK</th>
+                                                                <th>Nama</th>
+                                                                <th>Posisi</th>
+                                                                <th>Unit Kerja</th>
+                                                                <th>nilai</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                             <?php if($load_peserta->num_rows() > 0){ ?>
+                                                                <?php foreach($load_peserta->result() as $result_peserta){ ?>
+                                                                <tr>
+                                                                    <td><?php echo $result_peserta->nik; ?></td>
+                                                                    <td><?php echo $result_peserta->nama; ?></td>
+                                                                    <td><?php echo $result_peserta->posisi; ?></td>
+                                                                    <td><?php echo $result_peserta->unit_kerja; ?></td>
+                                                                    <td><input type="text" class="form-control" name="inputNilai[]" id="inputNilai"></td>
                                                                 </tr>
                                                                 <?php } ?>
                                                                 <?php } ?>
@@ -296,6 +272,50 @@
                                                 </div>
                                         </div>
                                         <div class="tab-pane fade" id="pic-panitia" role="tabpanel" aria-labelledby="profile-tab">
+
+                                                <div class="p-20">
+                                                    <h4 class="header-title m-t-10">Evaluasi Trainer</h4>
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-4 m-b-30">
+                                                            <input type="file" name="evaluasi_trainer" id="filer_input5">
+                                                            <span class="font-13 text-muted">upload size maks : 2MB, File allowed: pdf,docx</span>
+                                                        </div>
+                                                    </div>
+                                                    <h4 class="header-title m-t-30">Trainer</h4>
+                                                    <p class="text-muted font-13 m-b-20">Contoh Penulisan Nilai evaluasi : 4 (range 1-4)</p>
+                                                    <table id="table-trainer" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>Nama Trainer</th>
+                                                            <th>Nama Materi</th>
+                                                            <th width="15">Durasi (menit)</th>
+                                                            <th width="5">Nilai Evaluasi</th>
+                                                            <th width="15">Action</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <?php if($load_trainer->num_rows() > 0){ ?>
+                                                                <?php 
+                                                                $no=0;
+                                                                foreach($load_trainer->result() as $result_trainer){ ?>
+                                                                <tr>
+                                                                    <td><input type="text" class="form-control" id="namaPemateri<?php echo $no; ?>" value="<?php echo $result_trainer->nama_pemateri; ?>" name="namaPemateri[]">
+                                                                        <input type="hidden" id="inputIdTrainer" name="inputIdTrainer[]" value="<?php echo $result_trainer->id_kategori_trainer; ?>"><input type="hidden" id="inputPerusahaan" name="inputPerusahaan[]" value="internal">
+                                                                    </td>
+                                                                    <td><input type="text" class="form-control" id="autocomplete-ajax<?php echo $no; ?>" name="inputMateri[]" value="<?php echo $result_trainer->materi; ?>"></td>
+                                                                    <td><input type="text" class="form-control autonumber" id="inputDurasiTrainer" name="inputDurasiTrainer[]" data-v-min="1" data-v-max="999"></td>
+                                                                    <td><input type="text" class="form-control autonumber" data-v-min="1" data-v-max="4" id="inputNilaiEvaluasi" name="inputNilaiEvaluasi[]"></td>
+                                                                    <td><a href="javascript:void(0);" class="remCF" class="btn btn-danger remove-trainer" type="button"><i class="fa fa-2x fa-times text-danger"></i></a></td>
+                                                                </tr>
+                                                                <?php $no++;} ?>
+                                                        <?php } ?>
+                                                        </tbody>
+                                                    </table>
+                                                    <span class="text-muted">Jika tidak terdaftar atau ingin memasukkan trainer. klik tambah dibawah ini</span><br>
+                                                    <a id="add-trainer"><i class="fa fa-3x fa-plus-square"></i></a> 
+                                                </div>
+                                                <hr>
+                                                <div class="m-t-10"></div>
                                                 <div class="p-20">
                                                     <h4 class="header-title m-t-0">PIC / PANITIA</h4>
                                                     <p class="text-muted font-13 m-b-20">Masukkan nama PIC atau nama panitia</p>
@@ -324,40 +344,7 @@
                                                     <span class="text-muted">Jika tidak terdaftar atau ingin memasukkan pic diluar tabel karyawan, silahkan tambahkan ini</span><br>
                                                     <a id="add-pic"><i class="fa fa-3x fa-plus-square"></i></a> 
                                                 </div>
-                                                <hr>
-                                                <div class="m-t-10"></div>
-                                                <div class="p-20">
-                                                
-                                                    <h4 class="header-title m-t-0">Trainer</h4>
-                                                    <p class="text-muted font-13 m-b-30">pilih trainer yang diinginkan</p>
-                                                    <div class="m-b-20">
-                                                    <a class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target=".bs-get-trainer" id="get-trainer-internal">Pilih Trainer</a>
-                                                    </div>
-                                                    <table id="table-trainer" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                                                        <thead>
-                                                        <tr>
-                                                            <th>Nama Trainer</th>
-                                                            <th>Nama Materi</th>
-                                                            <th width="15">Action</th>
-                                                        </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <?php if($load_trainer->num_rows() > 0){ ?>
-                                                                <?php 
-                                                                $no=0;
-                                                                foreach($load_trainer->result() as $result_trainer){ ?>
-                                                                <tr>
-                                                                    <td><?php echo $result_trainer->nama_pemateri; ?>
-                                                                        <input type="hidden" id="inputIdTrainer" name="inputIdTrainer[]" value="<?php echo $result_trainer->id_kategori_trainer; ?>"><input type="hidden" id="inputPerusahaan" name="inputPerusahaan[]" value="internal">
-                                                                    </td>
-                                                                    <td><input type="text" class="form-control" id="autocomplete-ajax<?php echo $no; ?>" name="inputMateri[]" value="<?php echo $result_trainer->materi; ?>"></td>
-                                                                    <td><a href="javascript:void(0);" class="remCF" class="btn btn-danger remove-pic" type="button"><i class="fa fa-2x fa-times text-danger"></i></a></td>
-                                                                </tr>
-                                                                <?php $no++;} ?>
-                                                        <?php } ?>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
+
                                             </div>
                                             <div class="tab-pane fade" id="rab" role="tabpanel"
                                              aria-labelledby="profile-tab">
@@ -460,40 +447,6 @@
                                                     </table>
                                                 </div>
                                             </div>
-                                            <div class="tab-pane fade" id="rundown" role="tabpanel"
-                                             aria-labelledby="profile-tab">
-                                                <div class="p-20">
-                                                        <div class="form-group row">
-                                                            <label class="col-sm-2">Upload Rundown Acara</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="file" name="rundown_input" id="filer_input3">
-                                                                <span class="font-13 text-muted">upload size maks : 1MB, File allowed: xls,xlsx</span>
-                                                            </div>
-                                                            <?php
-                                                            //Load files which status is active
-                                                            if($load_rundown->num_rows() > 0)
-                                                            {
-                                                                    foreach($load_rundown->result() as $f)
-                                                                    {
-                                                            ?>
-                                                            <div id="file_delete<?php echo $f->id;?>" class="form-group row" style="margin-bottom:-4px">
-                                                                <label class='col-sm-2'>&nbsp;</label>
-                                                                <div class="col-sm-10">
-                                                                    <div class="col-doc" >
-                                                                        <a class="btn waves-effect waves-light btn-danger delete-file" data-idfile="<?php echo $f->id; ?>"><i class="fa fa-trash"></i></a>
-                                                                        <a href="<?php echo base_url().'assets/attachments/rundown/'.$f->nama_file;?>" target="_blank" class="btn waves-effect waves-light btn-primary embed-preview"><i class="fa fa-eye"></i></a>
-                                                                        <a href="<?php echo base_url().'assets/attachments/rundown/'.$f->nama_file;?>" class="btn waves-effect waves-light btn-primary" download><i class="fa fa-download"></i></a>
-                                                                        &nbsp;<?php echo $f->nama_file;?>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <?php
-                                                                    }
-                                                                }
-                                                            ?>
-                                                        </div>
-                                                </div>
-                                            </div>
                                             <!--
                                             <div class="tab-pane fade" id="biayatraining" role="tabpanel"
                                              aria-labelledby="profile-tab">
@@ -513,7 +466,7 @@
                                              aria-labelledby="profile-tab">
                                                 <div class="p-20">
                                                     <div class="form-group row">
-                                                        <label class="col-sm-2">Upload Rundown Acara</label>
+                                                        <label class="col-sm-2">Upload Materi</label>
                                                         <div class="col-sm-6">
                                                             <input type="file" name="materi_input" id="filer_input4">
                                                             <span class="font-13 text-muted">upload size maks : 2MB, File allowed: pdf,jpg,.docx,jpeg</span>
@@ -540,6 +493,18 @@
                                                                     }
                                                                 }
                                                             ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="dokumentasi" role="tabpanel"
+                                             aria-labelledby="profile-tab">
+                                                <div class="p-20">
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-2">Upload Dokumentasi Acara</label>
+                                                        <div class="col-sm-6">
+                                                            <input type="file" name="dokumentasi_input" id="filer_input3">
+                                                            <span class="font-13 text-muted">upload size maks : 2MB, File allowed: jpg,jpeg,png (maksimal 4 foto)</span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>

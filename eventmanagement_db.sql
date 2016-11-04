@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 03 Nov 2016 pada 12.16
+-- Generation Time: 04 Nov 2016 pada 12.34
 -- Versi Server: 10.1.10-MariaDB
 -- PHP Version: 7.0.4
 
@@ -560,7 +560,12 @@ INSERT INTO `em_activitiesuser` (`id`, `id_user`, `description`, `item_id`, `dat
 (522, '00000000013', 'Edit Event', 'asdasdasd', '2016-11-03 17:47:21', '::1'),
 (523, '00000000013', 'Edit Event', 'asdasdasd', '2016-11-03 17:49:55', '::1'),
 (524, '00000000013', 'Tambah Event', 'Event ABCD', '2016-11-03 17:55:19', '::1'),
-(525, '00000000013', 'Edit Event', 'Event ABCD', '2016-11-03 17:56:29', '::1');
+(525, '00000000013', 'Edit Event', 'Event ABCD', '2016-11-03 17:56:29', '::1'),
+(526, '00000000013', 'Sign in', '', '2016-11-04 09:58:54', '::1'),
+(527, '00000000013', 'Proses Approval Event Event ABCD dengan no.memo', 'A-232/PNM-AAS/XX/2016', '2016-11-04 10:03:42', '::1'),
+(528, '00000000013', 'Proses Approval Event Event ABCD dengan no.memo', 'A-232/PNM-AAS/XX/2016', '2016-11-04 10:10:33', '::1'),
+(529, '00000000013', 'Sign out', '', '2016-11-04 12:59:57', '::1'),
+(530, '00000000013', 'Sign in', '', '2016-11-04 13:00:10', '::1');
 
 -- --------------------------------------------------------
 
@@ -754,7 +759,7 @@ INSERT INTO `em_event` (`id`, `id_event`, `nomor_memo`, `nama_event`, `topik_eve
 (0000000007, 'ALYOD5WQY21478019600', 'R-232/PNM-PPL/XI/2015', 'COBACOBA', 'KOKOKO 1111', '', '2016-11-19', '2016-11-26', 0000000002, 'Indonesia', 0000000003, '-0.789275', '113.92132700000002', 'Des A', 0000000001, 0000000008, 'tidak', 9, 0, 600000, 'active', 13, '2016-11-02 17:11:33', 13, '2016-11-03 16:06:28', 'rejected_atasan'),
 (0000000008, '5XCTZNBGQZ1478106000', 'coba trainer dengan materi', 'event materi', 'topik materi', '', '2016-11-07', '2016-11-08', 0000000002, 'Indonesia', 0000000003, '-0.789275', '113.92132700000002', 'Manager;Officer', 0000000004, 0000000000, '', 3, 0, 240000, 'active', 13, '2016-11-03 14:16:56', NULL, NULL, 'draft'),
 (0000000009, 'O6QV07LSZI1478106000', 'a-213/PNM-asd/as/1231', 'asdasdasd', 'asdasdsad', '', '2016-11-06', '2016-11-08', 0000000002, 'adadad', 0000000003, '', '', 'Officer;Manager', 0000000004, 0000000001, '', 81, 0, 46100, 'active', 13, '2016-11-03 17:44:55', 13, '2016-11-03 17:49:55', 'submitted'),
-(0000000010, 'PZWHEVNBLK1478106000', 'A-232/PNM-AAS/XX/2016', 'Event ABCD', 'ABCDEFG HIJKL', '', '2016-11-06', '2016-11-09', 0000000003, 'Indonesia', 0000000003, '-0.789275', '113.92132700000002', 'Officer;Manager', 0000000004, 0000000001, '', 166, 0, 20000, 'active', 13, '2016-11-03 17:55:19', 13, '2016-11-03 17:56:29', 'submitted');
+(0000000010, 'PZWHEVNBLK1478106000', 'A-232/PNM-AAS/XX/2016', 'Event ABCD', 'ABCDEFG HIJKL', '', '2016-11-06', '2016-11-09', 0000000003, 'Indonesia', 0000000003, '-0.789275', '113.92132700000002', 'Officer;Manager', 0000000004, 0000000001, '', 166, 0, 20000, 'active', 13, '2016-11-03 17:55:19', 13, '2016-11-04 10:10:33', 'approved_pusat');
 
 -- --------------------------------------------------------
 
@@ -784,7 +789,9 @@ CREATE TABLE `em_event_approval` (
 INSERT INTO `em_event_approval` (`id`, `id_approval`, `id_event`, `tingkat_approval`, `rab_disetujui`, `catatan`, `persetujuan`, `is_active`, `created_by`, `created_date`, `modified_by`, `modified_date`) VALUES
 (1, 'ALYOD5WQY21478019600ap-1', 'ALYOD5WQY21478019600', 'atasan', NULL, '<p>tst</p>\r\n', 'rejected', 'active', 0000000013, '2016-11-03 16:06:28', NULL, NULL),
 (2, 'FWKGI9EDBJ1478019600ap-1', 'FWKGI9EDBJ1478019600', 'atasan', NULL, '<p>test</p>\r\n', 'approved', 'active', 0000000013, '2016-11-03 16:07:24', NULL, NULL),
-(3, 'FWKGI9EDBJ1478019600ap-2', 'FWKGI9EDBJ1478019600', 'pusat', 10000000, '<p>ok</p>\r\n', '', 'active', 0000000013, '2016-11-03 16:07:44', NULL, NULL);
+(3, 'FWKGI9EDBJ1478019600ap-2', 'FWKGI9EDBJ1478019600', 'pusat', 10000000, '<p>ok</p>\r\n', '', 'active', 0000000013, '2016-11-03 16:07:44', NULL, NULL),
+(4, 'PZWHEVNBLK1478106000ap-1', 'PZWHEVNBLK1478106000', 'atasan', NULL, '<p>ok</p>\r\n', 'approved', 'active', 0000000013, '2016-11-04 10:03:42', NULL, NULL),
+(5, 'PZWHEVNBLK1478106000ap-2', 'PZWHEVNBLK1478106000', 'pusat', 1000000, '<p>oks</p>\r\n', '', 'active', 0000000013, '2016-11-04 10:10:32', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -809,7 +816,8 @@ CREATE TABLE `em_event_approval_files` (
 --
 
 INSERT INTO `em_event_approval_files` (`id`, `id_event_approval`, `nama_file`, `jenis_file`, `created_by`, `created_date`, `modified_by`, `modified_date`, `is_active`) VALUES
-(1, 'FWKGI9EDBJ1478019600ap-2', 'FWKGI9EDBJ1478019600ap-2_20161103at160745_getsso_aplikasi_terkait.jpg', 'image/jpeg', 0000000013, '2016-11-03 16:07:45', NULL, NULL, 'active');
+(1, 'FWKGI9EDBJ1478019600ap-2', 'FWKGI9EDBJ1478019600ap-2_20161103at160745_getsso_aplikasi_terkait.jpg', 'image/jpeg', 0000000013, '2016-11-03 16:07:45', NULL, NULL, 'active'),
+(2, 'PZWHEVNBLK1478106000ap-2', 'PZWHEVNBLK1478106000ap-2_20161104at101032_getsso_aplikasi_terkait.jpg', 'image/jpeg', 0000000013, '2016-11-04 10:10:32', NULL, NULL, 'active');
 
 -- --------------------------------------------------------
 
@@ -1582,6 +1590,66 @@ INSERT INTO `em_klasifikasimateri` (`id`, `nama_klasifikasi`, `is_active`, `crea
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `em_listpersetujuan`
+--
+
+CREATE TABLE `em_listpersetujuan` (
+  `id` int(10) UNSIGNED ZEROFILL NOT NULL,
+  `id_tipepelatihan` varchar(256) DEFAULT NULL COMMENT 'Kumpulan id tipe pelatihan yg digunakan untuk list tsb',
+  `idsdm` varchar(256) NOT NULL,
+  `nip` varchar(256) NOT NULL,
+  `nama_lengkap` varchar(256) NOT NULL,
+  `unit_kerja` varchar(256) NOT NULL,
+  `posisi` varchar(256) NOT NULL,
+  `biaya_minimum` bigint(20) DEFAULT NULL,
+  `biaya_maksimum` bigint(20) DEFAULT NULL,
+  `is_active` enum('active','disabled','deleted') NOT NULL,
+  `created_by` int(11) UNSIGNED ZEROFILL NOT NULL,
+  `created_date` datetime NOT NULL,
+  `modified_by` int(11) UNSIGNED ZEROFILL DEFAULT NULL,
+  `modified_date` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `em_listpersetujuan`
+--
+
+INSERT INTO `em_listpersetujuan` (`id`, `id_tipepelatihan`, `idsdm`, `nip`, `nama_lengkap`, `unit_kerja`, `posisi`, `biaya_minimum`, `biaya_maksimum`, `is_active`, `created_by`, `created_date`, `modified_by`, `modified_date`) VALUES
+(0000000001, NULL, '0039B63EF8FA2E62FFFEE1B2D9D97A90', 'D074.09.15', 'Morrison Hendrik Riwu Kore', 'Divisi Pengembangan Portofolio Wilayah Unit Bisnis MEKAAR', 'Strategic Advisory Pembiayaan Kelompok Miskin Ekonomi', 434343, 121212, 'active', 00000000011, '2016-11-03 10:24:32', 00000000011, '2016-11-03 14:21:25'),
+(0000000002, NULL, '000332C969AF5D5B1FFA121AFFB26C52', '1895.10.12.M', 'Dewi Wulan Apriani', 'Cabang Bekasi - ULaMM Cikarang', 'Operasional Unit', NULL, NULL, 'deleted', 00000000011, '2016-11-03 10:26:28', 00000000011, '2016-11-03 11:47:42'),
+(0000000004, NULL, '3AFF60BB7B7BC0776978B0B084B0A142', '545.07.08', 'Ahmad Nur Muharram', 'Divisi Pusat Pendidikan dan Pelatihan', 'Sr. Spesialis', 100000000, 200000000, 'active', 00000000011, '2016-11-03 10:44:37', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `em_listpersetujuan_alt`
+--
+
+CREATE TABLE `em_listpersetujuan_alt` (
+  `id` int(10) UNSIGNED ZEROFILL NOT NULL,
+  `id_listpersetujuan` int(10) UNSIGNED ZEROFILL NOT NULL,
+  `idsdm` varchar(256) NOT NULL,
+  `nip` varchar(256) NOT NULL,
+  `nama_lengkap` varchar(256) NOT NULL,
+  `unit_kerja` varchar(256) NOT NULL,
+  `posisi` varchar(256) NOT NULL,
+  `is_active` enum('active','disabled','deleted') NOT NULL,
+  `created_by` int(11) UNSIGNED ZEROFILL NOT NULL,
+  `created_date` datetime NOT NULL,
+  `modified_by` int(11) UNSIGNED ZEROFILL DEFAULT NULL,
+  `modified_date` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `em_listpersetujuan_alt`
+--
+
+INSERT INTO `em_listpersetujuan_alt` (`id`, `id_listpersetujuan`, `idsdm`, `nip`, `nama_lengkap`, `unit_kerja`, `posisi`, `is_active`, `created_by`, `created_date`, `modified_by`, `modified_date`) VALUES
+(0000000001, 0000000001, '000B5D413523F7C13BAA91F30C70D050', '927.07.11', 'Ani Andriani', 'Divisi Operasi', 'Officer Layanan Operasi', 'active', 00000000011, '2016-11-03 13:04:53', 00000000011, '2016-11-03 14:21:25');
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `em_materi`
 --
 
@@ -1654,7 +1722,7 @@ INSERT INTO `em_navigationmenu` (`id`, `id_parent`, `id_systemactive`, `icon_men
 (16, 14, 1, NULL, 'Persetujuan Memo Event', 'pengajuan-event/list-approval-atasan', 0, 1, NULL, 2, 'active', 00000000001, '2016-10-07 09:31:44', NULL, NULL),
 (17, 14, 1, NULL, 'Data Validasi & Persetujuan Event', 'pengajuan-event/list-approval-pusat', 0, 1, NULL, 3, 'active', 00000000001, '2016-10-07 09:32:08', NULL, NULL),
 (18, NULL, 1, 'zmdi zmdi-format-list-bulleted', 'Realisasi', NULL, 0, 1, 5, NULL, 'active', 00000000001, '2016-10-07 09:32:08', NULL, NULL),
-(19, 18, 1, NULL, 'Realisasi Event', 'realisasi-event', 0, 1, NULL, 1, 'active', 00000000001, '2016-10-07 09:32:28', NULL, NULL),
+(19, 18, 1, NULL, 'Realisasi Event', 'realisasi/list', 0, 1, NULL, 1, 'active', 00000000001, '2016-10-07 09:32:28', NULL, NULL),
 (20, 18, 1, NULL, 'Persetujuan Pertanggung Jawaban', 'persetujuan-pertanggungjawaban', 0, 1, NULL, 2, 'active', 00000000001, '2016-10-07 09:32:56', NULL, NULL),
 (21, 18, 1, NULL, 'Verifikasi Pertanggung Jawaban', 'verifikasi-pertanggungjawaban', 0, 1, NULL, 3, 'active', 00000000001, '2016-10-07 09:33:23', NULL, NULL),
 (22, NULL, 1, 'zmdi zmdi-chart', 'Feedback', NULL, 0, 1, 6, NULL, 'active', 00000000001, '2016-10-07 09:33:23', NULL, NULL),
@@ -1682,7 +1750,7 @@ CREATE TABLE `em_program_anggaran` (
   `id_parent` int(11) DEFAULT NULL COMMENT 'Jika NULL, maka dia root nya (setelah RKAP)',
   `level` int(11) NOT NULL COMMENT '1=bisnis unit;2=kategori program;3=program',
   `deskripsi` varchar(256) NOT NULL,
-  `budget` varchar(50) DEFAULT NULL,
+  `budget` bigint(20) DEFAULT NULL,
   `is_active` enum('active','disabled','deleted') NOT NULL,
   `created_by` int(10) UNSIGNED ZEROFILL NOT NULL,
   `created_date` datetime NOT NULL,
@@ -1695,9 +1763,21 @@ CREATE TABLE `em_program_anggaran` (
 --
 
 INSERT INTO `em_program_anggaran` (`id`, `id_root`, `id_parent`, `level`, `deskripsi`, `budget`, `is_active`, `created_by`, `created_date`, `modified_by`, `modified_date`) VALUES
-(1, NULL, NULL, 1, 'Bisnis Unit Mekar', '100000000', 'active', 0000000011, '2016-10-27 20:04:23', 0000000013, '2016-11-02 13:30:39'),
-(2, 1, 1, 2, 'PPL', '50000000', 'active', 0000000011, '2016-10-27 20:04:55', 0000000013, '2016-11-02 13:33:56'),
-(3, 1, 2, 3, 'Program Sumber Daya Manusia', NULL, 'active', 0000000011, '2016-10-27 20:05:11', 0000000011, '2016-10-28 08:39:10');
+(1, NULL, NULL, 1, 'Test Parent 1aa', 1314, 'active', 0000000011, '2016-10-27 20:04:23', 0000000011, '2016-10-28 06:58:35'),
+(2, 8, 8, 2, 'Test Child 1.1aaaa', 25445, 'deleted', 0000000011, '2016-10-27 20:04:55', 0000000011, '2016-10-28 08:39:27'),
+(3, 1, 7, 3, 'Test Child 1.1.1 bbbbb', NULL, 'active', 0000000011, '2016-10-27 20:05:11', 0000000011, '2016-10-28 08:39:10'),
+(7, 1, 1, 2, 'Test Child 1.2', NULL, 'active', 0000000011, '2016-10-27 20:04:55', NULL, NULL),
+(8, NULL, NULL, 1, 'Test Parent 2', 23131232, 'deleted', 0000000011, '2016-10-28 01:56:33', 0000000011, '2016-10-28 08:39:27'),
+(9, NULL, 8, 2, 'Test Child 2.1', 35234324, 'active', 0000000011, '2016-10-28 01:59:52', NULL, NULL),
+(10, 8, 8, 2, 'Test Child 2.2', NULL, 'deleted', 0000000011, '2016-10-28 02:02:06', 0000000011, '2016-10-28 08:39:27'),
+(11, 1, 2, 3, 'Test Child 1.1.1', NULL, 'deleted', 0000000011, '2016-10-28 02:03:13', 0000000011, '2016-10-28 08:39:19'),
+(12, 8, 9, 3, 'Test Child 2.1.1', NULL, 'deleted', 0000000011, '2016-10-28 02:03:54', 0000000011, '2016-10-28 08:39:27'),
+(13, NULL, NULL, 1, 'Test Parent 3', 7654363, 'active', 0000000011, '2016-10-28 14:39:31', NULL, NULL),
+(14, NULL, NULL, 1, 'bisnis unit level 1', 300000000, 'active', 0000000013, '2016-10-28 15:58:31', NULL, NULL),
+(15, 14, 14, 2, 'bisnis unit level 2 (dari level 1)', NULL, 'active', 0000000013, '2016-10-28 15:59:10', NULL, NULL),
+(16, 14, 14, 2, 'bisnis unit level 1.1', 121212, 'active', 0000000011, '2016-11-01 16:07:24', 0000000011, '2016-11-01 16:31:23'),
+(17, 14, 14, 2, 'bisnis unit level 1.2', 123123123, 'active', 0000000011, '2016-11-01 16:31:40', NULL, NULL),
+(18, 14, 14, 2, 'bisnis unit level 1.3', 23232323, 'active', 0000000011, '2016-11-01 16:32:43', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1726,16 +1806,23 @@ CREATE TABLE `em_realisasi` (
   `id_kategori_event` int(10) UNSIGNED ZEROFILL NOT NULL COMMENT 'jenis event yang ingin diajukan. contoh : exam/training/dsb.',
   `id_tipe_pelatihan` int(10) UNSIGNED ZEROFILL DEFAULT NULL COMMENT 'tipe pelatihan apabila memilih event kategori training',
   `dengan_exam` varchar(10) DEFAULT NULL COMMENT 'jika memilih event training, menggunakan exam atau tidak',
-  `jumlah_peserta` int(11) DEFAULT NULL,
+  `jumlah_peserta_realisasi` int(11) NOT NULL,
   `uang_muka` bigint(20) DEFAULT NULL,
-  `total_rab` bigint(20) DEFAULT NULL,
+  `realisasi_rab` bigint(20) NOT NULL,
   `is_active` enum('active','deleted') NOT NULL,
   `created_by` int(11) NOT NULL,
   `created_date` datetime NOT NULL,
   `modified_by` int(11) DEFAULT NULL,
   `modified_date` datetime DEFAULT NULL,
-  `status_event` enum('draft','submitted','cancelled by user','approved_atasan','aprroved_valid','approved_pusat','rejected_atasan','rejected_valid','rejected_pusat') NOT NULL
+  `status_realisasi` enum('belum realisasi','submitted','cancelled by user','approved_atasan','aprroved_valid','approved_pusat','rejected_atasan','rejected_valid','rejected_pusat') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `em_realisasi`
+--
+
+INSERT INTO `em_realisasi` (`id`, `id_event`, `id_realisasi`, `memo_pertanggungjawaban`, `nomor_memo_pengajuan`, `nama_event`, `topik_event`, `lokasi_kerja`, `mulai_tanggal_pelaksanaan`, `selesai_tanggal_pelaksanaan`, `id_kategori_tempat_pelaksanaan`, `nama_tempat`, `gambaran_kegiatan`, `id_program_anggaran`, `latitude`, `longitude`, `target_sasaran`, `id_kategori_event`, `id_tipe_pelatihan`, `dengan_exam`, `jumlah_peserta_realisasi`, `uang_muka`, `realisasi_rab`, `is_active`, `created_by`, `created_date`, `modified_by`, `modified_date`, `status_realisasi`) VALUES
+(0000000001, 'PZWHEVNBLK1478106000', 'REA-6UHKW7EVER1478192400', NULL, '', '', '', NULL, '0000-00-00', '0000-00-00', 0000000000, '', '', 0000000000, NULL, NULL, '', 0000000000, NULL, NULL, 0, NULL, 0, 'active', 0, '0000-00-00 00:00:00', NULL, NULL, 'belum realisasi');
 
 -- --------------------------------------------------------
 
@@ -1870,6 +1957,7 @@ CREATE TABLE `em_realisasi_listpeserta` (
   `nik` varchar(256) NOT NULL,
   `nama` varchar(256) NOT NULL,
   `posisi` varchar(256) NOT NULL,
+  `nilai` float DEFAULT NULL,
   `nilai_pretest` float DEFAULT NULL,
   `nilai_posttest` float DEFAULT NULL,
   `created_by` int(10) UNSIGNED ZEROFILL NOT NULL,
@@ -1991,36 +2079,22 @@ CREATE TABLE `em_registrasi` (
   `id` int(10) UNSIGNED ZEROFILL NOT NULL,
   `id_event` varchar(256) NOT NULL,
   `idsdm` varchar(256) NOT NULL,
-  `nik` varchar(256) NOT NULL,
+  `nip` varchar(256) NOT NULL,
   `nama` varchar(256) NOT NULL,
+  `posisi` varchar(256) NOT NULL,
   `email` varchar(256) NOT NULL,
   `idsdm_replaced` varchar(256) DEFAULT NULL,
-  `nik_replaced` varchar(256) DEFAULT NULL,
+  `nip_replaced` varchar(256) DEFAULT NULL,
   `nama_replaced` varchar(256) DEFAULT NULL,
+  `posisi_replaced` varchar(256) DEFAULT NULL,
   `email_replaced` varchar(256) DEFAULT NULL,
   `alasan_replaced` text,
+  `is_active` enum('active','disabled','deleted') NOT NULL,
   `created_by` int(10) UNSIGNED ZEROFILL NOT NULL,
   `created_date` datetime NOT NULL,
   `modified_by` int(10) UNSIGNED ZEROFILL DEFAULT NULL,
   `modified_date` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `em_registrasi`
---
-
-INSERT INTO `em_registrasi` (`id`, `id_event`, `idsdm`, `nik`, `nama`, `email`, `idsdm_replaced`, `nik_replaced`, `nama_replaced`, `email_replaced`, `alasan_replaced`, `created_by`, `created_date`, `modified_by`, `modified_date`) VALUES
-(0000000001, '9NZ8Z2HRK01477587600', '20D6EB8F2A2C270F51A28297FEC61440', '20D6EB8F2A2C270F51A28297FEC61440', 'IRWAN ZACKY', 'deby.natazha@yahoo.co.id', NULL, NULL, NULL, NULL, NULL, 0000000002, '2016-10-18 17:44:15', NULL, NULL),
-(0000000002, '9NZ8Z2HRK01477587600', 'EE6C13783F449DB5489DCABC60436E2F', 'EE6C13783F449DB5489DCABC60436E2F', 'YAYANG IQBAL', 'deby.natazha@yahoo.co.id', NULL, NULL, NULL, NULL, NULL, 0000000002, '2016-10-19 17:44:15', NULL, NULL),
-(0000000003, '9NZ8Z2HRK01477587600', 'DA272D7FCB7ADEFF251E1C52760506C7', 'DA272D7FCB7ADEFF251E1C52760506C7', 'SOVENDA SEPTA HASTOYO', 'deby.natazha@yahoo.co.id', NULL, NULL, NULL, NULL, NULL, 0000000002, '2016-10-20 17:44:15', NULL, NULL),
-(0000000004, '9NZ8Z2HRK01477587600', '4F4D5D8D6F769359B5421A939A4214C7', '4F4D5D8D6F769359B5421A939A4214C7', 'FITRIANI SULAEMAN', 'deby.natazha@yahoo.co.id', NULL, NULL, NULL, NULL, NULL, 0000000002, '2016-10-21 17:44:15', NULL, NULL),
-(0000000005, '9NZ8Z2HRK01477587600', '08379D4E957B887E2368C69951D396AB', '08379D4E957B887E2368C69951D396AB', 'ADI SETIA HARMAWAN', 'deby.natazha@yahoo.co.id', NULL, NULL, NULL, NULL, NULL, 0000000002, '2016-10-22 17:44:15', NULL, NULL),
-(0000000006, '9NZ8Z2HRK01477587600', '48BD28C62468F88CE63FA6C09AE53EBF', '48BD28C62468F88CE63FA6C09AE53EBF', 'Risky Handayani', 'deby.natazha@yahoo.co.id', NULL, NULL, NULL, NULL, NULL, 0000000002, '2016-10-23 17:44:15', NULL, NULL),
-(0000000007, '9NZ8Z2HRK01477587600', 'C0A40529E71FAB0CF898BE05EFAEF8B8', 'C0A40529E71FAB0CF898BE05EFAEF8B8', 'Cecem Taufik', 'deby.natazha@yahoo.co.id', NULL, NULL, NULL, NULL, NULL, 0000000002, '2016-10-24 17:44:15', NULL, NULL),
-(0000000008, '9NZ8Z2HRK01477587600', '847D05E1340EDFA68E01B450D299B878', '847D05E1340EDFA68E01B450D299B878', 'Dwi Retno Sari', 'deby.natazha@yahoo.co.id', NULL, NULL, NULL, NULL, NULL, 0000000002, '2016-10-25 17:44:15', NULL, NULL),
-(0000000009, '9NZ8Z2HRK01477587600', '256EC73DA11A6F7EF3309C2B98888D56', '256EC73DA11A6F7EF3309C2B98888D56', 'Shany Cindy Riana', 'deby.natazha@yahoo.co.id', NULL, NULL, NULL, NULL, NULL, 0000000002, '2016-10-26 17:44:15', NULL, NULL),
-(0000000010, '9NZ8Z2HRK01477587600', '38B636D94B1CA3B1F2532DB740DA446C', '38B636D94B1CA3B1F2532DB740DA446C', 'Andika Permana Putra Purba', 'deby.natazha@yahoo.co.id', NULL, NULL, NULL, NULL, NULL, 0000000002, '2016-10-27 17:44:15', NULL, NULL),
-(0000000011, '9NZ8Z2HRK01477587600', 'ECD2FD56BAAA7D522748DB3BA18CB79B', 'ECD2FD56BAAA7D522748DB3BA18CB79B', 'Ilham Hidayat', 'deby.natazha@yahoo.co.id', NULL, NULL, NULL, NULL, NULL, 0000000002, '2016-10-28 17:44:15', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -2560,6 +2634,18 @@ ALTER TABLE `em_klasifikasimateri`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `em_listpersetujuan`
+--
+ALTER TABLE `em_listpersetujuan`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `em_listpersetujuan_alt`
+--
+ALTER TABLE `em_listpersetujuan_alt`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `em_materi`
 --
 ALTER TABLE `em_materi`
@@ -2575,6 +2661,12 @@ ALTER TABLE `em_navigationmenu`
 -- Indexes for table `em_program_anggaran`
 --
 ALTER TABLE `em_program_anggaran`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `em_realisasi`
+--
+ALTER TABLE `em_realisasi`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -2675,7 +2767,7 @@ ALTER TABLE `em_usergroup_matrix`
 -- AUTO_INCREMENT for table `em_activitiesuser`
 --
 ALTER TABLE `em_activitiesuser`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=526;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=531;
 --
 -- AUTO_INCREMENT for table `em_bisnis_unit`
 --
@@ -2710,12 +2802,12 @@ ALTER TABLE `em_event`
 -- AUTO_INCREMENT for table `em_event_approval`
 --
 ALTER TABLE `em_event_approval`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `em_event_approval_files`
 --
 ALTER TABLE `em_event_approval_files`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `em_event_changedate`
 --
@@ -2787,6 +2879,16 @@ ALTER TABLE `em_kategori_tempat`
 ALTER TABLE `em_klasifikasimateri`
   MODIFY `id` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
+-- AUTO_INCREMENT for table `em_listpersetujuan`
+--
+ALTER TABLE `em_listpersetujuan`
+  MODIFY `id` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `em_listpersetujuan_alt`
+--
+ALTER TABLE `em_listpersetujuan_alt`
+  MODIFY `id` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
 -- AUTO_INCREMENT for table `em_materi`
 --
 ALTER TABLE `em_materi`
@@ -2800,7 +2902,12 @@ ALTER TABLE `em_navigationmenu`
 -- AUTO_INCREMENT for table `em_program_anggaran`
 --
 ALTER TABLE `em_program_anggaran`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+--
+-- AUTO_INCREMENT for table `em_realisasi`
+--
+ALTER TABLE `em_realisasi`
+  MODIFY `id` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `em_realisasi_bukti_transaksi`
 --
@@ -2820,7 +2927,7 @@ ALTER TABLE `em_realisasi_evaluasitrainer`
 -- AUTO_INCREMENT for table `em_registrasi`
 --
 ALTER TABLE `em_registrasi`
-  MODIFY `id` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `em_settings`
 --

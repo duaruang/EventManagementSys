@@ -7,6 +7,9 @@
  <!-- Autocomplete -->
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/plugins/autocomplete/jquery.mockjax.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/plugins/autocomplete/jquery.autocomplete.min.js"></script>
+<!-- start: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
+<script src="<?php echo base_url(); ?>assets/plugins/ckeditor/ckeditor.js"></script>
+<script src="<?php echo base_url(); ?>assets/plugins/ckeditor/adapters/jquery.js"></script>
 <!-- Jquery filer js -->
 <script src="<?php echo base_url(); ?>assets/plugins/jquery.filer/js/jquery.filer.min.js"></script>
 <!-- Jquery Document Viewer -->
@@ -40,17 +43,25 @@ $("#inputSasaranTarget").val(selectedValues);
 <script type="text/javascript">
 $(document).ready(function() {
 		$('#filer_input3').filer({
-			limit: 1,
-			maxSize: 1, //1 MB
-			extensions: ['xls', 'xlsx'],
+			limit: 4,
+			maxSize: 2, //2 MB
+			extensions: ['jpg','jpeg','png'],
 			changeInput: true,
 			showThumbs: true,
-			addMore: false
+			addMore: true
 		});
 		$('#filer_input4').filer({
 			limit: 1,
 			maxSize: 2, //1 MB
 			extensions: ['docx', 'pdf','jpg', 'jpeg'],
+			changeInput: true,
+			showThumbs: true,
+			addMore: false
+		});
+		$('#filer_input5').filer({
+			limit: 1,
+			maxSize: 2, //2 MB
+			extensions: ['pdf','docx'],
 			changeInput: true,
 			showThumbs: true,
 			addMore: false
@@ -111,68 +122,16 @@ $(document).ready(function() {
 				$('#anggaran').hide(650);
 			}
 		});
-		/*===============================================================================
-        FUNCTION CLICK PILIH EXAM
-        ================================================================================*/
-		$('.pilih_exam').on('click', function (e) {
-			e.preventDefault();
-			//remove input hidden data peserta
-			$("#wrapabcs").children().remove();
-	        var $row = $(this).closest("tr");    // Find the row
-	        var idexam	 			= $row.find("td:nth-child(1)");
-	        var judulexam 			= $row.find("td:nth-child(2)");
-	        var kategori			= $row.find("td:nth-child(6)");
-	        var idjadwalexam		= $row.find("td:nth-child(7)");
-
-	       document.getElementById("inputIdExam").value 		= idexam.text(); 
-		   document.getElementById("judul_exam").value 			= judulexam.text();
-		   document.getElementById("deskripsi").value 			= kategori.text();
-		   document.getElementById("inputidjadwalexam").value 	= idjadwalexam.text();
-		   var id_jadwal_exam= idjadwalexam.text();
-		  
-		   //remove data tabel daftar peserta
-		   $("#show_tabel_peserta tbody tr").children().remove();
-		   $('#loader').show();
-		   /*===============================================================================
-	        GET DATA FROM SELECTED EXAM
-	        ================================================================================*/
-		   $.ajax({
-                    type: 'POST',
-                    url: '<?php echo base_url() ?>Event_controller/get_list_peserta/'+id_jadwal_exam,
-                    dataType: 'json',
-                    cache	: false,
-   					processData: false,
-                    success: function (data) {
-
-                    	/*===============================================================================
-				        STORE DATA FROM SELECTED EXAM TO TABLE PARTICIPANT AND TITLE EXAM
-				        ================================================================================*/
-                    	var jml_peserta = data.length;
-                		$("#inputJumlahPeserta").val(jml_peserta); 
-
-                    	$('#loader').hide();
-                    	$.each(data, function(i, item) {
-                    		//ADD INPUT HIDDEN 
-                    		$('<div>').html ('<input type="hidden" id="inputIdSdm" name="inputIdSdm[]" value="'+data[i].id_sdm +'"><input type="hidden" id="inputNikPeserta" name="inputNikPeserta[]" value="'+data[i].nip +'"><input type="hidden" id="inputNamaPeserta" name="inputNamaPeserta[]" value="'+data[i].nama +'"><input type="hidden" id="inputPosisiPeserta" name="inputPosisiPeserta[]" value="'+data[i].posisi +'">').appendTo('#wrapabcs');
-                    	
-	                		//STORE DATA TO TABLE PARTICIPANT
-						    $('<tr>').html(
-						        "<td>" + data[i].nip + "</td><td>" + data[i].nama + "</td><td>" + data[i].posisi + "</td>").appendTo('#daftar_peserta_table');
-					    });
-                    },
-                    error: function (e) {
-                    	$('#loader').hide();
-                        alert('error connection. please reload');
-                    }
-                });
-	    });
+		
 
 		/*==================================================================================================================
         START/FUNCTION SUBMIT FORM EVENT TO DATABASE
         ====================================================================================================================*/
 	    $("#edit-form-event").submit(function(e){
 			e.preventDefault();
-			
+			for ( instance in CKEDITOR.instances ) {
+		        CKEDITOR.instances[instance].updateElement();
+		    }
         	var button_boolean	= $('input[name="draft"]').is(':focus');
         	
 			var formURL = "<?php echo site_url('pengajuan-event/process_edit'); ?>";
@@ -221,16 +180,11 @@ $(document).ready(function() {
 	    /*==================================================================================================================
         END/FUNCTION SUBMIT FORM EVENT TO DATABASE
         ====================================================================================================================*/
-
-		//SET DATE NEXT 3 DAYS FROM NOW DATE
-		<?php $tomorrow_timestamp = strtotime("+ 3 day"); ?>
-
 		//INIT DATE RANGE PICKER
 		$('.input-limit-datepicker').daterangepicker({
 	        toggleActive: true,
 	        autoUpdateInput: false,
-	        format: 'DD-MM-YYYY',
-	        minDate: '<?php echo tgl_eng(date('Y-m-d', $tomorrow_timestamp)); ?>'
+	        format: 'DD-MM-YYYY'
 	    });
 
 	    //SET VALUE TO FIELD START DATE
@@ -244,362 +198,43 @@ $(document).ready(function() {
 	  	});
  		
 		/*===============================================================================
-    	FUNCTION IF EVENT CATEGORY ON CHANGE
-    	================================================================================*/
-		$('#inputKategoriEvent').on('change', function() {
-			$('#myTab').show();
-			/*
-			//reset value
-			var iu = document.getElementById('inputIdExam');
-			var ij = document.getElementById('inputidjadwalexam');
-			var je = document.getElementById('judul_exam');
-			var im = document.getElementById('deskripsi');
-
-			iu.value= iu.defaultValue;
-        	ij.value= ij.defaultValue;
-        	je.value= je.defaultValue;
-        	im.value= im.defaultValue;*/
-        	//$("#inputTipePelatihan").select2("val", "");
-        	//$('#inputTipeExam').val('');
-
-        	
-
-	  		/*===============================================================================
-        	RULES IF CATEGORY EVENT IS TRAINING
-        	================================================================================*/
-	  		if(this.value == '0000000001')
-	  		{
-				$("#inputTipeExam").removeAttr("required");
-				$("#deskripsi").removeAttr("required");
-				$("#judul_exam").removeAttr("required");
-	  			$("#inputTipePelatihan").attr("required","");
-	  			$("#inputDenganExam").attr("required","");
-	  			
-	  			$('#show_tipe_pelatihan').show();
-
-	  			$('#show_tipe_exam').hide();
-	  			$('#show_detail_exam').hide();
-	  			$('#show_dengan_exam').show();
-
-	  			$('#navdaftarpesertainput').hide();
-	  			$('#show_tabel_peserta_input').hide();
-	  			$('#navpicpanitia').hide();
-	  			$('#navrab').hide();
-	  			$('#navrundown').hide();
-	  			$('#navbiayatraining').hide();
-	  			$('#navmateri').hide();
-
-	  			//remove data tabel daftar peserta
-		   		$("#show_tabel_peserta tbody tr").children().remove();
-		   		//remove input hidden data peserta
-				$("#wrapabcs").children().remove();
-				$('#navdaftarpesertainput').hide();
-	  		}
-
-	  		/*===============================================================================
-        	RULES IF CATEGORY EVENT IS EXAM
-        	================================================================================*/
-	  		if(this.value == '0000000002')
-	  		{
-	  			$('#show_tipe_exam').show();
-	  			$('#show_detail_exam').show();
-	  			//show tab daftar peserta
-	  			$('#navdaftarpeserta').show();
-	  			//Hide tab selain daftar peserta
-	  			$('#show_tipe_pelatihan').hide();
-	  			$('#navdaftarpesertainput').hide();
-	  			$('#show_tabel_peserta_input').hide();
-	  			$('#navpicpanitia').hide();
-	  			$('#navrab').hide();
-	  			$('#navrundown').hide();
-	  			$('#navbiayatraining').hide();
-	  			$('#navmateri').hide();
-	  			$('#show_dengan_exam').hide();
-
-	  			$("#wrapabcs").children().remove();
-	  			
-	  			$("#inputTipeExam").attr("required","");
-	  			$("#deskripsi").attr("required","");
-				$("#judul_exam").attr("required","");
-	  			$("#inputTipePelatihan").removeAttr("required");
-	  			$("#inputDenganExam").removeAttr("required");
-	  		}
-
-	  		/*===============================================================================
-        	RULES IF CATEGORY EVENT IS OTHERS
-        	================================================================================*/
-	  		if(this.value == '0000000004')
-	  		{
-	  			
-	  			$('#navrab').show();
-	  			$('#navrundown').show();
-	  			$('#navdaftarpesertainput').show();
-	  			$('#show_tabel_peserta_input').show();
-	  			$('#navpicpanitia').show();
-	  			//show tab daftar peserta
-
-	  			//Hide tab selain daftar peserta
-	  			$('#show_detail_exam').hide();
-	  			$('#navdaftarpeserta').hide();
-	  			$('#show_tabel_peserta').hide();
-	  			$('#navbiayatraining').hide();
-	  			$('#navmateri').hide();
-	  			$('#show_dengan_exam').hide();
-	  			$('#show_tipe_exam').hide();
-	  			$('#show_tipe_pelatihan').hide();
-
-	  			$("#inputTipeExam").removeAttr("required");
-	  			$("#deskripsi").removeAttr("required");
-				$("#judul_exam").removeAttr("required");
-	  		}
-		});
-
-
-
-		//validasi untuk menampilkan rab
-		$('#tipe_pelatihan').on('change', function() {
-	  		$('#show_exam').hide();
-	  		$('#navmateri').hide();
-  			$('#navrab').hide();
-  			$('#navrundown').hide();
-  			$('#navbiayatraining').hide();
-  			$('#navpicpanitia').hide();
-	  			
-		});
-
-		$('input[name="inputDenganExam"]').on('click change', function(e) {
-		    var variabel_x = $('input[name="inputDenganExam"]:checked').val();
-
-		    /*===============================================================================
-        	RULES WITH EXAM
-        	================================================================================*/
-		    if(variabel_x == 'ya')
-		    {
-		    	//show
-		    	$('#show_tipe_exam').show();
-		    	$('#show_detail_exam').show();
-		    	$('#navdaftarpeserta').show();
-
-		    	//hide 
-		    	$('#navdaftarpesertainput').hide();
-	  			$('#show_tabel_peserta_input').hide();
-	  			$('#navmateri').hide();
-	  			$('#navrab').hide();
-	  			$('#navrundown').hide();
-	  			$('#navbiayatraining').hide();
-	  			$('#navpicpanitia').hide();
-
-		    	//reset value
-		    	$("#show_tabel_peserta tbody tr").children().remove();
-		    	$("#daftar_peserta_table_input tbody tr").children().remove();
-		    	document.getElementById("judul_exam").value 		= ''; 
-		    	document.getElementById("deskripsi").value 			= ''; 
-		    	document.getElementById("inputIdExam").value 		= ''; 
-		    	document.getElementById("inputidjadwalexam").value 	= ''; 
-
-		   		//add attribute
-		   		$("#inputTipeExam").attr("required","");
-	  			$("#deskripsi").attr("required","");
-				$("#judul_exam").attr("required","");
-
-				//set zero value rab
-				$('#table-rab').find('input').each(function() {
-					$(this).val(0);
-				});
-
-		    }
-
-		    /*===============================================================================
-        	RULES WITHOUT EXAM
-        	================================================================================*/
-		    if(variabel_x == 'tidak')
-		    {
-		    	$('#show_tipe_exam').hide();
-		    	$('#show_detail_exam').hide();
-		    	$('#navdaftarpesertainput').show();
-		    	$('#show_tabel_peserta_input').show();
-		    	$('#navdaftarpeserta').hide();
-		    	$('#show_tabel_peserta').hide();
-		    	
-		    	$('#navmateri').show();
-	  			$('#navrab').show();
-	  			$('#navrundown').show();
-	  			$('#navbiayatraining').show();
-	  			$('#navpicpanitia').show();
-
-		    	//remove input hidden data peserta
-				$("#wrapabcs").children().remove();
-		    	$("#show_tabel_peserta tbody tr").children().remove();
-		    	document.getElementById("judul_exam").value 		= ''; 
-		    	document.getElementById("deskripsi").value 			= ''; 
-		    	document.getElementById("inputIdExam").value 		= ''; 
-		    	document.getElementById("inputidjadwalexam").value 	= ''; 
-
-		   		//add attribute
-		   		$("#inputTipeExam").removeAttr("required");
-	  			$("#deskripsi").removeAttr("required");
-				$("#judul_exam").removeAttr("required");
-		    	
-		    }
-		});
-		/*===============================================================================
-        FUNCTION GET ALL KARYAWAN TO GET SELECTED PARTICIPANT
-        ================================================================================*/
-		$('#get-list-psrt').on('click', function (e) {
-			e.preventDefault();
-			var table  = $('#get_list_peserta_table').DataTable({
-				"bRetrieve" : "true",
-				 ajax: {
-			        url: '<?php echo site_url('Event_controller/get_all_list_peserta'); ?>',
-			        type: 'POST',
-			    	dataSrc: 'data'
-			    },
-			    'columnDefs': [{
-			         'targets': 0,
-			         'searchable':false,
-			         'orderable':false,
-			         'className': 'dt-body-center',
-			         'render': function (data, type, full, meta){
-			             return '<input type="checkbox" name="id[]" value="' + $('<div/>').text(data).html() + '">';
-			         }
-			      }],
-		        select: {
-		            style: 'multi',
-		            selector: 'input[type="checkbox"]'
-		        },
-				columns: [
-					{ data: "karyawan_id" },
-					{ data: "karyawan_nip" },
-					{ data: "karyawan_nama"},
-					{ data: "karyawan_posisi"},
-					{ data: "karyawan_unit_kerja"}
-				]
-			});
-			/*===============================================================================
-        	METHOD STORE DATA TO TABLE PARTICIPANT FROM SELECTED EMPLOYEE 
-        	================================================================================*/
-			$('#inputpeserta').on('click', function(){
-				$("#daftar_peserta_table_input tbody tr").children().remove();
-				var jml_peserta=0;
-				var rowData = [];
-	            var rowData = table.rows('.selected').data();
-	            var countdata = table.rows('.selected').data().length;
-	            //console.log(countdata);
-	            //var obj = JSON.stringify(rowData);
-	            //var parsejson = JSON.parse(obj);
-                //$("#inputJumlahPeserta").val(countdata); 
-
-				$("#wrapabcs").children().remove();
-				jml_peserta = countdata;
-                $("#inputJumlahPeserta").val(jml_peserta); 
-	            for(i=0;i<countdata;i++)
-	            {
-
-	            $('<div>').html ('<input type="hidden" id="inputIdSdm" name="inputIdSdm[]" value="'+rowData[i].karyawan_id +'"><input type="hidden" id="inputNikPeserta" name="inputNikPeserta[]" value="'+rowData[i].karyawan_nip +'"><input type="hidden" id="inputNamaPeserta" name="inputNamaPeserta[]" value="'+rowData[i].karyawan_nama +'"><input type="hidden" id="inputPosisiPeserta" name="inputPosisiPeserta[]" value="'+rowData[i].karyawan_posisi +'">').appendTo('#wrapabcs');	
-
-	            $('#daftar_peserta_table_input tbody').prepend( '<tr><td>'+rowData[i].karyawan_nip+'</td><td> '+rowData[i].karyawan_nama+'</td><td> '+rowData[i].karyawan_posisi+'</td></tr>' );
-	        	}
-	        });
-			/*===============================================================================
-        	METHOD SELECT ALL EMPLOYEE TO TABLE PARTICIPANT
-        	================================================================================*/
-			$('#example-select-all').on('click', function(){
-		      // Get all rows with search applied
-		      var rows = table.rows({ 'search': 'applied' }).nodes();
-
-		      // Check/uncheck checkboxes for all rows in the table
-		     	if (this.checked == true){
-		     		$('input[type="checkbox"]', rows).prop('checked', this.checked, true);
-		      		table.rows({filter:'applied'}).select();
-		  		}else
-		  		{
-		  			$('input[type="checkbox"]', rows).prop('checked', this.checked, false);
-		  			table.rows({filter:'applied'}).deselect();
-		  		}
-		   	});
-		});
-
-		/*===============================================================================
         FUNCTION GET TRAINER INTERNAL
         ================================================================================*/
-		$('#get-trainer-internal').on('click', function (e) {
-			e.preventDefault();
-			var table_trainer  = $('#get_list_trainer_internal_table').DataTable({
-				"bRetrieve" : "true",
-				 ajax: {
-			        url: '<?php echo site_url('Event_controller/get_trainer_internal'); ?>',
-			        type: 'POST',
-			    	dataSrc: 'data'
-			    },
-			    'columnDefs': [{
-			         'targets': 0,
-			         'searchable':false,
-			         'orderable':false,
-			         'className': 'dt-body-center',
-			         'render': function (data, type, full, meta){
-			             return '<input type="checkbox" name="id[]" value="' + $('<div/>').text(data).html() + '">';
-			         }
-			      }],
-		        select: {
-		            style: 'multi',
-		            selector: 'input[type="checkbox"]'
-		        },
-				columns: [
-					{ data: "id" },
-					{ data: "nama_pemateri" },
-					{ data: "posisi" },
-					{ data: "unit_kerja" }
-				]
+        var count_trainer =  $('#table-trainer tbody #inputDurasiTrainer').length;
+        for(i=0;i<count_trainer;i++)
+        {
+        	$('#autocomplete-ajax'+i).autocomplete({
+		    	serviceUrl: '<?php echo base_url() ?>event/get_materi'
+		    });
+		 	$('#table-trainer tbody td').find('#namaPemateri'+i).autocomplete({
+
+		    	serviceUrl: '<?php echo base_url() ?>realisasi_controller/get_trainer',
+		    	onSelect: function(suggestion) {
+					$(this).parent().find("#inputIdTrainer").val(suggestion.data);
+					console.log($(this).parent().find("#inputIdTrainer").val(suggestion.data));
+				}
+		    });
+        }
+    	/*===============================================================================
+    	FUNCTION ADD ROWS trainer 
+    	================================================================================*/
+		$('#add-trainer').on('click', function(){
+
+			 $('#table-trainer tbody').append('<tr><td><input type="text" class="form-control" id="namaPemateri'+(++count_trainer)+'"><input type="hidden" class="form-control" id="inputIdTrainer" name="inputIdTrainer[]"><input type="hidden" id="inputPerusahaan" name="inputPerusahaan[]" value="internal"></td><td><input type="text" class="form-control" id="autocomplete-ajax'+count_trainer+'" name="inputMateri[]" ></td><td><input type="text" class="form-control tinyn" id="inputDurasiTrainer" name="inputDurasiTrainer[]" data-v-min="1" data-v-max="999"></td><td><input type="text" class="form-control tinyn" data-v-min="1" data-v-max="4" id="inputNilaiEvaluasi" name="inputNilaiEvaluasi[]"></td><td><a href="javascript:void(0);" class="remTrainer" class="btn btn-danger remove-pic" type="button"><i class="fa fa-2x fa-times text-danger"></i></a></td></tr>');
+
+			$('#autocomplete-ajax'+count_trainer).autocomplete({
+		    	serviceUrl: '<?php echo base_url() ?>event/get_materi'
+		    });
+			$('#table-trainer tbody td').find('#namaPemateri'+count_trainer).autocomplete({
+		    	serviceUrl: '<?php echo base_url() ?>realisasi_controller/get_trainer',
+		    	onSelect: function(suggestion) {
+					$(this).parent().find("#inputIdTrainer").val(suggestion.data);
+				}
 			});
 
-			/*===============================================================================
-        	METHOD STORE DATA TO TABLE TRAINER FROM SELECTED TRAINER 
-        	================================================================================*/
-			$('#inputtrainer').on('click', function(){
-				$("#table-trainer tbody tr").children().remove();
-				var rowData = [];
-	            var rowData = table_trainer.rows('.selected').data();
-	            var countdata = table_trainer.rows('.selected').data().length;
-	            //console.log(countdata);
-	            //var obj = JSON.stringify(rowData);
-	            //var parsejson = JSON.parse(obj);
-                //$("#inputJumlahPeserta").val(countdata); 
+			 $('.tinyn').autoNumeric('init');
 
-	            for(i=0;i<countdata;i++)
-	            {
-
-	            	$('#table-trainer tbody').prepend( '<tr><td> '+rowData[i].nama_pemateri+'<input type="hidden" id="inputIdTrainer" name="inputIdTrainer[]" value="'+rowData[i].id +'"><input type="hidden" id="inputPerusahaan" name="inputPerusahaan[]" value="internal"></td><td><input type="text" name="inputMateri[]" id="autocomplete-ajax'+i+'" class="form-control" style=" z-index: 2; background: transparent;"/><input type="text" name="inputMateri[]" id="autocomplete-ajax-x'+i+'" disabled="disabled" class="form-control" style="color: #CCC; position: absolute; background: transparent; z-index: 1;display: none;"/></td><td><a href="javascript:void(0);" class="remTrainer" class="btn btn-danger remove-pic" type="button"><i class="fa fa-2x fa-times text-danger"></i></a></td></tr>' );
-
-	            	$('#autocomplete-ajax'+i).autocomplete({
-					    	serviceUrl: '<?php echo base_url() ?>event/get_materi'
-					    });
-	        	}
-	        	
-	        	$('#autocomplete-ajax').autocomplete({
-			    	serviceUrl: '<?php echo base_url() ?>event/get_materi'
-			    });
-	        });
-			/*===============================================================================
-        	METHOD SELECT ALL TRAINER 
-        	================================================================================*/
-			$('#select_all_trainer').on('click', function(){
-		      // Get all rows with search applied
-		      var rows = table_trainer.rows({ 'search': 'applied' }).nodes();
-
-		      // Check/uncheck checkboxes for all rows in the table
-		     	if (this.checked == true){
-		     		$('input[type="checkbox"]', rows).prop('checked', this.checked, true);
-		      		table_trainer.rows({filter:'applied'}).select();
-		  		}else
-		  		{
-		  			$('input[type="checkbox"]', rows).prop('checked', this.checked, false);
-		  			table_trainer.rows({filter:'applied'}).deselect();
-		  		}
-		   	});
 		});
-		/*===============================================================================
-    	FUNCTION remove ROWS TRAINER
-    	================================================================================*/
 		 $("#table-trainer tbody").on('click','.remTrainer',function(){
 	        $(this).parent().parent().remove();
 	    });
@@ -613,10 +248,17 @@ $(document).ready(function() {
 			var table_pic  = $('#get_list_pic_table').DataTable({
 				"bRetrieve" : "true",
 				 ajax: {
-			        url: '<?php echo site_url('Event_controller/get_all_list_peserta'); ?>',
+			        url: '<?php echo site_url('Realisasi_controller/get_all_list_pesertas'); ?>',
 			        type: 'POST',
 			    	dataSrc: 'data'
 			    },
+			    "rowCallback": function ( row, data, index ) {
+		            if(data.karyawan_nip == 'MKR2259.07.16')
+		            {
+		            	$('tr',row).addClass('selected');
+		            	console.log($('tr',row));
+		            }
+		        },
 			    'columnDefs': [{
 			         'targets': 0,
 			         'searchable':false,
@@ -636,7 +278,8 @@ $(document).ready(function() {
 					{ data: "karyawan_nama"},
 					{ data: "karyawan_posisi"},
 					{ data: "karyawan_unit_kerja"}
-				]
+				],
+				rowId: 'karyawan_nip'
 			});
 
 			/*===============================================================================

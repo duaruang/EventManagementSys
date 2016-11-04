@@ -18,7 +18,7 @@
 						}
 					}
 				?>
-				<li <?php echo ($submenu_exists==1)?"class='has-submenu'":"";?>>
+				<li <?php echo ($submenu_exists==1?"class='has-submenu'":"");?>>
 					<?php
 					if($mn->modul_homepage==1) //link redirect to homepage
 					{
@@ -50,8 +50,25 @@
 					<?php
 							foreach($load_submenu->result() as $sm)
 							{
+								$sub_submenu_exists = '';
+								$load_sub_submenu	= '';
+								$load_sub_submenu = $this->menu_model->select_menubar_submenu($sm->id);
+								if($load_sub_submenu->num_rows() > 0) //Sub Sub-menu exists
+								{
+									$sub_submenu_exists = 1;
+								}
 					?>
-					<li><a href="<?php echo ($sm->nama_modul=='' or $sm->nama_modul==NULL)? "" : site_url($sm->nama_modul); ?>"><?php echo $sm->nama_menu;?></a></li>
+					<li <?php echo ($sub_submenu_exists==1?"class='has-submenu'":"");?>>
+						<?php if($sub_submenu_exists==''){?><a href="<?php echo ($sm->nama_modul=='' or $sm->nama_modul==NULL)? "" : site_url($sm->nama_modul); ?>"><?php echo $sm->nama_menu;?></a>
+						<?php } else { ?><a><?php echo $sm->nama_menu;?></a><?php } ?>
+						<?php if($sub_submenu_exists==1){ ?>
+						<ul class="submenu">
+							<?php foreach($load_sub_submenu->result() as $ssm){?>
+							<li><a href="<?php echo ($ssm->nama_modul=='' or $ssm->nama_modul==NULL)? "" : site_url($ssm->nama_modul); ?>"><?php echo $ssm->nama_menu;?></a></li>
+							<?php } ?>
+						</ul>
+						<?php } ?>
+					</li>
 					<?php
 							}
 					?>
@@ -71,3 +88,6 @@
 		</div>
 	</div>
 </div>
+<style>
+	#topnav .navigation-menu > li .submenu > li.has-submenu > a:after {top:12px;}
+</style>

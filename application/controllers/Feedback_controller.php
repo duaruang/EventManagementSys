@@ -20,7 +20,8 @@ class Feedback_controller extends MY_Controller {
 	 */
 	public function index()
 	{
-	    //$this->is_logged();
+	    //Check user is logged or not
+	    $this->is_logged();
 		
         //Set Head Content
 		$head['title'] 			= 'List Feedback - Event Management System' ;
@@ -39,7 +40,8 @@ class Feedback_controller extends MY_Controller {
 
 	public function send()
 	{
-	    //$this->is_logged();
+	    //Check user is logged or not
+	    $this->is_logged();
 		
         //Set Head Content
 		$head['title'] 			= 'Kirim Feedback - Event Management System' ;
@@ -58,7 +60,8 @@ class Feedback_controller extends MY_Controller {
 	
 	public function load_participant()
 	{
-	    //$this->is_logged();
+	    //Check user is logged or not
+	    $this->is_logged();
 		
 		$id_event = $this->security->xss_clean(strip_image_tags($this->input->post('idevent')));
 		$load_participant = $this->feedback_model->select_peserta_registrasi($id_event);
@@ -160,7 +163,7 @@ class Feedback_controller extends MY_Controller {
 						$data_p		= array(
 										'id_feedback'			=> $id_feedback,
 										'idsdm'					=> $idsdm,
-										'nik' 					=> $ptp[0]['nik'],
+										'nip' 					=> $ptp[0]['nip'],
 										'nama' 					=> $ptp[0]['nama'],
 										'email' 				=> $ptp[0]['email'],
 										'status' 				=> $status,
@@ -173,9 +176,9 @@ class Feedback_controller extends MY_Controller {
 		}
 		
 		//Insert Log
-		//$activities = 'Kirim Feedback Event';
-		//$itemid		= $nama_event;
-		//$this->insert_activities_user($activities,$itemid);
+		$activities = 'Kirim Feedback Event';
+		$itemid		= $nama_event;
+		$this->insert_activities_user($activities,$itemid);
 		
 		//Set session flashdata
 		$this->session->set_flashdata('message_success', 'Email telah berhasil dikirim.');
@@ -186,7 +189,9 @@ class Feedback_controller extends MY_Controller {
 
 	public function view()
 	{
-	    //$this->is_logged();
+	    //Check user is logged or not
+	    $this->is_logged();
+		
 		//Get Data
 		$id_feedback = $this->uri->segment(3);
 		
@@ -198,22 +203,24 @@ class Feedback_controller extends MY_Controller {
         //Set Spesific Javascript page
         $data['script']     	= $this->load->view('page/feedback/include/add-script', NULL, TRUE);
         
-		//Set Data 
-		$data['load_feedback']	= $this->feedback_model->select_feedback_detail($id_feedback);
+		//Set Data 	
+		$load_feedback			= $this->feedback_model->select_feedback_detail($id_feedback);
+		$data['load_feedback']	= $load_feedback;
 		
         //Load page
-		$this->template->view('page/feedback/view',$data);
+		if($load_feedback->num_rows() > 0) $this->template->view('page/feedback/view',$data);
+		else show_404();
 	}
 
 	public function process_delete()
 	{
 		//Check user is logged or not
-	    //$this->is_logged();
+	    $this->is_logged();
 		
 		//Get Data
 		$id_feedback = $this->security->xss_clean(strip_image_tags($this->input->post('hidden-idfeedback'))); 
 		$event_name	 = $this->security->xss_clean(strip_image_tags($this->input->post('hidden-eventname'))); 
-		$id_user	 = '';//$this->session->userdata('sess_user_id');
+		$id_user	 = $this->session->userdata('sess_user_id');
 		
 		if($id_feedback != '') {
 			//Update Data table Kategori RAB -> is_active = deleted, delete parent
@@ -221,9 +228,9 @@ class Feedback_controller extends MY_Controller {
 			$this->feedback_model->update_feedback($id_feedback,$data);
 			
 			//insert log
-			//$activities = 'Hapus feedback Event';
-			//$itemid		= $event_name;
-			//$this->insert_activities_user($activities,$itemid);
+			$activities = 'Hapus feedback Event';
+			$itemid		= $event_name;
+			$this->insert_activities_user($activities,$itemid);
 			
 			//Set session flashdata
 			$this->session->set_flashdata('message_success', 'Data telah berhasil dihapus.');

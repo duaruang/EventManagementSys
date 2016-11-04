@@ -20,7 +20,8 @@ class KategoriRab_controller extends MY_Controller {
 	 */
 	public function index()
 	{
-	    //$this->is_logged();
+	    //Check user is logged or not
+	    $this->is_logged();
 		
         //Set Head Content
 		$head['title'] 			= 'Kategori RAB - Event Management System' ;
@@ -39,7 +40,8 @@ class KategoriRab_controller extends MY_Controller {
 
 	public function add()
 	{
-	    //$this->is_logged();
+	    //Check user is logged or not
+	    $this->is_logged();
 		
         //Set Head Content
 		$head['title'] 			= 'Tambah Kategori RAB - Event Management System' ;
@@ -71,7 +73,7 @@ class KategoriRab_controller extends MY_Controller {
 		//Get Data
 		$deskripsi		= trim($this->security->xss_clean(strip_image_tags($this->input->post('deskripsi'))));
 		//$jumlah_unit	= trim($this->security->xss_clean(strip_image_tags($this->input->post('jumlah_unit'))));
-		//$frekwensi		= trim($this->security->xss_clean(strip_image_tags($this->input->post('frekwensi'))));
+		//$frekwensi	= trim($this->security->xss_clean(strip_image_tags($this->input->post('frekwensi'))));
 		$status			= $this->security->xss_clean(strip_image_tags($this->input->post('status')));
 		$id_user		= $this->session->userdata('sess_user_id');
 		
@@ -112,12 +114,12 @@ class KategoriRab_controller extends MY_Controller {
 		);
 		
 		//Get Data
-		$parent		= $this->security->xss_clean(strip_image_tags($this->input->post('parent')));
-		$deskripsi	= trim($this->security->xss_clean(strip_image_tags($this->input->post('deskripsi'))));
+		$parent			= $this->security->xss_clean(strip_image_tags($this->input->post('parent')));
+		$deskripsi		= trim($this->security->xss_clean(strip_image_tags($this->input->post('deskripsi'))));
 		$jumlah_unit	= trim($this->security->xss_clean(strip_image_tags($this->input->post('jumlah_unit'))));
 		$frekwensi		= trim($this->security->xss_clean(strip_image_tags($this->input->post('frekwensi'))));
-		$status		= $this->security->xss_clean(strip_image_tags($this->input->post('status')));
-		$id_user	= $this->session->userdata('sess_user_id');
+		$status			= $this->security->xss_clean(strip_image_tags($this->input->post('status')));
+		$id_user		= $this->session->userdata('sess_user_id');
 		
 		//Insert Data to table kategori rab
 		$data_rab	= array(
@@ -145,7 +147,9 @@ class KategoriRab_controller extends MY_Controller {
 
 	public function view()
 	{
-	    //$this->is_logged();
+	    //Check user is logged or not
+	    $this->is_logged();
+		
 		//Get Data
 		$id_rab = $this->uri->segment(3);
 		
@@ -158,15 +162,19 @@ class KategoriRab_controller extends MY_Controller {
         $data['script']     	= $this->load->view('page/kategori_rab/include/add-script', NULL, TRUE);
         
 		//Set Data 
-		$data['load_rab']		= $this->kategori_rab_model->select_category_id($id_rab);
+		$load_rab				= $this->kategori_rab_model->select_category_id($id_rab);
+		$data['load_rab']		= $load_rab;
 		
         //Load page
-		$this->template->view('page/kategori_rab/view',$data);
+		if($load_rab->num_rows() > 0) $this->template->view('page/kategori_rab/view',$data);
+		else show_404();
 	}
 
 	public function edit()
 	{
-	    //$this->is_logged();
+	    //Check user is logged or not
+	    $this->is_logged();
+		
 	    //Get Data
 		$id_rab = $this->uri->segment(3);
 		
@@ -180,11 +188,13 @@ class KategoriRab_controller extends MY_Controller {
         
 		//Set Data 
 		$data['id_rab']			= $id_rab;
-		$data['load_rab']		= $this->kategori_rab_model->select_category_id($id_rab);
+		$load_rab				= $this->kategori_rab_model->select_category_id($id_rab);
+		$data['load_rab']		= $load_rab;
 		$data['load_parent']	= $this->kategori_rab_model->select_parent_category();
 		
         //Load page
-		$this->template->view('page/kategori_rab/edit',$data);
+		if($load_rab->num_rows() > 0) $this->template->view('page/kategori_rab/edit',$data);
+		else show_404();
 	}
 
 	public function process_edit()
@@ -247,7 +257,7 @@ class KategoriRab_controller extends MY_Controller {
 	public function process_delete()
 	{
 		//Check user is logged or not
-	    //$this->is_logged();
+	    $this->is_logged();
 		
 		//Get Data
 		$id_rab		 = $this->security->xss_clean(strip_image_tags($this->input->post('hidden-idrab'))); 

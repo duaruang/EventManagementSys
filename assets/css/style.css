@@ -22673,7 +22673,7 @@ table.privilage td .radio label, .checkbox label {
     border-color: #ddd #ddd transparent;
 }
 
-a.maps-google:hover
+a.maps-google:hover,a#add-trainer:hover, a#add-pic:hover
 {
   cursor: pointer;
 }

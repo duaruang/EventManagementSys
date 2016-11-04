@@ -20,7 +20,9 @@ class TrainerEksternal_controller extends MY_Controller {
 	 */
 	public function index()
 	{
-	    //$this->is_logged();
+	    //Check user is logged or not
+	    $this->is_logged();
+		
         //Set Head Content
 		$head['title'] 			= 'Trainer Eksternal - Event Management System' ;
 		$head['css']			=  $this->load->view('page/trainer_eksternal/include/index-css', NULL, TRUE);
@@ -38,7 +40,8 @@ class TrainerEksternal_controller extends MY_Controller {
 
 	public function add()
 	{
-	    //$this->is_logged();
+	    //Check user is logged or not
+	    $this->is_logged();
 		
         //Set Head Content
 		$head['title'] 			= 'Tambah Trainer Eksternal - Event Management System' ;
@@ -146,7 +149,9 @@ class TrainerEksternal_controller extends MY_Controller {
 
 	public function view()
 	{
-	    //$this->is_logged();
+	    //Check user is logged or not
+	    $this->is_logged();
+		
 		//Get Data
 		$id_trainer = $this->uri->segment(3);
 		
@@ -159,16 +164,20 @@ class TrainerEksternal_controller extends MY_Controller {
         $data['script']     	= $this->load->view('page/trainer_eksternal/include/add-script', NULL, TRUE);
         
 		//Set Data 
-		$data['load_trainer']	= $this->trainer_eksternal_model->select_trainer_id($id_trainer);
+		$load_trainer			= $this->trainer_eksternal_model->select_trainer_id($id_trainer);
+		$data['load_trainer']	= $load_trainer;
 		$data['load_files']		= $this->trainer_eksternal_model->select_trainer_files($id_trainer);
 		
         //Load page
-		$this->template->view('page/trainer_eksternal/view',$data);
+		if($load_trainer->num_rows() > 0) $this->template->view('page/trainer_eksternal/view',$data);
+		else show_404();
 	}
 
 	public function edit()
 	{
-	    //$this->is_logged();
+	    //Check user is logged or not
+	    $this->is_logged();
+		
 	    //Get Data
 		$id_trainer = $this->uri->segment(3);
 		
@@ -182,11 +191,13 @@ class TrainerEksternal_controller extends MY_Controller {
         
 		//Set Data 
 		$data['id_trainer']		= $id_trainer;
-		$data['load_trainer']	= $this->trainer_eksternal_model->select_trainer_id($id_trainer);
+		$load_trainer			= $this->trainer_eksternal_model->select_trainer_id($id_trainer);
+		$data['load_trainer']	= $load_trainer;
 		$data['load_files']		= $this->trainer_eksternal_model->select_trainer_files($id_trainer);
 		
         //Load page
-		$this->template->view('page/trainer_eksternal/edit',$data);
+		if($load_trainer->num_rows() > 0) $this->template->view('page/trainer_eksternal/edit',$data);
+		else show_404();
 	}
 
 	public function process_edit()
@@ -303,7 +314,7 @@ class TrainerEksternal_controller extends MY_Controller {
 	public function process_delete()
 	{
 		//Check user is logged or not
-	    //$this->is_logged();
+	    $this->is_logged();
 		
 		//Get Data
 		$id_trainer 	= $this->security->xss_clean(strip_image_tags($this->input->post('hidden-idtrainer'))); 
